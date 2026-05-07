@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-bg: #000000;
+  --color-surface: #0A0A0A;
+  --color-surface2: #141414;
+  --color-ink: #F5F0E6;
+  --color-ink2: #A8A39A;
+  --color-ink3: #6E6A63;
+  --color-rule: #1F1F1F;
+  --color-rule2: #2A2A2A;
+  --color-spark: #FF3C15;
+  --color-ember: #D63310;
+  --color-sun: #FB9000;
+  --color-highlight: #5046E6;
+  --color-yellow: #FFC534;
+  --color-success: #22C55E;
+  --color-fail: #EF4444;
+}
+
+html {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  color-scheme: dark;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-feature-settings: 'ss01', 'cv01', 'cv02';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: var(--color-spark);
+  color: var(--color-bg);
+}
+
+@layer utilities {
+  .italic-spark {
+    font-style: italic;
+    text-decoration: underline;
+    text-decoration-color: var(--color-spark);
+    text-decoration-thickness: 4px;
+    text-underline-offset: 8px;
+  }
+}
+
+/* Ticker — pause on hover */
+.ticker:hover .ticker-track {
+  animation-play-state: paused;
+}
+
+/* Inline code (e.g. each.run() in body copy) */
+code {
+  font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
+  background: var(--color-surface2);
+  border: 1px solid var(--color-rule2);
+  padding: 0 0.3rem;
+  border-radius: 4px;
+  font-size: 0.9em;
+  color: var(--color-ink);
+}
+
+/* Code-snippet panel inside the widget — uses different shell */
+pre.snippet,
+pre.snippet code {
+  background: var(--color-bg);
+  border: 0;
+  padding: 0;
+  border-radius: 0;
+  font-size: 13px;
+  color: var(--color-ink);
+  line-height: 1.55;
+}
+
+pre.snippet .tk-key   { color: #A8A39A; }
+pre.snippet .tk-str   { color: #FF9166; }
+pre.snippet .tk-fn    { color: var(--color-ink); }
+pre.snippet .tk-num   { color: #FF9166; }
+pre.snippet .tk-cmt   { color: var(--color-ink3); font-style: italic; }
+pre.snippet .tk-punct { color: var(--color-ink3); }
+pre.snippet .tk-prop  { color: #A8A39A; }
+
+/* Focus rings */
+:where(a, button, input):focus-visible {
+  outline: 2px solid var(--color-spark);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Hide scrollbar on inner horizontal scrollers */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
