@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { navItems, megaMenus } from '@/lib/content';
 import { Wordmark } from '@/components/ui/Wordmark';
 import { PulseDot } from '@/components/ui/PulseDot';
+import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { MegaMenu } from './MegaMenu';
 import { MobileMenu } from './MobileMenu';
 
@@ -44,8 +45,13 @@ export function Nav() {
                   );
                 }
                 const isOpen = openMenu === item.menu;
+                const isDevelopers = item.menu === 'developers';
                 return (
-                  <li key={item.label} onMouseEnter={() => setOpenMenu(item.menu)}>
+                  <li
+                    key={item.label}
+                    onMouseEnter={() => setOpenMenu(item.menu)}
+                    className={isDevelopers ? 'relative' : undefined}
+                  >
                     <button
                       type="button"
                       aria-expanded={isOpen}
@@ -56,6 +62,11 @@ export function Nav() {
                       {item.label}
                       <span className="text-[10px] mt-0.5">▾</span>
                     </button>
+                    {/* Developers dropdown — anchored to its own button (small flat list).
+                        Platform/Use Cases remain container-level for full-width megamenu. */}
+                    {isDevelopers && isOpen && (
+                      <MegaMenu menu={megaMenus.developers} open />
+                    )}
                   </li>
                 );
               })}
@@ -69,7 +80,12 @@ export function Nav() {
                   <span className="text-spark">*</span> 99.99% · 284K req/24h
                 </span>
               </span>
-              <Link href="#" className="text-[14px] font-medium text-ink2 hover:text-ink">
+              <Link
+                href="https://docs.eachlabs.ai/introduction"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[14px] font-medium text-ink2 hover:text-ink"
+              >
                 Docs
               </Link>
               <Link
@@ -78,23 +94,26 @@ export function Nav() {
               >
                 Sign in
               </Link>
+              <ThemeToggle />
             </div>
 
-            {/* Mobile hamburger */}
-            <button
-              type="button"
-              onClick={() => setMobileOpen(true)}
-              aria-label="Open menu"
-              className="lg:hidden inline-flex items-center justify-center w-10 h-10 border border-rule2 rounded-md"
-            >
-              <span className="block w-4 h-0.5 bg-ink relative before:absolute before:left-0 before:-top-1.5 before:w-4 before:h-0.5 before:bg-ink after:absolute after:left-0 after:top-1.5 after:w-4 after:h-0.5 after:bg-ink" />
-            </button>
+            {/* Mobile right: theme toggle + hamburger */}
+            <div className="lg:hidden flex items-center gap-2">
+              <ThemeToggle />
+              <button
+                type="button"
+                onClick={() => setMobileOpen(true)}
+                aria-label="Open menu"
+                className="inline-flex items-center justify-center w-10 h-10 border border-rule2 rounded-md"
+              >
+                <span className="block w-4 h-0.5 bg-ink relative before:absolute before:left-0 before:-top-1.5 before:w-4 before:h-0.5 before:bg-ink after:absolute after:left-0 after:top-1.5 after:w-4 after:h-0.5 after:bg-ink" />
+              </button>
+            </div>
           </div>
 
-          {/* Mega menus mounted under the nav row */}
-          {openMenu === 'platform'   && <MegaMenu menu={megaMenus.platform}   open />}
-          {openMenu === 'usecases'   && <MegaMenu menu={megaMenus.usecases}   open />}
-          {openMenu === 'developers' && <MegaMenu menu={megaMenus.developers} open />}
+          {/* Wide mega menus (Platform / Use Cases) — span full container width */}
+          {openMenu === 'platform' && <MegaMenu menu={megaMenus.platform} open />}
+          {openMenu === 'usecases' && <MegaMenu menu={megaMenus.usecases} open />}
         </div>
       </nav>
 

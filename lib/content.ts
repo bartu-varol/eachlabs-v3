@@ -13,7 +13,7 @@ export const ticker = [
 
 export type MegaColumn = {
   eyebrow: string;
-  items: { title: string; body: string }[];
+  items: { title: string; body: string; href: string; comingSoon?: boolean }[];
 };
 
 export type FeaturedCard = {
@@ -35,16 +35,15 @@ export const megaMenus: Record<'platform' | 'usecases' | 'developers', MegaMenu>
       {
         eyebrow: 'RUN',
         items: [
-          { title: 'each::router',    body: 'Model-aware fallbacks. Quality-aware routing.' },
-          { title: 'each::workflows', body: 'Chain models. Version. Rollback.' },
-          { title: 'each::sense',     body: 'Intelligent media generation, hosted.' },
+          { title: 'each::router',    body: 'Model-aware fallbacks. Quality-aware routing.', href: '/router' },
+          { title: 'each::workflows', body: 'Chain models. Version. Rollback.',              href: '/workflows' },
+          { title: 'each::enhancer',  body: 'Same prompt. Better output. Every model.',      href: '/enhancer' },
         ],
       },
       {
         eyebrow: 'OBSERVE',
         items: [
-          { title: 'each::trace', body: 'Per-call attribution. Slice cost, latency, quality.' },
-          { title: 'each::ab',    body: 'Ship the winning model in one click.' },
+          { title: 'each::trace',      body: 'Per-call attribution. Slice cost, latency.',  href: '/trace', comingSoon: true },
         ],
       },
     ],
@@ -60,17 +59,17 @@ export const megaMenus: Record<'platform' | 'usecases' | 'developers', MegaMenu>
       {
         eyebrow: 'BY INDUSTRY',
         items: [
-          { title: 'Consumer AI',       body: 'Creative apps, social, gen UX.' },
-          { title: 'Enterprise retail', body: 'Product photography, ad creative.' },
-          { title: 'Internal AI apps',  body: 'Ops tooling, content for teams.' },
+          { title: 'Consumer AI',       body: 'Creative apps, social, gen UX.',         href: '/usecases/consumer-ai' },
+          { title: 'Enterprise retail', body: 'Product photography, ad creative.',      href: '/usecases/retail' },
+          { title: 'Internal AI apps',  body: 'Ops tooling, content for teams.',        href: '/usecases/internal' },
         ],
       },
       {
         eyebrow: 'BY TEAM',
         items: [
-          { title: 'Marketing & brand', body: 'Campaign assets, brand creative.' },
-          { title: 'Ad-tech & growth',  body: 'Programmatic ads, live A/B.' },
-          { title: 'Gaming & live-ops', body: 'NPCs, VO, textures, music.' },
+          { title: 'Marketing & brand', body: 'Campaign assets, brand creative.',       href: '/usecases/marketing' },
+          { title: 'Ad-tech & growth',  body: 'Programmatic ads, live A/B.',            href: '/usecases/ad-tech' },
+          { title: 'Gaming & live-ops', body: 'NPCs, VO, textures, music.',             href: '/usecases/gaming' },
         ],
       },
     ],
@@ -84,13 +83,13 @@ export const megaMenus: Record<'platform' | 'usecases' | 'developers', MegaMenu>
   developers: {
     columns: [],
     flat: [
-      { title: 'Docs',          href: '#' },
-      { title: 'API reference', href: '#' },
-      { title: 'SDKs',          href: '#' },
-      { title: 'Changelog',     href: '#' },
-      { title: 'GitHub',        href: '#' },
-      { title: 'Discord',       href: '#' },
-      { title: 'Status',        href: '#' },
+      { title: 'Docs',          href: 'https://docs.eachlabs.ai/introduction' },
+      { title: 'API reference', href: 'https://docs.eachlabs.ai/introduction' },
+      { title: 'SDKs',          href: 'https://docs.eachlabs.ai/introduction' },
+      { title: 'Changelog',     href: 'https://docs.eachlabs.ai/introduction' },
+      { title: 'GitHub',        href: 'https://github.com/eachlabs' },
+      { title: 'Discord',       href: 'https://discord.gg/eachlabs' },
+      { title: 'Status',        href: 'https://docs.eachlabs.ai/introduction' },
     ],
   },
 };
@@ -102,8 +101,8 @@ export const navItems: Array<
   { label: 'Platform',   menu: 'platform' },
   { label: 'Use Cases',  menu: 'usecases' },
   { label: 'Explore',    href: '/explore' },
-  { label: 'Customers',  href: '#' },
-  { label: 'Pricing',    href: '#' },
+  { label: 'Customers',  href: '/customers' },
+  { label: 'Pricing',    href: '/pricing' },
   { label: 'Developers', menu: 'developers' },
 ];
 
@@ -112,12 +111,21 @@ export const navItems: Array<
 export const hero = {
   pill: '* SERIES A · $18M LED BY EBRD',
   pillCta: 'Read the memo →',
+  /** Body lead — large, the hook. */
+  bodyLead: '600+ AI models behind one API',
+  /** Body rest — descriptive, with playful flair. */
   body:
-    '600+ AI models behind one API. Auto-fallback when models break. Per-call tracing. Live A/B. You write each.run() — we do the rest.',
+    '— the hyped ones, the cheap ones, the one that broke yesterday. We do the boring parts: retries when models go down, per-user cost when finance asks, live A/B when product wants to ship. You write each.run(). We do the rest.',
   ctas: [
-    { label: 'Get an API key →',     href: '/signup',         variant: 'primary'   as const },
-    { label: 'Talk to an engineer',  href: '/contact',        variant: 'secondary' as const },
-    { label: 'Read the cookbook',    href: '/docs/cookbook',  variant: 'tertiary'  as const },
+    { label: "Start shipping — it's free →",       href: '/signup',  variant: 'primary'   as const },
+    { label: 'Talk to an engineer (a real one)',   href: '/contact', variant: 'secondary' as const },
+  ],
+  /** Stats bar — 4 numbers each with a one-line cheeky sub. */
+  stats: [
+    { value: '600+',    label: 'models',          sub: 'one API · one signature' },
+    { value: '10×',     label: 'fewer errors',    sub: 'auto-fallback in <120ms' },
+    { value: '99.99%',  label: 'uptime',          sub: 'no asterisks' },
+    { value: '<120ms',  label: 'router overhead', sub: 'faster than a tweet' },
   ],
   subtext: 'NO CREDIT CARD · NO "JUMP ON A QUICK CALL" · CANCEL BY DELETING YOUR API KEY',
 };
@@ -131,6 +139,142 @@ export const widget = {
   belowEscape: { prefix: 'Don’t see your problem?', linkLabel: 'Talk to an engineer →', href: 'mailto:engineer@eachlabs.ai' },
 };
 
+// ---------- CHAOS → FIX (Section 02) ----------
+
+export const chaosToFix = {
+  eyebrow: '* SECTION / 02 · CHAOS → FIX · EACH::SENSE',
+  headline: {
+    line1: 'Tell us what’s breaking.',
+    line2: 'We’ve already built the fix.',
+  },
+};
+
+// ---------- RECEIPTS / BENCHMARKED ----------
+
+export type Metric = {
+  /** Tab pill label, e.g. "USER-VISIBLE ERRORS" */
+  label: string;
+  /** Short caption shown under the headline */
+  caption: string;
+  /** Headline winner number — e.g. "97×" + "FEWER ERRORS" */
+  hero: { multiplier: string; suffix: string };
+  /** Side labels */
+  others: { label: string; sub: string };
+  each: { label: string; sub: string };
+  /** Numeric values used for bars + count-up. `inverse` = lower is better. */
+  format: 'percent' | 'time' | 'usd' | 'days';
+  othersValue: number;
+  eachValue: number;
+  /** What "filled" bar represents — visual scaling reference */
+  scaleMax?: number;
+};
+
+export const receipts = {
+  eyebrow: '* RECEIPTS · BENCHMARKED Q1 2026',
+  cohort: 'n=4.1M production traces',
+  metrics: [
+    {
+      label: 'USER-VISIBLE ERRORS',
+      caption: 'auto-fallback fires in <120ms when the primary model dies',
+      hero: { multiplier: '97×', suffix: 'FEWER ERRORS' },
+      others: { label: 'OTHERS', sub: 'raw SDKs, no router' },
+      each:   { label: 'EACH.RUN', sub: 'quality-aware + fallback' },
+      format: 'percent',
+      othersValue: 3.42,
+      eachValue: 0.035,
+      scaleMax: 4,
+    },
+    {
+      label: 'P99 RECOVERY ON FAIL',
+      caption: 'how long until the user sees a recovered response',
+      hero: { multiplier: '6,200×', suffix: 'FASTER RECOVERY' },
+      others: { label: 'OTHERS', sub: 'manual rollover, on-call paged' },
+      each:   { label: 'EACH.RUN', sub: 'router spillover · live' },
+      format: 'time',
+      othersValue: 744, // seconds (12.4 min)
+      eachValue: 0.12,  // seconds (120ms)
+      scaleMax: 800,
+    },
+    {
+      label: 'COST PER SHIPPED RESULT',
+      caption: 'average $/successful output across 600+ models',
+      hero: { multiplier: '3×', suffix: 'CHEAPER' },
+      others: { label: 'OTHERS', sub: 'pinned to one provider' },
+      each:   { label: 'EACH.RUN', sub: 'quality-aware routing' },
+      format: 'usd',
+      othersValue: 0.18,
+      eachValue: 0.06,
+      scaleMax: 0.2,
+    },
+    {
+      label: 'INTEGRATION TIME',
+      caption: 'time to first prod call after signing up',
+      hero: { multiplier: '2,520×', suffix: 'FASTER TO SHIP' },
+      others: { label: 'OTHERS', sub: 'new SDK · auth · QA' },
+      each:   { label: 'EACH.RUN', sub: 'one API · one signature' },
+      format: 'days',
+      othersValue: 14,    // days
+      eachValue: 0.0056,  // days (8 minutes)
+      scaleMax: 14,
+    },
+  ] satisfies Metric[],
+};
+
+// ---------- ASK::SENSE (mock demo) ----------
+
+export type SenseAnswer = {
+  text: string;
+  docHref: string;
+  docLabel: string;
+};
+
+export const askSense = {
+  eyebrow: '* LIVE DEMO · EACH::SENSE',
+  headline: { line1: 'Tell us your AI', italic: 'chaos.', line2: 'We’ll show you the way out.' },
+  body:
+    'Type your actual problem. each::sense — our AI agent — reads it, gives you a 2–3 sentence answer, and links you straight to the part of the docs that solves it. No signup, no demo call.',
+  inputPlaceholders: [
+    'how do I track cost per customer…',
+    'my model keeps failing at 3 AM…',
+    'I need to A/B test two models in prod…',
+    'finance asked for cost per user tier…',
+    'rollback yesterday’s deploy…',
+  ],
+  chips: [
+    'Model keeps failing',
+    'Don’t know which model to pick',
+    'How do I track cost per customer',
+  ],
+  /** Hardcoded answers for the chip labels. Anything else falls through to fallback. */
+  answers: {
+    'Model keeps failing': {
+      text:
+        'Set fallbacks once on each.run(). The router watches every call and spills traffic to a backup the moment your primary degrades. Recovery in ~120ms; your users never see the error.',
+      docHref: '/docs/router/fallbacks',
+      docLabel: 'each::router · fallbacks',
+    },
+    'Don’t know which model to pick': {
+      text:
+        'Use each::sense — same call signature, but you describe the result instead of naming a model. We pick (and re-pick) the best fit per call based on quality, latency, and cost.',
+      docHref: '/docs/sense/overview',
+      docLabel: 'each::sense · overview',
+    },
+    'How do I track cost per customer': {
+      text:
+        'Pass attributes at runtime (user_id, tier, anything). each::trace tags every call. Then slice cost, latency, and quality by any attribute in the dashboard — no instrumentation sprint.',
+      docHref: '/docs/trace/attribution',
+      docLabel: 'each::trace · attribution',
+    },
+  } satisfies Record<string, SenseAnswer>,
+  fallback: {
+    text:
+      'We don’t have a canned answer for that one — but the live each::sense agent does. In production, this same input would call a real LLM and link you to the relevant doc.',
+    docHref: '/docs/sense/overview',
+    docLabel: 'each::sense · overview',
+  } satisfies SenseAnswer,
+  footnote: 'powered by each::sense (demo) · responses are mocked · no API call yet',
+};
+
 // ---------- TRUSTED BY ----------
 
 export const trustedBy = {
@@ -140,54 +284,6 @@ export const trustedBy = {
     'Aster', 'Volt', 'Prism', 'Maker', 'Orbit', 'Finch',
   ],
   stats: '20,000+ DEVS  ·  $1.2B SHIPPED  ·  4.3M PRODUCTION TRACES',
-};
-
-// ---------- ASK THE AI ----------
-
-export const askAI = {
-  eyebrow: '* STILL DECIDING?',
-  headline: { line1: 'Do what everyone else does.', line2: 'Ask the AI.' },
-  body: "We're in their training data. Ask away.",
-  prompt: "Be honest about each::labs (eachlabs.ai). What do they do, who's it for, and what's the catch?",
-  footnote: "We don't see what they say. They don't see this page. Honest.",
-};
-
-// ---------- THREE WAYS IN ----------
-
-export type TwayCard = {
-  product: string;
-  cardHeadline: string;
-  tags: string[];
-  cta: { label: string; href: string };
-};
-
-export const threeWaysIn = {
-  eyebrow: '* THE PLATFORM',
-  headline: { line1: 'Three ways in.', line2: 'Same backbone.' },
-  body:
-    'Pick the level of abstraction that fits your team. Switch later — your data and workflows come with you.',
-  cards: [
-    {
-      product: 'api',
-      cardHeadline: 'You pick the model. We handle the rest.',
-      tags: ['200+ models', 'async + webhooks', 'price-matched'],
-      cta: { label: 'Read the API docs →', href: 'https://docs.eachlabs.ai/api/overview' },
-    },
-    {
-      product: 'workflows',
-      cardHeadline: 'You design the pipeline. We run every step.',
-      tags: ['chain & branch', 'versioning', '10× bulk runs'],
-      cta: { label: 'See workflow examples →', href: 'https://docs.eachlabs.ai/workflows/overview' },
-    },
-    {
-      product: 'sense',
-      cardHeadline: 'Just describe the result. We pick the model.',
-      tags: ['OpenAI-compatible', '500+ models', 'auto-routed'],
-      cta: { label: 'Try each::sense →', href: 'https://docs.eachlabs.ai/sense/overview' },
-    },
-  ] as TwayCard[],
-  pipelineStrip: 'ROUTE  ·  RETRY  ·  FALLBACK  ·  TRACE  ·  MONITOR',
-  pipelineCaption: 'Same backbone behind all three.',
 };
 
 // ---------- CUSTOMER STORIES ----------
@@ -300,46 +396,6 @@ export const customerStories = {
   },
 };
 
-// ---------- COMPARISON ----------
-
-export const comparison = {
-  eyebrow: '* THE RECEIPTS',
-  headline: { left: 'Without each::labs.', right: 'With each::labs.' },
-  rows: [
-    {
-      anchor: 'Model goes down at 3 AM.',
-      without: 'PagerDuty fires. You wake up. Debug. Redeploy. Sleep at 5.',
-      with: 'Auto-fallback kicks in. You sleep. Read the trace tomorrow.',
-    },
-    {
-      anchor: 'Veo 3 launches.',
-      without: 'You write a new integration. QA it. Ship in two weeks.',
-      with: 'You change one string. Ship today.',
-    },
-    {
-      anchor: 'Finance asks “cost per user tier?”',
-      without: 'You spend a sprint instrumenting.',
-      with: 'You open the dashboard.',
-    },
-    {
-      anchor: 'You want to A/B test a model.',
-      without: 'First, build an A/B framework.',
-      with: 'Set the split percentage.',
-    },
-    {
-      anchor: 'Workflow fails on step 3 of 4.',
-      without: 'You pay for steps 1–2. User sees an error.',
-      with: 'Auto-retry with state. User sees output.',
-    },
-    {
-      anchor: 'A new OpenAI model drops.',
-      without: 'Wait 2 weeks for the SDK.',
-      with: 'We onboard it in 24h.',
-    },
-  ],
-  closer: 'Same job. Same tools. Different week.',
-};
-
 // ---------- RABBIT HOLE ----------
 
 export const rabbitHole = {
@@ -351,7 +407,7 @@ export const rabbitHole = {
       title: 'Sign up.',
       subline: 'API key in 60 seconds.',
       body: '10K free traces. No credit card. Cancel by deleting your key.',
-      cta: { label: 'Get an API key →', href: '/signup', style: 'primary' as const },
+      cta: { label: 'Follow the white rabbit →', href: '/signup', style: 'primary' as const },
     },
     {
       eyebrow: '* TAKE A HAND',
@@ -362,10 +418,10 @@ export const rabbitHole = {
     },
     {
       eyebrow: '* READ THE MAP',
-      title: 'Skim the cookbook.',
+      title: 'Skim the doc.',
       subline: 'Code samples and recipes.',
       body: 'Real workflows, real configurations, real production examples. Copy what fits.',
-      cta: { label: 'Open the docs →', href: '/docs/cookbook', style: 'text' as const },
+      cta: { label: 'Open the docs →', href: 'https://docs.eachlabs.ai/introduction', style: 'text' as const },
     },
   ],
   subtext: 'NO CREDIT CARD · NO "JUMP ON A QUICK CALL" · CANCEL BY DELETING YOUR API KEY',
@@ -380,41 +436,41 @@ export const footer = {
     {
       title: 'PRODUCT',
       links: [
-        { label: 'each::router',    href: '#' },
-        { label: 'each::trace',     href: '#' },
-        { label: 'each::workflows', href: '#' },
-        { label: 'each::ab',        href: '#' },
-        { label: 'each::sense',     href: '#' },
-        { label: 'Pricing',         href: '#' },
+        { label: 'each::router',     href: '/router' },
+        { label: 'each::workflows',  href: '/workflows' },
+        { label: 'each::enhancer',   href: '/enhancer' },
+        { label: 'each::trace',      href: '/trace' },
+        { label: 'Pricing',          href: '/pricing' },
       ],
     },
     {
       title: 'DEVELOPERS',
       links: [
-        { label: 'Docs',          href: '#' },
-        { label: 'API reference', href: '#' },
-        { label: 'SDKs',          href: '#' },
-        { label: 'Changelog',     href: '#' },
-        { label: 'Status',        href: '#' },
+        { label: 'Docs',          href: 'https://docs.eachlabs.ai/introduction' },
+        { label: 'API reference', href: 'https://docs.eachlabs.ai/introduction' },
+        { label: 'SDKs',          href: 'https://docs.eachlabs.ai/introduction' },
+        { label: 'Changelog',     href: 'https://docs.eachlabs.ai/introduction' },
+        { label: 'GitHub',        href: 'https://github.com/eachlabs' },
+        { label: 'Status',        href: 'https://docs.eachlabs.ai/introduction' },
       ],
     },
     {
       title: 'COMPANY',
       links: [
         { label: 'About',     href: '#' },
-        { label: 'Customers', href: '#' },
-        { label: 'Blog',      href: '#' },
-        { label: 'Brand',     href: '#' },
+        { label: 'Customers', href: '/customers' },
+        { label: 'Use cases', href: '/usecases' },
+        { label: 'Blog',      href: '/blog' },
         { label: 'Careers',   href: '#' },
       ],
     },
     {
       title: 'CONNECT',
       links: [
-        { label: 'Discord',     href: '#' },
-        { label: 'X / Twitter', href: '#' },
-        { label: 'LinkedIn',    href: '#' },
-        { label: 'GitHub',      href: '#' },
+        { label: 'Discord',     href: 'https://discord.gg/eachlabs' },
+        { label: 'X / Twitter', href: 'https://x.com/eachlabs' },
+        { label: 'LinkedIn',    href: 'https://www.linkedin.com/company/eachlabs' },
+        { label: 'GitHub',      href: 'https://github.com/eachlabs' },
       ],
     },
   ],

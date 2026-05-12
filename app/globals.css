@@ -2,50 +2,131 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Light mode (default) — palette extracted from new-web-demo.vercel.app */
 :root {
-  --color-bg: #000000;
-  --color-surface: #0A0A0A;
-  --color-surface2: #141414;
-  --color-ink: #F5F0E6;
-  --color-ink2: #A8A39A;
-  --color-ink3: #6E6A63;
-  --color-rule: #1F1F1F;
-  --color-rule2: #2A2A2A;
-  --color-spark: #FF3C15;
-  --color-ember: #D63310;
-  --color-sun: #FB9000;
-  --color-highlight: #5046E6;
-  --color-yellow: #FFC534;
-  --color-success: #22C55E;
-  --color-fail: #EF4444;
+  --c-bg: 245 242 235;
+  --c-surface: 239 235 226;
+  --c-surface2: 232 227 215;
+  --c-ink: 14 13 10;
+  --c-ink2: 58 56 50;
+  --c-ink3: 118 114 106;
+  --c-rule: 221 214 198;
+  --c-rule2: 200 194 181;
+  --c-spark: 255 60 21;
+  --c-ember: 214 51 16;
+  --c-sun: 251 144 0;
+  --c-highlight: 80 70 230;
+  --c-yellow: 201 138 0;
+  --c-success: 91 143 58;
+  --c-fail: 239 68 68;
+
+  --tk-str: 214 51 16;
+  --tk-key: 118 114 106;
+  --tk-prop: 118 114 106;
+}
+
+/* System dark — applies only when user has NOT explicitly chosen */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --c-bg: 0 0 0;
+    --c-surface: 10 10 10;
+    --c-surface2: 20 20 20;
+    --c-ink: 245 240 230;
+    --c-ink2: 168 163 154;
+    --c-ink3: 110 106 99;
+    --c-rule: 31 31 31;
+    --c-rule2: 42 42 42;
+    --c-yellow: 255 197 52;
+    --c-success: 34 197 94;
+
+    --tk-str: 255 145 102;
+    --tk-key: 168 163 154;
+    --tk-prop: 168 163 154;
+  }
+}
+
+/* Explicit user choice via toggle — wins over system */
+:root[data-theme="dark"] {
+  --c-bg: 0 0 0;
+  --c-surface: 10 10 10;
+  --c-surface2: 20 20 20;
+  --c-ink: 245 240 230;
+  --c-ink2: 168 163 154;
+  --c-ink3: 110 106 99;
+  --c-rule: 31 31 31;
+  --c-rule2: 42 42 42;
+  --c-yellow: 255 197 52;
+  --c-success: 34 197 94;
+
+  --tk-str: 255 145 102;
+  --tk-key: 168 163 154;
+  --tk-prop: 168 163 154;
 }
 
 html {
-  background: var(--color-bg);
-  color: var(--color-ink);
-  color-scheme: dark;
+  background: rgb(var(--c-bg));
+  color: rgb(var(--c-ink));
+  color-scheme: light dark;
 }
 
 body {
-  background: var(--color-bg);
-  color: var(--color-ink);
+  background-color: rgb(var(--c-bg));
+  /* Three soft radial pockets — spark top-left, spark mid-right, highlight bottom-center.
+     Same mesh on both modes; the underlying --c-bg gives the right tone per theme. */
+  background-image:
+    radial-gradient(ellipse 70% 50% at 12% -8%,  rgb(var(--c-spark)     / 0.055), transparent 60%),
+    radial-gradient(ellipse 55% 35% at 88% 38%,  rgb(var(--c-spark)     / 0.035), transparent 65%),
+    radial-gradient(ellipse 50% 40% at 50% 102%, rgb(var(--c-highlight) / 0.045), transparent 65%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  color: rgb(var(--c-ink));
   font-feature-settings: 'ss01', 'cv01', 'cv02';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Light mode wants slightly less saturation — pale cream amplifies tints. */
+:root[data-theme="light"] body,
+:root:not([data-theme]) body {
+  /* defaults above already work; if user is in light, soften slightly */
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) body {
+    background-image:
+      radial-gradient(ellipse 70% 50% at 12% -8%,  rgb(var(--c-spark)     / 0.04), transparent 65%),
+      radial-gradient(ellipse 55% 35% at 88% 38%,  rgb(var(--c-spark)     / 0.025), transparent 70%),
+      radial-gradient(ellipse 50% 40% at 50% 102%, rgb(var(--c-highlight) / 0.035), transparent 70%);
+  }
+}
+
+:root[data-theme="light"] body {
+  background-image:
+    radial-gradient(ellipse 70% 50% at 12% -8%,  rgb(var(--c-spark)     / 0.04), transparent 65%),
+    radial-gradient(ellipse 55% 35% at 88% 38%,  rgb(var(--c-spark)     / 0.025), transparent 70%),
+    radial-gradient(ellipse 50% 40% at 50% 102%, rgb(var(--c-highlight) / 0.035), transparent 70%);
+}
+
 ::selection {
-  background: var(--color-spark);
-  color: var(--color-bg);
+  background: rgb(var(--c-spark));
+  color: rgb(var(--c-bg));
 }
 
 @layer utilities {
   .italic-spark {
     font-style: italic;
     text-decoration: underline;
-    text-decoration-color: var(--color-spark);
+    text-decoration-color: rgb(var(--c-spark));
     text-decoration-thickness: 4px;
     text-underline-offset: 8px;
+  }
+
+  /* Hero H1 underline — used on "AI apps" without italics */
+  .hero-underline {
+    text-decoration: underline;
+    text-decoration-color: rgb(var(--c-spark));
+    text-decoration-thickness: 5px;
+    text-underline-offset: 10px;
   }
 }
 
@@ -57,37 +138,37 @@ body {
 /* Inline code (e.g. each.run() in body copy) */
 code {
   font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
-  background: var(--color-surface2);
-  border: 1px solid var(--color-rule2);
+  background: rgb(var(--c-surface2));
+  border: 1px solid rgb(var(--c-rule2));
   padding: 0 0.3rem;
   border-radius: 4px;
   font-size: 0.9em;
-  color: var(--color-ink);
+  color: rgb(var(--c-ink));
 }
 
 /* Code-snippet panel inside the widget — uses different shell */
 pre.snippet,
 pre.snippet code {
-  background: var(--color-bg);
+  background: rgb(var(--c-bg));
   border: 0;
   padding: 0;
   border-radius: 0;
   font-size: 13px;
-  color: var(--color-ink);
+  color: rgb(var(--c-ink));
   line-height: 1.55;
 }
 
-pre.snippet .tk-key   { color: #A8A39A; }
-pre.snippet .tk-str   { color: #FF9166; }
-pre.snippet .tk-fn    { color: var(--color-ink); }
-pre.snippet .tk-num   { color: #FF9166; }
-pre.snippet .tk-cmt   { color: var(--color-ink3); font-style: italic; }
-pre.snippet .tk-punct { color: var(--color-ink3); }
-pre.snippet .tk-prop  { color: #A8A39A; }
+pre.snippet .tk-key   { color: rgb(var(--tk-key)); }
+pre.snippet .tk-str   { color: rgb(var(--tk-str)); }
+pre.snippet .tk-fn    { color: rgb(var(--c-ink)); }
+pre.snippet .tk-num   { color: rgb(var(--tk-str)); }
+pre.snippet .tk-cmt   { color: rgb(var(--c-ink3)); font-style: italic; }
+pre.snippet .tk-punct { color: rgb(var(--c-ink3)); }
+pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
 
 /* Focus rings */
 :where(a, button, input):focus-visible {
-  outline: 2px solid var(--color-spark);
+  outline: 2px solid rgb(var(--c-spark));
   outline-offset: 3px;
   border-radius: 4px;
 }

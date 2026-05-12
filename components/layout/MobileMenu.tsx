@@ -74,7 +74,7 @@ export function MobileMenu({ open, onClose }: Props) {
                         col.items.map((sub) => (
                           <Link
                             key={col.eyebrow + sub.title}
-                            href="#"
+                            href={sub.href}
                             onClick={onClose}
                             className="text-[15px] text-ink2 hover:text-ink"
                           >
@@ -102,7 +102,9 @@ export function MobileMenu({ open, onClose }: Props) {
             Get an API key
           </Link>
           <Link
-            href="#"
+            href="https://docs.eachlabs.ai/introduction"
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex-1 inline-flex items-center justify-center px-5 py-3 rounded-md border border-rule2 text-ink text-[14px] font-medium"
           >
             Docs

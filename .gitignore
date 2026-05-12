@@ -7,3 +7,6 @@ next-env.d.ts
 *.tsbuildinfo
 .vercel
 _legacy/
+
+# Claude Code worktrees
+.claude/worktrees/
