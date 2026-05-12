@@ -524,11 +524,11 @@ function SwappingPill({ phase }: { phase: SwapPhase }) {
         {swapWindow && (
           <motion.span
             key={isFail ? 'tag-fail' : 'tag-fb'}
-            initial={{ opacity: 0, y: 6, scale: 0.85 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -4, scale: 0.9 }}
+            initial={{ opacity: 0, y: 6, scale: 0.85, x: '-50%' }}
+            animate={{ opacity: 1, y: 0, scale: 1, x: '-50%' }}
+            exit={{ opacity: 0, y: -4, scale: 0.9, x: '-50%' }}
             transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute left-1/2 -translate-x-1/2 -top-[22px] font-mono text-[9px] uppercase tracking-eyebrow px-2 py-[2px] rounded-sm whitespace-nowrap pointer-events-none flex items-center gap-1"
+            className="absolute left-1/2 -top-[22px] font-mono text-[9px] uppercase tracking-eyebrow px-2 py-[2px] rounded-sm whitespace-nowrap pointer-events-none flex items-center gap-1"
             style={{
               color: isFail ? 'rgb(var(--c-fail))' : 'rgb(var(--c-spark))',
               backgroundColor: isFail
@@ -554,15 +554,16 @@ function SwappingPill({ phase }: { phase: SwapPhase }) {
         )}
       </AnimatePresence>
 
-      {/* Expanding ring burst at the moment fallback engages */}
+      {/* Expanding ring burst — fires the instant fallback engages */}
       <AnimatePresence>
         {showFb && (
           <motion.span
             key="burst"
             initial={{ scale: 0.7, opacity: 0.9 }}
             animate={{ scale: 1.9, opacity: 0 }}
+            exit={{ opacity: 0 }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
-            className="absolute inset-0 rounded-md border-2 pointer-events-none"
+            className="absolute inset-0 rounded-md border-2 pointer-events-none origin-center"
             style={{ borderColor: 'rgb(var(--c-spark) / 0.7)' }}
             aria-hidden
           />
