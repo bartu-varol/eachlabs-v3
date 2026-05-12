@@ -15,8 +15,8 @@ const baseStyles =
   'inline-flex items-center justify-center px-5 py-3 rounded-md text-[14px] font-medium transition-colors duration-150 whitespace-nowrap';
 
 const styleMap: Record<Variant, string> = {
-  // Primary CTA: orange fill, black text (the brief: bg-spark text-bg)
-  primary: 'bg-spark text-bg hover:bg-ember',
+  // Primary CTA: orange fill, white text
+  primary: 'bg-spark text-white hover:bg-ember',
 
   // Secondary: outlined on dark surface
   secondary: 'border border-rule2 text-ink bg-bg hover:bg-surface',

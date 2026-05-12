@@ -1,9 +1,11 @@
 import type { Metadata } from 'next';
 import { Inter, JetBrains_Mono } from 'next/font/google';
+import Script from 'next/script';
 import './globals.css';
 import { Ticker } from '@/components/layout/Ticker';
 import { Nav } from '@/components/layout/Nav';
 import { Footer } from '@/components/layout/Footer';
+import { ChromeGuard } from '@/components/layout/ChromeGuard';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -22,14 +24,23 @@ export const metadata: Metadata = {
   description: 'Ship reliable AI apps. We handle the chaos.',
 };
 
+const themeBootstrap = `(function(){try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();`;
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`}>
+    <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
       <body className="bg-bg text-ink font-sans">
-        <Ticker />
-        <Nav />
+        <Script id="theme-bootstrap" strategy="beforeInteractive">
+          {themeBootstrap}
+        </Script>
+        <ChromeGuard>
+          <Ticker />
+          <Nav />
+        </ChromeGuard>
         <main>{children}</main>
-        <Footer />
+        <ChromeGuard>
+          <Footer />
+        </ChromeGuard>
       </body>
     </html>
   );

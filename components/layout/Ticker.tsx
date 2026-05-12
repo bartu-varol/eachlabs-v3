@@ -6,7 +6,7 @@ export function Ticker() {
   const sequence = [...ticker, ...ticker];
 
   return (
-    <div className="ticker bg-spark text-bg h-9 overflow-hidden flex items-center sticky top-0 z-50">
+    <div className="ticker bg-spark text-white h-9 overflow-hidden flex items-center sticky top-0 z-50">
       <div className="ticker-track flex whitespace-nowrap will-change-transform animate-marquee">
         {sequence.map((item, i) => {
           const isFirst = i === 0;

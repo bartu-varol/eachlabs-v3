@@ -7,15 +7,18 @@ type Props = {
 };
 
 /**
- * Render a feature title with the `each::` prefix in ink3.
+ * Render a feature title in the wordmark pattern:
+ *   each (ink)  ::  (spark)  name (ink → spark on hover)
  * If the title doesn't start with `each::`, render plain.
  */
 function FeatureTitle({ title }: { title: string }) {
   if (title.startsWith('each::')) {
+    const name = title.slice(6);
     return (
-      <span className="font-medium text-[15px] text-ink group-hover:text-spark transition-colors">
-        <span className="text-ink3">each::</span>
-        {title.slice(6)}
+      <span className="font-medium text-[15px] inline-flex items-baseline">
+        <span className="text-ink group-hover:text-spark transition-colors">each</span>
+        <span className="text-spark">::</span>
+        <span className="text-ink group-hover:text-spark transition-colors">{name}</span>
       </span>
     );
   }
@@ -32,19 +35,29 @@ export function MegaMenu({ menu, open }: Props) {
   // Developers menu — flat list
   if (menu.flat) {
     return (
-      <div className="absolute top-full right-0 mt-2 z-40 w-[260px]">
+      // Hover-bridge: pt-2 makes the gap between trigger and panel hoverable,
+      // so the dropdown doesn't close while the cursor crosses it.
+      <div className="absolute top-full right-0 z-40 w-[260px] pt-2">
         <div className="bg-surface border border-rule2 rounded-md p-6 shadow-[0_8px_24px_-12px_rgba(0,0,0,0.6)]">
           <ul className="flex flex-col gap-3">
-            {menu.flat.map((item) => (
-              <li key={item.title}>
-                <Link
-                  href={item.href}
-                  className="text-[14px] text-ink2 hover:text-ink transition-colors"
-                >
-                  {item.title}
-                </Link>
-              </li>
-            ))}
+            {menu.flat.map((item) => {
+              const isExternal = item.href.startsWith('http');
+              return (
+                <li key={item.title}>
+                  <Link
+                    href={item.href}
+                    target={isExternal ? '_blank' : undefined}
+                    rel={isExternal ? 'noopener noreferrer' : undefined}
+                    className="text-[14px] text-ink2 hover:text-ink transition-colors flex items-center justify-between gap-2"
+                  >
+                    <span>{item.title}</span>
+                    {isExternal && (
+                      <span className="text-ink3 text-[10px]" aria-hidden>↗</span>
+                    )}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </div>
@@ -53,7 +66,9 @@ export function MegaMenu({ menu, open }: Props) {
 
   // Platform / Use cases — three-column grid with featured card
   return (
-    <div className="absolute top-full left-0 right-0 mt-2 z-40">
+    // Hover-bridge: pt-2 keeps the cursor inside the dropdown's hit-area
+    // while it travels from the trigger to the panel.
+    <div className="absolute top-full left-0 right-0 z-40 pt-2">
       <div className="container">
         <div className="bg-surface border border-rule2 rounded-md p-10 grid grid-cols-3 gap-10 shadow-[0_8px_24px_-12px_rgba(0,0,0,0.6)]">
           {menu.columns.map((col) => (
@@ -62,16 +77,34 @@ export function MegaMenu({ menu, open }: Props) {
                 * {col.eyebrow}
               </div>
               <ul className="flex flex-col gap-4">
-                {col.items.map((item) => (
-                  <li key={item.title}>
-                    <Link href="#" className="block group">
-                      <FeatureTitle title={item.title} />
-                      <div className="text-[13px] text-ink2 mt-0.5 leading-[1.4]">
-                        {item.body}
-                      </div>
-                    </Link>
-                  </li>
-                ))}
+                {col.items.map((item) => {
+                  const isExternal = item.href.startsWith('http');
+                  return (
+                    <li key={item.title}>
+                      <Link
+                        href={item.href}
+                        target={isExternal ? '_blank' : undefined}
+                        rel={isExternal ? 'noopener noreferrer' : undefined}
+                        className="block group"
+                      >
+                        <div className="flex items-center gap-2">
+                          <FeatureTitle title={item.title} />
+                          {item.comingSoon && (
+                            <span className="font-mono text-[9px] uppercase tracking-eyebrow px-1.5 py-0.5 border border-yellow text-yellow rounded bg-yellow/10 leading-none">
+                              ● Coming soon
+                            </span>
+                          )}
+                          {isExternal && (
+                            <span className="text-ink3 text-[10px]" aria-hidden>↗</span>
+                          )}
+                        </div>
+                        <div className="text-[13px] text-ink2 mt-0.5 leading-[1.4]">
+                          {item.body}
+                        </div>
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}

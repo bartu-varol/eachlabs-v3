@@ -8,9 +8,9 @@ type Props = {
 const TYPE_PILL: Record<ModelType, string> = {
   VIDEO:   'bg-highlight text-white',
   IMAGE:   'bg-emerald-600 text-white',
-  AUDIO:   'bg-yellow text-black',
-  '3D':    'bg-spark text-black',
-  UPSCALE: 'bg-sun text-black',
+  AUDIO:   'bg-yellow text-white',
+  '3D':    'bg-spark text-white',
+  UPSCALE: 'bg-sun text-white',
   UTIL:    'bg-rule2 text-ink2',
 };
 

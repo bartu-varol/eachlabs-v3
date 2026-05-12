@@ -2,50 +2,131 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Light mode (default) — palette extracted from new-web-demo.vercel.app */
 :root {
-  --color-bg: #000000;
-  --color-surface: #0A0A0A;
-  --color-surface2: #141414;
-  --color-ink: #F5F0E6;
-  --color-ink2: #A8A39A;
-  --color-ink3: #6E6A63;
-  --color-rule: #1F1F1F;
-  --color-rule2: #2A2A2A;
-  --color-spark: #FF3C15;
-  --color-ember: #D63310;
-  --color-sun: #FB9000;
-  --color-highlight: #5046E6;
-  --color-yellow: #FFC534;
-  --color-success: #22C55E;
-  --color-fail: #EF4444;
+  --c-bg: 245 242 235;
+  --c-surface: 239 235 226;
+  --c-surface2: 232 227 215;
+  --c-ink: 14 13 10;
+  --c-ink2: 58 56 50;
+  --c-ink3: 118 114 106;
+  --c-rule: 221 214 198;
+  --c-rule2: 200 194 181;
+  --c-spark: 255 60 21;
+  --c-ember: 214 51 16;
+  --c-sun: 251 144 0;
+  --c-highlight: 80 70 230;
+  --c-yellow: 201 138 0;
+  --c-success: 91 143 58;
+  --c-fail: 239 68 68;
+
+  --tk-str: 214 51 16;
+  --tk-key: 118 114 106;
+  --tk-prop: 118 114 106;
+}
+
+/* System dark — applies only when user has NOT explicitly chosen */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --c-bg: 0 0 0;
+    --c-surface: 10 10 10;
+    --c-surface2: 20 20 20;
+    --c-ink: 245 240 230;
+    --c-ink2: 168 163 154;
+    --c-ink3: 110 106 99;
+    --c-rule: 31 31 31;
+    --c-rule2: 42 42 42;
+    --c-yellow: 255 197 52;
+    --c-success: 34 197 94;
+
+    --tk-str: 255 145 102;
+    --tk-key: 168 163 154;
+    --tk-prop: 168 163 154;
+  }
+}
+
+/* Explicit user choice via toggle — wins over system */
+:root[data-theme="dark"] {
+  --c-bg: 0 0 0;
+  --c-surface: 10 10 10;
+  --c-surface2: 20 20 20;
+  --c-ink: 245 240 230;
+  --c-ink2: 168 163 154;
+  --c-ink3: 110 106 99;
+  --c-rule: 31 31 31;
+  --c-rule2: 42 42 42;
+  --c-yellow: 255 197 52;
+  --c-success: 34 197 94;
+
+  --tk-str: 255 145 102;
+  --tk-key: 168 163 154;
+  --tk-prop: 168 163 154;
 }
 
 html {
-  background: var(--color-bg);
-  color: var(--color-ink);
-  color-scheme: dark;
+  background: rgb(var(--c-bg));
+  color: rgb(var(--c-ink));
+  color-scheme: light dark;
 }
 
 body {
-  background: var(--color-bg);
-  color: var(--color-ink);
+  background-color: rgb(var(--c-bg));
+  /* Three soft radial pockets — spark top-left, spark mid-right, highlight bottom-center.
+     Same mesh on both modes; the underlying --c-bg gives the right tone per theme. */
+  background-image:
+    radial-gradient(ellipse 70% 50% at 12% -8%,  rgb(var(--c-spark)     / 0.055), transparent 60%),
+    radial-gradient(ellipse 55% 35% at 88% 38%,  rgb(var(--c-spark)     / 0.035), transparent 65%),
+    radial-gradient(ellipse 50% 40% at 50% 102%, rgb(var(--c-highlight) / 0.045), transparent 65%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  color: rgb(var(--c-ink));
   font-feature-settings: 'ss01', 'cv01', 'cv02';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Light mode wants slightly less saturation — pale cream amplifies tints. */
+:root[data-theme="light"] body,
+:root:not([data-theme]) body {
+  /* defaults above already work; if user is in light, soften slightly */
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) body {
+    background-image:
+      radial-gradient(ellipse 70% 50% at 12% -8%,  rgb(var(--c-spark)     / 0.04), transparent 65%),
+      radial-gradient(ellipse 55% 35% at 88% 38%,  rgb(var(--c-spark)     / 0.025), transparent 70%),
+      radial-gradient(ellipse 50% 40% at 50% 102%, rgb(var(--c-highlight) / 0.035), transparent 70%);
+  }
+}
+
+:root[data-theme="light"] body {
+  background-image:
+    radial-gradient(ellipse 70% 50% at 12% -8%,  rgb(var(--c-spark)     / 0.04), transparent 65%),
+    radial-gradient(ellipse 55% 35% at 88% 38%,  rgb(var(--c-spark)     / 0.025), transparent 70%),
+    radial-gradient(ellipse 50% 40% at 50% 102%, rgb(var(--c-highlight) / 0.035), transparent 70%);
+}
+
 ::selection {
-  background: var(--color-spark);
-  color: var(--color-bg);
+  background: rgb(var(--c-spark));
+  color: rgb(var(--c-bg));
 }
 
 @layer utilities {
   .italic-spark {
     font-style: italic;
     text-decoration: underline;
-    text-decoration-color: var(--color-spark);
+    text-decoration-color: rgb(var(--c-spark));
     text-decoration-thickness: 4px;
     text-underline-offset: 8px;
+  }
+
+  /* Hero H1 underline — used on "AI apps" without italics */
+  .hero-underline {
+    text-decoration: underline;
+    text-decoration-color: rgb(var(--c-spark));
+    text-decoration-thickness: 5px;
+    text-underline-offset: 10px;
   }
 }
 
@@ -57,37 +138,37 @@ body {
 /* Inline code (e.g. each.run() in body copy) */
 code {
   font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
-  background: var(--color-surface2);
-  border: 1px solid var(--color-rule2);
+  background: rgb(var(--c-surface2));
+  border: 1px solid rgb(var(--c-rule2));
   padding: 0 0.3rem;
   border-radius: 4px;
   font-size: 0.9em;
-  color: var(--color-ink);
+  color: rgb(var(--c-ink));
 }
 
 /* Code-snippet panel inside the widget — uses different shell */
 pre.snippet,
 pre.snippet code {
-  background: var(--color-bg);
+  background: rgb(var(--c-bg));
   border: 0;
   padding: 0;
   border-radius: 0;
   font-size: 13px;
-  color: var(--color-ink);
+  color: rgb(var(--c-ink));
   line-height: 1.55;
 }
 
-pre.snippet .tk-key   { color: #A8A39A; }
-pre.snippet .tk-str   { color: #FF9166; }
-pre.snippet .tk-fn    { color: var(--color-ink); }
-pre.snippet .tk-num   { color: #FF9166; }
-pre.snippet .tk-cmt   { color: var(--color-ink3); font-style: italic; }
-pre.snippet .tk-punct { color: var(--color-ink3); }
-pre.snippet .tk-prop  { color: #A8A39A; }
+pre.snippet .tk-key   { color: rgb(var(--tk-key)); }
+pre.snippet .tk-str   { color: rgb(var(--tk-str)); }
+pre.snippet .tk-fn    { color: rgb(var(--c-ink)); }
+pre.snippet .tk-num   { color: rgb(var(--tk-str)); }
+pre.snippet .tk-cmt   { color: rgb(var(--c-ink3)); font-style: italic; }
+pre.snippet .tk-punct { color: rgb(var(--c-ink3)); }
+pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
 
 /* Focus rings */
 :where(a, button, input):focus-visible {
-  outline: 2px solid var(--color-spark);
+  outline: 2px solid rgb(var(--c-spark));
   outline-offset: 3px;
   border-radius: 4px;
 }
@@ -95,6 +176,526 @@ pre.snippet .tk-prop  { color: #A8A39A; }
 /* Hide scrollbar on inner horizontal scrollers */
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { scrollbar-width: none; }
+
+/* Model detail — readme HTML (rendered from the marketplace DB). Keeps the look
+   aligned with the rest of the page so the embedded headings/lists don't
+   override the brand styling. */
+.model-readme-prose {
+  font-size: 14px;
+  line-height: 1.65;
+  color: rgb(var(--c-ink2));
+}
+.model-readme-prose h1,
+.model-readme-prose h2,
+.model-readme-prose h3 {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  color: rgb(var(--c-ink));
+  letter-spacing: -0.01em;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+.model-readme-prose h2 { font-size: 16px; font-weight: 600; }
+.model-readme-prose h3 { font-size: 14px; font-weight: 600; }
+.model-readme-prose p { margin: 0.5rem 0; }
+.model-readme-prose strong { color: rgb(var(--c-ink)); font-weight: 600; }
+.model-readme-prose ul, .model-readme-prose ol {
+  margin: 0.5rem 0;
+  padding-left: 1.2rem;
+}
+.model-readme-prose ul { list-style: disc; }
+.model-readme-prose ol { list-style: decimal; }
+.model-readme-prose li { margin: 0.2rem 0; }
+.model-readme-prose code {
+  background: rgb(var(--c-surface2));
+  border: 1px solid rgb(var(--c-rule2));
+  padding: 0 0.3rem;
+  border-radius: 4px;
+  font-size: 0.88em;
+}
+.model-readme-prose a {
+  color: rgb(var(--c-ink));
+  text-decoration: underline;
+  text-decoration-color: rgb(var(--c-spark));
+  text-underline-offset: 3px;
+}
+
+/* Editorial readme styling for provider + family pages. */
+.catalog-readme-prose {
+  font-size: 16px;
+  line-height: 1.72;
+  color: rgb(var(--c-ink2));
+}
+
+/* Lede — first paragraph reads larger to draw the eye in. */
+.catalog-readme-prose > p:first-child {
+  font-size: 19px;
+  line-height: 1.55;
+  color: rgb(var(--c-ink));
+  letter-spacing: -0.005em;
+  margin-bottom: 1.5rem;
+}
+
+.catalog-readme-prose h2,
+.catalog-readme-prose h3,
+.catalog-readme-prose h4 {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  color: rgb(var(--c-ink));
+  letter-spacing: -0.018em;
+  font-weight: 600;
+}
+.catalog-readme-prose h2 {
+  font-size: 26px;
+  line-height: 1.2;
+  margin-top: 2.75rem;
+  margin-bottom: 0.85rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgb(var(--c-rule));
+}
+.catalog-readme-prose h2:first-child { border-top: 0; padding-top: 0; margin-top: 0; }
+.catalog-readme-prose h3 {
+  font-size: 18px;
+  line-height: 1.3;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+.catalog-readme-prose h4 {
+  font-size: 16px;
+  line-height: 1.35;
+  margin-top: 1.5rem;
+  margin-bottom: 0.4rem;
+}
+.catalog-readme-prose p { margin: 0.8rem 0; }
+.catalog-readme-prose strong { color: rgb(var(--c-ink)); font-weight: 600; }
+
+.catalog-readme-prose ul, .catalog-readme-prose ol {
+  margin: 1rem 0;
+  padding-left: 1.3rem;
+}
+.catalog-readme-prose ul { list-style: none; padding-left: 0; }
+.catalog-readme-prose ul > li {
+  position: relative;
+  padding-left: 1.4rem;
+  margin: 0.55rem 0;
+}
+.catalog-readme-prose ul > li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.65em;
+  width: 6px;
+  height: 6px;
+  border-radius: 2px;
+  background: rgb(var(--c-spark));
+}
+.catalog-readme-prose ol { list-style: decimal; }
+.catalog-readme-prose ol > li { margin: 0.45rem 0; padding-left: 0.4rem; }
+.catalog-readme-prose ol > li::marker { color: rgb(var(--c-spark)); font-weight: 600; }
+
+.catalog-readme-prose code {
+  background: rgb(var(--c-surface2));
+  border: 1px solid rgb(var(--c-rule2));
+  padding: 0 0.3rem;
+  border-radius: 4px;
+  font-size: 0.88em;
+}
+.catalog-readme-prose a {
+  color: rgb(var(--c-ink));
+  text-decoration: underline;
+  text-decoration-color: rgb(var(--c-spark));
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+}
+.catalog-readme-prose a:hover {
+  color: rgb(var(--c-spark));
+}
+
+/* FAQ answer body — DB stores HTML, mostly <p>. Match readme typography. */
+.catalog-faq-answer p { margin: 0.5rem 0; }
+.catalog-faq-answer strong { color: rgb(var(--c-ink)); font-weight: 600; }
+.catalog-faq-answer ul, .catalog-faq-answer ol {
+  margin: 0.5rem 0;
+  padding-left: 1.2rem;
+}
+.catalog-faq-answer ul { list-style: disc; }
+.catalog-faq-answer ol { list-style: decimal; }
+.catalog-faq-answer a {
+  color: rgb(var(--c-ink));
+  text-decoration: underline;
+  text-decoration-color: rgb(var(--c-spark));
+  text-underline-offset: 3px;
+}
+
+/* Blog detail body — renders Ghost CMS HTML. Long-form editorial typography
+   tuned for reading, with explicit handling for Ghost-emitted figure/image
+   cards, tables, and code blocks. */
+.blog-prose {
+  font-size: 16px;
+  line-height: 1.72;
+  color: rgb(var(--c-ink2));
+}
+.blog-prose > p:first-of-type {
+  font-size: 19px;
+  line-height: 1.55;
+  color: rgb(var(--c-ink));
+  letter-spacing: -0.005em;
+  margin-bottom: 1.5rem;
+}
+.blog-prose h2,
+.blog-prose h3,
+.blog-prose h4 {
+  font-family: var(--font-inter), system-ui, sans-serif;
+  color: rgb(var(--c-ink));
+  letter-spacing: -0.018em;
+  font-weight: 600;
+  scroll-margin-top: 5rem;
+}
+.blog-prose h2 {
+  font-size: 26px;
+  line-height: 1.2;
+  margin-top: 2.75rem;
+  margin-bottom: 0.85rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgb(var(--c-rule));
+}
+.blog-prose h2:first-child { border-top: 0; padding-top: 0; margin-top: 0; }
+.blog-prose h3 {
+  font-size: 18px;
+  line-height: 1.3;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+.blog-prose h4 {
+  font-size: 16px;
+  line-height: 1.35;
+  margin-top: 1.5rem;
+  margin-bottom: 0.4rem;
+}
+.blog-prose p { margin: 0.8rem 0; }
+.blog-prose strong { color: rgb(var(--c-ink)); font-weight: 600; }
+.blog-prose em { font-style: italic; }
+.blog-prose ul, .blog-prose ol {
+  margin: 1rem 0;
+  padding-left: 1.3rem;
+}
+.blog-prose ul { list-style: none; padding-left: 0; }
+.blog-prose ul > li {
+  position: relative;
+  padding-left: 1.4rem;
+  margin: 0.55rem 0;
+}
+.blog-prose ul > li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.65em;
+  width: 6px;
+  height: 6px;
+  border-radius: 2px;
+  background: rgb(var(--c-spark));
+}
+.blog-prose ol { list-style: decimal; }
+.blog-prose ol > li { margin: 0.45rem 0; padding-left: 0.4rem; }
+.blog-prose ol > li::marker { color: rgb(var(--c-spark)); font-weight: 600; }
+.blog-prose a {
+  color: rgb(var(--c-ink));
+  text-decoration: underline;
+  text-decoration-color: rgb(var(--c-spark));
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+}
+.blog-prose a:hover { color: rgb(var(--c-spark)); }
+.blog-prose blockquote {
+  border-left: 2px solid rgb(var(--c-spark));
+  padding-left: 1rem;
+  color: rgb(var(--c-ink2));
+  font-style: italic;
+  margin: 1.5rem 0;
+}
+.blog-prose code {
+  background: rgb(var(--c-surface2));
+  border: 1px solid rgb(var(--c-rule2));
+  padding: 0 0.3rem;
+  border-radius: 4px;
+  font-size: 0.88em;
+}
+.blog-prose pre {
+  background: rgb(var(--c-surface));
+  border: 1px solid rgb(var(--c-rule2));
+  border-radius: 8px;
+  padding: 1rem 1.1rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.blog-prose pre code { background: transparent; border: none; padding: 0; }
+.blog-prose hr {
+  border: none;
+  border-top: 1px solid rgb(var(--c-rule));
+  margin: 2.5rem 0;
+}
+.blog-prose figure { margin: 1.75rem 0; }
+.blog-prose img,
+.blog-prose .kg-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  border: 1px solid rgb(var(--c-rule2));
+}
+.blog-prose figcaption {
+  color: rgb(var(--c-ink3));
+  font-size: 12.5px;
+  line-height: 1.5;
+  text-align: center;
+  margin-top: 0.7rem;
+}
+.blog-prose table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1.5rem 0;
+  font-size: 14px;
+  line-height: 1.55;
+}
+.blog-prose th,
+.blog-prose td {
+  border: 1px solid rgb(var(--c-rule2));
+  padding: 0.55rem 0.8rem;
+  text-align: left;
+  vertical-align: top;
+}
+.blog-prose th {
+  background: rgb(var(--c-surface) / 0.5);
+  color: rgb(var(--c-ink));
+  font-weight: 600;
+}
+.blog-prose .kg-bookmark-card {
+  display: block;
+  border: 1px solid rgb(var(--c-rule2));
+  border-radius: 8px;
+  padding: 1rem 1.2rem;
+  margin: 1.5rem 0;
+  text-decoration: none;
+}
+.blog-prose .kg-embed-card,
+.blog-prose .kg-video-card,
+.blog-prose .kg-audio-card {
+  margin: 1.5rem 0;
+}
+
+/* ── Catalog entrance choreography ──────────────────────────────────────
+   A small library of directional keyframes + a stagger system. Used on
+   provider / family pages — every time the route param changes, React
+   remounts the keyed wrapper and these animations replay.
+
+   Easing curve is cubic-bezier(0.16, 1, 0.3, 1) — "ease-out-expo".
+   Soft start, sharp finish. Reads as confident but unhurried.
+*/
+
+@keyframes ec-fade-up {
+  from { opacity: 0; transform: translate3d(0, 14px, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+@keyframes ec-fade-left {
+  from { opacity: 0; transform: translate3d(-14px, 0, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+@keyframes ec-fade-right {
+  from { opacity: 0; transform: translate3d(14px, 0, 0); }
+  to   { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+@keyframes ec-fade-scale {
+  from { opacity: 0; transform: scale(0.985) translate3d(0, 8px, 0); }
+  to   { opacity: 1; transform: scale(1) translate3d(0, 0, 0); }
+}
+
+.ec-anim {
+  opacity: 0;
+  will-change: opacity, transform;
+  animation-duration: 540ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  animation-fill-mode: forwards;
+  animation-delay: calc(var(--ec-delay, 0) * 1ms);
+}
+.ec-anim-up    { animation-name: ec-fade-up; }
+.ec-anim-left  { animation-name: ec-fade-left; }
+.ec-anim-right { animation-name: ec-fade-right; }
+.ec-anim-scale { animation-name: ec-fade-scale; }
+
+/* ── Catalog card choreography ──────────────────────────────────────────
+   Dramatic hover: glow shadow in the card's accent color, a clear
+   highlight ring that pops in, a scale+saturation bloom on the media, and
+   a cursor-tracked spotlight overlay. Maximum "wow" on hover.
+*/
+
+/* Derive an rgba from --ec-accent for shadows + spotlights. Accent is set
+   inline per card (#hex string), so we keep the hex and use color-mix. */
+.ec-card {
+  position: relative;
+  isolation: isolate;
+  cursor: pointer;
+  /* Always-on accent glow — cards "float" off the page even at rest, so the
+     grid feels alive without any hover. */
+  box-shadow: 0 4px 18px -8px color-mix(in srgb, var(--ec-accent, rgb(var(--c-ink))) 22%, transparent);
+  transition:
+    transform 320ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 320ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Highlight ring — visible at rest in the accent color, bright + thick on hover. */
+.ec-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid color-mix(in srgb, var(--ec-accent, rgb(var(--c-rule2))) 40%, transparent);
+  transition:
+    border-color 280ms ease-out,
+    inset 280ms ease-out,
+    border-width 280ms ease-out;
+  pointer-events: none;
+  z-index: 2;
+}
+.ec-card:hover::before {
+  inset: -2px;
+  border-width: 2px;
+  border-color: var(--ec-accent, rgb(var(--c-spark)));
+}
+
+/* Subtle cursor-tracked spotlight — a small soft glow follows the pointer
+   on hover. Dialed way down vs. earlier; meant to feel like a faint warm
+   highlight, not a flashlight. */
+.ec-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    160px circle at var(--mx, 50%) var(--my, 50%),
+    color-mix(in srgb, var(--ec-accent, rgb(var(--c-spark))) 28%, transparent),
+    transparent 65%
+  );
+  opacity: 0;
+  mix-blend-mode: screen;
+  transition: opacity 320ms ease-out;
+  pointer-events: none;
+  z-index: 3;
+}
+.ec-card:hover::after { opacity: 0.28; }
+
+
+/* Card lift + accent-tinted glow on hover. */
+.ec-card:hover {
+  transform: translateY(-6px) scale(1.015);
+  box-shadow:
+    0 20px 44px -12px color-mix(in srgb, var(--ec-accent, rgb(var(--c-ink))) 45%, transparent),
+    0 8px 20px -8px rgba(0, 0, 0, 0.25);
+}
+
+/* Media bloom — full color at rest, an extra pop on hover. */
+.ec-card-media {
+  transition:
+    filter 520ms ease-out,
+    transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.ec-card:hover .ec-card-media {
+  filter: saturate(1.18) brightness(1.06) contrast(1.03);
+  transform: scale(1.09);
+}
+
+/* Shimmer sweep — a band of light glides across the card on hover. We
+   define 8 directions; each card picks one deterministically (via hash of
+   its slug) so the grid feels like a chorus of different glints rather
+   than 24 identical sweeps. */
+.ec-card-shine {
+  position: absolute;
+  inset: 0;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  z-index: 4;
+  /* Hide until a direction class arms it. */
+  background: linear-gradient(
+    var(--shine-angle, 115deg),
+    transparent 32%,
+    rgba(255, 255, 255, 0.28) 48%,
+    rgba(255, 255, 255, 0.42) 50%,
+    rgba(255, 255, 255, 0.28) 52%,
+    transparent 68%
+  );
+  transform: var(--shine-from, translateX(-110%));
+}
+
+/* Per-direction keyframes — match the gradient angle so the band sweeps
+   perpendicular to its own stripes. */
+@keyframes ec-shine-lr { from { transform: translateX(-110%); } to { transform: translateX(110%); } }
+@keyframes ec-shine-rl { from { transform: translateX(110%); } to { transform: translateX(-110%); } }
+@keyframes ec-shine-td { from { transform: translateY(-110%); } to { transform: translateY(110%); } }
+@keyframes ec-shine-bt { from { transform: translateY(110%); } to { transform: translateY(-110%); } }
+@keyframes ec-shine-d1 { from { transform: translate(-110%, -110%); } to { transform: translate(110%,  110%); } }
+@keyframes ec-shine-d2 { from { transform: translate( 110%, -110%); } to { transform: translate(-110%, 110%); } }
+@keyframes ec-shine-d3 { from { transform: translate(-110%,  110%); } to { transform: translate(110%, -110%); } }
+@keyframes ec-shine-d4 { from { transform: translate( 110%,  110%); } to { transform: translate(-110%,-110%); } }
+
+/* Direction classes — pick gradient angle + animation. The angle is
+   perpendicular to the sweep so the band always reads as a light beam. */
+.ec-shine-lr { --shine-angle: 100deg; --shine-from: translateX(-110%); }
+.ec-shine-rl { --shine-angle: 100deg; --shine-from: translateX( 110%); }
+.ec-shine-td { --shine-angle:  10deg; --shine-from: translateY(-110%); }
+.ec-shine-bt { --shine-angle:  10deg; --shine-from: translateY( 110%); }
+.ec-shine-d1 { --shine-angle: 135deg; --shine-from: translate(-110%, -110%); }
+.ec-shine-d2 { --shine-angle:  45deg; --shine-from: translate( 110%, -110%); }
+.ec-shine-d3 { --shine-angle:  45deg; --shine-from: translate(-110%,  110%); }
+.ec-shine-d4 { --shine-angle: 135deg; --shine-from: translate( 110%,  110%); }
+
+.ec-card:hover .ec-shine-lr { animation: ec-shine-lr 950ms cubic-bezier(0.16, 1, 0.3, 1) 120ms 1; }
+.ec-card:hover .ec-shine-rl { animation: ec-shine-rl 950ms cubic-bezier(0.16, 1, 0.3, 1) 120ms 1; }
+.ec-card:hover .ec-shine-td { animation: ec-shine-td 950ms cubic-bezier(0.16, 1, 0.3, 1) 120ms 1; }
+.ec-card:hover .ec-shine-bt { animation: ec-shine-bt 950ms cubic-bezier(0.16, 1, 0.3, 1) 120ms 1; }
+.ec-card:hover .ec-shine-d1 { animation: ec-shine-d1 1100ms cubic-bezier(0.16, 1, 0.3, 1) 120ms 1; }
+.ec-card:hover .ec-shine-d2 { animation: ec-shine-d2 1100ms cubic-bezier(0.16, 1, 0.3, 1) 120ms 1; }
+.ec-card:hover .ec-shine-d3 { animation: ec-shine-d3 1100ms cubic-bezier(0.16, 1, 0.3, 1) 120ms 1; }
+.ec-card:hover .ec-shine-d4 { animation: ec-shine-d4 1100ms cubic-bezier(0.16, 1, 0.3, 1) 120ms 1; }
+
+/* Description reveal — slides up from below on hover. */
+.ec-card-reveal {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition:
+    max-height 360ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 240ms ease-out 80ms;
+}
+.ec-card:hover .ec-card-reveal {
+  max-height: 80px;
+  opacity: 1;
+}
+
+/* Scrim taller on hover so revealed text stays legible. */
+.ec-card-scrim {
+  transition: height 360ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.ec-card:hover .ec-card-scrim { height: 80%; }
+
+/* Skeleton shimmer — used on workflow tiles while data is fetching.
+   Subtle, low-contrast so the page doesn't feel "blinky" during pagination. */
+@keyframes ec-shimmer {
+  0%   { opacity: 0.55; }
+  50%  { opacity: 0.85; }
+  100% { opacity: 0.55; }
+}
+.ec-skeleton {
+  animation: ec-shimmer 1.4s ease-in-out infinite;
+}
+
+/* Grid card stagger — index passed as inline --ec-i, capped in JS at ~14.
+   No base delay so filter / search changes feel instant; only per-card
+   stagger gives the cascade. */
+.ec-anim-card {
+  opacity: 0;
+  will-change: opacity, transform;
+  animation: ec-fade-up 480ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: calc(var(--ec-i, 0) * 30ms);
+}
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

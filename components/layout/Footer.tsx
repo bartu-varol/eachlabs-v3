@@ -36,16 +36,21 @@ export function Footer() {
                 {col.title}
               </div>
               <ul className="flex flex-col gap-3">
-                {col.links.map((link) => (
-                  <li key={link.label}>
-                    <Link
-                      href={link.href}
-                      className="text-[14px] text-ink2 hover:text-ink transition-colors"
-                    >
-                      <FooterLink label={link.label} />
-                    </Link>
-                  </li>
-                ))}
+                {col.links.map((link) => {
+                  const isExternal = link.href.startsWith('http');
+                  return (
+                    <li key={link.label}>
+                      <Link
+                        href={link.href}
+                        target={isExternal ? '_blank' : undefined}
+                        rel={isExternal ? 'noopener noreferrer' : undefined}
+                        className="text-[14px] text-ink2 hover:text-ink transition-colors"
+                      >
+                        <FooterLink label={link.label} />
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}

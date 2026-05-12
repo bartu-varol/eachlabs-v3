@@ -30,7 +30,8 @@ export function MobileMenu({ open, onClose }: Props) {
       </div>
       <nav className="flex-1 overflow-y-auto px-6 py-8 flex flex-col gap-2">
         {navItems.map((item) => {
-          if ('href' in item) {
+          // Plain link (no megamenu) — Explore, Customers, Pricing
+          if (!('menu' in item)) {
             return (
               <Link
                 key={item.label}
@@ -43,6 +44,9 @@ export function MobileMenu({ open, onClose }: Props) {
             );
           }
 
+          // Item with a megamenu (Platform / Use Cases / Developers).
+          // On mobile, render as an accordion. The optional `item.href`
+          // (overview page) is exposed via a separate "Browse" link below.
           const isOpen = expanded === item.menu;
           const menu = megaMenus[item.menu];
 
@@ -74,7 +78,7 @@ export function MobileMenu({ open, onClose }: Props) {
                         col.items.map((sub) => (
                           <Link
                             key={col.eyebrow + sub.title}
-                            href="#"
+                            href={sub.href}
                             onClick={onClose}
                             className="text-[15px] text-ink2 hover:text-ink"
                           >
@@ -97,12 +101,14 @@ export function MobileMenu({ open, onClose }: Props) {
         <div className="mt-6 flex gap-3">
           <Link
             href="/signup"
-            className="flex-1 inline-flex items-center justify-center px-5 py-3 rounded-md bg-spark text-bg text-[14px] font-medium"
+            className="flex-1 inline-flex items-center justify-center px-5 py-3 rounded-md bg-spark text-white text-[14px] font-medium"
           >
-            Get an API key
+            Follow the white rabbit
           </Link>
           <Link
-            href="#"
+            href="https://docs.eachlabs.ai/introduction"
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex-1 inline-flex items-center justify-center px-5 py-3 rounded-md border border-rule2 text-ink text-[14px] font-medium"
           >
             Docs
