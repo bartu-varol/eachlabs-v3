@@ -495,12 +495,13 @@ function NormalPill({ step, index }: { step: string; index: number }) {
 
 /* The kling-v3 / wan-2.7 swapping pill. Both names are layered;
    the active one slides in (y:0, opacity:1), the other slides out.
-   A floating "↳ FALLBACK" tag appears above during the fail+fallback
-   window to make the model swap unmistakable. */
+   A floating tag appears above during fail+fallback so the model swap
+   is unmistakable. On the moment of fallback engage, an expanding ring
+   burst + background fill flash hammer the transition home. */
 function SwappingPill({ phase }: { phase: SwapPhase }) {
   const isFail = phase === 'fail';
   const showFb = phase === 'fallback';
-  const swapWindow = isFail || showFb; // tag stays up through both phases
+  const swapWindow = isFail || showFb;
 
   const borderColor =
     isFail  ? 'rgb(var(--c-fail))' :
@@ -510,50 +511,78 @@ function SwappingPill({ phase }: { phase: SwapPhase }) {
     isFail  ? 'rgb(var(--c-fail))' :
     showFb  ? 'rgb(var(--c-spark))' :
               'rgb(var(--c-ink3))';
+  const bgFill =
+    isFail  ? 'rgb(var(--c-fail) / 0.18)' :
+    showFb  ? 'rgb(var(--c-spark) / 0.12)' :
+              'rgb(var(--c-bg))';
 
   return (
     <span className="relative inline-block z-10">
-      {/* Floating "FALLBACK" tag — appears above the pill during fail+fallback */}
-      <AnimatePresence>
+      {/* Floating tag — appears above the pill during fail+fallback,
+          and explicitly names the from → to swap. */}
+      <AnimatePresence mode="wait">
         {swapWindow && (
           <motion.span
-            key="fb-tag"
-            initial={{ opacity: 0, y: 4, scale: 0.85 }}
+            key={isFail ? 'tag-fail' : 'tag-fb'}
+            initial={{ opacity: 0, y: 6, scale: 0.85 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -2, scale: 0.9 }}
-            transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute left-1/2 -translate-x-1/2 -top-[18px] font-mono text-[8.5px] uppercase tracking-eyebrow px-1.5 py-px rounded-sm whitespace-nowrap pointer-events-none"
+            exit={{ opacity: 0, y: -4, scale: 0.9 }}
+            transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="absolute left-1/2 -translate-x-1/2 -top-[22px] font-mono text-[9px] uppercase tracking-eyebrow px-2 py-[2px] rounded-sm whitespace-nowrap pointer-events-none flex items-center gap-1"
             style={{
               color: isFail ? 'rgb(var(--c-fail))' : 'rgb(var(--c-spark))',
               backgroundColor: isFail
-                ? 'rgb(var(--c-fail) / 0.12)'
-                : 'rgb(var(--c-spark) / 0.15)',
+                ? 'rgb(var(--c-fail) / 0.15)'
+                : 'rgb(var(--c-spark) / 0.18)',
               borderWidth: 1,
               borderStyle: 'solid',
               borderColor: isFail
-                ? 'rgb(var(--c-fail) / 0.5)'
-                : 'rgb(var(--c-spark) / 0.55)',
+                ? 'rgb(var(--c-fail) / 0.55)'
+                : 'rgb(var(--c-spark) / 0.6)',
+              boxShadow: isFail
+                ? '0 0 10px rgb(var(--c-fail) / 0.35)'
+                : '0 0 10px rgb(var(--c-spark) / 0.45)',
             }}
             aria-hidden
           >
-            {isFail ? '✗ kling failed' : '↳ fallback'}
+            {isFail ? (
+              <>✗ kling-v3 failed</>
+            ) : (
+              <>↳ routed to <span className="font-semibold">wan-2.7</span></>
+            )}
           </motion.span>
         )}
       </AnimatePresence>
 
+      {/* Expanding ring burst at the moment fallback engages */}
+      <AnimatePresence>
+        {showFb && (
+          <motion.span
+            key="burst"
+            initial={{ scale: 0.7, opacity: 0.9 }}
+            animate={{ scale: 1.9, opacity: 0 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+            className="absolute inset-0 rounded-md border-2 pointer-events-none"
+            style={{ borderColor: 'rgb(var(--c-spark) / 0.7)' }}
+            aria-hidden
+          />
+        )}
+      </AnimatePresence>
+
       <motion.span
-        className="relative inline-block px-2 py-1 rounded-md bg-bg border font-mono text-[9.5px] md:text-[10px] uppercase tracking-eyebrow whitespace-nowrap overflow-hidden"
+        className="relative inline-block px-2 py-1 rounded-md border font-mono text-[9.5px] md:text-[10px] uppercase tracking-eyebrow whitespace-nowrap overflow-hidden"
         animate={{
           borderColor,
           color: textColor,
-          scale: showFb ? [1, 1.08, 1] : 1,
+          backgroundColor: bgFill,
+          scale: showFb ? [1, 1.12, 1] : isFail ? [1, 1.04, 1] : 1,
         }}
-        transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
         style={{
           boxShadow: showFb
-            ? '0 0 0 1px rgb(var(--c-spark) / 0.4), 0 0 14px rgb(var(--c-spark) / 0.55)'
+            ? '0 0 0 1px rgb(var(--c-spark) / 0.45), 0 0 18px rgb(var(--c-spark) / 0.6)'
             : isFail
-              ? '0 0 0 1px rgb(var(--c-fail) / 0.4), 0 0 10px rgb(var(--c-fail) / 0.45)'
+              ? '0 0 0 1px rgb(var(--c-fail) / 0.45), 0 0 14px rgb(var(--c-fail) / 0.55)'
               : 'none',
         }}
       >
@@ -563,19 +592,24 @@ function SwappingPill({ phase }: { phase: SwapPhase }) {
           <motion.span
             className="block"
             animate={{
-              y: showFb ? -22 : 0,
+              y: showFb ? -28 : 0,
               opacity: showFb ? 0 : 1,
               textDecoration: isFail ? 'line-through' : 'none',
+              filter: showFb ? 'blur(2px)' : 'blur(0px)',
             }}
-            transition={{ duration: 0.26, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
           >
             kling-v3
           </motion.span>
           {/* wan-2.7 — slides in from below on fallback */}
           <motion.span
             className="absolute inset-0 block"
-            animate={{ y: showFb ? 0 : 22, opacity: showFb ? 1 : 0 }}
-            transition={{ duration: 0.26, ease: [0.16, 1, 0.3, 1] }}
+            animate={{
+              y: showFb ? 0 : 28,
+              opacity: showFb ? 1 : 0,
+              filter: showFb ? 'blur(0px)' : 'blur(2px)',
+            }}
+            transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
           >
             wan-2.7
           </motion.span>
