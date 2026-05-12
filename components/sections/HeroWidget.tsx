@@ -511,10 +511,13 @@ function SwappingPill({ phase }: { phase: SwapPhase }) {
     isFail  ? 'rgb(var(--c-fail))' :
     showFb  ? 'rgb(var(--c-spark))' :
               'rgb(var(--c-ink3))';
-  const bgFill =
-    isFail  ? 'rgb(var(--c-fail) / 0.18)' :
-    showFb  ? 'rgb(var(--c-spark) / 0.12)' :
-              'rgb(var(--c-bg))';
+  // Tint overlay sits on top of the always-opaque bg-bg base, so the
+  // pipeline rule line never bleeds through the pill.
+  const tintColor =
+    isFail  ? 'rgb(var(--c-fail))' :
+    showFb  ? 'rgb(var(--c-spark))' :
+              'rgba(0,0,0,0)';
+  const tintOpacity = isFail ? 0.2 : showFb ? 0.12 : 0;
 
   return (
     <span className="relative inline-block z-10">
@@ -571,11 +574,10 @@ function SwappingPill({ phase }: { phase: SwapPhase }) {
       </AnimatePresence>
 
       <motion.span
-        className="relative inline-block px-2 py-1 rounded-md border font-mono text-[9.5px] md:text-[10px] uppercase tracking-eyebrow whitespace-nowrap overflow-hidden"
+        className="relative inline-block px-2 py-1 rounded-md border bg-bg font-mono text-[9.5px] md:text-[10px] uppercase tracking-eyebrow whitespace-nowrap overflow-hidden"
         animate={{
           borderColor,
           color: textColor,
-          backgroundColor: bgFill,
           scale: showFb ? [1, 1.12, 1] : isFail ? [1, 1.04, 1] : 1,
         }}
         transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
@@ -587,6 +589,13 @@ function SwappingPill({ phase }: { phase: SwapPhase }) {
               : 'none',
         }}
       >
+        {/* Tint overlay — sits on top of bg-bg so the pipeline line stays hidden */}
+        <motion.span
+          aria-hidden
+          className="absolute inset-0 rounded-md pointer-events-none"
+          animate={{ backgroundColor: tintColor, opacity: tintOpacity }}
+          transition={{ duration: 0.35 }}
+        />
         <span className="relative block">
           {/* kling-v3 — visible during primary + fail; slides up & out on fallback.
               On fail, gets strike-through to underline the death. */}
