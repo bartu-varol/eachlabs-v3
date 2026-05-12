@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getFlowDetail, getRelatedFlows, listPopularFlowSlugs } from '@/lib/flowDetail';
+import { getFlowDetail, getRelatedFlows, listPopularFlowSlugs, type FlowDetail } from '@/lib/flowDetail';
 import { FlowDetailHero } from '@/components/flow-detail/FlowDetailHero';
 import { FlowTemplate } from '@/components/flow-detail/FlowTemplate';
 import { FlowApiSnippets } from '@/components/flow-detail/FlowApiSnippets';
@@ -9,6 +9,35 @@ import { FlowPlayground } from '@/components/flow-detail/FlowPlayground';
 import { FlowRelated } from '@/components/flow-detail/FlowRelated';
 import { FlowReadme, type FlowReadmeData } from '@/components/flow-detail/FlowReadme';
 import { buildExampleInputJson } from '@/lib/flowDetail';
+import { MODEL_PRICES } from '@/lib/modelPricing';
+
+/** Best-effort fixed price for the template: sum step model prices matched to
+ *  the local catalog. Returns formatted USD, or "Varies" if no step resolves. */
+function templateFixedPrice(flow: FlowDetail): { headline: string; matched: boolean } {
+  const steps = flow.definition.steps ?? [];
+  if (steps.length === 0) return { headline: 'Varies', matched: false };
+  const normalize = (s: string) => s.toLowerCase().replace(/[-_.\s]/g, '');
+  let total = 0;
+  let matched = 0;
+  for (const step of steps) {
+    if (!step.model) continue;
+    const stepKey = normalize(step.model);
+    const hit = MODEL_PRICES.find((p) => {
+      const candidate = normalize(`${p.provider}${p.model}`);
+      return candidate.includes(stepKey) || stepKey.includes(candidate);
+    });
+    if (hit) {
+      total += hit.price;
+      matched++;
+    }
+  }
+  if (matched === 0) return { headline: 'Varies', matched: false };
+  let headline: string;
+  if (total < 0.01) headline = `$${total.toFixed(4)}`;
+  else if (total < 1) headline = `$${total.toFixed(3).replace(/0+$/, '').replace(/\.$/, '')}`;
+  else headline = `$${total.toFixed(2)}`;
+  return { headline, matched: true };
+}
 
 const MOCK_README: FlowReadmeData = {
   overview: `
@@ -127,11 +156,7 @@ export default async function FlowDetailPage({
   const inputCount = Object.keys(flow.definition.input_schema?.properties ?? {}).filter(
     (k) => k !== 'type',
   ).length;
-  const lastUpdated = flow.updatedAt ? new Date(flow.updatedAt).toLocaleDateString('en-US', {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
-  }) : '-';
+  const fixedPrice = templateFixedPrice(flow);
 
   return (
     <>
@@ -154,22 +179,21 @@ export default async function FlowDetailPage({
             <div className="border border-rule2 rounded-md p-5 bg-surface/40">
               <div className="flex items-baseline justify-between gap-3 mb-3">
                 <span className="font-mono text-[11px] uppercase tracking-eyebrow text-ink2">
-                  Cost &amp; usage
+                  Template price
                 </span>
                 <span className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3">
                   per run
                 </span>
               </div>
-              <div className="font-mono text-[24px] text-ink mb-2 tabular-nums">
-                Sum of steps
+              <div className="font-display text-[32px] text-ink mb-2 tabular-nums leading-none">
+                {fixedPrice.headline}
               </div>
               <p className="text-[13px] text-ink2 leading-[1.55]">
-                Flow orchestration is free. You only pay for the underlying model calls, each step
-                bills at its model price. Estimate yours in the pricing calculator.
+                Fixed price for this template as-is. Clone the flow and the price moves with whatever
+                models you swap in — every step bills at its own model price, nothing on top.
               </p>
               <p className="text-[11.5px] text-ink3 italic leading-[1.5] mt-3">
-                * This is the estimated price based on this prompt. Real cost depends on
-                your inputs (duration, resolution, mode).
+                * Real cost can still shift with your inputs (duration, resolution, mode).
               </p>
               <dl className="grid grid-cols-2 gap-y-2 gap-x-4 text-[12px] mt-4 border-t border-rule2 pt-4">
                 <dt className="font-mono text-ink3 uppercase tracking-eyebrow text-[10px]">
@@ -180,10 +204,6 @@ export default async function FlowDetailPage({
                   Inputs
                 </dt>
                 <dd className="font-mono text-ink text-right tabular-nums">{inputCount}</dd>
-                <dt className="font-mono text-ink3 uppercase tracking-eyebrow text-[10px]">
-                  Updated
-                </dt>
-                <dd className="font-mono text-ink text-right">{lastUpdated}</dd>
               </dl>
             </div>
 
