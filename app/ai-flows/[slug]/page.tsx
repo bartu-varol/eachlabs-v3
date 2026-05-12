@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getFlowDetail, getRelatedFlows, listPopularFlowSlugs } from '@/lib/flowDetail';
+import { getFlowDetail, getRelatedFlows, listPopularFlowSlugs, type FlowDetail } from '@/lib/flowDetail';
 import { FlowDetailHero } from '@/components/flow-detail/FlowDetailHero';
 import { FlowTemplate } from '@/components/flow-detail/FlowTemplate';
 import { FlowApiSnippets } from '@/components/flow-detail/FlowApiSnippets';
@@ -9,6 +9,33 @@ import { FlowPlayground } from '@/components/flow-detail/FlowPlayground';
 import { FlowRelated } from '@/components/flow-detail/FlowRelated';
 import { FlowReadme, type FlowReadmeData } from '@/components/flow-detail/FlowReadme';
 import { buildExampleInputJson } from '@/lib/flowDetail';
+import { MODEL_PRICES } from '@/lib/modelPricing';
+
+/** Best-effort estimate: sum step model prices when we can match them by name.
+ *  Returns a formatted USD string, or "Varies" when nothing resolves. */
+function estimateFlowPrice(flow: FlowDetail): string {
+  const steps = flow.definition.steps ?? [];
+  if (steps.length === 0) return 'Varies';
+  const normalize = (s: string) => s.toLowerCase().replace(/[-_.\s]/g, '');
+  let total = 0;
+  let matched = 0;
+  for (const step of steps) {
+    if (!step.model) continue;
+    const stepKey = normalize(step.model);
+    const hit = MODEL_PRICES.find((p) => {
+      const candidate = normalize(`${p.provider}${p.model}`);
+      return candidate.includes(stepKey) || stepKey.includes(candidate);
+    });
+    if (hit) {
+      total += hit.price;
+      matched++;
+    }
+  }
+  if (matched === 0) return 'Varies';
+  if (total < 0.01) return `~$${total.toFixed(4)}`;
+  if (total < 1) return `~$${total.toFixed(3).replace(/0+$/, '').replace(/\.$/, '')}`;
+  return `~$${total.toFixed(2)}`;
+}
 
 const MOCK_README: FlowReadmeData = {
   overview: `
@@ -127,11 +154,7 @@ export default async function FlowDetailPage({
   const inputCount = Object.keys(flow.definition.input_schema?.properties ?? {}).filter(
     (k) => k !== 'type',
   ).length;
-  const lastUpdated = flow.updatedAt ? new Date(flow.updatedAt).toLocaleDateString('en-US', {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
-  }) : '—';
+  const estimatedPrice = estimateFlowPrice(flow);
 
   return (
     <>
@@ -181,9 +204,9 @@ export default async function FlowDetailPage({
                 </dt>
                 <dd className="font-mono text-ink text-right tabular-nums">{inputCount}</dd>
                 <dt className="font-mono text-ink3 uppercase tracking-eyebrow text-[10px]">
-                  Updated
+                  Estimated price
                 </dt>
-                <dd className="font-mono text-ink text-right">{lastUpdated}</dd>
+                <dd className="font-mono text-ink text-right tabular-nums">{estimatedPrice}</dd>
               </dl>
             </div>
 
