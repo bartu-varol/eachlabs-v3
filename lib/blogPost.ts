@@ -115,3 +115,52 @@ export async function listBlogPostSlugs(limit = 24): Promise<string[]> {
   const data = (await res.json()) as { posts?: Array<{ slug: string }> };
   return (data.posts ?? []).map((p) => p.slug);
 }
+
+export type BlogPostSummary = {
+  slug: string;
+  title: string;
+  excerpt: string;
+  featureImage: string | null;
+  publishedAt: string | null;
+  readingTime: number;
+  featured: boolean;
+  primaryTag: BlogTag | null;
+  author: BlogAuthor | null;
+};
+
+type RawSummary = {
+  slug: string;
+  title: string;
+  excerpt: string;
+  custom_excerpt: string | null;
+  feature_image: string | null;
+  published_at: string | null;
+  reading_time: number | null;
+  featured: boolean;
+  primary_tag: RawTag | null;
+  primary_author: RawAuthor | null;
+};
+
+function mapSummary(p: RawSummary): BlogPostSummary {
+  return {
+    slug: p.slug,
+    title: p.title,
+    excerpt: p.custom_excerpt ?? p.excerpt ?? '',
+    featureImage: p.feature_image ?? null,
+    publishedAt: p.published_at ?? null,
+    readingTime: p.reading_time ?? 0,
+    featured: !!p.featured,
+    primaryTag: mapTag(p.primary_tag),
+    author: mapAuthor(p.primary_author),
+  };
+}
+
+export async function listBlogPosts(limit = 60): Promise<BlogPostSummary[]> {
+  const url =
+    `${GHOST_API_URL}/ghost/api/v3/content/posts/` +
+    `?key=${GHOST_API_KEY}&limit=${limit}&include=authors,tags`;
+  const res = await fetch(url, { next: { revalidate: 600 } });
+  if (!res.ok) return [];
+  const data = (await res.json()) as { posts?: RawSummary[] };
+  return (data.posts ?? []).map(mapSummary);
+}
