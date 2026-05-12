@@ -50,10 +50,14 @@ function initialsFrom(name: string): string {
     .toUpperCase();
 }
 
-function demoteHeadings(html: string): string {
+function sanitizeBlogHtml(html: string): string {
   return html
     .replace(/<\s*h1(\b[^>]*)>/gi, '<h2$1>')
-    .replace(/<\s*\/\s*h1\s*>/gi, '</h2>');
+    .replace(/<\s*\/\s*h1\s*>/gi, '</h2>')
+    .replace(/<script\b[\s\S]*?<\/script\s*>/gi, '')
+    .replace(/<noscript\b[\s\S]*?<\/noscript\s*>/gi, '')
+    .replace(/\s+on\w+\s*=\s*"[^"]*"/gi, '')
+    .replace(/\s+on\w+\s*=\s*'[^']*'/gi, '');
 }
 
 export default async function BlogPostPage({
@@ -65,7 +69,7 @@ export default async function BlogPostPage({
   const post = await getBlogPost(slug);
   if (!post) notFound();
 
-  const body = demoteHeadings(post.html ?? '');
+  const body = sanitizeBlogHtml(post.html ?? '');
 
   return (
     <section className="container py-20 md:py-28">

@@ -36,7 +36,7 @@ function templateFixedPrice(flow: FlowDetail): { headline: string; matched: bool
   }
 
   if (matched === 0) {
-    // Deterministic mock — same slug always yields the same number.
+    // Deterministic mock,same slug always yields the same number.
     // Range chosen to look plausible for a single-to-few step flow.
     const stepBaseline = Math.max(1, steps.length || 1);
     let h = 0;
@@ -206,7 +206,7 @@ export default async function FlowDetailPage({
               </div>
               <p className="text-[13px] text-ink2 leading-[1.55]">
                 Fixed price for this template as-is. Clone the flow and the price moves with whatever
-                models you swap in — every step bills at its own model price, nothing on top.
+                models you swap in,every step bills at its own model price, nothing on top.
               </p>
               <p className="text-[11.5px] text-ink3 italic leading-[1.5] mt-3">
                 * Real cost can still shift with your inputs (duration, resolution, mode).

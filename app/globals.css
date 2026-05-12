@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Light mode (default) — palette extracted from new-web-demo.vercel.app */
+/* Light mode (default), palette extracted from new-web-demo.vercel.app */
 :root {
   --c-bg: 245 242 235;
   --c-surface: 239 235 226;
@@ -25,7 +25,7 @@
   --tk-prop: 118 114 106;
 }
 
-/* System dark — applies only when user has NOT explicitly chosen */
+/* System dark, applies only when user has NOT explicitly chosen */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
     --c-bg: 0 0 0;
@@ -45,7 +45,7 @@
   }
 }
 
-/* Explicit user choice via toggle — wins over system */
+/* Explicit user choice via toggle, wins over system */
 :root[data-theme="dark"] {
   --c-bg: 0 0 0;
   --c-surface: 10 10 10;
@@ -71,7 +71,7 @@ html {
 
 body {
   background-color: rgb(var(--c-bg));
-  /* Three soft radial pockets — spark top-left, spark mid-right, highlight bottom-center.
+  /* Three soft radial pockets, spark top-left, spark mid-right, highlight bottom-center.
      Same mesh on both modes; the underlying --c-bg gives the right tone per theme. */
   background-image:
     radial-gradient(ellipse 70% 50% at 12% -8%,  rgb(var(--c-spark)     / 0.055), transparent 60%),
@@ -85,7 +85,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Light mode wants slightly less saturation — pale cream amplifies tints. */
+/* Light mode wants slightly less saturation, pale cream amplifies tints. */
 :root[data-theme="light"] body,
 :root:not([data-theme]) body {
   /* defaults above already work; if user is in light, soften slightly */
@@ -121,7 +121,7 @@ body {
     text-underline-offset: 8px;
   }
 
-  /* Hero H1 underline — used on "AI apps" without italics */
+  /* Hero H1 underline, used on "AI apps" without italics */
   .hero-underline {
     text-decoration: underline;
     text-decoration-color: rgb(var(--c-spark));
@@ -130,7 +130,7 @@ body {
   }
 }
 
-/* Ticker — pause on hover */
+/* Ticker, pause on hover */
 .ticker:hover .ticker-track {
   animation-play-state: paused;
 }
@@ -146,7 +146,7 @@ code {
   color: rgb(var(--c-ink));
 }
 
-/* Code-snippet panel inside the widget — uses different shell */
+/* Code-snippet panel inside the widget, uses different shell */
 pre.snippet,
 pre.snippet code {
   background: rgb(var(--c-bg));
@@ -177,7 +177,7 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
 .no-scrollbar::-webkit-scrollbar { display: none; }
 .no-scrollbar { scrollbar-width: none; }
 
-/* Model detail — readme HTML (rendered from the marketplace DB). Keeps the look
+/* Model detail, readme HTML (rendered from the marketplace DB). Keeps the look
    aligned with the rest of the page so the embedded headings/lists don't
    override the brand styling. */
 .model-readme-prose {
@@ -226,7 +226,7 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
   color: rgb(var(--c-ink2));
 }
 
-/* Lede — first paragraph reads larger to draw the eye in. */
+/* Lede, first paragraph reads larger to draw the eye in. */
 .catalog-readme-prose > p:first-child {
   font-size: 19px;
   line-height: 1.55;
@@ -309,7 +309,7 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
   color: rgb(var(--c-spark));
 }
 
-/* FAQ answer body — DB stores HTML, mostly <p>. Match readme typography. */
+/* FAQ answer body, DB stores HTML, mostly <p>. Match readme typography. */
 .catalog-faq-answer p { margin: 0.5rem 0; }
 .catalog-faq-answer strong { color: rgb(var(--c-ink)); font-weight: 600; }
 .catalog-faq-answer ul, .catalog-faq-answer ol {
@@ -325,7 +325,7 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
   text-underline-offset: 3px;
 }
 
-/* Blog detail body — renders Ghost CMS HTML. Long-form editorial typography
+/* Blog detail body, renders Ghost CMS HTML. Long-form editorial typography
    tuned for reading, with explicit handling for Ghost-emitted figure/image
    cards, tables, and code blocks. */
 .blog-prose {
@@ -485,10 +485,10 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
 
 /* ── Catalog entrance choreography ──────────────────────────────────────
    A small library of directional keyframes + a stagger system. Used on
-   provider / family pages — every time the route param changes, React
+   provider / family pages, every time the route param changes, React
    remounts the keyed wrapper and these animations replay.
 
-   Easing curve is cubic-bezier(0.16, 1, 0.3, 1) — "ease-out-expo".
+   Easing curve is cubic-bezier(0.16, 1, 0.3, 1), "ease-out-expo".
    Soft start, sharp finish. Reads as confident but unhurried.
 */
 
@@ -534,7 +534,7 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
   position: relative;
   isolation: isolate;
   cursor: pointer;
-  /* Always-on accent glow — cards "float" off the page even at rest, so the
+  /* Always-on accent glow, cards "float" off the page even at rest, so the
      grid feels alive without any hover. */
   box-shadow: 0 4px 18px -8px color-mix(in srgb, var(--ec-accent, rgb(var(--c-ink))) 22%, transparent);
   transition:
@@ -542,7 +542,7 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
     box-shadow 320ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Highlight ring — visible at rest in the accent color, bright + thick on hover. */
+/* Highlight ring, visible at rest in the accent color, bright + thick on hover. */
 .ec-card::before {
   content: '';
   position: absolute;
@@ -562,7 +562,7 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
   border-color: var(--ec-accent, rgb(var(--c-spark)));
 }
 
-/* Subtle cursor-tracked spotlight — a small soft glow follows the pointer
+/* Subtle cursor-tracked spotlight, a small soft glow follows the pointer
    on hover. Dialed way down vs. earlier; meant to feel like a faint warm
    highlight, not a flashlight. */
 .ec-card::after {
@@ -592,7 +592,7 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
     0 8px 20px -8px rgba(0, 0, 0, 0.25);
 }
 
-/* Media bloom — full color at rest, an extra pop on hover. */
+/* Media bloom, full color at rest, an extra pop on hover. */
 .ec-card-media {
   transition:
     filter 520ms ease-out,
@@ -603,7 +603,7 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
   transform: scale(1.09);
 }
 
-/* Shimmer sweep — a band of light glides across the card on hover. We
+/* Shimmer sweep, a band of light glides across the card on hover. We
    define 8 directions; each card picks one deterministically (via hash of
    its slug) so the grid feels like a chorus of different glints rather
    than 24 identical sweeps. */
@@ -625,7 +625,7 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
   transform: var(--shine-from, translateX(-110%));
 }
 
-/* Per-direction keyframes — match the gradient angle so the band sweeps
+/* Per-direction keyframes, match the gradient angle so the band sweeps
    perpendicular to its own stripes. */
 @keyframes ec-shine-lr { from { transform: translateX(-110%); } to { transform: translateX(110%); } }
 @keyframes ec-shine-rl { from { transform: translateX(110%); } to { transform: translateX(-110%); } }
@@ -636,7 +636,7 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
 @keyframes ec-shine-d3 { from { transform: translate(-110%,  110%); } to { transform: translate(110%, -110%); } }
 @keyframes ec-shine-d4 { from { transform: translate( 110%,  110%); } to { transform: translate(-110%,-110%); } }
 
-/* Direction classes — pick gradient angle + animation. The angle is
+/* Direction classes, pick gradient angle + animation. The angle is
    perpendicular to the sweep so the band always reads as a light beam. */
 .ec-shine-lr { --shine-angle: 100deg; --shine-from: translateX(-110%); }
 .ec-shine-rl { --shine-angle: 100deg; --shine-from: translateX( 110%); }
@@ -656,7 +656,7 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
 .ec-card:hover .ec-shine-d3 { animation: ec-shine-d3 1100ms cubic-bezier(0.16, 1, 0.3, 1) 120ms 1; }
 .ec-card:hover .ec-shine-d4 { animation: ec-shine-d4 1100ms cubic-bezier(0.16, 1, 0.3, 1) 120ms 1; }
 
-/* Description reveal — slides up from below on hover. */
+/* Description reveal, slides up from below on hover. */
 .ec-card-reveal {
   max-height: 0;
   opacity: 0;
@@ -676,7 +676,7 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
 }
 .ec-card:hover .ec-card-scrim { height: 80%; }
 
-/* Skeleton shimmer — used on workflow tiles while data is fetching.
+/* Skeleton shimmer, used on workflow tiles while data is fetching.
    Subtle, low-contrast so the page doesn't feel "blinky" during pagination. */
 @keyframes ec-shimmer {
   0%   { opacity: 0.55; }
@@ -687,7 +687,7 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
   animation: ec-shimmer 1.4s ease-in-out infinite;
 }
 
-/* Grid card stagger — index passed as inline --ec-i, capped in JS at ~14.
+/* Grid card stagger, index passed as inline --ec-i, capped in JS at ~14.
    No base delay so filter / search changes feel instant; only per-card
    stagger gives the cascade. */
 .ec-anim-card {
