@@ -52,7 +52,7 @@ type ExploreShellProps = {
   initialTrends: WorkflowSummary[];
   initialTrendsOffset: number | null;
   initialTrendsTotal: number;
-  /** Live model count from upstream API — used for the tab counter. */
+  /** Live model count from upstream API, used for the tab counter. */
   liveModelsCount?: number;
 };
 
@@ -75,7 +75,7 @@ export function ExploreShell({
   const [provider, setProvider] = useState<string>('ALL');
   const [showAll, setShowAll] = useState(false);
 
-  /** Models after the provider filter — used to derive available categories. */
+  /** Models after the provider filter, used to derive available categories. */
   const providerScopedModels = useMemo(() => {
     if (provider === 'ALL') return allModels;
     return allModels.filter((m: CatalogModel) => m.providerSlug === provider);
@@ -156,7 +156,7 @@ export function ExploreShell({
         </div>
       </section>
 
-      {/* Filters bar — sticky */}
+      {/* Filters bar, sticky */}
       <section className="bg-bg border-b border-rule sticky top-[100px] z-30 backdrop-blur-sm">
         <div className="container">
           {tab === 'MODELS' ? (
@@ -186,7 +186,7 @@ export function ExploreShell({
                 </select>
               </div>
 
-              {/* Row 2: category chip rail — uses the full container width. */}
+              {/* Row 2: category chip rail, uses the full container width. */}
               {availableCategories.length > 1 && (
                 <div
                   className="flex flex-wrap gap-2 w-full"

@@ -35,7 +35,7 @@ export function CustomerStories() {
 
   return (
     <section className="border-t border-rule py-24 md:py-32 overflow-hidden">
-      {/* Header — kept in container width for readability */}
+      {/* Header, kept in container width for readability */}
       <motion.div
         className="container"
         initial={{ opacity: 0, y: 8 }}
@@ -53,13 +53,13 @@ export function CustomerStories() {
         <p className="text-ink2 text-[15px] leading-[1.55] max-w-[600px] mt-6">{c.body}</p>
       </motion.div>
 
-      {/* Full-bleed marquee — outside the container */}
+      {/* Full-bleed marquee, outside the container */}
       <div
         role="region"
         aria-label="Customer stories"
         className="mt-16 relative group"
       >
-        {/* Edge fade masks — left/right vignettes pull the eye into the middle */}
+        {/* Edge fade masks, left/right vignettes pull the eye into the middle */}
         <div className="absolute inset-y-0 left-0 w-24 md:w-40 bg-gradient-to-r from-[rgb(var(--c-bg))] to-transparent z-10 pointer-events-none" />
         <div className="absolute inset-y-0 right-0 w-24 md:w-40 bg-gradient-to-l from-[rgb(var(--c-bg))] to-transparent z-10 pointer-events-none" />
 
@@ -96,7 +96,7 @@ export function CustomerStories() {
           ))}
         </div>
 
-        {/* Subtle hint — auto-cycling, hover to pause */}
+        {/* Subtle hint, auto-cycling, hover to pause */}
         <div className="container mt-6">
           <div className="flex items-center justify-end font-mono text-[10px] text-ink3">
             <span className="inline-block w-1.5 h-1.5 rounded-full bg-spark animate-pulse mr-2" aria-hidden />

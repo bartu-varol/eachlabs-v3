@@ -298,7 +298,7 @@ export async function getModelDetail(
   const m = body.result;
   if (!m || !m.slug) return null;
 
-  // Inputs — convert keyed map to ordered array.
+  // Inputs, convert keyed map to ordered array.
   const inputsObj = m.inputs ?? {};
   const inputs = Object.entries(inputsObj)
     .filter(([k]) => k !== 'type')

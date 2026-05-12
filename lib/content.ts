@@ -6,7 +6,7 @@ export const ticker = [
   '* THE MODEL THAT BROKE YESTERDAY? STILL SHIPPING',
   '* 600+ MODELS · 4 MODALITIES · 1 API',
   '* NO 3AM PAGES (ASK YOUR ON-CALL)',
-  '* SERIES A — $18M LED BY EBRD',
+  '* SERIES A, $18M LED BY EBRD',
 ];
 
 // ---------- NAV ----------
@@ -17,7 +17,7 @@ export type MegaColumn = {
     title: string;
     body: string;
     href: string;
-    /** Mark this item as coming-soon — adds a small badge in the megamenu. */
+    /** Mark this item as coming-soon, adds a small badge in the megamenu. */
     comingSoon?: boolean;
   }[];
 };
@@ -57,7 +57,7 @@ export const megaMenus: Record<'platform' | 'developers', MegaMenu> = {
     ],
     featured: {
       eyebrow: '* THIS WEEK',
-      title: 'each::router 1.4 — quality-aware spill',
+      title: 'each::router 1.4, quality-aware spill',
       body: 'We now route around quality degradations, not just failures.',
       link: 'Read more →',
     },
@@ -84,7 +84,7 @@ export const megaMenus: Record<'platform' | 'developers', MegaMenu> = {
     ],
     featured: {
       eyebrow: '* NEW',
-      title: 'TypeScript SDK 2.0 — typed workflows + streaming',
+      title: 'TypeScript SDK 2.0, typed workflows + streaming',
       body: 'Workflow IDs are now type-safe at build time. Streaming responses without ceremony.',
       link: 'See the upgrade →',
     },
@@ -109,16 +109,16 @@ export const navItems: NavItem[] = [
 export const hero = {
   pill: '* SERIES A · $18M LED BY EBRD',
   pillCta: 'Read the memo →',
-  /** Body lead — large, the hook. */
+  /** Body lead, large, the hook. */
   bodyLead: '600+ AI models behind one API',
-  /** Body rest — descriptive, with playful flair. */
+  /** Body rest, descriptive, with playful flair. */
   body:
-    '— the hyped ones, the cheap ones, the one that broke yesterday. We do the boring parts: retries when models go down, per-user cost when finance asks, live A/B when product wants to ship. You write each.run(). We do the rest.',
+    '- the hyped ones, the cheap ones, the one that broke yesterday. We do the boring parts: retries when models go down, per-user cost when finance asks, live A/B when product wants to ship. You write each.run(). We do the rest.',
   ctas: [
     { label: 'Follow the white rabbit',         href: '/signup',  variant: 'primary'   as const },
     { label: 'Talk to an engineer (a real one)',   href: '/contact', variant: 'secondary' as const },
   ],
-  /** Stats bar — 4 numbers each with a one-line cheeky sub. */
+  /** Stats bar, 4 numbers each with a one-line cheeky sub. */
   stats: [
     { value: '600+',    label: 'models',          sub: 'one API · one signature' },
     { value: '10×',     label: 'fewer errors',    sub: 'auto-fallback in <120ms' },
@@ -154,7 +154,7 @@ export type Metric = {
   label: string;
   /** Short caption shown under the headline */
   caption: string;
-  /** Headline winner number — e.g. "97×" + "FEWER ERRORS" */
+  /** Headline winner number, e.g. "97×" + "FEWER ERRORS" */
   hero: { multiplier: string; suffix: string };
   /** Side labels */
   others: { label: string; sub: string };
@@ -163,7 +163,7 @@ export type Metric = {
   format: 'percent' | 'time' | 'usd' | 'days';
   othersValue: number;
   eachValue: number;
-  /** What "filled" bar represents — visual scaling reference */
+  /** What "filled" bar represents, visual scaling reference */
   scaleMax?: number;
 };
 
@@ -187,7 +187,7 @@ export const receipts = {
       caption: 'how long until the user sees a recovered response',
       hero: { multiplier: '6,200×', suffix: 'FASTER RECOVERY' },
       others: { label: 'OTHERS', sub: 'manual rollover, on-call paged' },
-      each:   { label: 'EACH.RUN', sub: 'router spillover · live' },
+      each:   { label: 'EACH.RUN', sub: 'router failover · live' },
       format: 'time',
       othersValue: 744, // seconds (12.4 min)
       eachValue: 0.12,  // seconds (120ms)
@@ -230,7 +230,7 @@ export const askSense = {
   eyebrow: '* LIVE DEMO · EACH::SENSE',
   headline: { line1: 'Tell us your AI', italic: 'chaos.', line2: 'We’ll show you the way out.' },
   body:
-    'Type your actual problem. each::sense — our AI agent — reads it, gives you a 2–3 sentence answer, and links you straight to the part of the docs that solves it. No signup, no demo call.',
+    'Type your actual problem. each::sense, our AI agent, reads it, gives you a 2–3 sentence answer, and links you straight to the part of the docs that solves it. No signup, no demo call.',
   inputPlaceholders: [
     'how do I track cost per customer…',
     'my model keeps failing at 3 AM…',
@@ -253,20 +253,20 @@ export const askSense = {
     },
     'Don’t know which model to pick': {
       text:
-        'Use each::sense — same call signature, but you describe the result instead of naming a model. We pick (and re-pick) the best fit per call based on quality, latency, and cost.',
+        'Use each::sense, same call signature, but you describe the result instead of naming a model. We pick (and re-pick) the best fit per call based on quality, latency, and cost.',
       docHref: '/docs/sense/overview',
       docLabel: 'each::sense · overview',
     },
     'How do I track cost per customer': {
       text:
-        'Pass attributes at runtime (user_id, tier, anything) on each.run(). Every call is tagged at the platform layer; the dashboard slices cost, latency, and quality by any attribute in real time — no instrumentation sprint.',
+        'Pass attributes at runtime (user_id, tier, anything) on each.run(). Every call is tagged at the platform layer; the dashboard slices cost, latency, and quality by any attribute in real time, no instrumentation sprint.',
       docHref: 'https://docs.eachlabs.ai/introduction',
       docLabel: 'each::labs · attribution',
     },
   } satisfies Record<string, SenseAnswer>,
   fallback: {
     text:
-      'We don’t have a canned answer for that one — but the live each::sense agent does. In production, this same input would call a real LLM and link you to the relevant doc.',
+      'We don’t have a canned answer for that one, but the live each::sense agent does. In production, this same input would call a real LLM and link you to the relevant doc.',
     docHref: '/docs/sense/overview',
     docLabel: 'each::sense · overview',
   } satisfies SenseAnswer,
@@ -291,7 +291,7 @@ export type HeadlineToken = { kind: 'plain' | 'spark'; text: string };
 
 export type Avatar = {
   initials: string;
-  /** Tailwind bg utility class — must use a brand-kit color */
+  /** Tailwind bg utility class, must use a brand-kit color */
   bg: string;
   /** Tailwind text utility class for the initials */
   text: string;
@@ -311,7 +311,7 @@ export const customerStories = {
   eyebrow: '* TESTIMONIALS',
   headline: { line1: 'Trusted by product teams', line2: 'building with AI.' },
   body:
-    'Ten teams. Different products. One thing in common — they spent their engineering hours on what users actually see, not on plumbing AI infrastructure.',
+    'Ten teams. Different products. One thing in common, they spent their engineering hours on what users actually see, not on plumbing AI infrastructure.',
 
   caseStudies: [
     {
@@ -454,7 +454,7 @@ export const customerStories = {
 
   ctaCard: {
     eyebrow: '* AND 120+ MORE TEAMS',
-    headline: 'From early-stage AI products to enterprise growth teams.',
+    headline: 'Consumer apps and enterprise platforms ship on the same API.',
     body: 'Each one shipping faster because the boring parts already exist.',
     cta: 'Read all customer stories →',
     href: '/customers',
@@ -573,7 +573,7 @@ export const enterprise = {
     subtext: 'SOC 2 TYPE II · HIPAA-READY · GDPR · ISO 27001 IN PROGRESS · DPA ON REQUEST',
   },
 
-  /** "What enterprise actually means" comparison — kills the competitors. */
+  /** "What enterprise actually means" comparison, kills the competitors. */
   meansWhat: {
     eyebrow: '* THE WORD "ENTERPRISE"',
     headline: {
@@ -596,7 +596,7 @@ export const enterprise = {
       {
         topic: 'Incident response',
         others: 'A status page tweet. RCA "available on request."',
-        ours: 'Written RCA in <24h, every P1 — root cause, blast radius, fix, prevention. Sent before you ask.',
+        ours: 'Written RCA in <24h, every P1, root cause, blast radius, fix, prevention. Sent before you ask.',
       },
       {
         topic: 'Data',
@@ -606,7 +606,7 @@ export const enterprise = {
       {
         topic: 'Procurement',
         others: 'Sales-led, six weeks to MSA, "we don\'t share our SOC 2."',
-        ours: 'SOC 2 Type II, DPA, sub-processor list, security pack — downloadable below. Legal in days, not weeks.',
+        ours: 'SOC 2 Type II, DPA, sub-processor list, security pack, downloadable below. Legal in days, not weeks.',
       },
       {
         topic: 'Pricing',
@@ -616,7 +616,7 @@ export const enterprise = {
     ],
   },
 
-  /** 6 capabilities — each with "why this exists" instead of generic bullet. */
+  /** 6 capabilities, each with "why this exists" instead of generic bullet. */
   capabilities: {
     eyebrow: '* WHAT YOU ACTUALLY GET',
     headline: {
@@ -642,21 +642,21 @@ export const enterprise = {
         accent: 'success' as const,
         title: 'Audit log + SIEM export',
         body:
-          'Every call, every config change, every key rotation — append-only. Stream to Splunk, Datadog, S3 in real time. Tamper-evident.',
+          'Every call, every config change, every key rotation, append-only. Stream to Splunk, Datadog, S3 in real time. Tamper-evident.',
         why: 'Your security team wants a query interface. Not a screenshot.',
       },
       {
         accent: 'sun' as const,
         title: 'Data residency + zero retention',
         body:
-          'Pin inference to a region. EU / US / APAC. Disable provider-side prompt retention with one flag. We never train on your data — contractually.',
+          'Pin inference to a region. EU / US / APAC. Disable provider-side prompt retention with one flag. We never train on your data, contractually.',
         why: 'GDPR Article 28 + DPA pre-signed. Privacy team gets a one-pager, not a research project.',
       },
       {
         accent: 'ember' as const,
         title: 'Private model hosting',
         body:
-          'Fine-tunes, weights you own, custom inference kernels — hosted on dedicated GPUs, routed behind the same each.run() signature.',
+          'Fine-tunes, weights you own, custom inference kernels, hosted on dedicated GPUs, routed behind the same each.run() signature.',
         why: 'Build a moat in your models. Keep the orchestration boring.',
       },
       {
@@ -669,7 +669,7 @@ export const enterprise = {
     ],
   },
 
-  /** The 3AM Promise — brand voice meets enterprise. */
+  /** The 3AM Promise, brand voice meets enterprise. */
   threeAm: {
     eyebrow: '* THE 3 AM PROMISE',
     headline: {
@@ -678,7 +678,7 @@ export const enterprise = {
       line3: 'Yours doesn\'t.',
     },
     body:
-      'No platform stops models from breaking. We are the difference between "user sees nothing" and "founder gets a 3 AM page." Here is the protocol — verbatim.',
+      'No platform stops models from breaking. We are the difference between "user sees nothing" and "founder gets a 3 AM page." Here is the protocol, verbatim.',
     steps: [
       {
         time: 'T+0ms',
@@ -687,7 +687,7 @@ export const enterprise = {
       },
       {
         time: 'T+~120ms',
-        title: 'Spillover to fallback.',
+        title: 'Failover to fallback.',
         body: 'Quality-aware route picks the next-best healthy model. User sees a response. No retry storm, no half-cached corpses.',
       },
       {
@@ -705,7 +705,7 @@ export const enterprise = {
       'IF THE FALLBACK ITSELF FAILS, SERVICE CREDITS APPLY PER THE SLA. WE WRITE A CHECK. NOT AN APOLOGY.',
   },
 
-  /** 3 deep customer outcomes — numbers, not logos. */
+  /** 3 deep customer outcomes, numbers, not logos. */
   outcomes: {
     eyebrow: '* OUTCOMES, NOT LOGOS',
     headline: {
@@ -743,7 +743,7 @@ export const enterprise = {
     ],
   },
 
-  /** Architecture diagram — text-based but reads like a real wire. */
+  /** Architecture diagram, text-based but reads like a real wire. */
   architecture: {
     eyebrow: '* THE WIRE',
     headline: {
@@ -785,7 +785,7 @@ export const enterprise = {
     ],
   },
 
-  /** Procurement assets — visible, downloadable, the part rivals hide. */
+  /** Procurement assets, visible, downloadable, the part rivals hide. */
   procurement: {
     eyebrow: '* THE BORING DOCUMENTS',
     headline: {
@@ -843,7 +843,7 @@ export const enterprise = {
     items: [
       {
         q: 'How is this not just another vendor in the middle?',
-        a: 'You can run the routing plane inside your VPC. The control plane never sees inference traffic. We bill on the platform, not the inference — your provider invoices stay direct.',
+        a: 'You can run the routing plane inside your VPC. The control plane never sees inference traffic. We bill on the platform, not the inference, your provider invoices stay direct.',
       },
       {
         q: 'What happens if each::labs goes down?',
@@ -851,7 +851,7 @@ export const enterprise = {
       },
       {
         q: 'Can we get a custom SLA above 99.99%?',
-        a: 'Yes — multi-region routing pushes us into the 99.995% range. We quote it after a one-call architecture review. Service credits scale with it.',
+        a: 'Yes, multi-region routing pushes us into the 99.995% range. We quote it after a one-call architecture review. Service credits scale with it.',
       },
       {
         q: 'Do you train on our prompts or outputs?',
@@ -859,7 +859,7 @@ export const enterprise = {
       },
       {
         q: 'How do we exit if it isn\'t working?',
-        a: 'each.run() is a thin wrapper. Remove our SDK, point at providers directly — your code is portable. Data is exportable as JSONL. We keep nothing after termination + 30 days.',
+        a: 'each.run() is a thin wrapper. Remove our SDK, point at providers directly, your code is portable. Data is exportable as JSONL. We keep nothing after termination + 30 days.',
       },
       {
         q: 'Who is on the on-call?',
@@ -868,7 +868,7 @@ export const enterprise = {
     ],
   },
 
-  /** Final CTA — vortex-backed, but a sharper card stack than RabbitHole. */
+  /** Final CTA, vortex-backed, but a sharper card stack than RabbitHole. */
   finalCta: {
     eyebrow: '* TWO WAYS IN',
     headline: {

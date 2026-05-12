@@ -1,13 +1,13 @@
 import type { VisualKey } from '@/lib/problems';
 
-/** A unified "scenario" — one storyline with a receipts metric + chaos narrative. */
+/** A unified "scenario", one storyline with a receipts metric + chaos narrative. */
 export type Scenario = {
   /** Stable id used in DOM keys + analytics. */
   id: string;
   /** One-word category shown alongside the dot, e.g. "Outage". */
   category: string;
 
-  /** Quantitative claim (top half — bars + count-up + hero number). */
+  /** Quantitative claim (top half, bars + count-up + hero number). */
   metric: {
     label: string;       // e.g. 'USER-VISIBLE ERRORS'
     caption: string;     // sub-caption under the label
@@ -15,7 +15,7 @@ export type Scenario = {
     others: { label: 'OTHERS'; sub: string; value: number };
     each:   { label: 'EACH.RUN'; sub: string; value: number };
     format: 'percent' | 'time' | 'usd' | 'days';
-    /** Bar scale ceiling — both sides scale to this. */
+    /** Bar scale ceiling, both sides scale to this. */
     scaleMax: number;
   };
 
@@ -62,7 +62,7 @@ export const SCENARIOS: Scenario[] = [
       caption: 'next-best provider picked before your user notices',
       hero: { multiplier: '6,200×', suffix: 'FASTER RECOVERY' },
       others: { label: 'OTHERS',   sub: 'manual rollover · on-call paged',  value: 744 },   // seconds
-      each:   { label: 'EACH.RUN', sub: 'router spillover · live',          value: 0.12 },  // seconds
+      each:   { label: 'EACH.RUN', sub: 'router failover · live',          value: 0.12 },  // seconds
       format: 'time',
       scaleMax: 800,
     },
@@ -95,7 +95,7 @@ export const SCENARIOS: Scenario[] = [
       feature: { prefix: 'each::', name: 'trace' },
       tagline: 'Tag every call. Slice cost by user, tier, anything.',
       body:
-        'Pass attributes at runtime. We tag the trace with whatever you send — user_id, tier, persona, experiment, anything. Then slice cost, latency, and quality by any of them.',
+        'Pass attributes at runtime. We tag the trace with whatever you send, user_id, tier, persona, experiment, anything. Then slice cost, latency, and quality by any of them.',
       docsHref: '#',
     },
     visual: 'attribution',
@@ -118,7 +118,7 @@ export const SCENARIOS: Scenario[] = [
       feature: { prefix: '', name: '600+ models · one API' },
       tagline: 'One call signature. Every model, every modality.',
       body:
-        'Same each.run() for every model in the catalog. Image, video, audio, 3D — image-to-video, text-to-image, voice cloning, all of it. Try Veo 3 in one string change.',
+        'Same each.run() for every model in the catalog. Image, video, audio, 3D, image-to-video, text-to-image, voice cloning, all of it. Try Veo 3 in one string change.',
       docsHref: '#',
     },
     visual: 'swap',

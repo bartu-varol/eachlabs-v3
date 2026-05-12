@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import type { PointVisual as Kind } from '@/lib/products';
 
 /* Tiny ambient animations for WHAT IT DOES / WHEN TO REACH FOR cards.
-   Each visual is ~36×36 to ~48×24 — sits in the corner of a card. */
+   Each visual is ~36×36 to ~48×24, sits in the corner of a card. */
 
 function Rings() {
   return (

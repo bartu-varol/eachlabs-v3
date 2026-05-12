@@ -11,7 +11,7 @@ import { fetchLiveModelsCount } from '@/lib/modelsLive';
 
 export const metadata = {
   title: 'Explore models · each::labs',
-  description: 'Every public AI model in the each::labs catalog — image, video, audio, text. Plus the workflow recipes that wire them up.',
+  description: 'Every public AI model in the each::labs catalog, image, video, audio, text. Plus the workflow recipes that wire them up.',
 };
 
 export const revalidate = 60;

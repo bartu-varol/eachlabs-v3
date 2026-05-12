@@ -196,7 +196,7 @@ export function HeroPreview({
       | null;
     if (!v || hasAudio === true) return;
     // Confirmed: actual audio bytes decoded (Chrome/Safari counter is non-trivial)
-    // or Mozilla's explicit flag is set. We ignore audioTracks alone — a webm can
+    // or Mozilla's explicit flag is set. We ignore audioTracks alone, a webm can
     // ship with an empty/silent track that has zero real audio content.
     const decodedBytes = v.webkitAudioDecodedByteCount ?? 0;
     if (v.mozHasAudio === true || decodedBytes > 1000) {

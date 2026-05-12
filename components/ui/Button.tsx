@@ -25,7 +25,7 @@ const styleMap: Record<Variant, string> = {
   tertiary:
     'text-ink2 hover:text-ink underline-offset-4 hover:underline px-2 py-3 rounded-none',
 
-  // Outline (rabbit hole middle card) — same as secondary, just named
+  // Outline (rabbit hole middle card), same as secondary, just named
   outline: 'border border-rule2 text-ink bg-surface hover:bg-bg',
 
   // Text-link CTA (rabbit hole third card)

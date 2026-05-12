@@ -34,7 +34,7 @@ export async function generateMetadata({
     title: `${p.name} · models · each::labs`,
     description:
       p.description ??
-      `All ${p.name} AI models available through the each::labs API — pinned versions, transparent pricing, one signature.`,
+      `All ${p.name} AI models available through the each::labs API, pinned versions, transparent pricing, one signature.`,
   };
 }
 

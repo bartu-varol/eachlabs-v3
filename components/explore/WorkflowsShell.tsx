@@ -50,7 +50,7 @@ export function WorkflowsShell({
   /** True while a filter changed and we're swapping out the entire list. */
   const [reloading, setReloading] = useState(false);
 
-  /** Categories shown in the Events select — only those with public workflows.
+  /** Categories shown in the Events select, only those with public workflows.
    *  Hide the `trending` category from the Workflows tab (it lives in its own
    *  Trends tab now). */
   const availableCategories = useMemo(() => {
@@ -60,7 +60,7 @@ export function WorkflowsShell({
       .sort((a, b) => b.public_workflow_count - a.public_workflow_count);
   }, [initialCategories, isTrends]);
 
-  /** Active request token — lets us cancel out-of-date inflight fetches. */
+  /** Active request token, lets us cancel out-of-date inflight fetches. */
   const reqId = useRef(0);
   const abortRef = useRef<AbortController | null>(null);
 
@@ -96,7 +96,7 @@ export function WorkflowsShell({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [discovery, category, query]);
 
-  // Debounced search input — wait 220ms before firing the effect above.
+  // Debounced search input, wait 220ms before firing the effect above.
   const [rawQuery, setRawQuery] = useState('');
   useEffect(() => {
     const t = setTimeout(() => setQuery(rawQuery), 220);
@@ -124,7 +124,7 @@ export function WorkflowsShell({
     }
   }, [loading, offset, discovery, category, query, total]);
 
-  // Intersection observer near the sentinel — fires when user scrolls close
+  // Intersection observer near the sentinel, fires when user scrolls close
   // to the bottom of the rendered list. PREFETCH_ROOT_MARGIN gives ~600px of
   // lead time so the next batch lands before the user actually reaches it.
   const sentinelRef = useRef<HTMLDivElement>(null);
@@ -163,7 +163,7 @@ export function WorkflowsShell({
           />
         </div>
 
-        {/* Trends tab is hard-pinned to discovery=trending — no selector. */}
+        {/* Trends tab is hard-pinned to discovery=trending, no selector. */}
         {!isTrends && (
           <select
             value={discovery}
@@ -222,7 +222,7 @@ export function WorkflowsShell({
         </div>
       )}
 
-      {/* Sentinel — invisible row the IntersectionObserver watches. */}
+      {/* Sentinel, invisible row the IntersectionObserver watches. */}
       {hasMore && <div ref={sentinelRef} className="h-px w-full mt-10" aria-hidden />}
 
       {!hasMore && workflows.length > 0 && (

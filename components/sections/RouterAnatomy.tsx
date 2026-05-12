@@ -3,12 +3,12 @@
 import { motion } from 'framer-motion';
 
 /* ──────────────────────────────────────────────────────────────────────────
-   RouterAnatomy — 3-column "spillover anatomy" section.
+   RouterAnatomy, 3-column "failover anatomy" section.
 
    Each column tells one beat of the story:
-     ① TRIGGER   — three signals the router watches (latency / errors / quality)
-     ② DECISION  — router scores 3 candidates, picks the winner
-     ③ OUTCOME   — trace shows what fired; pages: 0; users: unaffected
+     ① TRIGGER  , three signals the router watches (latency / errors / quality)
+     ② DECISION , router scores 3 candidates, picks the winner
+     ③ OUTCOME  , trace shows what fired; pages: 0; users: unaffected
 
    Cards animate in on viewport. Inner mini-diagrams have their own loops.
 ────────────────────────────────────────────────────────────────────────── */
@@ -26,14 +26,14 @@ export function RouterAnatomy() {
       />
       <div className="container py-24 md:py-28 relative">
         <div className="font-mono text-[11px] uppercase tracking-eyebrow text-highlight mb-3">
-          ● ANATOMY OF A SPILLOVER
+          ● ANATOMY OF A FAILOVER
         </div>
         <h2 className="font-display font-semibold text-[32px] md:text-[44px] leading-[1.05] tracking-tightest text-ink max-w-[760px]">
           Three signals. One decision. Zero pages.
         </h2>
         <p className="text-ink2 text-[15px] leading-[1.65] max-w-[640px] mt-6">
           The router doesn’t just retry on 5xx. It watches latency, error rate, and
-          output quality on every call — and reroutes the moment any of them slips,
+          output quality on every call, and reroutes the moment any of them slips,
           before pagerduty notices.
         </p>
 
@@ -108,7 +108,7 @@ function Column({
   );
 }
 
-/* ── ① TRIGGER — three signal meters ────────────────────────────────────── */
+/* ── ① TRIGGER, three signal meters ────────────────────────────────────── */
 
 function SignalsViz() {
   return (
@@ -222,7 +222,7 @@ function SignalMeter({
   );
 }
 
-/* ── ② DECISION — three candidate scores with winner reveal ─────────────── */
+/* ── ② DECISION, three candidate scores with winner reveal ─────────────── */
 
 function DecisionViz() {
   const candidates = [
@@ -296,7 +296,7 @@ function CandidateRow({
   );
 }
 
-/* ── ③ OUTCOME — trace card + counters ──────────────────────────────────── */
+/* ── ③ OUTCOME, trace card + counters ──────────────────────────────────── */
 
 function OutcomeViz() {
   return (
@@ -325,12 +325,6 @@ function OutcomeViz() {
           status="ok"
           ms="1180"
         />
-      </div>
-      {/* Outcome strip */}
-      <div className="grid grid-cols-3 gap-px bg-rule2 border border-rule2 rounded overflow-hidden mt-1">
-        <OutcomeCell label="pages" value="0" tone="success" />
-        <OutcomeCell label="user delay" value="+0ms" tone="success" />
-        <OutcomeCell label="cohort" value="sticky" tone="spark" />
       </div>
     </div>
   );
@@ -370,24 +364,3 @@ function TraceLine({
   );
 }
 
-function OutcomeCell({
-  label,
-  value,
-  tone,
-}: {
-  label: string;
-  value: string;
-  tone: 'success' | 'spark';
-}) {
-  const cls = tone === 'success' ? 'text-success' : 'text-spark';
-  return (
-    <div className="bg-surface px-2 py-2 text-center">
-      <div className="font-mono text-[8.5px] uppercase tracking-eyebrow text-ink3">
-        {label}
-      </div>
-      <div className={`font-display text-[13px] font-semibold tabular-nums mt-0.5 ${cls}`}>
-        {value}
-      </div>
-    </div>
-  );
-}

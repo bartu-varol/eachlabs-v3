@@ -16,7 +16,7 @@ import { ChaosVisual } from './ChaosVisuals';
 const CYCLE_MS = 5500;
 
 /* ──────────────────────────────────────────────────────────────────────────
-   Count-up — animates a numeric value, formatted per metric type.
+   Count-up, animates a numeric value, formatted per metric type.
 ────────────────────────────────────────────────────────────────────────── */
 
 function formatValue(v: number, format: Scenario['metric']['format']): string {
@@ -60,7 +60,7 @@ function CountUp({
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   ComparisonRow — full-width bar with side label + count-up value.
+   ComparisonRow, full-width bar with side label + count-up value.
 ────────────────────────────────────────────────────────────────────────── */
 
 function ComparisonRow({
@@ -113,7 +113,7 @@ function ComparisonRow({
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   StorySegments — Instagram-style top-of-section progress bars.
+   StorySegments, Instagram-style top-of-section progress bars.
 ────────────────────────────────────────────────────────────────────────── */
 
 function StorySegments({
@@ -168,7 +168,7 @@ function StorySegments({
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   ProofSection — top: receipts metric · bottom: chaos→fix · shared cycle.
+   ProofSection, top: receipts metric · bottom: chaos→fix · shared cycle.
 ────────────────────────────────────────────────────────────────────────── */
 
 export function ProofSection() {
@@ -201,7 +201,7 @@ export function ProofSection() {
       id="proof"
       className="relative border-t border-rule overflow-hidden"
     >
-      {/* Chaos → Fix ambient wash — fail-red on the left, success-green on the right */}
+      {/* Chaos → Fix ambient wash, fail-red on the left, success-green on the right */}
       <div
         aria-hidden
         className="absolute inset-0 pointer-events-none"
@@ -226,7 +226,7 @@ export function ProofSection() {
         Four scenarios. Real benchmarks against raw SDKs. Same numbers, different week.
       </p>
 
-      {/* Story segments — controls everything below */}
+      {/* Story segments, controls everything below */}
       <div className="mt-12 flex items-center gap-4">
         <StorySegments
           activeIdx={activeIdx}
@@ -264,7 +264,7 @@ export function ProofSection() {
         </button>
       </div>
 
-      {/* Animated content — receipts row + chaos panel */}
+      {/* Animated content, receipts row + chaos panel */}
       <AnimatePresence mode="wait">
         <motion.div
           key={activeIdx}
@@ -302,19 +302,19 @@ export function ProofSection() {
             </div>
           </div>
 
-          {/* ── CHAOS / FIX BLOCK (bottom — same scenario expanded) ──────── */}
+          {/* ── CHAOS / FIX BLOCK (bottom, same scenario expanded) ──────── */}
           <div className="mt-3 bg-surface border border-rule2 rounded-md grid grid-cols-1 lg:grid-cols-[1fr_1.15fr] gap-8 lg:gap-10 p-6 md:p-8">
-            {/* Left — readable narrative */}
+            {/* Left, readable narrative */}
             <div className="flex flex-col">
               <div className="font-mono text-[11px] uppercase tracking-eyebrow text-fail">
-                × WITHOUT EACH::LABS
+                × THE CHAOS
               </div>
               <p className="text-ink2 text-[15px] leading-relaxed mt-2">{s.chaos}</p>
 
               <div className="h-px bg-rule my-6" />
 
               <div className="font-mono text-[11px] uppercase tracking-eyebrow text-success">
-                ✓ WITH EACH::LABS
+                ✓ THE FIX
               </div>
               <h3 className="font-display font-semibold text-[26px] sm:text-[30px] leading-[1.05] mt-3 text-ink">
                 {s.fix.feature.prefix && <span className="text-ink3">{s.fix.feature.prefix}</span>}
@@ -337,7 +337,7 @@ export function ProofSection() {
               </Link>
             </div>
 
-            {/* Right — animated visual */}
+            {/* Right, animated visual */}
             <div className="flex items-center">
               <div className="w-full">
                 <ChaosVisual visual={s.visual} />

@@ -126,9 +126,9 @@ export const providersByModelCount: CatalogProvider[] = [...providers].sort((a, 
   return cb - ca;
 });
 
-/** Display-formatted price ($/run). Returns "—" when unknown. */
+/** Display-formatted price ($/run). Returns "-" when unknown. */
 export function formatPrice(m: Pick<CatalogModel, 'avgPrice'>): string {
-  if (m.avgPrice == null) return '—';
+  if (m.avgPrice == null) return '-';
   if (m.avgPrice === 0) return 'Free';
   if (m.avgPrice < 0.01) return `$${m.avgPrice.toFixed(4)}`;
   if (m.avgPrice < 1) return `$${m.avgPrice.toFixed(3)}`;
@@ -138,12 +138,12 @@ export function formatPrice(m: Pick<CatalogModel, 'avgPrice'>): string {
 /** Display-formatted latency from seconds. */
 export function formatLatency(m: Pick<CatalogModel, 'avgResponseSec'>): string {
   const s = m.avgResponseSec;
-  if (s == null || s === 0) return '—';
+  if (s == null || s === 0) return '-';
   if (s >= 60) return `${Math.round(s / 60)}m`;
   return `${s}s`;
 }
 
-/** Pretty model title — prefers title (DB-curated), falls back to slug. */
+/** Pretty model title, prefers title (DB-curated), falls back to slug. */
 export function displayName(m: Pick<CatalogModel, 'name' | 'title'>): string {
   return (m.title && m.title.trim()) || m.name;
 }

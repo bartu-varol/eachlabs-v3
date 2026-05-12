@@ -40,7 +40,7 @@ function FeaturedCard({ post }: { post: BlogPost }) {
         className="group grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-6 lg:gap-10 bg-surface border border-rule2 rounded-md overflow-hidden hover:[border-color:var(--c)] transition-colors"
         style={{ ['--c' as string]: c }}
       >
-        {/* Visual side — gradient hero with category badge */}
+        {/* Visual side, gradient hero with category badge */}
         <div
           className="relative min-h-[260px] flex items-end p-7 md:p-8"
           style={{
@@ -249,7 +249,7 @@ export default function BlogPage() {
       <section className="container py-10 md:py-12">
         {filtered.length === 0 ? (
           <div className="py-20 text-center font-mono text-[12px] text-ink3">
-            No posts match — try a different category or search.
+            No posts match, try a different category or search.
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">

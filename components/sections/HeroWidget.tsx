@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 /* ──────────────────────────────────────────────────────────────────────────
-   HeroWidget — "each::labs · LIVE"
+   HeroWidget, "each::labs · LIVE"
    Story we want felt: many models break · each::labs catches each one · the
    error rate would climb without us, but stays at 0.04% because we keep
    pulling it back down.
@@ -15,10 +15,10 @@ const ROWS = 9;
 const TOTAL = COLS * ROWS;
 
 // Master loop matches the ORCHESTRATE pane (6s) so both panes pulse together.
-// Three events per master cycle — 1 of 3 synced with the ORCHESTRATE swap:
-//   · FILLER_1 at 0.0s — random pair (warm-up)
-//   · SYNCED   at 2.0s — same moment as kling-v3 fail in ORCHESTRATE
-//   · FILLER_2 at 4.0s — random pair (cool-down, keeps the grid alive)
+// Three events per master cycle, 1 of 3 synced with the ORCHESTRATE swap:
+//   · FILLER_1 at 0.0s, random pair (warm-up)
+//   · SYNCED   at 2.0s, same moment as kling-v3 fail in ORCHESTRATE
+//   · FILLER_2 at 4.0s, random pair (cool-down, keeps the grid alive)
 // Each event takes ~1.8s to fully clear, so they don't overlap.
 const MASTER_LOOP_MS = 6000;
 const FILLER_1_AT_MS = 0;
@@ -50,7 +50,7 @@ export function HeroWidget() {
   const [event, setEvent] = useState<Ev | null>(null);
   const [phase, setPhase] = useState<Phase>('idle');
 
-  // All pending timers for the *current* event — cleared whenever we start a new one.
+  // All pending timers for the *current* event, cleared whenever we start a new one.
   const timeoutsRef = useRef<ReturnType<typeof setTimeout>[]>([]);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
@@ -85,22 +85,22 @@ export function HeroWidget() {
       );
     }
 
-    // The "synced" pair — same model the ORCHESTRATE pane swaps to.
+    // The "synced" pair, same model the ORCHESTRATE pane swaps to.
     const KLING_PAIR =
       FAILOVER_PAIRS.find((p) => p.from === 'kling-v3-12v') ?? FAILOVER_PAIRS[0];
 
     function tick() {
       clearPending();
-      // 1 of 3 events syncs with ORCHESTRATE — the middle one.
-      // Filler 1 — random pair, fires immediately at cycle start.
+      // 1 of 3 events syncs with ORCHESTRATE, the middle one.
+      // Filler 1, random pair, fires immediately at cycle start.
       if (FILLER_1_AT_MS === 0) {
         fireEvent();
       } else {
         timeoutsRef.current.push(setTimeout(() => fireEvent(), FILLER_1_AT_MS));
       }
-      // Synced — kling-v3-12v → wan-2.7, exactly when ORCHESTRATE flips.
+      // Synced, kling-v3-12v → wan-2.7, exactly when ORCHESTRATE flips.
       timeoutsRef.current.push(setTimeout(() => fireEvent(KLING_PAIR), SYNCED_AT_MS));
-      // Filler 2 — random pair after the synced moment.
+      // Filler 2, random pair after the synced moment.
       timeoutsRef.current.push(setTimeout(() => fireEvent(), FILLER_2_AT_MS));
     }
 
@@ -148,7 +148,7 @@ export function HeroWidget() {
 
   // ── Live-feeling error rate value ─────────────────────────────────────────
   // fail/fallback: bumps up to FAILED_RATE (the rate "would" be this without us)
-  // healed/idle:  snaps back to STEADY_RATE — because each::labs caught it
+  // healed/idle:  snaps back to STEADY_RATE, because each::labs caught it
   const rateValue =
     phase === 'fail' || phase === 'fallback' ? FAILED_RATE : STEADY_RATE;
   const rateRising = phase === 'fail' || phase === 'fallback';
@@ -162,7 +162,7 @@ export function HeroWidget() {
       />
 
       <div className="bg-surface border border-rule2 rounded-md overflow-hidden">
-        {/* Header — orchestration + observability framing */}
+        {/* Header, orchestration + observability framing */}
         <div className="flex items-center justify-between px-4 py-3 border-b border-rule2 bg-bg/40">
           <div className="flex items-center gap-2">
             <span className="inline-block w-1.5 h-1.5 rounded-full bg-spark animate-pulse" aria-hidden />
@@ -184,10 +184,10 @@ export function HeroWidget() {
           </div>
         </div>
 
-        {/* ① ORCHESTRATE — compact pipeline showing a workflow running live */}
+        {/* ① ORCHESTRATE, compact pipeline showing a workflow running live */}
         <OrchestratePane />
 
-        {/* ② OBSERVE — dot grid + SVG overlay */}
+        {/* ② OBSERVE, dot grid + SVG overlay */}
         <div className="px-5 md:px-6 pt-4 pb-3 border-t border-rule2">
           <div className="flex items-center justify-between mb-3">
             <span className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3">
@@ -276,7 +276,7 @@ export function HeroWidget() {
           </div>
         </div>
 
-        {/* Bottom strip — error rate that visibly bumps + drops */}
+        {/* Bottom strip, error rate that visibly bumps + drops */}
         <div className="grid grid-cols-2 gap-4 px-5 md:px-6 py-4 border-t border-rule2 bg-bg/30">
           <div>
             <div className="font-mono text-[9.5px] uppercase tracking-eyebrow text-ink3 mb-1 flex items-center gap-2">
@@ -340,7 +340,7 @@ export function HeroWidget() {
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   OrchestratePane — compact pipeline strip showing a live workflow.
+   OrchestratePane, compact pipeline strip showing a live workflow.
    The packet pauses at the kling-v3 step, kling fails (red flash), and the
    pill swaps to wan-2.7 (the fallback). Then the packet continues to OUTPUT.
    Loops forever. Sells the "ORCHESTRATION + auto-failover" story in 6s.
@@ -415,7 +415,7 @@ function OrchestratePane() {
           <NormalPill step="OUTPUT"  index={4} />
         </div>
 
-        {/* Traveling packet — pauses briefly at the kling position
+        {/* Traveling packet, pauses briefly at the kling position
             so the swap reads as "the failure caused the reroute". */}
         <motion.span
           className="absolute top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-spark"
@@ -435,7 +435,7 @@ function OrchestratePane() {
 }
 
 /* Highlight peak (normalized 0–1 in the 6s loop) for each pill index.
-   Calibrated to fire when the packet ARRIVES at that pill — not before.
+   Calibrated to fire when the packet ARRIVES at that pill, not before.
    Packet path (timeline 0–1):
      0 → 0.32   packet  4 → 50  (INPUT → kling)
      0.32 → 0.45 pause at 50    (swap)
@@ -444,22 +444,22 @@ function OrchestratePane() {
      INPUT (4%)  ≈ t = 0.000
      enhance(27%) ≈ t = 0.175  (in segment 1)
      kling (50%) ≈ t = 0.320
-     eleven(73%) ≈ t = 0.575  (in segment 3 — POST-swap)
+     eleven(73%) ≈ t = 0.575  (in segment 3, POST-swap)
      OUTPUT(96%) ≈ t = 0.700
 */
 const PILL_PEAK: Record<number, number> = {
   0: 0.03,  // INPUT
   1: 0.20,  // enhance
   // index 2 is SwappingPill (driven by phase state, not these keyframes)
-  3: 0.60,  // eleven — slightly AFTER packet arrives at 0.575 so it lights as packet hits it
-  4: 0.74,  // OUTPUT — slightly after packet arrives at 0.70
+  3: 0.60,  // eleven, slightly AFTER packet arrives at 0.575 so it lights as packet hits it
+  4: 0.74,  // OUTPUT, slightly after packet arrives at 0.70
 };
 
 /* Step pill that lights up as the packet passes and STAYS lit until the
-   cycle reset — so each pill the packet has visited remains sparked. */
+   cycle reset, so each pill the packet has visited remains sparked. */
 function NormalPill({ step, index }: { step: string; index: number }) {
   const peak = PILL_PEAK[index] ?? 0;
-  // Tight ramp — pill stays dark until packet is right at it, then snaps on.
+  // Tight ramp, pill stays dark until packet is right at it, then snaps on.
   const start = Math.max(0, peak - 0.02);
   // Stay lit until the very end of the cycle, then snap back to idle.
   const HOLD_UNTIL = 0.96;
@@ -536,7 +536,7 @@ function SwappingPill({ phase }: { phase: SwapPhase }) {
             : 'none',
       }}
     >
-      {/* Floating tag — sits above the pill (overflow-visible parent) */}
+      {/* Floating tag, sits above the pill (overflow-visible parent) */}
       <AnimatePresence mode="wait">
         {swapWindow && (
           <motion.span
@@ -571,7 +571,7 @@ function SwappingPill({ phase }: { phase: SwapPhase }) {
         )}
       </AnimatePresence>
 
-      {/* Expanding ring burst — fires the instant fallback engages */}
+      {/* Expanding ring burst, fires the instant fallback engages */}
       <AnimatePresence>
         {showFb && (
           <motion.span
@@ -587,7 +587,7 @@ function SwappingPill({ phase }: { phase: SwapPhase }) {
         )}
       </AnimatePresence>
 
-      {/* Tint overlay — sits on top of bg-bg so the pipeline line stays hidden */}
+      {/* Tint overlay, sits on top of bg-bg so the pipeline line stays hidden */}
       <motion.span
         aria-hidden
         className="absolute inset-0 rounded-md pointer-events-none"
@@ -595,11 +595,11 @@ function SwappingPill({ phase }: { phase: SwapPhase }) {
         transition={{ duration: 0.35 }}
       />
 
-      {/* Model name swap — overflow-hidden contained here so kling/wan slide
+      {/* Model name swap, overflow-hidden contained here so kling/wan slide
           is clipped, but the pill itself stays overflow-visible so the tag
           and burst can extend beyond. */}
       <span className="relative block overflow-hidden">
-        {/* kling-v3 — visible during primary + fail; slides up & out on fallback */}
+        {/* kling-v3, visible during primary + fail; slides up & out on fallback */}
         <motion.span
           className="block"
           animate={{
@@ -612,7 +612,7 @@ function SwappingPill({ phase }: { phase: SwapPhase }) {
         >
           kling-v3
         </motion.span>
-        {/* wan-2.7 — slides in from below on fallback */}
+        {/* wan-2.7, slides in from below on fallback */}
         <motion.span
           className="absolute inset-0 block"
           animate={{
@@ -630,7 +630,7 @@ function SwappingPill({ phase }: { phase: SwapPhase }) {
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   Dot — single grid cell. 4 states: idle / fail / fallback / healed.
+   Dot, single grid cell. 4 states: idle / fail / fallback / healed.
 ────────────────────────────────────────────────────────────────────────── */
 function Dot({ state }: { state: 'idle' | 'fail' | 'fallback' | 'healed' }) {
   const cls =

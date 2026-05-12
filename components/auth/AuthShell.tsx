@@ -4,7 +4,7 @@ import { Wordmark } from '@/components/ui/Wordmark';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
 
 type Props = {
-  /** Form column content — eyebrow, H1, OAuth, switch link. */
+  /** Form column content, eyebrow, H1, OAuth, switch link. */
   children: ReactNode;
   /** Right-side brand column content (hidden on mobile). */
   brand: ReactNode;
@@ -13,7 +13,7 @@ type Props = {
 export function AuthShell({ children, brand }: Props) {
   return (
     <div className="min-h-screen grid grid-cols-1 lg:grid-cols-2">
-      {/* LEFT — form column */}
+      {/* LEFT, form column */}
       <div className="relative flex flex-col px-6 sm:px-10 lg:px-14 py-8 lg:py-10 min-h-screen">
         <Link
           href="/"
@@ -49,7 +49,7 @@ export function AuthShell({ children, brand }: Props) {
         </div>
       </div>
 
-      {/* RIGHT — brand column */}
+      {/* RIGHT, brand column */}
       <div className="hidden lg:flex relative items-center justify-center px-12 py-10 bg-surface border-l border-rule2 overflow-hidden">
         <div
           aria-hidden

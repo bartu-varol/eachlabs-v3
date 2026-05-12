@@ -8,7 +8,7 @@ import { NextResponse } from 'next/server';
 
 const UPSTREAM = 'https://workflows.eachlabs.run/api/v1/public/workflows';
 
-export const revalidate = 60; // seconds — list is fairly stable, 1 min is plenty
+export const revalidate = 60; // seconds, list is fairly stable, 1 min is plenty
 
 export async function GET(req: Request): Promise<NextResponse> {
   const { searchParams } = new URL(req.url);
@@ -23,7 +23,7 @@ export async function GET(req: Request): Promise<NextResponse> {
 
   const res = await fetch(upstream.toString(), {
     headers: { 'Content-Type': 'application/json' },
-    // Cache upstream response at the platform edge — keyed by URL incl. params.
+    // Cache upstream response at the platform edge, keyed by URL incl. params.
     next: { revalidate: 60 },
   });
   const body = await res.json().catch(() => ({ error: 'invalid upstream response' }));

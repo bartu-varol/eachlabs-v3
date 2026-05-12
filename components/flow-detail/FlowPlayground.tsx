@@ -45,8 +45,8 @@ export function FlowPlayground({ flow }: Props) {
 
       <div className="px-5 py-4 border-b border-rule2/60 bg-bg/40">
         <p className="text-[13px] text-ink2 leading-[1.55]">
-          Clone this template into your workspace, then tweak any of the inputs below — or rewrite
-          the step prompts — to spin up your own variation. The pipeline stays the same; the
+          Clone this template into your workspace, then tweak any of the inputs below, or rewrite
+          the step prompts, to spin up your own variation. The pipeline stays the same; the
           creative output is yours.
         </p>
       </div>

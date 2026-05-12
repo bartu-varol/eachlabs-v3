@@ -7,7 +7,7 @@ export function Hero() {
   return (
     <section className="container py-20 md:py-24 lg:py-28">
       <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_minmax(0,1fr)] gap-10 lg:gap-14 items-center">
-        {/* Left — copy + CTAs + stats */}
+        {/* Left, copy + CTAs + stats */}
         <div className="text-center lg:text-left">
           {/* Top pill */}
           <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-4 gap-y-2 font-mono text-[11px] uppercase tracking-eyebrow">
@@ -21,7 +21,7 @@ export function Hero() {
             </Link>
           </div>
 
-          {/* H1 — "AI apps" gets a thick spark underline,
+          {/* H1, "AI apps" gets a thick spark underline,
               "We handle" sits in muted ink3, "the chaos." in italic spark. */}
           <h1 className="font-display font-semibold text-[44px] sm:text-[56px] md:text-[68px] lg:text-[72px] leading-[0.98] tracking-tightest mt-8 text-ink">
             <span className="block">
@@ -33,7 +33,7 @@ export function Hero() {
             </span>
           </h1>
 
-          {/* Body — big lead + descriptive rest */}
+          {/* Body, big lead + descriptive rest */}
           <p className="text-[15.5px] leading-[1.6] text-ink2 max-w-[560px] mx-auto lg:mx-0 mt-7">
             <strong className="text-ink font-semibold">{hero.bodyLead}</strong>{' '}
             {hero.body.split('each.run()').map((part, i, arr) =>
@@ -57,7 +57,7 @@ export function Hero() {
             ))}
           </div>
 
-          {/* Stats — 4 numbers with cheeky sublines */}
+          {/* Stats, 4 numbers with cheeky sublines */}
           <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-px bg-rule border border-rule rounded-md overflow-hidden max-w-[640px] mx-auto lg:mx-0">
             {hero.stats.map((s) => (
               <div key={s.label} className="bg-surface px-4 py-4 text-left">
@@ -76,7 +76,7 @@ export function Hero() {
           </p>
         </div>
 
-        {/* Right — animated live widget */}
+        {/* Right, animated live widget */}
         <div className="relative">
           <HeroWidget />
         </div>

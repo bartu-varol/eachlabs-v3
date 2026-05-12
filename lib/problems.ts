@@ -13,13 +13,13 @@ export type TerminalLine = {
 };
 
 export type ProblemFix = {
-  /** Named feature label, e.g. `each::router` — `each::` rendered ink3, name in ink */
+  /** Named feature label, e.g. `each::router`, `each::` rendered ink3, name in ink */
   feature: { prefix: string; name: string; tail?: string };
   tagline: string;
   body: string;
-  /** Animated terminal log shown in the right panel — replays on selection. */
+  /** Animated terminal log shown in the right panel, replays on selection. */
   terminal: TerminalLine[];
-  /** Visual key — selects the matching animated visual component. */
+  /** Visual key, selects the matching animated visual component. */
   visual: VisualKey;
   docsHref: string;
 };
@@ -36,11 +36,11 @@ export type VisualKey =
 
 export type Problem = {
   id: number;
-  /** Short tab pill label, e.g. "Outage" — used in the compact nav. */
+  /** Short tab pill label, e.g. "Outage", used in the compact nav. */
   shortLabel: string;
-  /** Long descriptive label, e.g. "My model just went down" — used as panel heading. */
+  /** Long descriptive label, e.g. "My model just went down", used as panel heading. */
   label: string;
-  /** One-line "without each::labs" pain narrative — what happens if you don't have us. */
+  /** One-line "without each::labs" pain narrative, what happens if you don't have us. */
   chaos: string;
   fix: ProblemFix;
 };
@@ -61,9 +61,9 @@ export const PROBLEMS: Problem[] = [
         { kind: 'cmd',   text: 'each.run("kling-v3-12v", input, { fallback: ["wan-2.7", "veo-3"] })' },
         { kind: 'info',  text: 'primary: kling-v3-12v · health=ok' },
         { kind: 'fail',  text: 'kling-v3-12v → 503 (provider degraded)' },
-        { kind: 'info',  text: 'spillover armed → wan-2.7' },
+        { kind: 'info',  text: 'failover armed → wan-2.7' },
         { kind: 'ok',    text: 'wan-2.7 → 200 in 124ms' },
-        { kind: 'comment', text: 'user latency unchanged — incident never reached pagerduty' },
+        { kind: 'comment', text: 'user latency unchanged, incident never reached pagerduty' },
       ],
       visual: 'fallback',
       docsHref: '#',
@@ -125,7 +125,7 @@ export const PROBLEMS: Problem[] = [
       feature: { prefix: 'each::', name: 'trace' },
       tagline: 'Tag every call. Slice cost by user, tier, anything.',
       body:
-        'Pass attributes at runtime. We tag the trace with whatever you send — user_id, tier, persona, experiment, anything. Then slice cost, latency, and quality by any of them.',
+        'Pass attributes at runtime. We tag the trace with whatever you send, user_id, tier, persona, experiment, anything. Then slice cost, latency, and quality by any of them.',
       terminal: [
         { kind: 'cmd',   text: 'each.run("kling-v3-12v", input, { attributes: { user_id: "u_8f2a", tier: "pro", persona: "creator" } })' },
         { kind: 'trace', text: 'tagged · user_id=u_8f2a' },
@@ -171,7 +171,7 @@ export const PROBLEMS: Problem[] = [
       feature: { prefix: 'each::', name: 'workflows' },
       tagline: 'Chain models like functions. Version like code.',
       body:
-        'Compose multi-model pipelines as code. Each step is independently retryable. The whole workflow is versioned, traced, and rollback-able. Failures don’t double-bill — we resume from the last good step.',
+        'Compose multi-model pipelines as code. Each step is independently retryable. The whole workflow is versioned, traced, and rollback-able. Failures don’t double-bill, we resume from the last good step.',
       terminal: [
         { kind: 'cmd',   text: 'each.workflow("product-vibez").run(input)' },
         { kind: 'ok',    text: 'step 1/4 · enhance (gpt-4o) · 1.2s' },
@@ -194,7 +194,7 @@ export const PROBLEMS: Problem[] = [
       feature: { prefix: '', name: '600+ models · one API' },
       tagline: 'One call signature. Every model, every modality.',
       body:
-        'Same each.run() for every model in the catalog. Image, video, audio, 3D — image-to-video, text-to-image, voice cloning, all of it. Try Veo 3 in one string change.',
+        'Same each.run() for every model in the catalog. Image, video, audio, 3D, image-to-video, text-to-image, voice cloning, all of it. Try Veo 3 in one string change.',
       terminal: [
         { kind: 'cmd',   text: 'each.run("kling-v3-12v", { prompt, duration: 8 })' },
         { kind: 'ok',    text: 'output ready · 4.2s' },
@@ -217,7 +217,7 @@ export const PROBLEMS: Problem[] = [
       feature: { prefix: 'each::', name: 'workflows', tail: 'versioning' },
       tagline: 'Every workflow is versioned. Rollback in one click.',
       body:
-        'When you ship a workflow, we tag it. When you change it, we tag the new version. Rollback by passing a version string — no redeploy, no rebuild.',
+        'When you ship a workflow, we tag it. When you change it, we tag the new version. Rollback by passing a version string, no redeploy, no rebuild.',
       terminal: [
         { kind: 'cmd',   text: 'each.workflow("product-vibez").version("v3.2").run(input)' },
         { kind: 'fail',  text: 'output quality regressed · rolling back' },

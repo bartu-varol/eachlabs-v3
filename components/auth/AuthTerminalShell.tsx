@@ -8,7 +8,7 @@ type Tab = { label: string; href: string; active?: boolean };
 type Props = {
   /** Path shown in the window title, e.g. "~/each-auth/signup". */
   cwd: string;
-  /** Window tabs at the top — used for the signup/signin switcher. */
+  /** Window tabs at the top, used for the signup/signin switcher. */
   tabs: Tab[];
   children: ReactNode;
 };

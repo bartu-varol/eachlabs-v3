@@ -7,7 +7,7 @@ import { ArrowUpRight } from 'lucide-react';
 
 type QA = {
   q: string;
-  /** Short caption shown next to the active number — flavor text. */
+  /** Short caption shown next to the active number, flavor text. */
   tag: string;
   a: ReactNode;
 };
@@ -24,7 +24,7 @@ const ITEMS: QA[] = [
     tag: 'PRICING',
     a: (
       <>
-        Pay-per-call. Free until you ship — 10K traces, no credit card. After that, you pay the
+        Pay-per-call. Free until you ship, 10K traces, no credit card. After that, you pay the
         model’s API price plus a thin platform fee. We never invoice “starting at.” Full pricing
         on the <InlineLink href="/pricing">pricing page</InlineLink>.
       </>
@@ -50,7 +50,7 @@ const ITEMS: QA[] = [
     tag: 'COMPARE',
     a: (
       <>
-        They give you model access. We give you model access plus the orchestration layer —
+        They give you model access. We give you model access plus the orchestration layer:
         quality-aware routing, automatic fallback, per-call tracing, A/B testing, workflows,
         version control. The boring parts. If all you need is one model occasionally, Replicate
         is fine. If you’re shipping AI in production, you’ll end up building what we already
@@ -73,7 +73,7 @@ const ITEMS: QA[] = [
     tag: 'DEPLOY',
     a: (
       <>
-        Not today. We’re a hosted service — the routing intelligence relies on our cross-tenant
+        Not today. We’re a hosted service, the routing intelligence relies on our cross-tenant
         signal. If you have a regulatory reason that forces self-hosting, talk to an engineer;
         we have a path for enterprise.
       </>
@@ -96,14 +96,14 @@ const ITEMS: QA[] = [
       <>
         If you’re on Replicate, fal.ai, or calling provider APIs directly, about an hour. The{' '}
         <code>each.run()</code> signature is similar enough to most that it’s mostly a
-        search-and-replace job. Bring your hardest workflow to the migration call — we’ll port
+        search-and-replace job. Bring your hardest workflow to the migration call, we’ll port
         it live.
       </>
     ),
   },
 ];
 
-/* Question button — left list. Highlights with shared layoutId pill on active. */
+/* Question button, left list. Highlights with shared layoutId pill on active. */
 function QuestionRow({
   item,
   index,
@@ -127,7 +127,7 @@ function QuestionRow({
       transition={{ duration: 0.32, delay: index * 0.04, ease: 'easeOut' }}
       className="relative w-full text-left rounded-md group"
     >
-      {/* Shared active highlight — uses layoutId so it slides between items */}
+      {/* Shared active highlight, uses layoutId so it slides between items */}
       {isActive && (
         <motion.span
           layoutId="faq-active"
@@ -166,7 +166,7 @@ function QuestionRow({
   );
 }
 
-/* Right panel — answer with stagger reveal of "lines". */
+/* Right panel, answer with stagger reveal of "lines". */
 function AnswerPanel({ item, index }: { item: QA; index: number }) {
   return (
     <motion.div
@@ -208,7 +208,7 @@ function AnswerPanel({ item, index }: { item: QA; index: number }) {
         </motion.div>
       </div>
 
-      {/* Question — display, big */}
+      {/* Question, display, big */}
       <motion.h3
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
@@ -218,7 +218,7 @@ function AnswerPanel({ item, index }: { item: QA; index: number }) {
         {item.q}
       </motion.h3>
 
-      {/* Answer body — fade in, then a thin spark divider grows */}
+      {/* Answer body, fade in, then a thin spark divider grows */}
       <motion.div
         className="h-px bg-spark/40 my-5 origin-left"
         initial={{ scaleX: 0 }}
@@ -244,7 +244,7 @@ export function FAQ() {
 
   return (
     <section className="relative border-t border-rule py-24 md:py-32 overflow-hidden">
-      {/* Floating orbs — subtle "questions in the air" ambient */}
+      {/* Floating orbs, subtle "questions in the air" ambient */}
       <div aria-hidden className="absolute inset-0 pointer-events-none">
         {[
           { size: 280, x: '12%', y: '18%', delay: 0,   dur: 8,  tone: 'spark'  },
@@ -299,7 +299,7 @@ export function FAQ() {
 
         {/* Split */}
         <div className="mt-12 grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] gap-6 lg:gap-8">
-          {/* Left — question list */}
+          {/* Left, question list */}
           <div className="flex flex-col gap-1 lg:sticky lg:top-32 self-start">
             {ITEMS.map((item, i) => (
               <QuestionRow
@@ -312,7 +312,7 @@ export function FAQ() {
             ))}
           </div>
 
-          {/* Right — answer panel */}
+          {/* Right, answer panel */}
           <div className="min-h-[260px]">
             <AnimatePresence mode="wait">
               <AnswerPanel key={activeIdx} item={active} index={activeIdx} />

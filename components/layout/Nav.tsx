@@ -116,7 +116,7 @@ export function Nav() {
             </div>
           </div>
 
-          {/* Wide mega menus — Platform & Developers, both full container width */}
+          {/* Wide mega menus, Platform & Developers, both full container width */}
           {openMenu === 'platform' && <MegaMenu menu={megaMenus.platform} open />}
           {openMenu === 'developers' && <MegaMenu menu={megaMenus.developers} open />}
         </div>

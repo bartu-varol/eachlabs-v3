@@ -5,11 +5,11 @@ type Props = { items: RelatedModel[] };
 
 function priceLabel(m: RelatedModel): string {
   if (m.costPerSecond) return `$${m.costPerSecond.toFixed(3)}/s`;
-  return '—';
+  return '-';
 }
 
 function runtimeLabel(seconds: number | null): string {
-  if (!seconds) return '—';
+  if (!seconds) return '-';
   if (seconds < 60) return `${seconds}s`;
   return `${Math.round(seconds / 60)}m`;
 }

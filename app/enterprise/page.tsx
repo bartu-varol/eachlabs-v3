@@ -30,8 +30,8 @@ const ACCENT_TINT: Record<string, { tint: string; deep: string }> = {
 const CAPABILITY_ICONS = [Server, KeyRound, FileSearch, Globe2, Shield, Compass];
 
 /* ──────────────────────────────────────────────────────────────────────────
-   HeroIncidentTimeline — replaces the standard widget on enterprise. Shows a
-   single incident playing out in real time: primary fails → spillover →
+   HeroIncidentTimeline, replaces the standard widget on enterprise. Shows a
+   single incident playing out in real time: primary fails → failover →
    on-call paged → RCA filed. The visual reinforces "we wake up so you don't."
 ────────────────────────────────────────────────────────────────────────── */
 function HeroIncidentTimeline() {
@@ -69,7 +69,7 @@ function HeroIncidentTimeline() {
             animate={{ opacity: [0.4, 1, 0.4] }}
             transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
           />
-          sla — 99.99%
+          sla, 99.99%
         </div>
       </div>
 
@@ -205,7 +205,7 @@ function EnterpriseHero() {
           </p>
         </motion.div>
 
-        {/* Right — incident timeline */}
+        {/* Right, incident timeline */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
@@ -220,7 +220,7 @@ function EnterpriseHero() {
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   "What enterprise means" — comparison rows
+   "What enterprise means", comparison rows
 ────────────────────────────────────────────────────────────────────────── */
 function MeansWhat() {
   const { meansWhat } = enterprise;
@@ -291,7 +291,7 @@ function MeansWhat() {
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   Capabilities — 6 tiles, each with "why this exists"
+   Capabilities, 6 tiles, each with "why this exists"
 ────────────────────────────────────────────────────────────────────────── */
 function Capabilities() {
   const { capabilities } = enterprise;
@@ -376,7 +376,7 @@ function Capabilities() {
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   The 3AM Promise — timeline section
+   The 3AM Promise, timeline section
 ────────────────────────────────────────────────────────────────────────── */
 function ThreeAmPromise() {
   const { threeAm } = enterprise;
@@ -433,7 +433,7 @@ function ThreeAmPromise() {
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   Outcomes — 3 deep case studies
+   Outcomes, 3 deep case studies
 ────────────────────────────────────────────────────────────────────────── */
 function Outcomes() {
   const { outcomes } = enterprise;
@@ -487,7 +487,7 @@ function Outcomes() {
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   Architecture — text-based wire diagram
+   Architecture, text-based wire diagram
 ────────────────────────────────────────────────────────────────────────── */
 function Architecture() {
   const { architecture } = enterprise;
@@ -515,7 +515,7 @@ function Architecture() {
           {architecture.body}
         </p>
 
-        {/* Wire diagram — 3 main nodes in a horizontal flow */}
+        {/* Wire diagram, 3 main nodes in a horizontal flow */}
         <div className="mt-14 relative">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-0 relative">
             {architecture.nodes.map((node, i) => (
@@ -587,7 +587,7 @@ function Architecture() {
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   Procurement assets — anchor: #sla
+   Procurement assets, anchor: #sla
 ────────────────────────────────────────────────────────────────────────── */
 function Procurement() {
   const { procurement } = enterprise;
@@ -649,7 +649,7 @@ function Procurement() {
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   FAQ — accordion-lite
+   FAQ, accordion-lite
 ────────────────────────────────────────────────────────────────────────── */
 function EnterpriseFAQ() {
   const { faq } = enterprise;
@@ -695,7 +695,7 @@ function EnterpriseFAQ() {
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   Final CTA — vortex-backed
+   Final CTA, vortex-backed
 ────────────────────────────────────────────────────────────────────────── */
 function Vortex() {
   const rings = [

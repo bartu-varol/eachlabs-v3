@@ -8,7 +8,7 @@ import { AskAiPanel } from '@/components/model-detail/AskAiPanel';
 type Props = { flow: FlowDetail };
 
 function formatNumber(n: number | null | undefined): string {
-  if (n == null || n === 0) return '—';
+  if (n == null || n === 0) return '-';
   if (n >= 1000) return `${(n / 1000).toFixed(1).replace(/\.0$/, '')}k`;
   return String(n);
 }

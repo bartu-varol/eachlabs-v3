@@ -5,7 +5,7 @@ import Link from 'next/link';
 import type { WorkflowSummary } from '@/lib/workflows';
 import { pickShineDirection } from './shine';
 
-/** Deterministic 1000–2000 multiplier from workflow_id — stable across renders. */
+/** Deterministic 1000–2000 multiplier from workflow_id, stable across renders. */
 function runsMultiplier(workflowId: string): number {
   let h = 0;
   for (let i = 0; i < workflowId.length; i++) h = (h * 31 + workflowId.charCodeAt(i)) | 0;
@@ -103,7 +103,7 @@ export function WorkflowTile({ workflow }: { workflow: WorkflowSummary }) {
   );
 }
 
-/** Skeleton placeholder — matches the 4:5 aspect of the real card. */
+/** Skeleton placeholder, matches the 4:5 aspect of the real card. */
 export function WorkflowTileSkeleton() {
   return (
     <div className="aspect-[4/5] rounded-lg bg-surface2 ec-skeleton ring-1 ring-rule2/60" />

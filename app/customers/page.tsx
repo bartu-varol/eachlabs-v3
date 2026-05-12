@@ -23,7 +23,7 @@ function HeadlineText({ tokens }: { tokens: HeadlineToken[] }) {
 export default function CustomersPage() {
   const c = customerStories;
 
-  // Companies list (preserve order from caseStudies) — derived from real testimonial data.
+  // Companies list (preserve order from caseStudies), derived from real testimonial data.
   const companies = c.caseStudies.map((cs) => cs.role);
   const marqueeRow = [...companies, ...companies, ...companies];
 

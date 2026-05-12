@@ -53,9 +53,9 @@ export default function PlatformPage() {
           </h1>
           <p className="text-ink2 text-[16px] leading-[1.55] max-w-[640px] mt-7">
             Six products, two layers.{' '}
-            <strong className="text-ink font-semibold">Run</strong> orchestrates the calls — router,
+            <strong className="text-ink font-semibold">Run</strong> orchestrates the calls, router,
             workflows, enhancer.{' '}
-            <strong className="text-ink font-semibold">Observe</strong> tells you what happened —
+            <strong className="text-ink font-semibold">Observe</strong> tells you what happened:
             attributes, A/B, trace.
           </p>
 

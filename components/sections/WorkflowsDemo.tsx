@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
 
 /* ──────────────────────────────────────────────────────────────────────────
-   WorkflowsDemo — vertical card-stack execution.
+   WorkflowsDemo, vertical card-stack execution.
 
    Visual: a real production graph executing live, top-to-bottom.
 
@@ -13,7 +13,7 @@ import { ChevronDown } from 'lucide-react';
      02  enhance · gpt-4o
      03  parallel: image · video · audio  (3 sub-cards side-by-side)
      04  merge · compose
-     05  OUTPUT — trace + cost summary
+     05  OUTPUT, trace + cost summary
 
    Each row lights up in sequence. Parallel row shows the 3 branches
    running concurrently, all greening at once. A subtle progress rail on the
@@ -94,7 +94,7 @@ function BranchCard({
       <div className="font-mono text-[11px] text-ink2 mt-1 truncate">{model}</div>
       <div className="flex items-center justify-between mt-2">
         <span className="font-mono text-[10px] text-ink3 tabular-nums">
-          {done || running ? `${(ms / 1000).toFixed(1)}s` : '—'}
+          {done || running ? `${(ms / 1000).toFixed(1)}s` : '-'}
         </span>
         <StatusBadge status={status} delay={delay} small />
       </div>
@@ -124,7 +124,7 @@ function FallbackBranchCard({
       setSub('wan-done');
       return;
     }
-    // status === 'running' — start kling, fail mid-run, fall back to wan
+    // status === 'running', start kling, fail mid-run, fall back to wan
     setSub('kling-run');
     const t1 = setTimeout(() => setSub('kling-fail'), 650);
     const t2 = setTimeout(() => setSub('wan-run'), 1000);
@@ -187,7 +187,7 @@ function FallbackBranchCard({
         </AnimatePresence>
       </div>
 
-      {/* Animated model name — swaps on fallback */}
+      {/* Animated model name, swaps on fallback */}
       <div className="relative h-[15px] mt-1 overflow-hidden">
         <AnimatePresence mode="wait">
           <motion.div
@@ -211,7 +211,7 @@ function FallbackBranchCard({
             failing ? 'text-fail' : 'text-ink3'
           }`}
         >
-          {failing ? '503 ✗' : done ? '2.6s' : running ? '…' : '—'}
+          {failing ? '503 ✗' : done ? '2.6s' : running ? '…' : '-'}
         </span>
         <FallbackBadge sub={sub} delay={delay} />
       </div>
@@ -262,7 +262,7 @@ function FallbackBadge({ sub, delay = 0 }: { sub: VideoSub; delay?: number }) {
   return <span className={`inline-block w-1.5 h-1.5 rounded-full bg-rule2`} aria-hidden />;
 }
 
-/* ── Status badge — spinner while running, ✓ when done ──────────────────── */
+/* ── Status badge, spinner while running, ✓ when done ──────────────────── */
 
 function StatusBadge({
   status,
@@ -563,7 +563,7 @@ export function WorkflowsDemo() {
           </StepRow>
         </div>
 
-        {/* Footer — total cost & trace summary */}
+        {/* Footer, total cost & trace summary */}
         <TraceFooter phase={phase} />
       </div>
 
@@ -611,7 +611,7 @@ function PhaseLabel({ phase }: { phase: Phase }) {
   );
 }
 
-/* ── Trace footer — fills in on completion ──────────────────────────────── */
+/* ── Trace footer, fills in on completion ──────────────────────────────── */
 
 function TraceFooter({ phase }: { phase: Phase }) {
   const showTrace = phase === 'done';

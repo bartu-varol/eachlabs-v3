@@ -4,21 +4,21 @@ import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 /* ──────────────────────────────────────────────────────────────────────────
-   RouterDemo — the 5-second story for /router.
+   RouterDemo, the 5-second story for /router.
 
    Four-phase loop (~7.2s total). Tells: "Router watches all candidates.
-   Primary degrades. Spillover decision in <120ms. Trace shows what fired."
+   Primary degrades. Failover decision in <120ms. Trace shows what fired."
 
      0.0 – 1.8s  STEADY      kling-v3 healthy, traffic flowing, p95 stable
      1.8 – 3.0s  DEGRADE     kling-v3 latency spikes + error rate climbs
      3.0 – 3.8s  DECIDE      router scores 3 candidates → wan-2.7 wins
-     3.8 – 7.2s  SPILLOVER   traffic on wan-2.7, "saved 1 page" footer
+     3.8 – 7.2s  FAILOVER   traffic on wan-2.7, "saved 1 page" footer
 
    Primary signal each phase tells in isolation:
-     · STEADY   — "many candidates exist"
-     · DEGRADE  — "router sees the problem first"
-     · DECIDE   — "the choice is data-driven"
-     · SPILL    — "users never noticed"
+     · STEADY  , "many candidates exist"
+     · DEGRADE , "router sees the problem first"
+     · DECIDE  , "the choice is data-driven"
+     · SPILL   , "users never noticed"
 ────────────────────────────────────────────────────────────────────────── */
 
 type Phase = 'steady' | 'degrade' | 'decide' | 'spill';
@@ -36,7 +36,7 @@ const TOTAL_LOOP =
 type Lane = {
   id: 'kling' | 'wan' | 'veo';
   name: string;
-  /** When NOT in spillover, all p95 values shown. Latency story */
+  /** When NOT in failover, all p95 values shown. Latency story */
   p95: { steady: number; degrade: number };
   /** Score the router assigns during DECIDE (1.0 = best). */
   score: number;
@@ -107,13 +107,13 @@ export function RouterDemo() {
         {/* Decision strip */}
         <DecisionStrip phase={phase} />
 
-        {/* Bottom strip — outcome counters */}
+        {/* Bottom strip, outcome counters */}
         <div className="grid grid-cols-3 gap-px bg-rule2 border-t border-rule2">
           <Counter
-            label="spillover"
+            label="failover"
             value={
               phase === 'decide'
-                ? '— ms'
+                ? '- ms'
                 : phase === 'spill'
                 ? '118ms'
                 : phase === 'degrade'
@@ -206,7 +206,7 @@ function LaneRow({
       ? lane.p95.degrade
       : lane.p95.steady;
 
-  // Latency bar fill (0–100%) — relative to a 1500ms ceiling.
+  // Latency bar fill (0–100%), relative to a 1500ms ceiling.
   const fill = Math.min(100, (p95 / 1500) * 100);
 
   // Status tone for the badge on the right.
@@ -296,7 +296,7 @@ function LaneRow({
   );
 }
 
-/* ── Status badge — small uppercase pill ────────────────────────────────── */
+/* ── Status badge, small uppercase pill ────────────────────────────────── */
 
 function StatusBadge({ tone }: { tone: 'ok' | 'fail' | 'standby' | 'serving' }) {
   const cfg = {
@@ -318,7 +318,7 @@ function StatusBadge({ tone }: { tone: 'ok' | 'fail' | 'standby' | 'serving' }) 
   );
 }
 
-/* ── Packet stream — three running dots when serving, faded when idle ───── */
+/* ── Packet stream, three running dots when serving, faded when idle ───── */
 
 function PacketStream({ serving, laneIdx }: { serving: boolean; laneIdx: number }) {
   return (
@@ -354,10 +354,10 @@ function PacketStream({ serving, laneIdx }: { serving: boolean; laneIdx: number 
   );
 }
 
-/* ── Decision strip — visible during DECIDE + SPILL phases ──────────────── */
+/* ── Decision strip, visible during DECIDE + SPILL phases ──────────────── */
 
 function DecisionStrip({ phase }: { phase: Phase }) {
-  // Single keyed child per phase — mode="wait" gives a clean cross-fade with no overlap.
+  // Single keyed child per phase, mode="wait" gives a clean cross-fade with no overlap.
   return (
     <div className="relative h-[58px] border-t border-rule2 bg-bg/40 overflow-hidden">
       <AnimatePresence mode="wait">

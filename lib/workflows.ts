@@ -1,4 +1,4 @@
-/** Live workflow data — fetched from /api/workflows (proxy to workflows.eachlabs.run). */
+/** Live workflow data, fetched from /api/workflows (proxy to workflows.eachlabs.run). */
 
 export type WorkflowSummary = {
   workflow_id: string;
@@ -67,7 +67,7 @@ export async function fetchWorkflowCategories(): Promise<WorkflowCategory[]> {
   return list;
 }
 
-/** Server-side fetcher — call from Server Components only. Uses absolute upstream URL. */
+/** Server-side fetcher, call from Server Components only. Uses absolute upstream URL. */
 export async function fetchWorkflowsServer(q: WorkflowsQuery): Promise<WorkflowsResponse> {
   const qs = buildQS(q);
   const url = `https://workflows.eachlabs.run/api/v1/public/workflows${qs ? `?${qs}` : ''}`;

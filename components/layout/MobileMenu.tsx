@@ -30,7 +30,7 @@ export function MobileMenu({ open, onClose }: Props) {
       </div>
       <nav className="flex-1 overflow-y-auto px-6 py-8 flex flex-col gap-2">
         {navItems.map((item) => {
-          // Plain link (no megamenu) — Explore, Customers, Pricing
+          // Plain link (no megamenu), Explore, Customers, Pricing
           if (!('menu' in item)) {
             return (
               <Link

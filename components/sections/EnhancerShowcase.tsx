@@ -11,7 +11,7 @@ import { EnhancerDemo } from './EnhancerDemo';
 import { EnhancerHowTo } from './EnhancerHowTo';
 
 /* ──────────────────────────────────────────────────────────────────────────
-   EnhancerShowcase — bespoke /enhancer page.
+   EnhancerShowcase, bespoke /enhancer page.
 
    Mirrors RouterShowcase / WorkflowsShowcase. Distinctive bit: this product
    is shipping in early access, so the hero carries an explicit "COMING Q1
@@ -33,7 +33,7 @@ export function EnhancerShowcase() {
         </Link>
 
         <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,560px)] gap-10 lg:gap-16 items-start mt-8">
-          {/* LEFT — copy */}
+          {/* LEFT, copy */}
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
@@ -56,11 +56,11 @@ export function EnhancerShowcase() {
             <ul className="mt-8 flex flex-col gap-2.5 max-w-[540px]">
               <BulletLine
                 accent="READ"
-                text="The enhancer reads the model's error code — content safety, content policy, or a celebrity / brand-IP hit."
+                text="The enhancer reads the model's error code, content safety, content policy, or a celebrity / brand-IP hit."
               />
               <BulletLine
                 accent="REWRITE"
-                text="It rewrites only the flagged tokens, never the intent — then re-checks against all three policies before shipping."
+                text="It rewrites only the flagged tokens, never the intent, then re-checks against all three policies before shipping."
               />
               <BulletLine
                 accent="HOW"
@@ -86,7 +86,7 @@ export function EnhancerShowcase() {
             </div>
           </motion.div>
 
-          {/* RIGHT — live demo */}
+          {/* RIGHT, live demo */}
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
@@ -143,7 +143,7 @@ export function EnhancerShowcase() {
         </div>
       </section>
 
-      {/* 4. HOW TO USE IT — One flag. Five policies. Every refusal saved. */}
+      {/* 4. HOW TO USE IT, One flag. Five policies. Every refusal saved. */}
       <EnhancerHowTo />
 
       {/* 5. WHEN TO REACH FOR IT */}
@@ -230,7 +230,7 @@ export function EnhancerShowcase() {
         </div>
       </section>
 
-      {/* 9. CTA — explicit waitlist framing */}
+      {/* 9. CTA, explicit waitlist framing */}
       <section className="container border-t border-rule py-24 md:py-32">
         <div className="max-w-[680px] mx-auto text-center">
           <div className="inline-flex items-center mb-5">
@@ -254,7 +254,7 @@ export function EnhancerShowcase() {
   );
 }
 
-/* ── Coming-soon pill — used in the hero AND in the CTA block ───────────── */
+/* ── Coming-soon pill, used in the hero AND in the CTA block ───────────── */
 
 function ComingSoonPill() {
   return (
@@ -284,7 +284,7 @@ function BulletLine({
   );
 }
 
-/* ── WhatCard — mechanism panel (mock code editor) + title + body ───────── */
+/* ── WhatCard, mechanism panel (mock code editor) + title + body ───────── */
 
 function WhatCard({ p }: { p: ProductPoint }) {
   return (
@@ -332,7 +332,7 @@ function WhatCard({ p }: { p: ProductPoint }) {
   );
 }
 
-/* ── WhenCard — corner ambient visual + number + title + body + detail ──── */
+/* ── WhenCard, corner ambient visual + number + title + body + detail ──── */
 
 function WhenCard({ p }: { p: ProductPoint }) {
   return (

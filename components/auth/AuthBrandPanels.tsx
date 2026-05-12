@@ -1,7 +1,7 @@
 import { Check } from 'lucide-react';
 
 /* ──────────────────────────────────────────────────────────────────────────
-   SignupBrandPanel — "what you get" + fake terminal + tagline.
+   SignupBrandPanel, "what you get" + fake terminal + tagline.
 ────────────────────────────────────────────────────────────────────────── */
 
 const SIGNUP_PERKS = [
@@ -59,7 +59,7 @@ export function SignupBrandPanel() {
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   SigninBrandPanel — status badge + network stats + changelog teaser.
+   SigninBrandPanel, status badge + network stats + changelog teaser.
 ────────────────────────────────────────────────────────────────────────── */
 
 const SIGNIN_STATS = [
@@ -105,7 +105,7 @@ export function SigninBrandPanel() {
           * THIS WEEK · CHANGELOG
         </div>
         <div className="mt-2 text-ink text-[14px] font-medium">
-          each::router 1.4 — quality-aware spill
+          each::router 1.4, quality-aware spill
         </div>
         <div className="text-ink3 italic text-[12px] mt-1">
           We now route around quality degradations, not just failures.

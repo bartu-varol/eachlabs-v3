@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 
 /* ──────────────────────────────────────────────────────────────────────────
-   PlatformBento — asymmetric grid of 6 products with typography-driven
+   PlatformBento, asymmetric grid of 6 products with typography-driven
    micro-animations. Each tile has a subtle accent-tinted background so the
    grid doesn't feel like 6 identical black boxes.
 ────────────────────────────────────────────────────────────────────────── */
@@ -31,7 +31,7 @@ const ACCENT: Record<Tile['accent'], { var: string; tint: string; deepTint: stri
 };
 
 /* ──────────────────────────────────────────────────────────────────────────
-   Typography micro-animations — same dev/mono aesthetic across all tiles.
+   Typography micro-animations, same dev/mono aesthetic across all tiles.
 ────────────────────────────────────────────────────────────────────────── */
 
 function RouterMini() {
@@ -65,7 +65,7 @@ function RouterMini() {
 }
 
 function WorkflowsMini() {
-  // enhance → gen → voice → compose — sequential highlight
+  // enhance → gen → voice → compose, sequential highlight
   const steps = ['enhance', 'gen', 'voice', 'compose'];
   return (
     <div className="font-mono text-[11.5px] flex items-center gap-2 flex-wrap">
@@ -97,7 +97,7 @@ function WorkflowsMini() {
 }
 
 function EnhancerMini() {
-  // raw provider error rate (red) vs enhancer error rate (spark) — animated reveal
+  // raw provider error rate (red) vs enhancer error rate (spark), animated reveal
   return (
     <div className="font-mono text-[11.5px] flex flex-col gap-1.5 w-full">
       <motion.div
@@ -180,7 +180,7 @@ function BentoTile({ tile, idx }: { tile: Tile; idx: number }) {
       className={`group relative rounded-md border border-rule2 overflow-hidden hover:[border-color:var(--c)] transition-colors ${tile.spanClass}`}
       style={{
         ['--c' as string]: accent.var,
-        // Subtle accent-tinted gradient over the surface — each tile feels its own color.
+        // Subtle accent-tinted gradient over the surface, each tile feels its own color.
         background: `linear-gradient(135deg, ${accent.deepTint} 0%, rgb(var(--c-surface)) 50%, ${accent.tint} 100%)`,
       }}
     >
@@ -216,7 +216,7 @@ function BentoTile({ tile, idx }: { tile: Tile; idx: number }) {
           {tile.tagline}
         </p>
 
-        {/* Visual area — typography-driven, fills the lower half of the tile */}
+        {/* Visual area, typography-driven, fills the lower half of the tile */}
         <div
           className="mt-auto pt-5 flex items-center min-h-[64px]"
           aria-hidden
@@ -250,10 +250,10 @@ export function PlatformBento() {
         </h2>
         <p className="text-ink2 text-[15px] leading-[1.6] max-w-[620px] mt-5">
           Each tile is a real product, used in production today. Click any of them to see how it
-          works on its own — or how it pairs with the rest.
+          works on its own, or how it pairs with the rest.
         </p>
 
-        {/* Bento grid — 3 cols × 3 rows on lg, stacks on mobile */}
+        {/* Bento grid, 3 cols × 3 rows on lg, stacks on mobile */}
         <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:grid-rows-[repeat(3,minmax(0,1fr))] gap-3 md:gap-4 auto-rows-[200px] lg:auto-rows-auto">
           {TILES.map((tile, i) => (
             <BentoTile key={tile.name} tile={tile} idx={i} />

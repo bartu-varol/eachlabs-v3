@@ -35,7 +35,7 @@ export async function generateMetadata({
   return {
     title: `${fam.name} · models · each::labs`,
     description:
-      fam.description ?? `${fam.name} model family on each::labs — all variants in one place.`,
+      fam.description ?? `${fam.name} model family on each::labs, all variants in one place.`,
   };
 }
 
@@ -146,12 +146,12 @@ export default async function FamilyPage({
                 Every variant in the <strong className="text-ink">{family.name}</strong> family
                 shares the same input contract and the same{' '}
                 <code className="font-mono text-spark">each.run()</code> signature. Switch from{' '}
-                <em>standard</em> to <em>pro</em> to <em>4K</em> by changing one string — no client
+                <em>standard</em> to <em>pro</em> to <em>4K</em> by changing one string, no client
                 code changes, no re-auth.
               </p>
               <p>
                 Pin a version when you ship. Promote a new variant when ready. Roll back if
-                quality dips. The family is a moving target — your code shouldn't be.
+                quality dips. The family is a moving target, your code shouldn't be.
               </p>
             </div>
           </div>

@@ -56,7 +56,7 @@ function Cursor() {
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   1. Fallback — HTTP packet hits primary, fails, deflects to fallback.
+   1. Fallback, HTTP packet hits primary, fails, deflects to fallback.
 ────────────────────────────────────────────────────────────────────────── */
 
 function FallbackVisual() {
@@ -84,7 +84,7 @@ function FallbackVisual() {
           animate={{ opacity: [0, 0, 1, 1, 0] }}
           transition={{ duration: 4, times: [0, 0.4, 0.5, 0.85, 1], repeat: Infinity }}
         >
-          ↳ spillover
+          ↳ failover
         </motion.div>
 
         {/* Fallback endpoint */}
@@ -92,10 +92,10 @@ function FallbackVisual() {
           name="wan-2.7"
           role="fallback"
           statuses={[
-            { t: 0,    code: '—',   tone: 'muted' },
-            { t: 1.6,  code: '—',   tone: 'muted' },
+            { t: 0,    code: '-',   tone: 'muted' },
+            { t: 1.6,  code: '-',   tone: 'muted' },
             { t: 2.6,  code: '200', tone: 'ok' },
-            { t: 3.6,  code: '—',   tone: 'muted' },
+            { t: 3.6,  code: '-',   tone: 'muted' },
           ]}
           packetActive={[false, false, true, false]}
         />
@@ -177,7 +177,7 @@ function CodeText({ keyframes }: { keyframes: string[] }) {
       animate={{ opacity: [1, 1, 1, 1] }}
       transition={{ duration: 4, repeat: Infinity }}
     >
-      {/* Animate textContent via key cycling — render each value with timed visibility */}
+      {/* Animate textContent via key cycling, render each value with timed visibility */}
       <span className="relative inline-block min-w-[26px] text-center">
         {keyframes.map((code, i) => (
           <motion.span
@@ -199,7 +199,7 @@ function CodeText({ keyframes }: { keyframes: string[] }) {
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   2. Latency — live histogram, threshold breach, spillover.
+   2. Latency, live histogram, threshold breach, failover.
 ────────────────────────────────────────────────────────────────────────── */
 
 function LatencyVisual() {
@@ -223,13 +223,13 @@ function LatencyVisual() {
         valueKeyframes={['540ms', '720ms', '1.42s', '610ms']}
       />
 
-      {/* Provider B (active after spillover) */}
+      {/* Provider B (active after failover) */}
       <Histogram
         label="provider B"
         bars={B}
         threshold={70}
         breachKeyframes={[false, false, false, false]}
-        valueKeyframes={['—', '—', '540ms', '540ms']}
+        valueKeyframes={['-', '-', '540ms', '540ms']}
         secondary
       />
 
@@ -316,7 +316,7 @@ function Histogram({
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   3. A/B — live experiment dashboard, calls + quality + winner badge.
+   3. A/B, live experiment dashboard, calls + quality + winner badge.
 ────────────────────────────────────────────────────────────────────────── */
 
 function ABVisual() {
@@ -392,7 +392,7 @@ function ABColumn({
 }
 
 function Counter({ to, duration = 1.2 }: { to: number; duration?: number }) {
-  // Lightweight count-up using motion timeline. We render to.toLocaleString() at end —
+  // Lightweight count-up using motion timeline. We render to.toLocaleString() at end -
   // for a richer effect, useMotionValue + useTransform; but keep this fast & simple.
   return (
     <motion.span
@@ -406,7 +406,7 @@ function Counter({ to, duration = 1.2 }: { to: number; duration?: number }) {
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   4. Attribution — JSON object types in line by line.
+   4. Attribution, JSON object types in line by line.
 ────────────────────────────────────────────────────────────────────────── */
 
 function AttributionVisual() {
@@ -453,7 +453,7 @@ function AttributionVisual() {
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   5. Slicing — SQL query → result rows fade in, bars animate.
+   5. Slicing, SQL query → result rows fade in, bars animate.
 ────────────────────────────────────────────────────────────────────────── */
 
 function SlicingVisual() {
@@ -514,7 +514,7 @@ function SlicingVisual() {
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   6. Pipeline — workflow with packet flowing across nodes; step 3 fails+retries.
+   6. Pipeline, workflow with packet flowing across nodes; step 3 fails+retries.
 ────────────────────────────────────────────────────────────────────────── */
 
 function PipelineVisual() {
@@ -596,7 +596,7 @@ function PipelineStep({
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   7. Swap — model name cycles through several. Same call, different model.
+   7. Swap, model name cycles through several. Same call, different model.
 ────────────────────────────────────────────────────────────────────────── */
 
 function SwapVisual() {
@@ -662,7 +662,7 @@ function SwapVisual() {
 }
 
 /* ──────────────────────────────────────────────────────────────────────────
-   8. Rollback — git-style commit graph; HEAD jumps from v3.2 back to v3.1.
+   8. Rollback, git-style commit graph; HEAD jumps from v3.2 back to v3.1.
 ────────────────────────────────────────────────────────────────────────── */
 
 function RollbackVisual() {

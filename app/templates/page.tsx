@@ -13,7 +13,7 @@ export const revalidate = 60;
 export const metadata: Metadata = {
   title: 'Workflow templates · each::labs',
   description:
-    'Pre-wired AI workflow templates from each::labs — fork into your account and ship production AI features in hours.',
+    'Pre-wired AI workflow templates from each::labs, fork into your account and ship production AI features in hours.',
 };
 
 export default async function TemplatesPage() {

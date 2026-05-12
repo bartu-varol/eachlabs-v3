@@ -32,7 +32,7 @@ function FeatureTitle({ title }: { title: string }) {
 export function MegaMenu({ menu, open }: Props) {
   if (!open) return null;
 
-  // Developers menu — flat list
+  // Developers menu, flat list
   if (menu.flat) {
     return (
       // Hover-bridge: pt-2 makes the gap between trigger and panel hoverable,
@@ -64,7 +64,7 @@ export function MegaMenu({ menu, open }: Props) {
     );
   }
 
-  // Platform / Use cases — three-column grid with featured card
+  // Platform / Use cases, three-column grid with featured card
   return (
     // Hover-bridge: pt-2 keeps the cursor inside the dropdown's hit-area
     // while it travels from the trigger to the panel.

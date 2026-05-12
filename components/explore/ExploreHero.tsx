@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { models, providers } from '@/lib/catalog';
 
 type Props = {
-  /** Total public workflows from the live API — keeps the hero copy honest. */
+  /** Total public workflows from the live API, keeps the hero copy honest. */
   workflowCount?: number;
   /** Live model count from upstream API. Falls back to static catalog. */
   modelsCount?: number;
@@ -20,7 +20,7 @@ export function ExploreHero({ workflowCount, modelsCount }: Props) {
         <span className="block text-ink3 italic">Plus the recipes that wire them up.</span>
       </h1>
       <p className="text-[15px] md:text-[16px] text-ink2 leading-[1.55] max-w-[680px] mt-6">
-        {displayedModels} pinned models from {providers.length} providers — image, video, audio, text — all behind one{' '}
+        {displayedModels} pinned models from {providers.length} providers, image, video, audio, text, all behind one{' '}
         <code className="font-mono text-spark">each.run()</code>.
         {workflowCount && workflowCount > 0 ? (
           <>

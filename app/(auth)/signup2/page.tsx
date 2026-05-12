@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 const MOTD = [
-  { ts: '05:14:22', tone: 'spark',   text: 'each::router 1.4 ships — quality-aware spill' },
+  { ts: '05:14:22', tone: 'spark',   text: 'each::router 1.4 ships, quality-aware spill' },
   { ts: '05:14:21', tone: 'ink2',    text: '284K req routed last 24h · 0 user-visible errors' },
   { ts: '05:14:19', tone: 'success', text: 'welcome.  there is no credit card field.' },
 ];

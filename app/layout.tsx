@@ -20,7 +20,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'each::labs — orchestration + observability for production AI',
+  title: 'each::labs, orchestration + observability for production AI',
   description: 'Ship reliable AI apps. We handle the chaos.',
 };
 

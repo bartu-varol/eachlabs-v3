@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import type { ProductDef } from '@/lib/products';
 
 /* ──────────────────────────────────────────────────────────────────────────
-   LiveTerminal — a streaming log/terminal feed per product.
+   LiveTerminal, a streaming log/terminal feed per product.
    Looks like watching `tail -f` on a real production system. Lines appear
    one-by-one with stagger, sit, then loop.
 ────────────────────────────────────────────────────────────────────────── */
@@ -45,13 +45,13 @@ const TEXT_COLOR: Record<LineKind, string> = {
   comment: 'text-ink3 italic',
 };
 
-/* Per-product mock terminal scripts — each plays a believable production scene. */
+/* Per-product mock terminal scripts, each plays a believable production scene. */
 const SCRIPTS: Record<ProductDef['slug'], Line[]> = {
   router: [
     { kind: 'cmd',  text: 'each.run("kling-v3-12v", input, { fallback: ["wan-2.7"] })' },
     { kind: 'ok',   text: '[03:14:22] kling-v3 · 200 · 892ms · trace_8f2a' },
     { kind: 'fail', text: '[03:14:24] kling-v3 · 503 · upstream timeout · trace_8f2c' },
-    { kind: 'trace', text: '[03:14:24] spillover armed → wan-2.7' },
+    { kind: 'trace', text: '[03:14:24] failover armed → wan-2.7' },
     { kind: 'ok',   text: '[03:14:24] wan-2.7 · 200 · 124ms · trace_8f2c · ✓ recovered' },
     { kind: 'ok',   text: '[03:14:25] kling-v3 · 200 · 901ms · trace_8f2d' },
     { kind: 'comment', text: 'no pages fired · uptime preserved · 99.99%' },
@@ -60,7 +60,7 @@ const SCRIPTS: Record<ProductDef['slug'], Line[]> = {
     { kind: 'cmd',  text: 'each.run({ workflow: "product-photo-v3" })' },
     { kind: 'info', text: '[12:01:03] enter · enhance (gpt-4o)' },
     { kind: 'ok',   text: '[12:01:04] step ok · enhance · 0.4s · $0.001' },
-    { kind: 'info', text: '[12:01:04] enter · image (kling-v3) ║ voice (eleven-v3) — parallel' },
+    { kind: 'info', text: '[12:01:04] enter · image (kling-v3) ║ voice (eleven-v3), parallel' },
     { kind: 'ok',   text: '[12:01:09] step ok · image · 4.8s · $0.180' },
     { kind: 'ok',   text: '[12:01:09] step ok · voice · 0.5s · $0.012' },
     { kind: 'ok',   text: '[12:01:10] step ok · compose · 0.3s · $0.001' },

@@ -7,7 +7,7 @@ import { ModelTile } from '@/components/explore/ModelTile';
 
 /**
  * Curated homepage picks: top recommended models from the real catalog, deduped
- * by family and balanced across modalities. Computed at module load — static.
+ * by family and balanced across modalities. Computed at module load, static.
  */
 const HOMEPAGE_MODELS: CatalogModel[] = (() => {
   const ranked = [...catalogModels]
@@ -78,7 +78,7 @@ export function ModelCatalog() {
         </Link>
       </motion.div>
 
-      {/* 4-col grid of real catalog models — same tile as /explore. */}
+      {/* 4-col grid of real catalog models, same tile as /explore. */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-5">
         {HOMEPAGE_MODELS.map((m, i) => (
           <motion.div

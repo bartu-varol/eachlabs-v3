@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 
 const UPSTREAM = 'https://workflows.eachlabs.run/api/v1/categories';
 
-export const revalidate = 600; // 10 min — categories don't churn
+export const revalidate = 600; // 10 min, categories don't churn
 
 export async function GET(): Promise<NextResponse> {
   const res = await fetch(UPSTREAM, {

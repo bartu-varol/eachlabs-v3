@@ -7,7 +7,7 @@ import { modalityOf, displayName } from '@/lib/catalog';
 import { HoverVideo } from './HoverVideo';
 import { pickShineDirection } from './shine';
 
-/** Per-modality accent — drives the empty-state gradient + the ring + the glow. */
+/** Per-modality accent, drives the empty-state gradient + the ring + the glow. */
 const ACCENT: Record<Modality, string> = {
   VIDEO: '#3D6BC9',
   IMAGE: '#5B8F3A',
@@ -39,7 +39,7 @@ export function ModelTile({ model }: { model: CatalogModel }) {
       className="ec-card group relative block aspect-[4/5] rounded-lg overflow-hidden bg-surface no-underline"
       style={{ ['--ec-accent' as string]: accent }}
     >
-      {/* Media layer — image/video fills the card, blooms on hover. */}
+      {/* Media layer, image/video fills the card, blooms on hover. */}
       <div
         className="ec-card-media absolute inset-0"
         style={{ background: `linear-gradient(135deg, ${accent}45, ${accent}15 55%, ${accent}05)` }}
@@ -61,10 +61,10 @@ export function ModelTile({ model }: { model: CatalogModel }) {
         )}
       </div>
 
-      {/* Hash-picked shimmer sweep — one of 8 directions per card. */}
+      {/* Hash-picked shimmer sweep, one of 8 directions per card. */}
       <div className={`ec-card-shine ${shineClass}`} aria-hidden />
 
-      {/* Bottom gradient — grows on hover so the revealed description stays legible. */}
+      {/* Bottom gradient, grows on hover so the revealed description stays legible. */}
       <div className="ec-card-scrim absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/85 via-black/45 to-transparent pointer-events-none z-[1]" />
 
       {/* Top-left: category pill. */}
@@ -75,7 +75,7 @@ export function ModelTile({ model }: { model: CatalogModel }) {
         {model.categoryName ?? mod}
       </span>
 
-      {/* Bottom — name (always) + slug (always) + description (reveal on hover). */}
+      {/* Bottom, name (always) + slug (always) + description (reveal on hover). */}
       <div className="absolute inset-x-0 bottom-0 z-10 p-4 md:p-5 text-white">
         <div className="font-display font-semibold text-[19px] md:text-[21px] leading-[1.1] tracking-[-0.02em] line-clamp-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.4)]">
           {name}

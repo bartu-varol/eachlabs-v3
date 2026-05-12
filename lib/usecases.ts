@@ -25,7 +25,7 @@ export type UseCaseDef = {
   stats: UseCaseStat[];   // 4 stats
   /** Three concrete moments showing the before/after for this team. */
   beforeAfter: BeforeAfter[];
-  /** What the platform looks like for this team — 4 numbered points. */
+  /** What the platform looks like for this team, 4 numbered points. */
   fitTitle: string;
   fitPoints: { n: string; title: string; body: string }[];
   /** A representative customer story. */
@@ -69,9 +69,9 @@ export const USE_CASES: Record<UseCaseSlug, UseCaseDef> = {
     ],
     fitTitle: 'Why consumer apps ship faster on each::labs.',
     fitPoints: [
-      { n: '01', title: 'Sticky speed under load',  body: 'Router auto-spills to faster providers when p95 spikes — your users keep the snappy feel.' },
+      { n: '01', title: 'Sticky speed under load',  body: 'Router auto-spills to faster providers when p95 spikes, your users keep the snappy feel.' },
       { n: '02', title: 'Per-user cost ceilings',   body: 'Tag user_id and tier. Cap free-tier spend automatically; never get surprised by abuse.' },
-      { n: '03', title: 'Built-in moderation',      body: 'Safety pre-checks before inference. Spillover routes around content_moderation blocks.' },
+      { n: '03', title: 'Built-in moderation',      body: 'Safety pre-checks before inference. Failover routes around content_moderation blocks.' },
       { n: '04', title: 'Same-day model swaps',     body: 'New model drops? Change one string. A/B it on 10%. Promote when significant.' },
     ],
     story: {
@@ -90,7 +90,7 @@ export const USE_CASES: Record<UseCaseSlug, UseCaseDef> = {
     title: 'E-commerce & retail',
     sub: 'Product photography. Lifestyle imagery. Localized creative.',
     body:
-      'Generate, regenerate, and localize thousands of product images and ad creatives — branded, on-spec, with the moderation and compliance baked in.',
+      'Generate, regenerate, and localize thousands of product images and ad creatives, branded, on-spec, with the moderation and compliance baked in.',
     stats: [
       { value: '$2.1M',   label: 'saved on stock + studios in 12mo' },
       { value: '73%',     label: 'faster from brief to asset' },
@@ -137,7 +137,7 @@ export const USE_CASES: Record<UseCaseSlug, UseCaseDef> = {
     title: 'Internal AI tools',
     sub: 'Ops tooling. Internal content. Team-only generators.',
     body:
-      'Build the AI features your internal teams need — slide decks, voiceovers, training data, support drafts — without standing up an entire ML platform yourself.',
+      'Build the AI features your internal teams need, slide decks, voiceovers, training data, support drafts, without standing up an entire ML platform yourself.',
     stats: [
       { value: '1 dev',    label: 'shipped 6 internal tools' },
       { value: '14 days',  label: 'from kick-off to first deploy' },
@@ -166,7 +166,7 @@ export const USE_CASES: Record<UseCaseSlug, UseCaseDef> = {
       { n: '01', title: 'SSO + RBAC on day 1',       body: 'Wire your IDP; we handle scopes per team. No homegrown auth glue.' },
       { n: '02', title: 'Per-team cost views',       body: 'Tag with team_id; finance sees exactly what each function costs.' },
       { n: '03', title: 'Built-in retention controls', body: 'Set retention per workflow; sensitive prompts auto-purge.' },
-      { n: '04', title: 'Composable workflows',      body: 'Slack bot? Internal gen UI? Same each.run() — six tools share one infra.' },
+      { n: '04', title: 'Composable workflows',      body: 'Slack bot? Internal gen UI? Same each.run(), six tools share one infra.' },
     ],
     story: {
       quote:
@@ -184,7 +184,7 @@ export const USE_CASES: Record<UseCaseSlug, UseCaseDef> = {
     title: 'Marketing & brand creative',
     sub: 'Campaign assets. Social content. Brand-safe variants at scale.',
     body:
-      'Generate the volume your brand calendar demands — campaign hero shots, social variants, regional adaptations — with brand-safety gates and full audit trails baked in.',
+      'Generate the volume your brand calendar demands, campaign hero shots, social variants, regional adaptations, with brand-safety gates and full audit trails baked in.',
     stats: [
       { value: '120×',    label: 'more campaign variants' },
       { value: '48 hr',   label: 'brief → published asset' },
@@ -231,7 +231,7 @@ export const USE_CASES: Record<UseCaseSlug, UseCaseDef> = {
     title: 'Programmatic ad creative',
     sub: 'Performance ads. Live A/B. Per-creative attribution.',
     body:
-      'Programmatic creative at the volume your campaigns demand. Generate, A/B in production, attribute to the user, and auto-promote the winning creative — all in real time.',
+      'Programmatic creative at the volume your campaigns demand. Generate, A/B in production, attribute to the user, and auto-promote the winning creative, all in real time.',
     stats: [
       { value: '260%',  label: 'net retention via creative scale' },
       { value: '47×',   label: 'more variants per campaign' },

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getFlowDetail, getRelatedFlows, listPopularFlowSlugs, type FlowDetail } from '@/lib/flowDetail';
+import { getFlowDetail, getRelatedFlows, listPopularFlowSlugs } from '@/lib/flowDetail';
 import { FlowDetailHero } from '@/components/flow-detail/FlowDetailHero';
 import { FlowTemplate } from '@/components/flow-detail/FlowTemplate';
 import { FlowApiSnippets } from '@/components/flow-detail/FlowApiSnippets';
@@ -9,40 +9,13 @@ import { FlowPlayground } from '@/components/flow-detail/FlowPlayground';
 import { FlowRelated } from '@/components/flow-detail/FlowRelated';
 import { FlowReadme, type FlowReadmeData } from '@/components/flow-detail/FlowReadme';
 import { buildExampleInputJson } from '@/lib/flowDetail';
-import { MODEL_PRICES } from '@/lib/modelPricing';
-
-/** Best-effort estimate: sum step model prices when we can match them by name.
- *  Returns a formatted USD string, or "Varies" when nothing resolves. */
-function estimateFlowPrice(flow: FlowDetail): string {
-  const steps = flow.definition.steps ?? [];
-  if (steps.length === 0) return 'Varies';
-  const normalize = (s: string) => s.toLowerCase().replace(/[-_.\s]/g, '');
-  let total = 0;
-  let matched = 0;
-  for (const step of steps) {
-    if (!step.model) continue;
-    const stepKey = normalize(step.model);
-    const hit = MODEL_PRICES.find((p) => {
-      const candidate = normalize(`${p.provider}${p.model}`);
-      return candidate.includes(stepKey) || stepKey.includes(candidate);
-    });
-    if (hit) {
-      total += hit.price;
-      matched++;
-    }
-  }
-  if (matched === 0) return 'Varies';
-  if (total < 0.01) return `~$${total.toFixed(4)}`;
-  if (total < 1) return `~$${total.toFixed(3).replace(/0+$/, '').replace(/\.$/, '')}`;
-  return `~$${total.toFixed(2)}`;
-}
 
 const MOCK_README: FlowReadmeData = {
   overview: `
     <p>
       <strong>The Last Hold</strong> is a cinematic disaster-love workflow that takes two
       portrait photos and renders a 15-second hyperreal short film: a storm on the Bosphorus,
-      a meteor impact, a tsunami — and one final, wordless embrace.
+      a meteor impact, a tsunami, and one final, wordless embrace.
     </p>
     <p>
       The flow chains a reference-to-video model with curated prompt scaffolding, audio
@@ -56,7 +29,7 @@ const MOCK_README: FlowReadmeData = {
       <li>Built-in dialogue beats, ambient SFX cues, and music swells</li>
       <li>Scripted camera moves: handheld push-in, orbit, locked emotional close-up</li>
       <li>15-second runtime at 720p, 16:9 aspect ratio</li>
-      <li>Optional generated audio — voice + score</li>
+      <li>Optional generated audio, voice + score</li>
     </ul>
   `,
   whatCanIUseFor: `
@@ -65,12 +38,12 @@ const MOCK_README: FlowReadmeData = {
       <li>Music-video teasers built around two-person chemistry</li>
       <li>Mood films, brand storytelling, festival submission proofs</li>
       <li>Wedding and anniversary keepsake reels from a single pair of stills</li>
-      <li>Narrative previs — block out an emotional beat before a real shoot</li>
+      <li>Narrative previs, block out an emotional beat before a real shoot</li>
     </ul>
   `,
   tipsAndTricks: `
     <ul>
-      <li><strong>Use front-facing portraits</strong> with both subjects clearly visible — soft natural light works best.</li>
+      <li><strong>Use front-facing portraits</strong> with both subjects clearly visible, soft natural light works best.</li>
       <li><strong>High contrast helps subject lock</strong>; avoid heavy filters or face-obscuring accessories.</li>
       <li>Two faces facing the camera produce stronger continuity than profile shots.</li>
       <li>Plain backgrounds give the storm and meteor SFX more room to breathe.</li>
@@ -82,36 +55,36 @@ const MOCK_README: FlowReadmeData = {
       <li><strong>Backbone:</strong> bytedance-seedance-2-0-reference-to-video-fast</li>
       <li><strong>Duration:</strong> 15s · <strong>Resolution:</strong> 720p · <strong>Aspect:</strong> 16:9</li>
       <li><strong>Audio:</strong> generated (voice + ambience + score)</li>
-      <li><strong>Inputs:</strong> two image URLs (Person1, Person2) — PNG / JPG / WebP</li>
+      <li><strong>Inputs:</strong> two image URLs (Person1, Person2), PNG / JPG / WebP</li>
       <li><strong>Avg. runtime:</strong> ~90–120 seconds end-to-end</li>
     </ul>
   `,
   thingsToBeAwareOf: `
     <ul>
-      <li>Generated voice lines are stylized — exact lip-sync to user dialogue is not guaranteed.</li>
+      <li>Generated voice lines are stylized, exact lip-sync to user dialogue is not guaranteed.</li>
       <li>Faces can drift on extreme angles or under heavy occlusion (hats, sunglasses, hair across face).</li>
-      <li>Output is locked to the 15-second story beats — this flow is not a generic image-to-video tool.</li>
+      <li>Output is locked to the 15-second story beats, this flow is not a generic image-to-video tool.</li>
       <li>Audio language defaults to English; non-English speech may sound accented.</li>
     </ul>
   `,
   keyConsiderations: `
     <p>
       This flow is opinionated by design. It's a <em>cinematic template</em>, not a freeform
-      prompt — the storm, meteor, and tsunami beats are baked into the pipeline. If you need
+      prompt, the storm, meteor, and tsunami beats are baked into the pipeline. If you need
       a different narrative arc, clone the flow and edit the step prompt rather than
       forcing it through inputs.
     </p>
     <p>
-      For longer films, chain multiple instances and stitch the outputs in post — single-run
+      For longer films, chain multiple instances and stitch the outputs in post, single-run
       length is fixed at 15 seconds.
     </p>
   `,
   limitations: `
     <ul>
       <li>Hard cap at 15 seconds per run.</li>
-      <li>Two-subject only — single-person or group (3+) inputs degrade quality.</li>
+      <li>Two-subject only, single-person or group (3+) inputs degrade quality.</li>
       <li>720p maximum; no 1080p or 4K path in this flow.</li>
-      <li>No control over background location — the Bosphorus setting is part of the template.</li>
+      <li>No control over background location, the Bosphorus setting is part of the template.</li>
     </ul>
   `,
 };
@@ -136,7 +109,7 @@ export async function generateMetadata({
   if (!flow) return { title: 'Flow · each::labs' };
   return {
     title: `${flow.name} · each::labs`,
-    description: flow.description ?? `${flow.name} — an each::labs AI flow you can clone and remix.`,
+    description: flow.description ?? `${flow.name}, an each::labs AI flow you can clone and remix.`,
   };
 }
 
@@ -154,7 +127,11 @@ export default async function FlowDetailPage({
   const inputCount = Object.keys(flow.definition.input_schema?.properties ?? {}).filter(
     (k) => k !== 'type',
   ).length;
-  const estimatedPrice = estimateFlowPrice(flow);
+  const lastUpdated = flow.updatedAt ? new Date(flow.updatedAt).toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+    year: 'numeric',
+  }) : '-';
 
   return (
     <>
@@ -187,7 +164,7 @@ export default async function FlowDetailPage({
                 Sum of steps
               </div>
               <p className="text-[13px] text-ink2 leading-[1.55]">
-                Flow orchestration is free. You only pay for the underlying model calls — each step
+                Flow orchestration is free. You only pay for the underlying model calls, each step
                 bills at its model price. Estimate yours in the pricing calculator.
               </p>
               <p className="text-[11.5px] text-ink3 italic leading-[1.5] mt-3">
@@ -204,9 +181,9 @@ export default async function FlowDetailPage({
                 </dt>
                 <dd className="font-mono text-ink text-right tabular-nums">{inputCount}</dd>
                 <dt className="font-mono text-ink3 uppercase tracking-eyebrow text-[10px]">
-                  Estimated price
+                  Updated
                 </dt>
-                <dd className="font-mono text-ink text-right tabular-nums">{estimatedPrice}</dd>
+                <dd className="font-mono text-ink text-right">{lastUpdated}</dd>
               </dl>
             </div>
 

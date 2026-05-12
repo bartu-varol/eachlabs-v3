@@ -5,15 +5,15 @@ import { ChevronDown, Copy, Download, ExternalLink, MessageSquare, Sparkles, Che
 
 type Props = {
   /**
-   * Either the model slug (legacy / default — derives the URL under
+   * Either the model slug (legacy / default, derives the URL under
    * /ai-models/{slug}) or an explicit `llmsUrl` for provider + family pages.
    */
   modelSlug?: string;
-  /** Optional override — e.g. https://www.eachlabs.ai/kling/llms.txt. */
+  /** Optional override, e.g. https://www.eachlabs.ai/kling/llms.txt. */
   llmsUrl?: string;
   /** Friendly label used for the menu aria-label + the download filename. */
   modelName?: string;
-  /** Filename base for downloads — defaults to a slug derived from llmsUrl/modelSlug. */
+  /** Filename base for downloads, defaults to a slug derived from llmsUrl/modelSlug. */
   downloadName?: string;
 };
 

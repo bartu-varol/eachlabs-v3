@@ -14,7 +14,7 @@ type Props = {
   searchPlaceholder?: string;
 };
 
-/** Categories that should always lead the row when present — image/video first. */
+/** Categories that should always lead the row when present, image/video first. */
 const CATEGORY_ORDER = [
   'text-to-video',
   'image-to-video',

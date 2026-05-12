@@ -114,7 +114,7 @@ export function PricingCalculator() {
         </h2>
         <p className="text-ink2 text-[14px] leading-[1.6] mt-5 max-w-[640px]">
           Prices are approximate per run; final cost depends on inputs (duration, resolution, mode).
-          No markup on inference — provider price is your price.
+          No markup on inference, provider price is your price.
         </p>
 
         {/* Controls */}
@@ -189,7 +189,7 @@ export function PricingCalculator() {
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="filter — provider or model name…"
+            placeholder="filter, provider or model name…"
             aria-label="Filter models"
             className="w-full pl-9 pr-3 py-2 bg-surface border border-rule2 rounded-md text-ink placeholder:text-ink3 font-mono text-[12.5px] focus:outline-none focus:border-spark/60"
           />
@@ -204,7 +204,7 @@ export function PricingCalculator() {
           <span className="uppercase tracking-eyebrow text-ink3 text-[10px]">Disclaimer</span>{' '}
           <span className="ml-1">
             Model prices may vary depending on provider updates, usage type, and prompt requirements.
-            What the provider charges is what you pay — we don&rsquo;t mark up inference.
+            What the provider charges is what you pay, we don&rsquo;t mark up inference.
           </span>
         </p>
 
@@ -282,7 +282,7 @@ export function PricingCalculator() {
           <div className="max-h-[640px] overflow-y-auto no-scrollbar">
             {filtered.length === 0 ? (
               <div className="p-10 text-center font-mono text-[12px] text-ink3">
-                No models match — try a different filter or modality.
+                No models match, try a different filter or modality.
               </div>
             ) : (
               filtered.map((m, i) => {

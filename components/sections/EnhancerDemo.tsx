@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
 /* ──────────────────────────────────────────────────────────────────────────
-   EnhancerDemo — the 5-second story for /enhancer.
+   EnhancerDemo, the 5-second story for /enhancer.
 
    The narrative: a user prompt would have been refused by the model's content
    checker. The enhancer catches the refusal, rewrites the risky bits, and the
@@ -44,16 +44,16 @@ const TIMINGS: Record<Phase, number> = {
 
 const TOTAL_LOOP = Object.values(TIMINGS).reduce((a, b) => a + b, 0);
 
-/* ── Content — concrete prompt swap that reads in <2s ───────────────────── */
+/* ── Content, concrete prompt swap that reads in <2s ───────────────────── */
 
-// Original prompt — the strike-through fragment is in `risky`.
+// Original prompt, the strike-through fragment is in `risky`.
 const ORIGINAL = {
   prefix: 'ad creative for our energy drink, ',
   risky:  'looks like Red Bull',
   suffix: ', dramatic lighting',
 };
 
-// Rewritten — the spark-highlighted fragment is the safe swap.
+// Rewritten, the spark-highlighted fragment is the safe swap.
 const REWRITTEN = {
   prefix: 'ad creative for our energy drink, ',
   swap:   'vibrant blue and silver design',
@@ -104,7 +104,7 @@ export function EnhancerDemo() {
       />
 
       <div className="bg-surface border border-rule2 rounded-md overflow-hidden">
-        {/* Header — note the COMING SOON badge */}
+        {/* Header, note the COMING SOON badge */}
         <div className="flex items-center justify-between px-4 py-3 border-b border-rule2 bg-bg/40">
           <div className="flex items-center gap-2">
             <span className="inline-block w-1.5 h-1.5 rounded-full bg-spark animate-pulse" aria-hidden />
@@ -186,7 +186,7 @@ function Label({
   );
 }
 
-/* ── Prompt box — original (with strike) or rewritten (with highlight) ──── */
+/* ── Prompt box, original (with strike) or rewritten (with highlight) ──── */
 
 function PromptBox({ phase, variant }: { phase: Phase; variant: 'original' | 'rewritten' }) {
   if (variant === 'original') {
@@ -261,7 +261,7 @@ function PromptBox({ phase, variant }: { phase: Phase; variant: 'original' | 're
   );
 }
 
-/* ── Check line — content-policy verdict status row ─────────────────────── */
+/* ── Check line, content-policy verdict status row ─────────────────────── */
 
 function CheckLine({
   phase,
@@ -321,7 +321,7 @@ function CheckLine({
   );
 }
 
-/* ── Rescue arrow — small "enhancer activated" indicator ────────────────── */
+/* ── Rescue arrow, small "enhancer activated" indicator ────────────────── */
 
 function RescueArrow({ phase }: { phase: Phase }) {
   return (
@@ -340,7 +340,7 @@ function RescueArrow({ phase }: { phase: Phase }) {
   );
 }
 
-/* ── Value chain — bottom strip showing user → app → each.run ───────────── */
+/* ── Value chain, bottom strip showing user → app → each.run ───────────── */
 
 function ValueChain({ phase }: { phase: Phase }) {
   const shipped = phase === 'ship';

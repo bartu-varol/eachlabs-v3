@@ -37,7 +37,7 @@ export function OAuthButtons({ mode }: { mode: Mode }) {
   function handleClick(provider: Provider) {
     if (loading) return;
     setLoading(provider);
-    // Mock — no real auth wired yet.
+    // Mock, no real auth wired yet.
     // eslint-disable-next-line no-console
     console.log(`[mock] ${mode} via ${provider}`);
     setTimeout(() => router.push('/'), 900);

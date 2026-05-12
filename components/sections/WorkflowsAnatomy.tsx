@@ -3,12 +3,12 @@
 import { motion } from 'framer-motion';
 
 /* ──────────────────────────────────────────────────────────────────────────
-   WorkflowsAnatomy — 3-column "anatomy of a workflow" section.
+   WorkflowsAnatomy, 3-column "anatomy of a workflow" section.
 
    Each column tells one beat of the story:
-     ① GRAPH      — what a workflow IS: typed nodes wired by reference
-     ② EXECUTION  — how it RUNS: sequential + parallel, with a live gantt
-     ③ VERSIONING — how you SHIP: pin v3.2, deploy v3.3, rollback in one string
+     ① GRAPH     , what a workflow IS: typed nodes wired by reference
+     ② EXECUTION , how it RUNS: sequential + parallel, with a live gantt
+     ③ VERSIONING, how you SHIP: pin v3.2, deploy v3.3, rollback in one string
 ────────────────────────────────────────────────────────────────────────── */
 
 export function WorkflowsAnatomy() {
@@ -40,7 +40,7 @@ export function WorkflowsAnatomy() {
             n="01"
             label="GRAPH"
             title="Typed nodes. Wired by reference."
-            body="Every node has typed inputs and outputs. Edges are references like 'enhance.out' — typo-checked at define time."
+            body="Every node has typed inputs and outputs. Edges are references like 'enhance.out', typo-checked at define time."
           >
             <GraphViz />
           </Column>
@@ -58,7 +58,7 @@ export function WorkflowsAnatomy() {
             n="03"
             label="VERSIONING"
             title="Pin a version. Roll back in one string."
-            body="v3.2 in prod, v3.3 in staging, v2.4 archived. Promote, rollback, A/B — change one string, no redeploy."
+            body="v3.2 in prod, v3.3 in staging, v2.4 archived. Promote, rollback, A/B, change one string, no redeploy."
           >
             <VersioningViz />
           </Column>
@@ -106,7 +106,7 @@ function Column({
   );
 }
 
-/* ── ① GRAPH — small typed-graph schematic with reference lines ─────────── */
+/* ── ① GRAPH, small typed-graph schematic with reference lines ─────────── */
 
 const GRAPH_NODES = [
   { id: 'enhance', x: 50,  y: 28, label: 'enhance', kind: 'util' as const,  out: 'string' },
@@ -178,7 +178,7 @@ function KindPill({ kind }: { kind: 'util' | 'model' | 'io' }) {
   );
 }
 
-/* ── ② EXECUTION — gantt-style timeline showing parallel runs ───────────── */
+/* ── ② EXECUTION, gantt-style timeline showing parallel runs ───────────── */
 
 const GANTT_STEPS = [
   { name: 'enhance', start: 0,    end: 12,  tone: 'spark'   as const },
@@ -263,7 +263,7 @@ function Stat({
   );
 }
 
-/* ── ③ VERSIONING — three pinned versions with HEAD pointer ─────────────── */
+/* ── ③ VERSIONING, three pinned versions with HEAD pointer ─────────────── */
 
 const VERSIONS = [
   { v: 'v3.3', tag: 'staging', message: 'try eleven-v4 for audio',     tone: 'highlight' as const },

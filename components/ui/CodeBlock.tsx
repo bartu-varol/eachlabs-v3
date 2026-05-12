@@ -4,7 +4,7 @@ import { useState, type ReactNode } from 'react';
 import { Check, Copy } from 'lucide-react';
 
 /* ──────────────────────────────────────────────────────────────────────────
-   CodeBlock — dev-grade snippet shell:
+   CodeBlock, dev-grade snippet shell:
      · macOS-style window chrome (red/yellow/green dots)
      · filename + language tag in the header
      · copy-to-clipboard with success feedback
@@ -56,7 +56,7 @@ export function CodeBlock({ code, language = 'ts', filename, hideLineNumbers }: 
       setCopied(true);
       setTimeout(() => setCopied(false), 1800);
     } catch {
-      /* clipboard not available — silently fail */
+      /* clipboard not available, silently fail */
     }
   }
 

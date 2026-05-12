@@ -14,23 +14,23 @@ import { LiveTerminal } from './LiveTerminal';
 import { ChaosVisual } from './ChaosVisuals';
 
 /* ──────────────────────────────────────────────────────────────────────────
-   RouterShowcase — bespoke /router page.
+   RouterShowcase, bespoke /router page.
 
    Why bespoke: the generic ProductPage tells the same story for all six
    platform products. Router benefits from a domain-specific live demo (model
-   lanes, spillover anatomy, integration steps) that the template can't model.
+   lanes, failover anatomy, integration steps) that the template can't model.
    The other five products keep using ProductPage; only /router opts out.
 
    Section order (designed for the 5-second comprehension test):
-     1. Hero            — split copy + live RouterDemo (the "what + why")
-     2. Stats grid      — quantitative anchor under the hero
-     3. What it does    — three mechanism cards (mock code panels)
-     4. Live            — cinematic console: streaming logs + fallback scene
-     5. Anatomy         — trigger / decision / outcome breakdown
-     6. When to reach   — four scenarios with ambient point visuals
-     7. Testimonial     — metric-driven quote
-     8. Pairs with      — links to Workflows / Trace / Attributes
-     9. CTA             — start free / docs
+     1. Hero           , split copy + live RouterDemo (the "what + why")
+     2. Stats grid     , quantitative anchor under the hero
+     3. What it does   , three mechanism cards (mock code panels)
+     4. Live           , cinematic console: streaming logs + fallback scene
+     5. Anatomy        , trigger / decision / outcome breakdown
+     6. When to reach  , four scenarios with ambient point visuals
+     7. Testimonial    , metric-driven quote
+     8. Pairs with     , links to Workflows / Trace / Attributes
+     9. CTA            , start free / docs
 ────────────────────────────────────────────────────────────────────────── */
 
 export function RouterShowcase() {
@@ -48,7 +48,7 @@ export function RouterShowcase() {
         </Link>
 
         <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,560px)] gap-10 lg:gap-16 items-start mt-8">
-          {/* LEFT — copy */}
+          {/* LEFT, copy */}
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
@@ -72,7 +72,7 @@ export function RouterShowcase() {
               />
               <BulletLine
                 accent="WHY"
-                text="Quality, latency and errors are watched live. Spillover fires before pagerduty."
+                text="Quality, latency and errors are watched live. Failover fires before pagerduty."
               />
               <BulletLine
                 accent="HOW"
@@ -85,7 +85,7 @@ export function RouterShowcase() {
               />
             </ul>
 
-            {/* Trusted by — quick social proof */}
+            {/* Trusted by, quick social proof */}
             <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-3">
               <span className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3">
                 SHIPPED BY
@@ -98,7 +98,7 @@ export function RouterShowcase() {
             </div>
           </motion.div>
 
-          {/* RIGHT — live demo */}
+          {/* RIGHT, live demo */}
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
@@ -109,7 +109,7 @@ export function RouterShowcase() {
         </div>
       </section>
 
-      {/* 2. STATS — full-width anchor under hero */}
+      {/* 2. STATS, full-width anchor under hero */}
       <section className="container -mt-2">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-rule border border-rule rounded-md overflow-hidden">
           {product.stats.map((s) => (
@@ -152,7 +152,7 @@ export function RouterShowcase() {
         </div>
       </section>
 
-      {/* 4. LIVE — kling-v3 just degraded. wan-2.7 took over. */}
+      {/* 4. LIVE, kling-v3 just degraded. wan-2.7 took over. */}
       <section className="relative border-t border-rule overflow-hidden">
         <div
           aria-hidden
@@ -173,18 +173,18 @@ export function RouterShowcase() {
             {product.liveBody}
           </p>
 
-          {/* Cinematic console — terminal (logs) on the left, scene (visual) on the right. */}
+          {/* Cinematic console, terminal (logs) on the left, scene (visual) on the right. */}
           <div className="mt-10 bg-bg border border-rule2 rounded-md overflow-hidden">
             <LiveConsoleHeader />
             <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] divide-y lg:divide-y-0 lg:divide-x divide-rule2">
-              {/* Left — streaming logs */}
+              {/* Left, streaming logs */}
               <div className="px-6 md:px-7 py-6 md:py-7 min-h-[320px]">
                 <div className="font-mono text-[9.5px] uppercase tracking-eyebrow text-ink3 mb-3">
                   ▸ live logs
                 </div>
                 <LiveTerminal slug="router" />
               </div>
-              {/* Right — animated fallback scene */}
+              {/* Right, animated fallback scene */}
               <div className="px-6 md:px-7 py-6 md:py-7 min-h-[320px] flex flex-col">
                 <div className="font-mono text-[9.5px] uppercase tracking-eyebrow text-ink3 mb-3">
                   ▸ what happens
@@ -212,7 +212,7 @@ export function RouterShowcase() {
         </div>
       </section>
 
-      {/* 5. SPILLOVER ANATOMY */}
+      {/* 5. FAILOVER ANATOMY */}
       <RouterAnatomy />
 
       {/* 6. WHEN TO REACH FOR IT */}
@@ -320,7 +320,7 @@ export function RouterShowcase() {
   );
 }
 
-/* ── Hero bullet line — eyebrow tag + text ──────────────────────────────── */
+/* ── Hero bullet line, eyebrow tag + text ──────────────────────────────── */
 
 function BulletLine({
   accent,
@@ -339,7 +339,7 @@ function BulletLine({
   );
 }
 
-/* ── WhatCard — mechanism panel (mock code editor) + title + body ───────── */
+/* ── WhatCard, mechanism panel (mock code editor) + title + body ───────── */
 
 function WhatCard({ p }: { p: ProductPoint }) {
   return (
@@ -350,7 +350,7 @@ function WhatCard({ p }: { p: ProductPoint }) {
       transition={{ duration: 0.32 }}
       className="bg-surface p-6 md:p-7 flex flex-col"
     >
-      {/* Mechanism panel — looks like a tiny code/config editor */}
+      {/* Mechanism panel, looks like a tiny code/config editor */}
       <div className="bg-bg/60 border border-rule2 rounded-md px-3 py-2.5 mb-6 relative overflow-hidden">
         <div className="flex items-center justify-between mb-1.5">
           <span className="flex items-center gap-1.5">
@@ -388,7 +388,7 @@ function WhatCard({ p }: { p: ProductPoint }) {
   );
 }
 
-/* ── WhenCard — corner ambient visual + number + title + body + detail ──── */
+/* ── WhenCard, corner ambient visual + number + title + body + detail ──── */
 
 function WhenCard({ p }: { p: ProductPoint }) {
   return (
@@ -422,7 +422,7 @@ function WhenCard({ p }: { p: ProductPoint }) {
   );
 }
 
-/* ── LIVE console chrome — header (pulse + live counter) + footer ───────── */
+/* ── LIVE console chrome, header (pulse + live counter) + footer ───────── */
 
 function LiveCounter() {
   const base = 47; // reqs / sec

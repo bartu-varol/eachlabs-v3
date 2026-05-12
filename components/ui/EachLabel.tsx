@@ -1,14 +1,14 @@
 import type { CSSProperties } from 'react';
 
 /* ──────────────────────────────────────────────────────────────────────────
-   EachLabel — renders an "each::xxx" product name in the wordmark style:
+   EachLabel, renders an "each::xxx" product name in the wordmark style:
    regular text + two pairs of spark-colored square blocks for the "::",
    matching logo (4).svg / logo-dark (2).svg.
 
    Sizes are em-based so the colon blocks scale with the parent's font-size.
    The text glyphs inherit `currentColor` from the parent.
 
-   If `name` doesn't start with "each::", falls back to plain text — safe to
+   If `name` doesn't start with "each::", falls back to plain text, safe to
    use for any string in product/menu lists.
 ────────────────────────────────────────────────────────────────────────── */
 
@@ -41,7 +41,7 @@ export function EachLabel({ name, className = '', style }: Props) {
   );
 }
 
-/* "::" rendered as two pairs of stacked squares in spark — same shape as
+/* "::" rendered as two pairs of stacked squares in spark, same shape as
    the SVG wordmark's colon glyph. em-based so it scales with parent text. */
 function ColonBlocks() {
   return (

@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { rabbitHole } from '@/lib/content';
 import { Button } from '@/components/ui/Button';
 
-/* Vortex — concentric rotating rings + pulsing opacity, sits behind the headline. */
+/* Vortex, concentric rotating rings + pulsing opacity, sits behind the headline. */
 function Vortex() {
   // Each ring: scale factor, dashed?, rotation direction & speed.
   const rings = [
@@ -100,7 +100,7 @@ export function RabbitHole() {
           <span className="block text-ink3 italic">{rabbitHole.headline.line2}</span>
         </motion.h2>
 
-        {/* 3 doors — drop-in stagger */}
+        {/* 3 doors, drop-in stagger */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-12">
           {rabbitHole.cards.map((card, i) => (
             <motion.div

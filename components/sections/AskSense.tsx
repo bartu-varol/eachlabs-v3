@@ -14,7 +14,7 @@ export function AskSense() {
   const sectionRef = useRef<HTMLElement>(null);
 
   // Scroll-linked entrance: content "falls" down from above as the section
-  // approaches the viewport — feels like it slides out from under the section
+  // approaches the viewport, feels like it slides out from under the section
   // above it, prompting the user to ask if they didn't find their chaos.
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -76,7 +76,7 @@ export function AskSense() {
         }}
       />
 
-      {/* Bridge from the section above — thin spark line that draws down,
+      {/* Bridge from the section above, thin spark line that draws down,
           plus a "still chaos?" hint that ties this to ProofSection. */}
       <motion.div
         aria-hidden
@@ -149,7 +149,7 @@ export function AskSense() {
         />
         <button
           type="submit"
-          className="px-5 md:px-7 bg-spark/15 text-spark hover:bg-spark hover:text-bg transition-colors font-medium text-[14px] flex items-center gap-2 border-l border-rule2"
+          className="px-5 md:px-7 bg-spark/15 text-spark hover:bg-spark hover:text-white transition-colors font-medium text-[14px] flex items-center gap-2 border-l border-rule2"
         >
           Ask <ArrowRight size={14} />
         </button>
@@ -166,7 +166,7 @@ export function AskSense() {
               className={[
                 'px-4 py-2 rounded-full text-[13px] border transition-colors',
                 isActive
-                  ? 'bg-spark text-bg border-spark'
+                  ? 'bg-spark text-white border-spark'
                   : 'bg-surface border-rule2 text-ink2 hover:text-ink hover:border-spark/40',
               ].join(' ')}
             >

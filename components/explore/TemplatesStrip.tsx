@@ -3,7 +3,7 @@ import { WorkflowTile } from './WorkflowTile';
 import { fetchWorkflowsServer } from '@/lib/workflows';
 
 /**
- * Featured workflows strip — pulls top 6 trending flows from the live API.
+ * Featured workflows strip, pulls top 6 trending flows from the live API.
  * SSR'd so the cards are visible in the initial HTML response.
  */
 export async function TemplatesStrip() {

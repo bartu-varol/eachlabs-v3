@@ -2,15 +2,15 @@ export type BlogPost = {
   slug: string;
   title: string;
   excerpt: string;
-  /** Display date — "MMM dd, yyyy" formatted. */
+  /** Display date, "MMM dd, yyyy" formatted. */
   date: string;
   readMin: number;
   category: 'MODEL LAUNCH' | 'GUIDE' | 'COMPARISON' | 'INDUSTRY' | 'PRODUCT';
   author: { name: string; role: string; initials: string; avatarBg: string; avatarText: string };
-  /** Tile accent — drives the gradient on listing cards. */
+  /** Tile accent, drives the gradient on listing cards. */
   accent: 'spark' | 'highlight' | 'success' | 'sun' | 'yellow' | 'ember';
   featured?: boolean;
-  /** Original eachlabs.ai post URL — read the full article. */
+  /** Original eachlabs.ai post URL, read the full article. */
   href: string;
 };
 
@@ -22,13 +22,13 @@ const TEAM = {
   avatarText: 'text-bg',
 };
 
-/** Posts pulled from eachlabs.ai/blog — real titles + excerpts, linked back to the source. */
+/** Posts pulled from eachlabs.ai/blog, real titles + excerpts, linked back to the source. */
 export const BLOG_POSTS: BlogPost[] = [
   {
     slug: 'google-veo-4-what-to-expect-from-googles-next-video-model',
     title: 'Google Veo 4: What to Expect From Google’s Next Video Model',
     excerpt:
-      'Veo 4 hasn’t been officially announced yet — but if you’ve been following the AI video space, you know Google’s next move is the one everyone’s pricing in. What to watch for, what changes for builders, and how to be ready on day zero.',
+      'Veo 4 hasn’t been officially announced yet, but if you’ve been following the AI video space, you know Google’s next move is the one everyone’s pricing in. What to watch for, what changes for builders, and how to be ready on day zero.',
     date: 'Apr 29, 2026',
     readMin: 7,
     category: 'MODEL LAUNCH',
@@ -41,7 +41,7 @@ export const BLOG_POSTS: BlogPost[] = [
     slug: 'p-avatar-video-create-talking-avatars-with-ai',
     title: 'P Avatar Video: Create Talking Avatars with AI',
     excerpt:
-      'Most avatar tools make you choose between quality and speed. You either wait for cinematic output or you settle. P Avatar Video changes the tradeoff — what it does, where it shines, and how to wire it into a production pipeline.',
+      'Most avatar tools make you choose between quality and speed. You either wait for cinematic output or you settle. P Avatar Video changes the tradeoff, what it does, where it shines, and how to wire it into a production pipeline.',
     date: 'Apr 30, 2026',
     readMin: 6,
     category: 'GUIDE',
@@ -53,7 +53,7 @@ export const BLOG_POSTS: BlogPost[] = [
     slug: 'realistic-vision-ai-image-generation-guide',
     title: 'Realistic Vision: AI Image Generation Guide',
     excerpt:
-      'Good photography costs money — equipment, location, lighting, a subject willing to stand still. Realistic Vision flips that math. The prompts, parameters, and pitfalls that separate stock-y output from output you’d actually ship.',
+      'Good photography costs money, equipment, location, lighting, a subject willing to stand still. Realistic Vision flips that math. The prompts, parameters, and pitfalls that separate stock-y output from output you’d actually ship.',
     date: 'Apr 13, 2026',
     readMin: 8,
     category: 'GUIDE',
@@ -65,7 +65,7 @@ export const BLOG_POSTS: BlogPost[] = [
     slug: 'ovi-ai-turn-images-into-videos-with-audio',
     title: 'Ovi AI: Turn Images Into Videos With Audio',
     excerpt:
-      'You’ve got a great photo — sharp, well-lit, the right subject — and it just sits there. Ovi AI fixes that. Upload an image, get a video with audio. The workflow, the limitations, and why this changes ad creative.',
+      'You’ve got a great photo, sharp, well-lit, the right subject, and it just sits there. Ovi AI fixes that. Upload an image, get a video with audio. The workflow, the limitations, and why this changes ad creative.',
     date: 'Apr 13, 2026',
     readMin: 5,
     category: 'GUIDE',
@@ -77,7 +77,7 @@ export const BLOG_POSTS: BlogPost[] = [
     slug: 'all-rumors-about-gpt-image-2',
     title: 'All Rumors About GPT Image 2',
     excerpt:
-      'In our previous post we broke down the GPT Image 2 leak — Arena codenames, technical architecture, signal vs. noise. Here is everything else: the rumors, the patent filings, the timing, and what it means for production teams.',
+      'In our previous post we broke down the GPT Image 2 leak, Arena codenames, technical architecture, signal vs. noise. Here is everything else: the rumors, the patent filings, the timing, and what it means for production teams.',
     date: 'Apr 09, 2026',
     readMin: 6,
     category: 'INDUSTRY',
@@ -137,7 +137,7 @@ export const BLOG_POSTS: BlogPost[] = [
     slug: 'kling-2-5-turbo-fast-ai-video-generation-guide',
     title: 'Kling 2.5 Turbo: Fast AI Video Generation Guide',
     excerpt:
-      'Speed matters in video production — not just generation speed (though that matters too), but the speed at which you can iterate on a brief. Kling 2.5 Turbo cuts the loop. What it gives up, what it keeps, when to reach for it.',
+      'Speed matters in video production, not just generation speed (though that matters too), but the speed at which you can iterate on a brief. Kling 2.5 Turbo cuts the loop. What it gives up, what it keeps, when to reach for it.',
     date: 'Mar 18, 2026',
     readMin: 6,
     category: 'GUIDE',
@@ -149,7 +149,7 @@ export const BLOG_POSTS: BlogPost[] = [
     slug: 'kling-avatar-ai-avatar-generation-guide',
     title: 'Kling Avatar: AI Avatar Generation Guide',
     excerpt:
-      'Getting a photograph to speak has always been a production problem. Hire a motion-capture studio, or settle for a stiff facial replacement. Kling Avatar makes the third option real — and it actually works for product use.',
+      'Getting a photograph to speak has always been a production problem. Hire a motion-capture studio, or settle for a stiff facial replacement. Kling Avatar makes the third option real, and it actually works for product use.',
     date: 'Mar 18, 2026',
     readMin: 6,
     category: 'GUIDE',
@@ -161,7 +161,7 @@ export const BLOG_POSTS: BlogPost[] = [
     slug: 'bytedance-seedream-v5-lite-text-to-image-guide',
     title: 'ByteDance Seedream V5 Lite: Text-to-Image Guide',
     excerpt:
-      'Most text-to-image models take your prompt and interpret it in one pass. They guess at what you mean, apply their style, and ship a frame. Seedream V5 Lite plays a different game — multi-pass refinement on a tight budget.',
+      'Most text-to-image models take your prompt and interpret it in one pass. They guess at what you mean, apply their style, and ship a frame. Seedream V5 Lite plays a different game, multi-pass refinement on a tight budget.',
     date: 'Mar 18, 2026',
     readMin: 7,
     category: 'GUIDE',

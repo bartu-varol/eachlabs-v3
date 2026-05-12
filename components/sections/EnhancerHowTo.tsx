@@ -3,11 +3,11 @@
 import { motion } from 'framer-motion';
 
 /* ──────────────────────────────────────────────────────────────────────────
-   EnhancerHowTo — "30 seconds to wire up rescue" section.
+   EnhancerHowTo, "30 seconds to wire up rescue" section.
 
-     ① Enable rescue           — one flag on the each.run() call
-     ② Choose what's caught    — list of policy categories the rescuer handles
-     ③ Read the rescue trace   — original + rewritten side by side
+     ① Enable rescue          , one flag on the each.run() call
+     ② Choose what's caught   , list of policy categories the rescuer handles
+     ③ Read the rescue trace  , original + rewritten side by side
 ────────────────────────────────────────────────────────────────────────── */
 
 const POLICIES = [
@@ -52,7 +52,7 @@ export function EnhancerHowTo() {
             ]}
           />
           <div className="flex flex-col gap-1.5 mt-1">
-            <Bullet text="Default off — opt in per call." />
+            <Bullet text="Default off, opt in per call." />
             <Bullet text="Bills only when an actual rescue fires." />
             <Bullet text={`Pass <code class="font-mono text-spark">intent_priority: "preserve"</code> to lock the user&rsquo;s meaning.`} />
           </div>
@@ -74,7 +74,7 @@ export function EnhancerHowTo() {
         {/* Step 3 */}
         <Step n="03" title="Read the rescue trace" delay={0.2}>
           <p className="text-ink2 text-[13px] leading-[1.6]">
-            Every rescued call carries a <Code>trace.enhancer</Code> block — the
+            Every rescued call carries a <Code>trace.enhancer</Code> block, the
             original, the rewritten, what got rejected, and the recheck verdict.
           </p>
           <CodeMini
@@ -149,7 +149,7 @@ function Bullet({ text }: { text: string }) {
       </span>
       <span
         className="text-ink2 text-[12.5px] leading-[1.55]"
-        // text may include inline <code> — keep simple by using innerHTML
+        // text may include inline <code>, keep simple by using innerHTML
         dangerouslySetInnerHTML={{ __html: text }}
       />
     </div>

@@ -14,7 +14,7 @@ import { LiveTerminal } from './LiveTerminal';
 import { ChaosVisual } from './ChaosVisuals';
 
 /* ──────────────────────────────────────────────────────────────────────────
-   WorkflowsShowcase — bespoke /workflows page.
+   WorkflowsShowcase, bespoke /workflows page.
 
    Mirrors RouterShowcase: split hero (copy + live demo), stats anchor, what,
    live, anatomy, when, testimonial, pairs, CTA. The other four products keep
@@ -36,7 +36,7 @@ export function WorkflowsShowcase() {
         </Link>
 
         <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,560px)] gap-10 lg:gap-16 items-start mt-8">
-          {/* LEFT — copy */}
+          {/* LEFT, copy */}
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
@@ -52,11 +52,11 @@ export function WorkflowsShowcase() {
               {product.body}
             </p>
 
-            {/* Three-line "what / why / how" — the demo on the right unpacks them visually. */}
+            {/* Three-line "what / why / how", the demo on the right unpacks them visually. */}
             <ul className="mt-8 flex flex-col gap-2.5 max-w-[520px]">
               <BulletLine
                 accent="WHAT"
-                text="A typed graph that chains models — defined once, executed as one call."
+                text="A typed graph that chains models, defined once, executed as one call."
               />
               <BulletLine
                 accent="WHY"
@@ -73,7 +73,7 @@ export function WorkflowsShowcase() {
               />
             </ul>
 
-            {/* Trusted by — quick social proof */}
+            {/* Trusted by, quick social proof */}
             <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-3">
               <span className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3">
                 SHIPPED BY
@@ -86,7 +86,7 @@ export function WorkflowsShowcase() {
             </div>
           </motion.div>
 
-          {/* RIGHT — live demo */}
+          {/* RIGHT, live demo */}
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
@@ -140,7 +140,7 @@ export function WorkflowsShowcase() {
         </div>
       </section>
 
-      {/* 4. LIVE — product-photo-v3 · executing now. */}
+      {/* 4. LIVE, product-photo-v3 · executing now. */}
       <section className="relative border-t border-rule overflow-hidden">
         <div
           aria-hidden
@@ -161,18 +161,18 @@ export function WorkflowsShowcase() {
             {product.liveBody}
           </p>
 
-          {/* Cinematic console — terminal (logs) on the left, scene (pipeline) on the right. */}
+          {/* Cinematic console, terminal (logs) on the left, scene (pipeline) on the right. */}
           <div className="mt-10 bg-bg border border-rule2 rounded-md overflow-hidden">
             <LiveConsoleHeader />
             <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr] divide-y lg:divide-y-0 lg:divide-x divide-rule2">
-              {/* Left — streaming logs */}
+              {/* Left, streaming logs */}
               <div className="px-6 md:px-7 py-6 md:py-7 min-h-[320px]">
                 <div className="font-mono text-[9.5px] uppercase tracking-eyebrow text-ink3 mb-3">
                   ▸ live logs
                 </div>
                 <LiveTerminal slug="workflows" />
               </div>
-              {/* Right — animated pipeline scene */}
+              {/* Right, animated pipeline scene */}
               <div className="px-6 md:px-7 py-6 md:py-7 min-h-[320px] flex flex-col">
                 <div className="font-mono text-[9.5px] uppercase tracking-eyebrow text-ink3 mb-3">
                   ▸ what happens
@@ -327,7 +327,7 @@ function BulletLine({
   );
 }
 
-/* ── WhatCard — mechanism panel (mock code editor) + title + body ───────── */
+/* ── WhatCard, mechanism panel (mock code editor) + title + body ───────── */
 
 function WhatCard({ p }: { p: ProductPoint }) {
   return (
@@ -375,7 +375,7 @@ function WhatCard({ p }: { p: ProductPoint }) {
   );
 }
 
-/* ── WhenCard — corner ambient visual + number + title + body + detail ──── */
+/* ── WhenCard, corner ambient visual + number + title + body + detail ──── */
 
 function WhenCard({ p }: { p: ProductPoint }) {
   return (
@@ -409,7 +409,7 @@ function WhenCard({ p }: { p: ProductPoint }) {
   );
 }
 
-/* ── LIVE console chrome — header (pulse + live counter) + footer ───────── */
+/* ── LIVE console chrome, header (pulse + live counter) + footer ───────── */
 
 function LiveCounter() {
   const base = 8242; // workflows / 24h

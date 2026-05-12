@@ -5,11 +5,11 @@ type Props = {
   providerSlug: string;
   providerName: string;
   families: CatalogFamily[];
-  /** Total model count across the provider — shown on the "Every X model" row. */
+  /** Total model count across the provider, shown on the "Every X model" row. */
   totalCount: number;
   /** Count per family slug. */
   countsByFamily: Record<string, number>;
-  /** Active family slug — null when the "All" row is selected. */
+  /** Active family slug, null when the "All" row is selected. */
   activeFamily: string | null;
 };
 

@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/Button';
 import { RabbitButton } from '@/components/ui/RabbitButton';
 import { PricingCalculator } from '@/components/sections/PricingCalculator';
 
-/* Pricing page — two main sections: §01 Model Price · §02 Storage Price */
+/* Pricing page, two main sections: §01 Model Price · §02 Storage Price */
 
 const SECTIONS = [
   { n: '01', id: 'model',   icon: Cpu,       title: 'Model price',   body: 'Same number the provider charges.' },
@@ -14,7 +14,7 @@ const SECTIONS = [
 ];
 
 /* ────────────────────────────────────────────────────────────────────────────
-   §01 — Model Price: single unified table (provider price == eachlabs price)
+   §01, Model Price: single unified table (provider price == eachlabs price)
    ──────────────────────────────────────────────────────────────────────────── */
 function ModelPriceSection() {
   return (
@@ -50,7 +50,7 @@ function ModelPriceSection() {
 }
 
 /* ────────────────────────────────────────────────────────────────────────────
-   §02 — Storage Price: pass-through cloud cost
+   §02, Storage Price: pass-through cloud cost
    ──────────────────────────────────────────────────────────────────────────── */
 const STORAGE_TIERS = [
   { label: 'First 5 GB',     rate: 'Free',        note: 'Included on every account, indefinitely.' },
@@ -78,7 +78,7 @@ function StoragePrice() {
           <span className="text-ink3 italic">We pass through the cloud cost.</span>
         </h2>
         <p className="text-ink2 text-[14.5px] leading-[1.6] mt-5 max-w-[640px]">
-          Videos, images, audio — every output is stored so you can fetch it, share it,
+          Videos, images, audio, every output is stored so you can fetch it, share it,
           or chain it into the next step. We bill storage at the underlying cloud rate.
           No retrieval fees, no per-request charges, no surprise egress.
         </p>
@@ -106,7 +106,7 @@ function StoragePrice() {
 
         <ul className="mt-8 space-y-2.5">
           {[
-            'Pass-through pricing — we charge what the cloud charges us.',
+            'Pass-through pricing, we charge what the cloud charges us.',
             'No retrieval fee. Fetching your output is free.',
             'No bandwidth surcharge. Same rate whether you serve 10 or 10M.',
           ].map((l) => (
@@ -140,7 +140,7 @@ export default function PricingPage() {
             <span className="text-ink3 italic">Pay the provider, not a penny more.</span>
           </h1>
           <p className="text-ink2 text-[16px] leading-[1.6] max-w-[680px] mt-7">
-            Eachlabs charges the same rate as the upstream provider — for every model, every
+            Eachlabs charges the same rate as the upstream provider, for every model, every
             run. Storage is pass-through. You only pay for what you would have paid anyway.
           </p>
 

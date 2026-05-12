@@ -51,7 +51,7 @@ export function AskAiPanel({ modelTitle, modelSlug, fullWidth = false }: Props) 
     window.setTimeout(() => {
       setThinking(false);
       setAnswer(
-        `each::sense will answer questions about ${modelTitle} here. We're wiring up the live agent — your question (“${q}”) will route to the right docs section in production.`,
+        `each::sense will answer questions about ${modelTitle} here. We're wiring up the live agent, your question (“${q}”) will route to the right docs section in production.`,
       );
     }, 700);
   }
