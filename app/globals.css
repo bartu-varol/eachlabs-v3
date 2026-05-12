@@ -516,14 +516,11 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
   border-radius: inherit;
   border: 0;
 }
-.blog-prose .kg-video-card .kg-video-overlay,
-.blog-prose .kg-video-card .kg-video-player-container,
-.blog-prose .kg-video-card .kg-video-large-play-icon,
-.blog-prose .kg-video-card .kg-video-play-icon,
-.blog-prose .kg-video-card .kg-video-pause-icon,
-.blog-prose .kg-video-card .kg-video-player,
-.blog-prose .kg-video-card .kg-video-controls,
-.blog-prose .kg-video-card .kg-video-hide {
+/* Hide every Koenig-video sub-element regardless of nesting depth. Some Ghost
+   posts emit the custom player outside the .kg-video-card wrapper, so the
+   class-prefix selector catches both shapes. We keep .kg-video-card (the
+   outer figure) and .kg-video-container (the <video> wrapper). */
+.blog-prose [class*="kg-video-"]:not(.kg-video-card):not(.kg-video-container) {
   display: none !important;
 }
 
@@ -541,20 +538,7 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
   width: 100%;
   height: 40px;
 }
-.blog-prose .kg-audio-card .kg-audio-player-container,
-.blog-prose .kg-audio-card .kg-audio-player,
-.blog-prose .kg-audio-card .kg-audio-thumbnail,
-.blog-prose .kg-audio-card .kg-audio-play-icon,
-.blog-prose .kg-audio-card .kg-audio-pause-icon,
-.blog-prose .kg-audio-card .kg-audio-title,
-.blog-prose .kg-audio-card .kg-audio-duration,
-.blog-prose .kg-audio-card .kg-audio-current-time,
-.blog-prose .kg-audio-card .kg-audio-seek-slider,
-.blog-prose .kg-audio-card .kg-audio-playback-rate,
-.blog-prose .kg-audio-card .kg-audio-mute-icon,
-.blog-prose .kg-audio-card .kg-audio-unmute-icon,
-.blog-prose .kg-audio-card .kg-audio-volume-slider,
-.blog-prose .kg-audio-card .kg-audio-hide {
+.blog-prose [class*="kg-audio-"]:not(.kg-audio-card) {
   display: none !important;
 }
 
