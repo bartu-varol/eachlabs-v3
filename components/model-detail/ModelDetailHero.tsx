@@ -223,7 +223,7 @@ export function ModelDetailHero({ model }: Props) {
           <dl className="grid grid-cols-3 gap-x-5 gap-y-3">
             <Stat label="Runtime" value={formatRuntime(model.averageResponseTime)} mono />
             <Stat label="Runs" value={formatNumber(model.executionCount)} mono />
-            <Stat label="Price" value={priceHeadline(model)} mono />
+            <Stat label="Estimated price" value={priceHeadline(model)} mono />
           </dl>
         </div>
       </div>
