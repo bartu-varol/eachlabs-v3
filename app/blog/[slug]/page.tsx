@@ -108,49 +108,53 @@ export default async function BlogPostPage({
 
       <div className="mt-6 grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_260px] gap-x-12 gap-y-10 items-start">
         <article className="max-w-[760px] min-w-0">
-          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[11px] uppercase tracking-eyebrow">
+          <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-mono text-[11px] uppercase tracking-eyebrow text-ink3">
             {post.primaryTag && (
               <>
                 <span className="text-spark">{post.primaryTag.name}</span>
-                <span className="text-ink3">·</span>
+                <span aria-hidden>·</span>
               </>
             )}
-            <span className="text-ink3">{formatDate(post.publishedAt)}</span>
+            <span>{formatDate(post.publishedAt)}</span>
             {post.readingTime > 0 && (
               <>
-                <span className="text-ink3">·</span>
-                <span className="text-ink3">{post.readingTime} min read</span>
+                <span aria-hidden>·</span>
+                <span>{post.readingTime} min read</span>
               </>
             )}
           </div>
 
-          <h1 className="font-display font-semibold text-[40px] sm:text-[52px] md:text-[64px] leading-[1.05] tracking-tightest mt-6 text-ink">
+          <h1 className="font-display font-semibold text-[36px] sm:text-[48px] md:text-[56px] leading-[1.06] tracking-tightest mt-5 text-ink">
             {post.title}
           </h1>
 
           {post.excerpt && (
-            <p className="text-ink2 text-[18px] leading-[1.55] mt-7">{post.excerpt}</p>
+            <p className="text-ink2 text-[17.5px] leading-[1.6] mt-6 max-w-[680px]">
+              {post.excerpt}
+            </p>
           )}
 
           {post.author && (
-            <div className="flex items-center gap-3 mt-10 pb-10 border-b border-rule">
+            <div className="flex items-center gap-3 mt-8 pb-8 border-b border-rule">
               {post.author.profileImage ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
                   src={post.author.profileImage}
                   alt={post.author.name}
-                  width={44}
-                  height={44}
-                  className="w-11 h-11 rounded-full object-cover flex-shrink-0"
+                  width={40}
+                  height={40}
+                  className="w-10 h-10 rounded-full object-cover flex-shrink-0"
                 />
               ) : (
-                <div className="w-11 h-11 rounded-full flex items-center justify-center text-[13px] font-medium flex-shrink-0 bg-spark/15 text-spark">
+                <div className="w-10 h-10 rounded-full flex items-center justify-center text-[12.5px] font-medium flex-shrink-0 bg-spark/15 text-spark">
                   {initialsFrom(post.author.name)}
                 </div>
               )}
               <div className="min-w-0">
-                <div className="text-ink text-[14px] font-medium">{post.author.name}</div>
-                <div className="text-ink3 text-[12.5px] mt-0.5 truncate">
+                <div className="text-ink text-[13.5px] font-medium leading-tight">
+                  {post.author.name}
+                </div>
+                <div className="text-ink3 text-[12px] mt-0.5 truncate">
                   {post.author.bio ?? 'each::labs'}
                 </div>
               </div>
@@ -158,7 +162,7 @@ export default async function BlogPostPage({
           )}
 
           {post.featureImage && (
-            <div className="mt-10 rounded-md overflow-hidden border border-rule2 bg-surface">
+            <figure className="mt-8 rounded-lg overflow-hidden">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={post.featureImage}
@@ -166,7 +170,7 @@ export default async function BlogPostPage({
                 className="w-full h-auto block"
                 loading="eager"
               />
-            </div>
+            </figure>
           )}
 
           <div

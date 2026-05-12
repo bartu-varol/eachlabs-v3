@@ -330,146 +330,158 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
    tuned for reading, with explicit handling for Ghost-emitted figure/image
    cards, tables, and code blocks. */
 .blog-prose {
-  font-size: 16px;
-  line-height: 1.72;
+  font-size: 17px;
+  line-height: 1.78;
   color: rgb(var(--c-ink2));
+  letter-spacing: -0.003em;
 }
 .blog-prose > p:first-of-type {
-  font-size: 19px;
+  font-size: 20px;
   line-height: 1.55;
   color: rgb(var(--c-ink));
-  letter-spacing: -0.005em;
-  margin-bottom: 1.5rem;
+  letter-spacing: -0.008em;
+  margin-bottom: 1.75rem;
 }
 .blog-prose h2,
 .blog-prose h3,
 .blog-prose h4 {
   font-family: var(--font-inter), system-ui, sans-serif;
   color: rgb(var(--c-ink));
-  letter-spacing: -0.018em;
+  letter-spacing: -0.02em;
   font-weight: 600;
   scroll-margin-top: 5rem;
 }
 .blog-prose h2 {
-  font-size: 26px;
-  line-height: 1.2;
-  margin-top: 2.75rem;
-  margin-bottom: 0.85rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid rgb(var(--c-rule));
+  font-size: 24px;
+  line-height: 1.25;
+  margin-top: 3.25rem;
+  margin-bottom: 1rem;
 }
-.blog-prose h2:first-child { border-top: 0; padding-top: 0; margin-top: 0; }
+.blog-prose h2:first-child { margin-top: 0; }
 .blog-prose h3 {
   font-size: 18px;
-  line-height: 1.3;
-  margin-top: 2rem;
-  margin-bottom: 0.5rem;
+  line-height: 1.35;
+  margin-top: 2.25rem;
+  margin-bottom: 0.6rem;
 }
 .blog-prose h4 {
   font-size: 16px;
-  line-height: 1.35;
-  margin-top: 1.5rem;
-  margin-bottom: 0.4rem;
+  line-height: 1.4;
+  margin-top: 1.75rem;
+  margin-bottom: 0.45rem;
 }
-.blog-prose p { margin: 0.8rem 0; }
+.blog-prose p { margin: 1.15rem 0; }
 .blog-prose strong { color: rgb(var(--c-ink)); font-weight: 600; }
 .blog-prose em { font-style: italic; }
 .blog-prose ul, .blog-prose ol {
-  margin: 1rem 0;
+  margin: 1.25rem 0;
   padding-left: 1.3rem;
 }
 .blog-prose ul { list-style: none; padding-left: 0; }
 .blog-prose ul > li {
   position: relative;
-  padding-left: 1.4rem;
-  margin: 0.55rem 0;
+  padding-left: 1.35rem;
+  margin: 0.6rem 0;
 }
 .blog-prose ul > li::before {
   content: '';
   position: absolute;
-  left: 0;
-  top: 0.65em;
-  width: 6px;
-  height: 6px;
-  border-radius: 2px;
+  left: 0.15rem;
+  top: 0.78em;
+  width: 5px;
+  height: 5px;
+  border-radius: 1px;
   background: rgb(var(--c-spark));
 }
-.blog-prose ol { list-style: decimal; }
-.blog-prose ol > li { margin: 0.45rem 0; padding-left: 0.4rem; }
-.blog-prose ol > li::marker { color: rgb(var(--c-spark)); font-weight: 600; }
+.blog-prose ol { list-style: decimal; padding-left: 1.45rem; }
+.blog-prose ol > li { margin: 0.55rem 0; padding-left: 0.35rem; }
+.blog-prose ol > li::marker { color: rgb(var(--c-ink3)); font-weight: 500; }
+.blog-prose li > ul,
+.blog-prose li > ol { margin: 0.4rem 0; }
 .blog-prose a {
   color: rgb(var(--c-ink));
   text-decoration: underline;
-  text-decoration-color: rgb(var(--c-spark));
-  text-decoration-thickness: 1.5px;
-  text-underline-offset: 3px;
+  text-decoration-color: rgb(var(--c-spark) / 0.45);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  transition: text-decoration-color 0.15s ease, color 0.15s ease;
 }
-.blog-prose a:hover { color: rgb(var(--c-spark)); }
+.blog-prose a:hover {
+  color: rgb(var(--c-spark));
+  text-decoration-color: rgb(var(--c-spark));
+}
 .blog-prose blockquote {
   border-left: 2px solid rgb(var(--c-spark));
-  padding-left: 1rem;
-  color: rgb(var(--c-ink2));
+  padding: 0.1rem 0 0.1rem 1.15rem;
+  color: rgb(var(--c-ink));
   font-style: italic;
-  margin: 1.5rem 0;
+  margin: 1.75rem 0;
 }
+.blog-prose blockquote p { margin: 0.4rem 0; }
 .blog-prose code {
   background: rgb(var(--c-surface2));
-  border: 1px solid rgb(var(--c-rule2));
-  padding: 0 0.3rem;
+  padding: 0.1rem 0.4rem;
   border-radius: 4px;
-  font-size: 0.88em;
+  font-size: 0.86em;
+  color: rgb(var(--c-ink));
 }
 .blog-prose pre {
   background: rgb(var(--c-surface));
   border: 1px solid rgb(var(--c-rule2));
   border-radius: 8px;
-  padding: 1rem 1.1rem;
+  padding: 1.05rem 1.15rem;
   overflow-x: auto;
-  margin: 1.5rem 0;
+  margin: 1.75rem 0;
   font-size: 13px;
-  line-height: 1.6;
+  line-height: 1.65;
 }
-.blog-prose pre code { background: transparent; border: none; padding: 0; }
+.blog-prose pre code { background: transparent; border: none; padding: 0; font-size: inherit; }
 .blog-prose hr {
   border: none;
   border-top: 1px solid rgb(var(--c-rule));
-  margin: 2.5rem 0;
+  margin: 2.75rem auto;
+  width: 4rem;
 }
-.blog-prose figure { margin: 1.75rem 0; }
+.blog-prose figure { margin: 2rem 0; }
 .blog-prose img,
 .blog-prose .kg-image {
   display: block;
   width: 100%;
   height: auto;
-  border-radius: 6px;
-  border: 1px solid rgb(var(--c-rule2));
+  border-radius: 8px;
 }
 .blog-prose figcaption {
   color: rgb(var(--c-ink3));
   font-size: 12.5px;
-  line-height: 1.5;
+  line-height: 1.55;
   text-align: center;
-  margin-top: 0.7rem;
+  margin-top: 0.85rem;
+  font-style: italic;
+  max-width: 36rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 .blog-prose table {
   border-collapse: collapse;
   width: 100%;
-  margin: 1.5rem 0;
+  margin: 1.75rem 0;
   font-size: 14px;
-  line-height: 1.55;
+  line-height: 1.6;
 }
 .blog-prose th,
 .blog-prose td {
-  border: 1px solid rgb(var(--c-rule2));
-  padding: 0.55rem 0.8rem;
+  border-bottom: 1px solid rgb(var(--c-rule2));
+  padding: 0.7rem 0.85rem;
   text-align: left;
   vertical-align: top;
 }
 .blog-prose th {
-  background: rgb(var(--c-surface) / 0.5);
   color: rgb(var(--c-ink));
   font-weight: 600;
+  border-bottom-width: 1.5px;
+  border-bottom-color: rgb(var(--c-rule));
 }
+.blog-prose tbody tr:hover td { background: rgb(var(--c-surface) / 0.4); }
 .blog-prose .kg-bookmark-card {
   display: block;
   border: 1px solid rgb(var(--c-rule2));
