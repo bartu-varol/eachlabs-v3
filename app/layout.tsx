@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import { Inter, JetBrains_Mono } from 'next/font/google';
-import Script from 'next/script';
 import './globals.css';
 import { Ticker } from '@/components/layout/Ticker';
 import { Nav } from '@/components/layout/Nav';
@@ -29,10 +28,10 @@ const themeBootstrap = `(function(){try{var t=localStorage.getItem('theme');if(t
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${jetbrainsMono.variable}`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeBootstrap }} />
+      </head>
       <body className="bg-bg text-ink font-sans">
-        <Script id="theme-bootstrap" strategy="beforeInteractive">
-          {themeBootstrap}
-        </Script>
         <ChromeGuard>
           <Ticker />
           <Nav />

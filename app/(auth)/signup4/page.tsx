@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { AuthTicketShell } from '@/components/auth/AuthTicketShell';
 import { OAuthButtons } from '@/components/auth/OAuthButtons';
+import { MagicLinkForm } from '@/components/auth/MagicLinkForm';
 
 export const metadata: Metadata = {
   title: 'Book your seat · each::labs',
@@ -43,39 +44,7 @@ export default function Signup4Page() {
         <OAuthButtons mode="signup" />
       </div>
 
-      <div className="mt-10 grid grid-cols-3 items-center gap-3">
-        <span className="h-px bg-rule2" />
-        <span className="font-mono text-[10.5px] uppercase tracking-eyebrow text-ink3 text-center">
-          or issue ticket by email
-        </span>
-        <span className="h-px bg-rule2" />
-      </div>
-
-      <form
-        onSubmit={(e) => e.preventDefault()}
-        className="mt-6 flex items-stretch gap-2"
-      >
-        <label className="sr-only" htmlFor="signup4-email">
-          Email
-        </label>
-        <input
-          id="signup4-email"
-          type="email"
-          required
-          placeholder="you@team.com"
-          className="flex-1 px-4 py-3 bg-bg border border-rule2 rounded-md text-ink placeholder:text-ink3 text-[14px] focus:outline-none focus:border-spark/60"
-        />
-        <button
-          type="submit"
-          className="px-5 py-3 bg-spark text-bg rounded-md text-[13.5px] font-medium whitespace-nowrap hover:bg-ember transition-colors"
-        >
-          Issue ticket →
-        </button>
-      </form>
-
-      <p className="mt-4 font-mono text-[10.5px] uppercase tracking-eyebrow text-ink3">
-        ✱ no password, we send a one-tap link.
-      </p>
+      <MagicLinkForm variant="signup" />
 
       <p className="mt-9 text-ink3 text-[13px]">
         Already flown with us?{' '}
