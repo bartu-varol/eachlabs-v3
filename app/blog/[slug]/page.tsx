@@ -64,7 +64,13 @@ function sanitizeBlogHtml(html: string): string {
     .replace(/<script\b[\s\S]*?<\/script\s*>/gi, '')
     .replace(/<noscript\b[\s\S]*?<\/noscript\s*>/gi, '')
     .replace(/\s+on\w+\s*=\s*"[^"]*"/gi, '')
-    .replace(/\s+on\w+\s*=\s*'[^']*'/gi, '');
+    .replace(/\s+on\w+\s*=\s*'[^']*'/gi, '')
+    .replace(/<video\b([^>]*)>/gi, (_m, attrs) =>
+      /\bcontrols\b/i.test(attrs) ? `<video${attrs}>` : `<video${attrs} controls preload="metadata" playsinline>`,
+    )
+    .replace(/<audio\b([^>]*)>/gi, (_m, attrs) =>
+      /\bcontrols\b/i.test(attrs) ? `<audio${attrs}>` : `<audio${attrs} controls preload="metadata">`,
+    );
 }
 
 const HEADING_RE = /<h([23])\b[^>]*\bid\s*=\s*["']([^"']+)["'][^>]*>([\s\S]*?)<\/h\1>/gi;

@@ -487,13 +487,117 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
   border: 1px solid rgb(var(--c-rule2));
   border-radius: 8px;
   padding: 1rem 1.2rem;
-  margin: 1.5rem 0;
+  margin: 1.75rem 0;
   text-decoration: none;
 }
-.blog-prose .kg-embed-card,
-.blog-prose .kg-video-card,
+
+/* Video card — Ghost ships a custom controls skin that needs JS to drive.
+   We don't ship that JS, so fall back to native browser controls and hide
+   the Koenig overlay/skin so it doesn't sit on top of the native player. */
+.blog-prose .kg-video-card {
+  margin: 2rem 0;
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgb(0 0 0);
+  border: 1px solid rgb(var(--c-rule2));
+  position: relative;
+}
+.blog-prose .kg-video-card .kg-video-container {
+  position: relative;
+  width: 100%;
+  background: rgb(0 0 0);
+}
+.blog-prose .kg-video-card video {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 70vh;
+  background: rgb(0 0 0);
+  border-radius: inherit;
+  border: 0;
+}
+.blog-prose .kg-video-card .kg-video-overlay,
+.blog-prose .kg-video-card .kg-video-player-container,
+.blog-prose .kg-video-card .kg-video-large-play-icon,
+.blog-prose .kg-video-card .kg-video-play-icon,
+.blog-prose .kg-video-card .kg-video-pause-icon,
+.blog-prose .kg-video-card .kg-video-player,
+.blog-prose .kg-video-card .kg-video-controls,
+.blog-prose .kg-video-card .kg-video-hide {
+  display: none !important;
+}
+
+/* Audio card — same story: drop the custom skin, use a styled native player. */
 .blog-prose .kg-audio-card {
-  margin: 1.5rem 0;
+  margin: 2rem 0;
+  padding: 1rem 1.1rem;
+  border-radius: 10px;
+  border: 1px solid rgb(var(--c-rule2));
+  background: rgb(var(--c-surface) / 0.5);
+  display: block;
+}
+.blog-prose .kg-audio-card audio {
+  display: block;
+  width: 100%;
+  height: 40px;
+}
+.blog-prose .kg-audio-card .kg-audio-player-container,
+.blog-prose .kg-audio-card .kg-audio-player,
+.blog-prose .kg-audio-card .kg-audio-thumbnail,
+.blog-prose .kg-audio-card .kg-audio-play-icon,
+.blog-prose .kg-audio-card .kg-audio-pause-icon,
+.blog-prose .kg-audio-card .kg-audio-title,
+.blog-prose .kg-audio-card .kg-audio-duration,
+.blog-prose .kg-audio-card .kg-audio-current-time,
+.blog-prose .kg-audio-card .kg-audio-seek-slider,
+.blog-prose .kg-audio-card .kg-audio-playback-rate,
+.blog-prose .kg-audio-card .kg-audio-mute-icon,
+.blog-prose .kg-audio-card .kg-audio-unmute-icon,
+.blog-prose .kg-audio-card .kg-audio-volume-slider,
+.blog-prose .kg-audio-card .kg-audio-hide {
+  display: none !important;
+}
+
+/* Bare <video>/<audio> tags (when Ghost doesn't wrap them in a kg-card). */
+.blog-prose > video,
+.blog-prose > audio,
+.blog-prose figure > video,
+.blog-prose figure > audio {
+  display: block;
+  width: 100%;
+  margin: 1.75rem 0;
+  border-radius: 10px;
+  background: rgb(0 0 0);
+}
+.blog-prose > audio,
+.blog-prose figure > audio {
+  background: transparent;
+  height: 40px;
+}
+
+/* Embed card — YouTube / Vimeo / Twitter iframes. Make them responsive. */
+.blog-prose .kg-embed-card {
+  margin: 2rem 0;
+}
+.blog-prose .kg-embed-card iframe {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  border: 1px solid rgb(var(--c-rule2));
+  border-radius: 10px;
+  background: rgb(0 0 0);
+}
+.blog-prose iframe[src*="youtube.com"],
+.blog-prose iframe[src*="youtu.be"],
+.blog-prose iframe[src*="vimeo.com"] {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  border: 1px solid rgb(var(--c-rule2));
+  border-radius: 10px;
+  margin: 2rem 0;
 }
 
 /* ── Catalog entrance choreography ──────────────────────────────────────
