@@ -520,9 +520,23 @@ function SwappingPill({ phase }: { phase: SwapPhase }) {
   const tintOpacity = isFail ? 0.2 : showFb ? 0.12 : 0;
 
   return (
-    <span className="relative inline-block z-10">
-      {/* Floating tag — appears above the pill during fail+fallback,
-          and explicitly names the from → to swap. */}
+    <motion.span
+      className="relative z-10 px-2 py-1 rounded-md border bg-bg font-mono text-[9.5px] md:text-[10px] uppercase tracking-eyebrow whitespace-nowrap"
+      animate={{
+        borderColor,
+        color: textColor,
+        scale: showFb ? [1, 1.12, 1] : isFail ? [1, 1.04, 1] : 1,
+      }}
+      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+      style={{
+        boxShadow: showFb
+          ? '0 0 0 1px rgb(var(--c-spark) / 0.45), 0 0 18px rgb(var(--c-spark) / 0.6)'
+          : isFail
+            ? '0 0 0 1px rgb(var(--c-fail) / 0.45), 0 0 14px rgb(var(--c-fail) / 0.55)'
+            : 'none',
+      }}
+    >
+      {/* Floating tag — sits above the pill (overflow-visible parent) */}
       <AnimatePresence mode="wait">
         {swapWindow && (
           <motion.span
@@ -573,59 +587,45 @@ function SwappingPill({ phase }: { phase: SwapPhase }) {
         )}
       </AnimatePresence>
 
+      {/* Tint overlay — sits on top of bg-bg so the pipeline line stays hidden */}
       <motion.span
-        className="relative inline-block px-2 py-1 rounded-md border bg-bg font-mono text-[9.5px] md:text-[10px] uppercase tracking-eyebrow whitespace-nowrap overflow-hidden"
-        animate={{
-          borderColor,
-          color: textColor,
-          scale: showFb ? [1, 1.12, 1] : isFail ? [1, 1.04, 1] : 1,
-        }}
-        transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-        style={{
-          boxShadow: showFb
-            ? '0 0 0 1px rgb(var(--c-spark) / 0.45), 0 0 18px rgb(var(--c-spark) / 0.6)'
-            : isFail
-              ? '0 0 0 1px rgb(var(--c-fail) / 0.45), 0 0 14px rgb(var(--c-fail) / 0.55)'
-              : 'none',
-        }}
-      >
-        {/* Tint overlay — sits on top of bg-bg so the pipeline line stays hidden */}
+        aria-hidden
+        className="absolute inset-0 rounded-md pointer-events-none"
+        animate={{ backgroundColor: tintColor, opacity: tintOpacity }}
+        transition={{ duration: 0.35 }}
+      />
+
+      {/* Model name swap — overflow-hidden contained here so kling/wan slide
+          is clipped, but the pill itself stays overflow-visible so the tag
+          and burst can extend beyond. */}
+      <span className="relative block overflow-hidden">
+        {/* kling-v3 — visible during primary + fail; slides up & out on fallback */}
         <motion.span
-          aria-hidden
-          className="absolute inset-0 rounded-md pointer-events-none"
-          animate={{ backgroundColor: tintColor, opacity: tintOpacity }}
-          transition={{ duration: 0.35 }}
-        />
-        <span className="relative block">
-          {/* kling-v3 — visible during primary + fail; slides up & out on fallback.
-              On fail, gets strike-through to underline the death. */}
-          <motion.span
-            className="block"
-            animate={{
-              y: showFb ? -28 : 0,
-              opacity: showFb ? 0 : 1,
-              textDecoration: isFail ? 'line-through' : 'none',
-              filter: showFb ? 'blur(2px)' : 'blur(0px)',
-            }}
-            transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-          >
-            kling-v3
-          </motion.span>
-          {/* wan-2.7 — slides in from below on fallback */}
-          <motion.span
-            className="absolute inset-0 block"
-            animate={{
-              y: showFb ? 0 : 28,
-              opacity: showFb ? 1 : 0,
-              filter: showFb ? 'blur(0px)' : 'blur(2px)',
-            }}
-            transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-          >
-            wan-2.7
-          </motion.span>
-        </span>
-      </motion.span>
-    </span>
+          className="block"
+          animate={{
+            y: showFb ? -28 : 0,
+            opacity: showFb ? 0 : 1,
+            textDecoration: isFail ? 'line-through' : 'none',
+            filter: showFb ? 'blur(2px)' : 'blur(0px)',
+          }}
+          transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+        >
+          kling-v3
+        </motion.span>
+        {/* wan-2.7 — slides in from below on fallback */}
+        <motion.span
+          className="absolute inset-0 block"
+          animate={{
+            y: showFb ? 0 : 28,
+            opacity: showFb ? 1 : 0,
+            filter: showFb ? 'blur(0px)' : 'blur(2px)',
+          }}
+          transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+        >
+          wan-2.7
+        </motion.span>
+      </span>
+    </motion.span>
   );
 }
 
