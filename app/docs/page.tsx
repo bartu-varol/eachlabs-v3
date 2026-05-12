@@ -154,7 +154,7 @@ export default function DocsPage() {
           </h2>
           <div className="flex flex-wrap gap-3 justify-center mt-8">
             <Button href="https://discord.gg/eachlabs" variant="primary">Open Discord →</Button>
-            <Button href="mailto:engineer@eachlabs.ai" variant="secondary">Email support</Button>
+            <Button href="mailto:support@eachlabs.ai" variant="secondary">Email support</Button>
           </div>
         </div>
       </section>

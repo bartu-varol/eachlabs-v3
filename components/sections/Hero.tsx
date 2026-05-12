@@ -9,17 +9,23 @@ export function Hero() {
       <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_minmax(0,1fr)] gap-10 lg:gap-14 items-center">
         {/* Left, copy + CTAs + stats */}
         <div className="text-center lg:text-left">
-          {/* Top pill */}
-          <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-4 gap-y-2 font-mono text-[11px] uppercase tracking-eyebrow">
-            <span className="text-spark">{hero.pill}</span>
-            <span className="text-ink3">·</span>
-            <Link
-              href="#"
-              className="text-ink2 hover:text-ink transition-colors normal-case tracking-normal"
-            >
-              {hero.pillCta}
-            </Link>
-          </div>
+          {/* Top pill, optional */}
+          {hero.pill && (
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-4 gap-y-2 font-mono text-[11px] uppercase tracking-eyebrow">
+              <span className="text-spark">{hero.pill}</span>
+              {hero.pillCta && (
+                <>
+                  <span className="text-ink3">·</span>
+                  <Link
+                    href="#"
+                    className="text-ink2 hover:text-ink transition-colors normal-case tracking-normal"
+                  >
+                    {hero.pillCta}
+                  </Link>
+                </>
+              )}
+            </div>
+          )}
 
           {/* H1, "AI apps" gets a thick spark underline,
               "We handle" sits in muted ink3, "the chaos." in italic spark. */}

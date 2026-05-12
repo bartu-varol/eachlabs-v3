@@ -172,29 +172,44 @@ function Endpoint({
 }
 
 function CodeText({ keyframes }: { keyframes: string[] }) {
+  // Each state holds visible for ~hold of the cycle, then fades out FAST (~swap),
+  // a brief dark gap, then the next state fades in. Eliminates the long
+  // crossfade where two HTTP codes (e.g. 200 / 503) would sit on top of each
+  // other and look like an overlap bug.
+  const N = keyframes.length;
+  const swap = 0.025;       // 100ms at 4s cycle, the fade itself
+  const gap  = 0.015;       //  60ms invisible window between states
+  const slot = 1 / N;       // each state owns 1/N of the cycle
+
+  // 4 timing markers per state: hold-end, swap-end, gap-end, prep-for-next
+  // We build 4 keyframes per state, giving a clean on→off step pattern.
+  const times: number[] = [];
+  for (let i = 0; i < N; i++) {
+    const base = i * slot;
+    times.push(base);                          // state i visible (on)
+    times.push(base + slot - swap - gap);      // state i still on, fade about to start
+    times.push(base + slot - gap);             // state i off, in dark gap
+    times.push(base + slot);                   // dark gap ends, next state begins
+  }
+
   return (
-    <motion.span
-      animate={{ opacity: [1, 1, 1, 1] }}
-      transition={{ duration: 4, repeat: Infinity }}
-    >
-      {/* Animate textContent via key cycling, render each value with timed visibility */}
-      <span className="relative inline-block min-w-[26px] text-center">
-        {keyframes.map((code, i) => (
-          <motion.span
-            key={i}
-            className="absolute inset-0"
-            animate={{
-              opacity: keyframes.map((_, j) => (j === i ? 1 : 0)),
-            }}
-            transition={{ duration: 4, times: [0, 0.4, 0.65, 0.95], repeat: Infinity }}
-          >
-            {code}
-          </motion.span>
-        ))}
-        {/* Reserve width */}
-        <span className="invisible">{keyframes[0]}</span>
-      </span>
-    </motion.span>
+    <span className="relative inline-block min-w-[26px] text-center">
+      {keyframes.map((code, i) => (
+        <motion.span
+          key={i}
+          className="absolute inset-0"
+          animate={{
+            opacity: keyframes.flatMap((_, j) =>
+              j === i ? [1, 1, 0, 0] : [0, 0, 0, 0]
+            ),
+          }}
+          transition={{ duration: 4, times, repeat: Infinity, ease: 'linear' }}
+        >
+          {code}
+        </motion.span>
+      ))}
+      <span className="invisible">{keyframes[0]}</span>
+    </span>
   );
 }
 

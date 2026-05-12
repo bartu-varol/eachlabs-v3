@@ -69,7 +69,7 @@ export default function ContactPage() {
             </div>
             <h1 className="font-display font-semibold text-[44px] sm:text-[60px] lg:text-[68px] leading-[0.98] tracking-tightest mt-6 text-ink">
               Talk to a real engineer.
-              <span className="block text-ink3 italic">No SDRs, no demos-on-rails.</span>
+              <span className="block text-ink3 italic">No sales pitch, no scripted demos.</span>
             </h1>
             <p className="text-ink2 text-[16px] leading-[1.6] max-w-[520px] mt-7">
               Pricing questions, integration help, weird production edge cases, all of it goes
@@ -87,10 +87,10 @@ export default function ContactPage() {
                 OR EMAIL US DIRECTLY
               </div>
               <a
-                href="mailto:engineer@eachlabs.ai"
+                href="mailto:support@eachlabs.ai"
                 className="text-spark text-[16px] font-medium hover:underline underline-offset-4 inline-flex items-center gap-2"
               >
-                engineer@eachlabs.ai <ArrowRight size={16} />
+                support@eachlabs.ai <ArrowRight size={16} />
               </a>
             </div>
           </motion.div>
@@ -180,7 +180,7 @@ export default function ContactPage() {
 
                 {status === 'error' && (
                   <p className="font-mono text-[11px] text-fail">
-                    Could not send. Try emailing engineer@eachlabs.ai directly.
+                    Could not send. Try emailing support@eachlabs.ai directly.
                   </p>
                 )}
 

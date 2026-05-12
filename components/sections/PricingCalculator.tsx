@@ -24,10 +24,12 @@ const TYPE_COLOR: Record<Modality, string> = {
   AUDIO: 'rgb(var(--c-yellow))',
 };
 
+// Keep the section's accent backdrop consistent with §01 above it. Switching
+// tints per modality made the two sections feel like different pages.
 const TYPE_TINT: Record<Modality, string> = {
-  VIDEO: 'rgb(var(--c-highlight) / 0.10)',
-  IMAGE: 'rgb(var(--c-success)   / 0.10)',
-  AUDIO: 'rgb(var(--c-yellow)    / 0.10)',
+  VIDEO: 'rgb(var(--c-spark) / 0.05)',
+  IMAGE: 'rgb(var(--c-spark) / 0.05)',
+  AUDIO: 'rgb(var(--c-spark) / 0.05)',
 };
 
 function formatPrice(p: number): string {

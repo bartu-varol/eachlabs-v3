@@ -6,7 +6,6 @@ export const ticker = [
   '* THE MODEL THAT BROKE YESTERDAY? STILL SHIPPING',
   '* 600+ MODELS · 4 MODALITIES · 1 API',
   '* NO 3AM PAGES (ASK YOUR ON-CALL)',
-  '* SERIES A, $18M LED BY EBRD',
 ];
 
 // ---------- NAV ----------
@@ -107,8 +106,8 @@ export const navItems: NavItem[] = [
 // ---------- HERO ----------
 
 export const hero = {
-  pill: '* SERIES A · $18M LED BY EBRD',
-  pillCta: 'Read the memo →',
+  pill: '',
+  pillCta: '',
   /** Body lead, large, the hook. */
   bodyLead: '600+ AI models behind one API',
   /** Body rest, descriptive, with playful flair. */
@@ -134,7 +133,7 @@ export const widget = {
   eyebrow: '* WHAT’S BREAKING TODAY?',
   headline: { line1: 'Tell us what’s breaking.', line2: 'We’ve already built the fix.' },
   belowCount: '8 PROBLEMS · 5 NAMED PRODUCTS · ONE API',
-  belowEscape: { prefix: 'Don’t see your problem?', linkLabel: 'Talk to an engineer →', href: 'mailto:engineer@eachlabs.ai' },
+  belowEscape: { prefix: 'Don’t see your problem?', linkLabel: 'Talk to an engineer →', href: 'mailto:support@eachlabs.ai' },
 };
 
 // ---------- CHAOS → FIX (Section 02) ----------
@@ -227,10 +226,10 @@ export type SenseAnswer = {
 };
 
 export const askSense = {
-  eyebrow: '* LIVE DEMO · EACH::SENSE',
+  eyebrow: '* LIVE DEMO',
   headline: { line1: 'Tell us your AI', italic: 'chaos.', line2: 'We’ll show you the way out.' },
   body:
-    'Type your actual problem. each::sense, our AI agent, reads it, gives you a 2–3 sentence answer, and links you straight to the part of the docs that solves it. No signup, no demo call.',
+    'Type your actual problem. Our AI agent reads it, gives you a short answer, and links you straight to the part of the docs that solves it. No signup, no sales call.',
   inputPlaceholders: [
     'how do I track cost per customer…',
     'my model keeps failing at 3 AM…',
@@ -253,9 +252,9 @@ export const askSense = {
     },
     'Don’t know which model to pick': {
       text:
-        'Use each::sense, same call signature, but you describe the result instead of naming a model. We pick (and re-pick) the best fit per call based on quality, latency, and cost.',
-      docHref: '/docs/sense/overview',
-      docLabel: 'each::sense · overview',
+        'Describe the result you want instead of naming a model. We pick (and re-pick) the best fit per call based on quality, latency, and cost.',
+      docHref: 'https://docs.eachlabs.ai/introduction',
+      docLabel: 'each::labs · model picking',
     },
     'How do I track cost per customer': {
       text:
@@ -266,11 +265,11 @@ export const askSense = {
   } satisfies Record<string, SenseAnswer>,
   fallback: {
     text:
-      'We don’t have a canned answer for that one, but the live each::sense agent does. In production, this same input would call a real LLM and link you to the relevant doc.',
-    docHref: '/docs/sense/overview',
-    docLabel: 'each::sense · overview',
+      'We don’t have a canned answer for that one, but the live agent does. In production, this same input calls a real LLM and links you to the relevant doc.',
+    docHref: 'https://docs.eachlabs.ai/introduction',
+    docLabel: 'each::labs · docs',
   } satisfies SenseAnswer,
-  footnote: 'powered by each::sense (demo) · responses are mocked · no API call yet',
+  footnote: '',
 };
 
 // ---------- TRUSTED BY ----------
@@ -548,8 +547,8 @@ export const footer = {
 export const enterprise = {
   hero: {
     pill: '* ENTERPRISE · WRITTEN BY THE ON-CALL',
-    pillCta: 'Read the SLA →',
-    pillHref: '#sla',
+    pillCta: '',
+    pillHref: '',
     headline: {
       line1: 'Production AI ',
       line1Underline: 'without',
@@ -559,18 +558,18 @@ export const enterprise = {
     body:
       'You already orchestrate around model failures, leaking budgets, and provider drift. Pay us, and the on-call shifts to our team. ',
     bodyLead:
-      'Same each.run(). Hard SLAs, private VPC, named architect, signed DPA in the inbox before legal asks. ',
+      'Same each.run(). Direct line to engineering, traceable spend, and a router that catches failures before pagerduty does. ',
     ctas: [
       { label: 'Talk to an engineer (a real one)', href: '/contact', variant: 'primary'   as const },
-      { label: 'Read the SLA & security pack',     href: '#sla',     variant: 'secondary' as const },
+      { label: 'See how the router works',         href: '/router',  variant: 'secondary' as const },
     ],
     stats: [
-      { value: '99.99%',  label: 'contractual SLA',     sub: 'penalties · not asterisks' },
-      { value: '<120ms',  label: 'failover overhead',   sub: 'before your user notices' },
-      { value: '24/7',    label: 'on-call by engineers', sub: 'not BDRs · not tier-1' },
-      { value: '<24h',    label: 'incident RCA',         sub: 'written. signed. shared.' },
+      { value: '99.99%',  label: 'effective uptime',     sub: 'across the routed path' },
+      { value: '<120ms',  label: 'failover overhead',    sub: 'before your user notices' },
+      { value: '24/7',    label: 'engineer-led support', sub: 'no BDRs · no tier-1 queue' },
+      { value: '<24h',    label: 'incident response',    sub: 'written. signed. shared.' },
     ],
-    subtext: 'SOC 2 TYPE II · HIPAA-READY · GDPR · ISO 27001 IN PROGRESS · DPA ON REQUEST',
+    subtext: '600+ MODELS · ONE API · DIRECT-TO-ENGINEERING SUPPORT',
   },
 
   /** "What enterprise actually means" comparison, kills the competitors. */
@@ -586,27 +585,27 @@ export const enterprise = {
       {
         topic: 'Support',
         others: 'A shared inbox. Tier-1 reads from a playbook.',
-        ours: 'A private Slack with the engineers who wrote the router. P1 acknowledged in <15min.',
+        ours: 'A direct Slack channel with the engineers who built the router. P1 acknowledged the same business day.',
       },
       {
-        topic: 'SLA',
-        others: '"99.9% uptime." No penalty schedule. No definition of "downtime."',
-        ours: '99.99% per-call success across the routed path. Service credits start at 99.95%. Schedule attached.',
+        topic: 'Uptime',
+        others: '"99.9%" with no definition of "downtime" and no penalty schedule.',
+        ours: '99.99% effective uptime across the routed path. Failover catches provider outages before your users do.',
       },
       {
         topic: 'Incident response',
         others: 'A status page tweet. RCA "available on request."',
-        ours: 'Written RCA in <24h, every P1, root cause, blast radius, fix, prevention. Sent before you ask.',
+        ours: 'Written RCA within 24h on every customer-impacting incident. Root cause, blast radius, fix, prevention.',
       },
       {
         topic: 'Data',
         others: '"Your data is yours." Sub-processor list available "on request."',
-        ours: 'Zero retention by default. Sub-processor list public. VPC deployment available. DPA pre-signed.',
+        ours: 'Zero retention by default. Provider-side retention disabled per request. We never train on your traffic.',
       },
       {
         topic: 'Procurement',
-        others: 'Sales-led, six weeks to MSA, "we don\'t share our SOC 2."',
-        ours: 'SOC 2 Type II, DPA, sub-processor list, security pack, downloadable below. Legal in days, not weeks.',
+        others: 'Sales-led, six weeks to MSA, "we don\'t share our security docs."',
+        ours: 'Custom MSA / DPA / security review on request, handled directly by engineering, not a sales handoff.',
       },
       {
         topic: 'Pricing',
@@ -626,45 +625,45 @@ export const enterprise = {
     tiles: [
       {
         accent: 'spark' as const,
-        title: 'Private VPC deployment',
+        title: 'Quality-aware failover',
         body:
-          'Deploy the routing plane inside your AWS / GCP / Azure account. Inference traffic never crosses our network. Your audit team relaxes.',
-        why: 'Built after a Fortune 100 fintech needed FedRAMP-moderate; default for any regulated workload now.',
+          'Every call is watched on quality, latency, and error rate. When the primary degrades, traffic spills to a healthy fallback in under 120ms, before your user notices.',
+        why: 'This is the product. The same router you use in production.',
       },
       {
         accent: 'highlight' as const,
-        title: 'SSO + SAML + SCIM',
+        title: '600+ models behind one API',
         body:
-          'Okta, Azure AD, Google Workspace. JIT provisioning, group-mapped roles, deprovision on departure. No "send us a CSV."',
-        why: 'IAM is the cheapest place to fail a SOC 2 audit. So we don\'t.',
+          'Kling, Veo, FLUX, ElevenLabs, OpenAI, and every other provider worth shipping. One signature, one bill, one trace. Swap models without rewriting a call site.',
+        why: 'You shouldn\'t pin your roadmap to a single provider\'s pricing.',
       },
       {
         accent: 'success' as const,
-        title: 'Audit log + SIEM export',
+        title: 'Per-call traces + cost attribution',
         body:
-          'Every call, every config change, every key rotation, append-only. Stream to Splunk, Datadog, S3 in real time. Tamper-evident.',
-        why: 'Your security team wants a query interface. Not a screenshot.',
+          'Every each.run() emits a trace, every step, every fallback, every cost. Tag with user_id, tier, experiment; slice spend in the dashboard.',
+        why: 'Finance asks who is expensive. The trace answers without an instrumentation sprint.',
       },
       {
         accent: 'sun' as const,
-        title: 'Data residency + zero retention',
+        title: 'Zero retention by default',
         body:
-          'Pin inference to a region. EU / US / APAC. Disable provider-side prompt retention with one flag. We never train on your data, contractually.',
-        why: 'GDPR Article 28 + DPA pre-signed. Privacy team gets a one-pager, not a research project.',
+          'We don\'t store prompts or outputs past what you need for traces. Provider-side retention is opt-in per provider. We never train on your traffic.',
+        why: 'Default-private is cheaper than auditing a permission you forgot you granted.',
       },
       {
         accent: 'ember' as const,
-        title: 'Private model hosting',
+        title: 'Engineering-led onboarding',
         body:
-          'Fine-tunes, weights you own, custom inference kernels, hosted on dedicated GPUs, routed behind the same each.run() signature.',
-        why: 'Build a moat in your models. Keep the orchestration boring.',
+          'A founding-team engineer walks your stack through integration, fallback design, and trace setup. Slack channel stays open afterward.',
+        why: 'The shortest path from "we want this in prod" to actually in prod.',
       },
       {
         accent: 'yellow' as const,
-        title: 'Named architect + roadmap access',
+        title: 'Volume commits + custom terms',
         body:
-          'A senior engineer assigned at signing. Quarterly business reviews. Direct input on what ships next quarter.',
-        why: 'You\'re not a ticket. You\'re a design partner.',
+          'Commit to monthly inference volume and the platform fee drops. Custom MSA / DPA / security review handled by engineering, not a sales handoff.',
+        why: 'Procurement should be a one-meeting problem, not a quarter.',
       },
     ],
   },
@@ -702,7 +701,7 @@ export const enterprise = {
       },
     ],
     footnote:
-      'IF THE FALLBACK ITSELF FAILS, SERVICE CREDITS APPLY PER THE SLA. WE WRITE A CHECK. NOT AN APOLOGY.',
+      'IF THE FALLBACK ITSELF FAILS, OUR ON-CALL HANDLES IT BEFORE YOURS DOES. THE RCA LANDS IN YOUR INBOX BY THE END OF THE NEXT BUSINESS DAY.',
   },
 
   /** 3 deep customer outcomes, numbers, not logos. */
@@ -714,31 +713,31 @@ export const enterprise = {
     },
     cards: [
       {
-        industry: 'CONSUMER AI · 18M MAU',
+        industry: 'CONSUMER AI · MILLIONS OF USERS',
         metric: '14',
         metricLabel: 'model swaps',
-        secondary: '0 downtime · 6 months',
+        secondary: 'zero user-visible regressions',
         body:
           'Hot-swapped fourteen image and video models across two providers without a single user-visible regression. Their on-call hasn\'t been paged for inference in two quarters.',
-        contract: 'Private VPC · 99.99% SLA · named architect',
+        contract: 'Failover routing · trace per call · engineering Slack',
       },
       {
-        industry: 'FINTECH · REGULATED',
+        industry: 'FINTECH · STRICT CHANGE CONTROL',
         metric: '0',
-        metricLabel: 'audit findings',
-        secondary: 'SOC 2 + ISO 27001 · passed',
+        metricLabel: 'inference-layer issues',
+        secondary: 'two internal reviews · clean',
         body:
-          'Routing plane deployed inside their AWS account, audit log streaming to their SIEM, sub-processor list locked. Two compliance audits in twelve months. Zero findings on the inference layer.',
-        contract: 'In-VPC deploy · SIEM export · pre-signed DPA',
+          'Standardized on one each.run() signature across teams, locked the trace schema to their data warehouse, and disabled provider-side retention end-to-end. Internal reviews flagged zero issues on the inference layer.',
+        contract: 'Trace export · provider retention off · review-ready',
       },
       {
-        industry: 'AD-TECH · 1.2B REQ/MO',
+        industry: 'AD-TECH · BILLION+ REQ/MO',
         metric: '$340K',
         metricLabel: 'monthly inference savings',
         secondary: 'same quality · 3 providers · 1 API',
         body:
           'Quality-aware routing pulled traffic toward the cheapest healthy provider per request type. No engineer changed code; each::router did the arithmetic. Procurement team noticed first.',
-        contract: 'Volume pricing · cost attribution · QBR cadence',
+        contract: 'Volume pricing · cost attribution · quarterly reviews',
       },
     ],
   },
@@ -748,10 +747,10 @@ export const enterprise = {
     eyebrow: '* THE WIRE',
     headline: {
       line1: 'How traffic moves.',
-      line2: 'In your VPC. On your audit log.',
+      line2: 'One call. One trace. Direct to providers.',
     },
     body:
-      'The boring diagram every architect asks for. each::router runs inside your cloud account. Inference traffic never sees our network unless you opt in.',
+      'The boring diagram every architect asks for. each.run() hits the router, the router talks to the provider you actually need, and a per-call trace lands in your dashboard. No retraining, no rewrites.',
     nodes: [
       {
         label: 'Your app',
@@ -760,76 +759,76 @@ export const enterprise = {
       },
       {
         label: 'each::router',
-        sub: 'deployed in your VPC · routing plane only',
+        sub: 'quality-aware · auto-failover · <120ms',
         kind: 'router',
       },
       {
         label: 'Provider A · B · C',
-        sub: 'direct connections · zero retention',
+        sub: 'direct connections · zero retention by default',
         kind: 'providers',
       },
     ],
     sidecars: [
       {
-        title: 'Audit log',
-        body: 'Append-only · streaming to your SIEM',
+        title: 'Per-call trace',
+        body: 'Step, status, cost, latency · queryable for 30 days',
       },
       {
-        title: 'Trace + attributes',
-        body: 'Per-call cost & latency · sliced by your tags',
+        title: 'Attribute tagging',
+        body: 'user_id · tier · experiment · slice spend by anything',
       },
       {
-        title: 'each::labs control',
-        body: 'Config + observability only · no traffic touches our cloud',
+        title: 'Engineering on-call',
+        body: 'Senior engineer paged on every customer-impacting incident',
       },
     ],
   },
 
-  /** Procurement assets, visible, downloadable, the part rivals hide. */
+  /** Procurement assets, available on request from engineering, not gated by sales. */
   procurement: {
     eyebrow: '* THE BORING DOCUMENTS',
     headline: {
-      line1: 'The paperwork',
-      line2: 'is already done.',
+      line1: 'Procurement docs,',
+      line2: 'one email away.',
     },
     body:
-      'Legal and procurement: this section is for you. Everything below is downloadable now. No gatekeeping form, no "after the call."',
+      'We don\'t hide the paperwork behind a sales call. Email the engineering team, your security or legal counterpart gets a direct reply, usually same business day.',
     assets: [
       {
-        title: 'SOC 2 Type II report',
-        sub: 'Renewed Q1 2026 · 12-month observation window',
+        title: 'Security review',
+        sub: 'Architecture, retention, sub-processors, in one document',
         cta: 'Request under NDA',
-        href: 'mailto:security@eachlabs.ai?subject=SOC%202%20Type%20II%20request',
+        href: 'mailto:support@eachlabs.ai?subject=Security%20review%20request',
       },
       {
         title: 'Sub-processor list',
-        sub: 'Public · versioned · email notification on change',
-        cta: 'View the list →',
-        href: '/legal/subprocessors',
+        sub: 'Current providers and their role · updated as we add models',
+        cta: 'Request the list →',
+        href: 'mailto:support@eachlabs.ai?subject=Sub-processor%20list',
       },
       {
-        title: 'DPA (GDPR Article 28)',
-        sub: 'Pre-signed · counter-sign and return',
-        cta: 'Download DPA →',
-        href: '/legal/dpa',
+        title: 'DPA',
+        sub: 'GDPR Article 28 template · we counter-sign · usually <1 week',
+        cta: 'Request the DPA →',
+        href: 'mailto:support@eachlabs.ai?subject=DPA%20request',
       },
       {
-        title: 'MSA template',
-        sub: 'Standard terms · redlines welcome · usually <2 weeks',
-        cta: 'Download MSA →',
-        href: '/legal/msa',
+        title: 'Custom MSA',
+        sub: 'Standard template · redlines welcome · handled by engineering',
+        cta: 'Start the redlines',
+        href: 'mailto:support@eachlabs.ai?subject=MSA%20redlines',
       },
       {
-        title: 'Security pack',
-        sub: 'CAIQ · pen-test summary · architecture overview',
-        cta: 'Request under NDA',
-        href: 'mailto:security@eachlabs.ai?subject=Security%20pack%20request',
+        title: 'Uptime + incident process',
+        sub: 'How we run on-call, what counts as a P1, and how we report it',
+        cta: 'Read the process →',
+        href: '/contact',
       },
       {
-        title: 'SLA terms',
-        sub: '99.95% / 99.99% tiers · service credit schedule',
-        cta: 'Read the SLA →',
-        href: '/legal/sla',
+        title: 'Pricing terms',
+        sub: 'Volume commitments, platform fee tiers, payment terms',
+        cta: 'Talk to engineering',
+        href: '/contact',
       },
     ],
     note:
@@ -843,27 +842,27 @@ export const enterprise = {
     items: [
       {
         q: 'How is this not just another vendor in the middle?',
-        a: 'You can run the routing plane inside your VPC. The control plane never sees inference traffic. We bill on the platform, not the inference, your provider invoices stay direct.',
+        a: 'We bill on the platform, not the inference, your provider invoices stay direct. The router watches every call but doesn\'t store prompts or outputs by default; only traces stay around so you can debug.',
       },
       {
         q: 'What happens if each::labs goes down?',
-        a: 'The router caches its policy locally and keeps routing on the last-known-good config for up to 60 minutes. Your inference does not depend on our control plane being up.',
+        a: 'The router caches its policy locally and keeps routing on the last-known-good config so your inference doesn\'t depend on our control plane being up. Same model providers, same direct connections.',
       },
       {
-        q: 'Can we get a custom SLA above 99.99%?',
-        a: 'Yes, multi-region routing pushes us into the 99.995% range. We quote it after a one-call architecture review. Service credits scale with it.',
+        q: 'Can we negotiate uptime + custom terms?',
+        a: 'Yes. Talk to engineering at /contact, we walk through your traffic shape, sketch the failover topology, and put real numbers on a one-page agreement. No sales cycle.',
       },
       {
         q: 'Do you train on our prompts or outputs?',
-        a: 'No. Contractually. The DPA says so in Section 4. Provider-side retention is disabled by default for enterprise accounts; we verify per provider quarterly.',
+        a: 'No. We don\'t store prompts or outputs past what you opt into for traces, and we never train models on your traffic. Provider-side retention is opt-in per provider and disabled by default for production accounts.',
       },
       {
         q: 'How do we exit if it isn\'t working?',
-        a: 'each.run() is a thin wrapper. Remove our SDK, point at providers directly, your code is portable. Data is exportable as JSONL. We keep nothing after termination + 30 days.',
+        a: 'each.run() is a thin wrapper. Remove our SDK, point at providers directly, your code is portable. Traces are exportable. We keep nothing after termination + 30 days.',
       },
       {
-        q: 'Who is on the on-call?',
-        a: 'Two senior engineers per shift, both from the core router team. P1 acknowledgement <15min. Coverage is 24/7/365, not "business hours in our timezone."',
+        q: 'Who answers when something breaks?',
+        a: 'A founding-team engineer, every time. Direct Slack channel for accounts on a custom plan; same-day email otherwise. No tier-1 queue, no scripted demos.',
       },
     ],
   },

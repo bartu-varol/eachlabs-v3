@@ -117,8 +117,8 @@ const result = await each.run({
       metric: '4 → 1',
       metricLabel: 'inference services collapsed into one workflow',
       quote: 'We went from four inference services glued together with bash to one versioned workflow. Velocity tripled, and rollback is a string change.',
-      name: 'Anonymous',
-      role: 'CTO · Consumer AI startup',
+      name: '',
+      role: '',
     },
     pairsWith: [
       { product: 'Router', body: 'Each node uses the router for fallbacks.', href: '/router' },
@@ -181,8 +181,8 @@ const result = await each.run({
       metric: 'weekly → 0',
       metricLabel: '3AM pages, since router went live',
       quote: 'Our 3AM pages went from weekly to zero. Worth the migration alone, and the failover trace told us exactly which provider had the bad night.',
-      name: 'Anonymous',
-      role: 'Marketing Manager · Ad-tech platform',
+      name: '',
+      role: '',
     },
     pairsWith: [
       { product: 'Workflows', body: 'Each workflow node uses the router for fallbacks.', href: '/workflows' },
@@ -246,8 +246,8 @@ const result = await each.run({
       metric: '12.4% → 0.9%',
       metricLabel: 'error rate vs raw provider, in production',
       quote: 'Our error rate dropped from one-in-eight to under one-in-a-hundred. Same model, same call, we just flipped enhance: true.',
-      name: 'Anonymous',
-      role: 'Head of Engineering · Media generation app',
+      name: '',
+      role: '',
     },
     pairsWith: [
       { product: 'Router', body: 'Different model, different failure surface, handled.', href: '/router' },

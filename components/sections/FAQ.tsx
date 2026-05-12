@@ -329,7 +329,7 @@ export function FAQ() {
         >
           Still have a question?{' '}
           <a
-            href="mailto:engineer@eachlabs.ai"
+            href="mailto:support@eachlabs.ai"
             className="text-spark hover:underline underline-offset-4"
           >
             Ask an engineer →

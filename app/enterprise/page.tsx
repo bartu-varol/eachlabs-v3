@@ -140,13 +140,17 @@ function EnterpriseHero() {
           {/* Pill */}
           <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-4 gap-y-2 font-mono text-[11px] uppercase tracking-eyebrow">
             <span className="text-spark">{hero.pill}</span>
-            <span className="text-ink3">·</span>
-            <Link
-              href={hero.pillHref}
-              className="text-ink2 hover:text-ink transition-colors normal-case tracking-normal"
-            >
-              {hero.pillCta}
-            </Link>
+            {hero.pillCta && (
+              <>
+                <span className="text-ink3">·</span>
+                <Link
+                  href={hero.pillHref || '#'}
+                  className="text-ink2 hover:text-ink transition-colors normal-case tracking-normal"
+                >
+                  {hero.pillCta}
+                </Link>
+              </>
+            )}
           </div>
 
           {/* H1 */}
@@ -246,7 +250,7 @@ function MeansWhat() {
             * TOPIC
           </div>
           <div className="px-5 py-3 font-mono text-[10.5px] uppercase tracking-eyebrow text-ink3 border-l border-rule">
-            OTHER PLATFORMS
+            THE CHAOS PATH
           </div>
           <div className="px-5 py-3 font-mono text-[10.5px] uppercase tracking-eyebrow text-spark border-l border-rule">
             EACH::LABS
@@ -271,7 +275,7 @@ function MeansWhat() {
             </div>
             <div className="px-5 py-3 md:py-6 md:border-l border-rule">
               <div className="md:hidden font-mono text-[10px] uppercase tracking-eyebrow text-ink3 mb-1">
-                Others
+                The chaos path
               </div>
               <p className="text-ink3 text-[14px] leading-[1.55] line-through decoration-ink3/30">
                 {row.others}

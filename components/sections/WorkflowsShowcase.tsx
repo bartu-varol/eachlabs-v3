@@ -244,14 +244,20 @@ export function WorkflowsShowcase() {
                 {product.testimonial.quote}
                 <span className="text-spark">”</span>
               </blockquote>
-              <div className="mt-5">
-                <div className="text-ink text-[14px] font-medium">
-                  {product.testimonial.name}
+              {(product.testimonial.name || product.testimonial.role) && (
+                <div className="mt-5">
+                  {product.testimonial.name && (
+                    <div className="text-ink text-[14px] font-medium">
+                      {product.testimonial.name}
+                    </div>
+                  )}
+                  {product.testimonial.role && (
+                    <div className="text-ink3 text-[13px] mt-0.5">
+                      {product.testimonial.role}
+                    </div>
+                  )}
                 </div>
-                <div className="text-ink3 text-[13px] mt-0.5">
-                  {product.testimonial.role}
-                </div>
-              </div>
+              )}
             </div>
           </div>
         </div>

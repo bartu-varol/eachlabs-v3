@@ -69,7 +69,7 @@ export const SCENARIOS: Scenario[] = [
     chaos:
       'p95 doubles overnight. Users abandon. You add timeouts, which make it worse. Retros pile up.',
     fix: {
-      feature: { prefix: 'each::', name: 'router', tail: 'latency mode' },
+      feature: { prefix: 'each::', name: 'router' },
       tagline: 'Auto-spill to faster providers when yours degrades.',
       body:
         'When p95 latency on a provider exceeds your threshold, the router quietly shifts traffic until it recovers. Your users keep their speed; you keep the cost data.',

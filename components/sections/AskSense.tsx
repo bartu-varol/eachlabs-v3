@@ -95,7 +95,7 @@ export function AskSense() {
           animate={{ opacity: [0.7, 1, 0.7] }}
           transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
         >
-          ↓ still chaos? · ask each::sense
+          ↓ still chaos? · ask the agent
         </motion.span>
       </motion.div>
 
@@ -144,7 +144,7 @@ export function AskSense() {
           value={value}
           onChange={(e) => setValue(e.target.value)}
           placeholder={placeholder}
-          aria-label="Ask each::sense"
+          aria-label="Ask the agent"
           className="flex-1 bg-transparent py-4 pr-4 text-ink placeholder:text-ink3 text-[15px] outline-none"
         />
         <button
@@ -208,7 +208,9 @@ export function AskSense() {
         )}
       </AnimatePresence>
 
-      <p className="font-mono text-[11px] text-ink3 mt-6">{askSense.footnote}</p>
+      {askSense.footnote && (
+        <p className="font-mono text-[11px] text-ink3 mt-6">{askSense.footnote}</p>
+      )}
       </motion.div>
     </section>
   );

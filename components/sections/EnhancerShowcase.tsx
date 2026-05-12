@@ -99,7 +99,7 @@ export function EnhancerShowcase() {
 
       {/* 2. STATS */}
       <section className="container -mt-2">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-rule border border-rule rounded-md overflow-hidden">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-rule border border-rule rounded-md overflow-hidden">
           {product.stats.map((s) => (
             <div key={s.label} className="bg-surface px-5 py-6">
               <div className="font-display font-semibold text-[24px] md:text-[28px] text-spark tabular-nums leading-none break-words">
@@ -187,14 +187,20 @@ export function EnhancerShowcase() {
                 {product.testimonial.quote}
                 <span className="text-spark">”</span>
               </blockquote>
-              <div className="mt-5">
-                <div className="text-ink text-[14px] font-medium">
-                  {product.testimonial.name}
+              {(product.testimonial.name || product.testimonial.role) && (
+                <div className="mt-5">
+                  {product.testimonial.name && (
+                    <div className="text-ink text-[14px] font-medium">
+                      {product.testimonial.name}
+                    </div>
+                  )}
+                  {product.testimonial.role && (
+                    <div className="text-ink3 text-[13px] mt-0.5">
+                      {product.testimonial.role}
+                    </div>
+                  )}
                 </div>
-                <div className="text-ink3 text-[13px] mt-0.5">
-                  {product.testimonial.role}
-                </div>
-              </div>
+              )}
             </div>
           </div>
         </div>
