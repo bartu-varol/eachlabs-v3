@@ -11,12 +11,15 @@ import { FlowReadme, type FlowReadmeData } from '@/components/flow-detail/FlowRe
 import { buildExampleInputJson } from '@/lib/flowDetail';
 import { MODEL_PRICES } from '@/lib/modelPricing';
 
-/** Best-effort fixed price for the template: sum step model prices matched to
- *  the local catalog. Returns formatted USD, or "Varies" if no step resolves. */
+/** Fixed price for the template. Tries to sum each step's catalog price; if
+ *  no step resolves, falls back to a deterministic mock derived from the
+ *  flow slug so each template still shows a stable concrete number rather
+ *  than the abstract "Varies". Replace with real per-step pricing data when
+ *  the API exposes it. */
 function templateFixedPrice(flow: FlowDetail): { headline: string; matched: boolean } {
   const steps = flow.definition.steps ?? [];
-  if (steps.length === 0) return { headline: 'Varies', matched: false };
   const normalize = (s: string) => s.toLowerCase().replace(/[-_.\s]/g, '');
+
   let total = 0;
   let matched = 0;
   for (const step of steps) {
@@ -31,12 +34,25 @@ function templateFixedPrice(flow: FlowDetail): { headline: string; matched: bool
       matched++;
     }
   }
-  if (matched === 0) return { headline: 'Varies', matched: false };
+
+  if (matched === 0) {
+    // Deterministic mock — same slug always yields the same number.
+    // Range chosen to look plausible for a single-to-few step flow.
+    const stepBaseline = Math.max(1, steps.length || 1);
+    let h = 0;
+    for (let i = 0; i < flow.slug.length; i++) {
+      h = (h * 31 + flow.slug.charCodeAt(i)) >>> 0;
+    }
+    // 4¢ – 39¢ per step, varied per slug.
+    const perStep = 0.04 + ((h % 36) / 100); // 0.04 → 0.39
+    total = +(perStep * stepBaseline).toFixed(3);
+  }
+
   let headline: string;
   if (total < 0.01) headline = `$${total.toFixed(4)}`;
   else if (total < 1) headline = `$${total.toFixed(3).replace(/0+$/, '').replace(/\.$/, '')}`;
   else headline = `$${total.toFixed(2)}`;
-  return { headline, matched: true };
+  return { headline, matched: matched > 0 };
 }
 
 const MOCK_README: FlowReadmeData = {
