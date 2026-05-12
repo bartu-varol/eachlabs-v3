@@ -494,10 +494,13 @@ function NormalPill({ step, index }: { step: string; index: number }) {
 }
 
 /* The kling-v3 / wan-2.7 swapping pill. Both names are layered;
-   the active one slides in (y:0, opacity:1), the other slides out. */
+   the active one slides in (y:0, opacity:1), the other slides out.
+   A floating "↳ FALLBACK" tag appears above during the fail+fallback
+   window to make the model swap unmistakable. */
 function SwappingPill({ phase }: { phase: SwapPhase }) {
   const isFail = phase === 'fail';
   const showFb = phase === 'fallback';
+  const swapWindow = isFail || showFb; // tag stays up through both phases
 
   const borderColor =
     isFail  ? 'rgb(var(--c-fail))' :
@@ -509,33 +512,76 @@ function SwappingPill({ phase }: { phase: SwapPhase }) {
               'rgb(var(--c-ink3))';
 
   return (
-    <motion.span
-      className="relative z-10 inline-block px-2 py-1 rounded-md bg-bg border font-mono text-[9.5px] md:text-[10px] uppercase tracking-eyebrow whitespace-nowrap overflow-hidden"
-      animate={{ borderColor, color: textColor }}
-      transition={{ duration: 0.22 }}
-      style={{
-        boxShadow: showFb ? '0 0 8px rgb(var(--c-spark) / 0.45)' : 'none',
-      }}
-    >
-      <span className="relative block">
-        {/* kling-v3 — visible during primary + fail; slides up & out on fallback */}
-        <motion.span
-          className="block"
-          animate={{ y: showFb ? -16 : 0, opacity: showFb ? 0 : 1 }}
-          transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
-        >
-          kling-v3
-        </motion.span>
-        {/* wan-2.7 — slides in from below on fallback */}
-        <motion.span
-          className="absolute inset-0 block"
-          animate={{ y: showFb ? 0 : 16, opacity: showFb ? 1 : 0 }}
-          transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
-        >
-          wan-2.7
-        </motion.span>
-      </span>
-    </motion.span>
+    <span className="relative inline-block z-10">
+      {/* Floating "FALLBACK" tag — appears above the pill during fail+fallback */}
+      <AnimatePresence>
+        {swapWindow && (
+          <motion.span
+            key="fb-tag"
+            initial={{ opacity: 0, y: 4, scale: 0.85 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -2, scale: 0.9 }}
+            transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+            className="absolute left-1/2 -translate-x-1/2 -top-[18px] font-mono text-[8.5px] uppercase tracking-eyebrow px-1.5 py-px rounded-sm whitespace-nowrap pointer-events-none"
+            style={{
+              color: isFail ? 'rgb(var(--c-fail))' : 'rgb(var(--c-spark))',
+              backgroundColor: isFail
+                ? 'rgb(var(--c-fail) / 0.12)'
+                : 'rgb(var(--c-spark) / 0.15)',
+              borderWidth: 1,
+              borderStyle: 'solid',
+              borderColor: isFail
+                ? 'rgb(var(--c-fail) / 0.5)'
+                : 'rgb(var(--c-spark) / 0.55)',
+            }}
+            aria-hidden
+          >
+            {isFail ? '✗ kling failed' : '↳ fallback'}
+          </motion.span>
+        )}
+      </AnimatePresence>
+
+      <motion.span
+        className="relative inline-block px-2 py-1 rounded-md bg-bg border font-mono text-[9.5px] md:text-[10px] uppercase tracking-eyebrow whitespace-nowrap overflow-hidden"
+        animate={{
+          borderColor,
+          color: textColor,
+          scale: showFb ? [1, 1.08, 1] : 1,
+        }}
+        transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+        style={{
+          boxShadow: showFb
+            ? '0 0 0 1px rgb(var(--c-spark) / 0.4), 0 0 14px rgb(var(--c-spark) / 0.55)'
+            : isFail
+              ? '0 0 0 1px rgb(var(--c-fail) / 0.4), 0 0 10px rgb(var(--c-fail) / 0.45)'
+              : 'none',
+        }}
+      >
+        <span className="relative block">
+          {/* kling-v3 — visible during primary + fail; slides up & out on fallback.
+              On fail, gets strike-through to underline the death. */}
+          <motion.span
+            className="block"
+            animate={{
+              y: showFb ? -22 : 0,
+              opacity: showFb ? 0 : 1,
+              textDecoration: isFail ? 'line-through' : 'none',
+            }}
+            transition={{ duration: 0.26, ease: [0.16, 1, 0.3, 1] }}
+          >
+            kling-v3
+          </motion.span>
+          {/* wan-2.7 — slides in from below on fallback */}
+          <motion.span
+            className="absolute inset-0 block"
+            animate={{ y: showFb ? 0 : 22, opacity: showFb ? 1 : 0 }}
+            transition={{ duration: 0.26, ease: [0.16, 1, 0.3, 1] }}
+          >
+            wan-2.7
+          </motion.span>
+        </span>
+      </motion.span>
+    </span>
   );
 }
 
