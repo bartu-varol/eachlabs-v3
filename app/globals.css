@@ -67,6 +67,7 @@ html {
   background: rgb(var(--c-bg));
   color: rgb(var(--c-ink));
   color-scheme: light dark;
+  scroll-behavior: smooth;
 }
 
 body {

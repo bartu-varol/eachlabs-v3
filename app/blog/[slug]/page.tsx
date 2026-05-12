@@ -3,7 +3,14 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
-import { getBlogPost, listBlogPostSlugs } from '@/lib/blogPost';
+import {
+  getAdjacentPosts,
+  getBlogPost,
+  listBlogPostSlugs,
+} from '@/lib/blogPost';
+import { ArticleToC, type TocItem } from '@/components/blog/ArticleToC';
+import { ShareRow } from '@/components/blog/ShareRow';
+import { AdjacentPosts } from '@/components/blog/AdjacentPosts';
 
 export const revalidate = 600;
 
@@ -60,16 +67,35 @@ function sanitizeBlogHtml(html: string): string {
     .replace(/\s+on\w+\s*=\s*'[^']*'/gi, '');
 }
 
+const HEADING_RE = /<h([23])\b[^>]*\bid\s*=\s*["']([^"']+)["'][^>]*>([\s\S]*?)<\/h\1>/gi;
+const TAG_RE = /<[^>]+>/g;
+
+function extractToc(html: string): TocItem[] {
+  const items: TocItem[] = [];
+  let m: RegExpExecArray | null;
+  while ((m = HEADING_RE.exec(html)) !== null) {
+    const level = Number(m[1]) as 2 | 3;
+    const id = m[2];
+    const text = m[3].replace(TAG_RE, '').trim();
+    if (id && text) items.push({ id, text, level });
+  }
+  return items;
+}
+
 export default async function BlogPostPage({
   params,
 }: {
   params: Promise<RouteParams>;
 }) {
   const { slug } = await params;
-  const post = await getBlogPost(slug);
+  const [post, adjacent] = await Promise.all([
+    getBlogPost(slug),
+    getAdjacentPosts(slug),
+  ]);
   if (!post) notFound();
 
   const body = sanitizeBlogHtml(post.html ?? '');
+  const toc = extractToc(body);
 
   return (
     <section className="container py-20 md:py-28">
@@ -80,82 +106,120 @@ export default async function BlogPostPage({
         <ArrowLeft size={12} /> all posts
       </Link>
 
-      <article className="mt-6 max-w-[760px]">
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[11px] uppercase tracking-eyebrow">
-          {post.primaryTag && (
-            <>
-              <span className="text-spark">{post.primaryTag.name}</span>
-              <span className="text-ink3">·</span>
-            </>
-          )}
-          <span className="text-ink3">{formatDate(post.publishedAt)}</span>
-          {post.readingTime > 0 && (
-            <>
-              <span className="text-ink3">·</span>
-              <span className="text-ink3">{post.readingTime} min read</span>
-            </>
-          )}
-        </div>
-
-        <h1 className="font-display font-semibold text-[40px] sm:text-[52px] md:text-[64px] leading-[1.05] tracking-tightest mt-6 text-ink">
-          {post.title}
-        </h1>
-
-        {post.excerpt && (
-          <p className="text-ink2 text-[18px] leading-[1.55] mt-7">{post.excerpt}</p>
-        )}
-
-        {post.author && (
-          <div className="flex items-center gap-3 mt-10 pb-10 border-b border-rule">
-            {post.author.profileImage ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={post.author.profileImage}
-                alt={post.author.name}
-                width={44}
-                height={44}
-                className="w-11 h-11 rounded-full object-cover flex-shrink-0"
-              />
-            ) : (
-              <div className="w-11 h-11 rounded-full flex items-center justify-center text-[13px] font-medium flex-shrink-0 bg-spark/15 text-spark">
-                {initialsFrom(post.author.name)}
-              </div>
+      <div className="mt-6 grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_260px] gap-x-12 gap-y-10 items-start">
+        <article className="max-w-[760px] min-w-0">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-[11px] uppercase tracking-eyebrow">
+            {post.primaryTag && (
+              <>
+                <span className="text-spark">{post.primaryTag.name}</span>
+                <span className="text-ink3">·</span>
+              </>
             )}
-            <div className="min-w-0">
-              <div className="text-ink text-[14px] font-medium">{post.author.name}</div>
-              <div className="text-ink3 text-[12.5px] mt-0.5 truncate">
-                {post.author.bio ?? 'each::labs'}
+            <span className="text-ink3">{formatDate(post.publishedAt)}</span>
+            {post.readingTime > 0 && (
+              <>
+                <span className="text-ink3">·</span>
+                <span className="text-ink3">{post.readingTime} min read</span>
+              </>
+            )}
+          </div>
+
+          <h1 className="font-display font-semibold text-[40px] sm:text-[52px] md:text-[64px] leading-[1.05] tracking-tightest mt-6 text-ink">
+            {post.title}
+          </h1>
+
+          {post.excerpt && (
+            <p className="text-ink2 text-[18px] leading-[1.55] mt-7">{post.excerpt}</p>
+          )}
+
+          {post.author && (
+            <div className="flex items-center gap-3 mt-10 pb-10 border-b border-rule">
+              {post.author.profileImage ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={post.author.profileImage}
+                  alt={post.author.name}
+                  width={44}
+                  height={44}
+                  className="w-11 h-11 rounded-full object-cover flex-shrink-0"
+                />
+              ) : (
+                <div className="w-11 h-11 rounded-full flex items-center justify-center text-[13px] font-medium flex-shrink-0 bg-spark/15 text-spark">
+                  {initialsFrom(post.author.name)}
+                </div>
+              )}
+              <div className="min-w-0">
+                <div className="text-ink text-[14px] font-medium">{post.author.name}</div>
+                <div className="text-ink3 text-[12.5px] mt-0.5 truncate">
+                  {post.author.bio ?? 'each::labs'}
+                </div>
               </div>
             </div>
+          )}
+
+          {post.featureImage && (
+            <div className="mt-10 rounded-md overflow-hidden border border-rule2 bg-surface">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={post.featureImage}
+                alt={post.title}
+                className="w-full h-auto block"
+                loading="eager"
+              />
+            </div>
+          )}
+
+          <div
+            className="blog-prose mt-10"
+            dangerouslySetInnerHTML={{ __html: body }}
+          />
+
+          <AdjacentPosts previous={adjacent.previous} next={adjacent.next} />
+
+          <div className="mt-12 flex flex-wrap gap-3 pt-10 border-t border-rule">
+            <Button href="/blog" variant="secondary">
+              ← Back to blog
+            </Button>
+            <Button href="https://discord.gg/eachlabs" variant="primary">
+              Discuss in Discord →
+            </Button>
           </div>
-        )}
+        </article>
 
-        {post.featureImage && (
-          <div className="mt-10 rounded-md overflow-hidden border border-rule2 bg-surface">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={post.featureImage}
-              alt={post.title}
-              className="w-full h-auto block"
-              loading="eager"
-            />
-          </div>
-        )}
-
-        <div
-          className="blog-prose mt-10"
-          dangerouslySetInnerHTML={{ __html: body }}
-        />
-
-        <div className="mt-16 flex flex-wrap gap-3 pt-10 border-t border-rule">
-          <Button href="/blog" variant="secondary">
-            ← Back to blog
-          </Button>
-          <Button href="https://discord.gg/eachlabs" variant="primary">
-            Discuss in Discord →
-          </Button>
-        </div>
-      </article>
+        <aside className="hidden lg:block lg:sticky lg:top-24 space-y-4 self-start">
+          <ArticleToC items={toc} />
+          <ShareRow title={post.title} slug={post.slug} />
+          {post.author && (
+            <div className="border border-rule2 rounded-md p-5 bg-surface/40">
+              <div className="font-mono text-[10.5px] uppercase tracking-eyebrow text-ink3 mb-3">
+                Written by
+              </div>
+              <div className="flex items-start gap-3">
+                {post.author.profileImage ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={post.author.profileImage}
+                    alt={post.author.name}
+                    className="w-10 h-10 rounded-full object-cover flex-shrink-0"
+                  />
+                ) : (
+                  <div className="w-10 h-10 rounded-full flex items-center justify-center text-[12px] font-medium flex-shrink-0 bg-spark/15 text-spark">
+                    {initialsFrom(post.author.name)}
+                  </div>
+                )}
+                <div className="min-w-0">
+                  <div className="text-ink text-[13.5px] font-medium leading-tight">
+                    {post.author.name}
+                  </div>
+                  <div className="text-ink3 text-[12px] mt-1 leading-snug line-clamp-3">
+                    {post.author.bio ?? 'each::labs writer'}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+        </aside>
+      </div>
     </section>
   );
 }

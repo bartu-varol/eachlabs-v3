@@ -164,3 +164,21 @@ export async function listBlogPosts(limit = 60): Promise<BlogPostSummary[]> {
   const data = (await res.json()) as { posts?: RawSummary[] };
   return (data.posts ?? []).map(mapSummary);
 }
+
+export type AdjacentPosts = {
+  previous: BlogPostSummary | null;
+  next: BlogPostSummary | null;
+};
+
+/** Fetch the post catalog and return the items adjacent to `slug` in publish order.
+ *  `previous` = newer post (one before in the published_at-desc list).
+ *  `next` = older post (one after). */
+export async function getAdjacentPosts(slug: string, limit = 200): Promise<AdjacentPosts> {
+  const all = await listBlogPosts(limit);
+  const idx = all.findIndex((p) => p.slug === slug);
+  if (idx === -1) return { previous: null, next: null };
+  return {
+    previous: idx > 0 ? all[idx - 1] : null,
+    next: idx < all.length - 1 ? all[idx + 1] : null,
+  };
+}
