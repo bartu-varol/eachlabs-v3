@@ -537,6 +537,15 @@ export const footer = {
         { label: 'GitHub',      href: 'https://github.com/eachlabs' },
       ],
     },
+    {
+      title: 'RESOURCES',
+      links: [
+        { label: 'Contact Us',        href: '/contact-us' },
+        { label: 'Brand Kit',         href: '/brand' },
+        { label: 'Privacy Policy',    href: '/privacy-policy' },
+        { label: 'Terms of Service',  href: '/terms-of-service' },
+      ],
+    },
   ],
   copyright: '© 2026 each::labs. All rights reserved.',
   status: '* 99.99% · all systems operational',

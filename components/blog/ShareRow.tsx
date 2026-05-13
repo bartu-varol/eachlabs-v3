@@ -19,7 +19,7 @@ export function ShareRow({ title, slug }: Props) {
       setCopied(true);
       setTimeout(() => setCopied(false), 1600);
     } catch {
-      // Silent fail — clipboard may be unavailable.
+      // Silent fail, clipboard may be unavailable.
     }
   }
 

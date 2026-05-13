@@ -324,7 +324,7 @@ export function BlogIndex({ posts }: Props) {
       <section className="container py-10 md:py-12">
         {filtered.length === 0 ? (
           <div className="py-20 text-center font-mono text-[12px] text-ink3">
-            No posts match — try a different category or search.
+            No posts match, try a different category or search.
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">

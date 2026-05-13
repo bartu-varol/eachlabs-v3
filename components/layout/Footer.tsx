@@ -19,7 +19,7 @@ export function Footer() {
   return (
     <footer className="border-t border-rule pt-12 pb-8 bg-bg">
       <div className="container">
-        <div className="grid grid-cols-1 md:grid-cols-[1.5fr_1fr_1fr_1fr_1fr] gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-[1.4fr_1fr_1fr_1fr_1fr_1fr] gap-8">
           <div className="flex flex-col gap-3">
             <Wordmark />
             <p className="text-[14px] text-ink2 max-w-[280px] leading-[1.5]">

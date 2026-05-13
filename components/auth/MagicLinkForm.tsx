@@ -27,7 +27,7 @@ export function MagicLinkForm({ variant }: Props) {
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    // Mock — real magic-link wiring lives elsewhere.
+    // Mock, real magic-link wiring lives elsewhere.
   }
 
   return (
