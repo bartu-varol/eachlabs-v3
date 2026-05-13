@@ -10,6 +10,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "fast-xml-parser": "^5.8.0",
     "framer-motion": "^12.38.0",
     "lottie-react": "^2.4.1",
     "lucide-react": "0.468.0",
