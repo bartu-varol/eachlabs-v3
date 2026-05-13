@@ -86,20 +86,6 @@ export function Nav() {
                 </span>
               </span>
               <Link
-                href="https://docs.eachlabs.ai/introduction"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[14px] font-medium text-ink2 hover:text-ink"
-              >
-                Docs
-              </Link>
-              <Link
-                href="/changelog"
-                className="text-[14px] font-medium text-ink2 hover:text-ink"
-              >
-                Changelog
-              </Link>
-              <Link
                 href="/signin"
                 className="inline-flex items-center justify-center px-4 py-1.5 border border-rule2 rounded-md text-[14px] font-medium text-ink hover:bg-surface transition-colors"
               >
