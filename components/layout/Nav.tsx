@@ -100,7 +100,7 @@ export function Nav() {
                 Changelog
               </Link>
               <Link
-                href="#"
+                href="/signin"
                 className="inline-flex items-center justify-center px-4 py-1.5 border border-rule2 rounded-md text-[14px] font-medium text-ink hover:bg-surface transition-colors"
               >
                 Sign in
