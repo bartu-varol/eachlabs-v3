@@ -1,12 +1,6 @@
-import type { Metadata } from 'next';
 import Link from 'next/link';
 import { AuthTerminalShell } from '@/components/auth/AuthTerminalShell';
 import { AuthTerminalAuth } from '@/components/auth/AuthTerminalAuth';
-
-export const metadata: Metadata = {
-  title: 'each auth signup · each::labs',
-  description: 'API key in 60 seconds. Terminal-first.',
-};
 
 const MOTD = [
   { ts: '05:14:22', tone: 'spark',   text: 'each::router 1.4 ships, quality-aware spill' },
@@ -14,13 +8,14 @@ const MOTD = [
   { ts: '05:14:19', tone: 'success', text: 'welcome.  there is no credit card field.' },
 ];
 
-export default function Signup2Page() {
+export function SignupTerminal() {
   return (
     <AuthTerminalShell
       cwd="~/each-auth/signup"
+      brandHref="/signup?ui=brand"
       tabs={[
-        { label: 'signin', href: '/signin2' },
-        { label: 'signup', href: '/signup2', active: true },
+        { label: 'signin', href: '/signin?ui=terminal' },
+        { label: 'signup', href: '/signup?ui=terminal', active: true },
       ]}
     >
       <pre className="font-mono text-[13.5px] leading-[1.85] text-ink2 whitespace-pre-wrap">
@@ -33,7 +28,7 @@ export default function Signup2Page() {
       </pre>
 
       <div className="mt-5">
-        <AuthTerminalAuth mode="signup" />
+        <AuthTerminalAuth mode="signup" redirectTo="/onboarding?theme=terminal" />
       </div>
 
       <div className="mt-10 border-t border-rule2 pt-5">
@@ -54,7 +49,7 @@ export default function Signup2Page() {
 
       <p className="mt-10 text-[12.5px] text-ink3 font-mono">
         already have a key?{' '}
-        <Link href="/signin2" className="text-spark hover:underline underline-offset-4">
+        <Link href="/signin?ui=terminal" className="text-spark hover:underline underline-offset-4">
           $ each auth login →
         </Link>
       </p>

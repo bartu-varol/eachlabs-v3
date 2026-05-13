@@ -66,7 +66,7 @@ export function EnhancerShowcase() {
                 accent="HOW"
                 text={
                   <>
-                    Add <code className="font-mono text-[12.5px] text-spark">enhance.rescue: true</code> to your each.run() call.
+                    Add <code className="font-mono text-[12.5px] text-spark">enhance.prompt: true</code> to your each.run() call.
                     The trace tells you what was rewritten and why.
                   </>
                 }
@@ -161,52 +161,7 @@ export function EnhancerShowcase() {
         </div>
       </section>
 
-      {/* 7. TESTIMONIAL */}
-      <section className="relative border-t border-rule overflow-hidden">
-        <div
-          aria-hidden
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              'radial-gradient(ellipse 60% 50% at 50% 0%, rgb(var(--c-spark) / 0.06), transparent 65%)',
-          }}
-        />
-        <div className="container py-20 md:py-24 relative">
-          <div className="grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-10 lg:gap-16 items-center">
-            <div className="lg:border-r lg:border-rule lg:pr-16">
-              <div className="font-display font-semibold text-[44px] md:text-[64px] leading-[0.9] tracking-tightest text-spark tabular-nums whitespace-nowrap">
-                {product.testimonial.metric}
-              </div>
-              <div className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3 mt-3 max-w-[260px]">
-                {product.testimonial.metricLabel}
-              </div>
-            </div>
-            <div>
-              <blockquote className="font-display text-[20px] md:text-[26px] leading-[1.35] tracking-tight text-ink">
-                <span className="text-spark">“</span>
-                {product.testimonial.quote}
-                <span className="text-spark">”</span>
-              </blockquote>
-              {(product.testimonial.name || product.testimonial.role) && (
-                <div className="mt-5">
-                  {product.testimonial.name && (
-                    <div className="text-ink text-[14px] font-medium">
-                      {product.testimonial.name}
-                    </div>
-                  )}
-                  {product.testimonial.role && (
-                    <div className="text-ink3 text-[13px] mt-0.5">
-                      {product.testimonial.role}
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 8. PAIRS WELL WITH */}
+      {/* 6. PAIRS WELL WITH */}
       <section className="container border-t border-rule py-20 md:py-24">
         <div className="font-mono text-[11px] uppercase tracking-eyebrow text-spark mb-3">
           ● PAIRS WELL WITH
@@ -236,7 +191,7 @@ export function EnhancerShowcase() {
         </div>
       </section>
 
-      {/* 9. CTA, explicit waitlist framing */}
+      {/* 7. CTA, explicit waitlist framing */}
       <section className="container border-t border-rule py-24 md:py-32">
         <div className="max-w-[680px] mx-auto text-center">
           <div className="inline-flex items-center mb-5">

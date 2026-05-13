@@ -1,56 +1,13 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Check, HardDrive, Cpu } from 'lucide-react';
+import { Check } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { RabbitButton } from '@/components/ui/RabbitButton';
 import { PricingCalculator } from '@/components/sections/PricingCalculator';
 
-/* Pricing page, two main sections: §01 Model Price · §02 Storage Price */
-
-const SECTIONS = [
-  { n: '01', id: 'model',   icon: Cpu,       title: 'Model price',   body: 'Same number the provider charges.' },
-  { n: '02', id: 'storage', icon: HardDrive, title: 'Storage price', body: 'Pass-through cloud cost. First 5 GB free.' },
-];
-
 /* ────────────────────────────────────────────────────────────────────────────
-   §01, Model Price: single unified table (provider price == eachlabs price)
-   ──────────────────────────────────────────────────────────────────────────── */
-function ModelPriceSection() {
-  return (
-    <section id="model" className="relative border-t border-rule overflow-hidden scroll-mt-24">
-      <div
-        aria-hidden
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            'radial-gradient(ellipse 60% 50% at 50% 0%, rgb(var(--c-spark) / 0.05), transparent 65%)',
-        }}
-      />
-      <div className="container pt-20 md:pt-24 pb-2 relative">
-        <div className="font-mono text-[11px] uppercase tracking-eyebrow text-spark mb-3">
-          ● §01 MODEL PRICE
-        </div>
-        <h2 className="font-display font-semibold text-[34px] md:text-[48px] leading-[1.05] tracking-tightest text-ink max-w-[820px]">
-          What the provider charges.{' '}
-          <span className="text-ink3 italic">What you pay. Same number.</span>
-        </h2>
-        <p className="text-ink2 text-[14.5px] leading-[1.6] mt-5 max-w-[640px]">
-          Every model on Eachlabs is billed at the upstream provider&rsquo;s rate. We don&rsquo;t
-          mark it up, we don&rsquo;t round up, we don&rsquo;t bundle it into a seat. If Alibaba
-          says <span className="font-mono text-ink">$0.10</span>, you pay{' '}
-          <span className="font-mono text-ink">$0.10</span>.
-        </p>
-      </div>
-
-      {/* Unified interactive table: provider price · eachlabs price · runs at budget */}
-      <PricingCalculator />
-    </section>
-  );
-}
-
-/* ────────────────────────────────────────────────────────────────────────────
-   §02, Storage Price: pass-through cloud cost
+   Storage Price: pass-through cloud cost
    ──────────────────────────────────────────────────────────────────────────── */
 const STORAGE_TIERS = [
   { label: 'First 5 GB',     rate: 'Free',        note: 'Included on every account, indefinitely.' },
@@ -71,7 +28,7 @@ function StoragePrice() {
       />
       <div className="container py-20 md:py-24 relative">
         <div className="font-mono text-[11px] uppercase tracking-eyebrow text-spark mb-3">
-          ● §02 STORAGE PRICE
+          ● STORAGE PRICE
         </div>
         <h2 className="font-display font-semibold text-[34px] md:text-[48px] leading-[1.05] tracking-tightest text-ink max-w-[820px]">
           Generated assets live somewhere.{' '}
@@ -143,34 +100,11 @@ export default function PricingPage() {
             Eachlabs charges the same rate as the upstream provider, for every model, every
             run. Storage is pass-through. You only pay for what you would have paid anyway.
           </p>
-
-          {/* Section anchor strip */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-rule mt-12 border border-rule rounded-md overflow-hidden">
-            {SECTIONS.map((s) => {
-              const Icon = s.icon;
-              return (
-                <a
-                  key={s.n}
-                  href={`#${s.id}`}
-                  className="bg-surface px-6 py-6 hover:bg-bg/40 transition-colors group"
-                >
-                  <div className="flex items-center justify-between">
-                    <div className="font-mono text-[11px] tabular-nums text-spark">{s.n}</div>
-                    <Icon size={16} className="text-ink3 group-hover:text-spark transition-colors" aria-hidden />
-                  </div>
-                  <div className="font-display font-semibold text-[18px] text-ink mt-3 leading-tight">
-                    {s.title}
-                  </div>
-                  <div className="text-ink2 text-[13px] mt-1.5 leading-[1.5]">{s.body}</div>
-                </a>
-              );
-            })}
-          </div>
         </motion.div>
       </section>
 
       {/* Main sections */}
-      <ModelPriceSection />
+      <PricingCalculator />
       <StoragePrice />
 
       {/* Enterprise CTA banner */}

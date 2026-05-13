@@ -3,11 +3,11 @@
 import { motion } from 'framer-motion';
 
 /* ──────────────────────────────────────────────────────────────────────────
-   EnhancerHowTo, "30 seconds to wire up rescue" section.
+   EnhancerHowTo, "30 seconds to wire up prompt enhance" section.
 
-     ① Enable rescue          , one flag on the each.run() call
-     ② Choose what's caught   , list of policy categories the rescuer handles
-     ③ Read the rescue trace  , original + rewritten side by side
+     ① Enhance prompt         , one flag on the each.run() call
+     ② Choose what's caught   , list of policy categories the enhancer handles
+     ③ Read the prompt trace  , original + rewritten side by side
 ────────────────────────────────────────────────────────────────────────── */
 
 const POLICIES = [
@@ -28,14 +28,14 @@ export function EnhancerHowTo() {
         One flag. Five policies. Every refusal saved.
       </h2>
       <p className="text-ink2 text-[15px] leading-[1.65] max-w-[640px] mt-6">
-        Add <Code>enhance.rescue: true</Code> to any each.run() call. The rescuer
+        Add <Code>enhance.prompt: true</Code> to any each.run() call. The enhancer
         watches the policy verdict, rewrites only when it would have failed, and
         stamps the trace so you can audit what was changed.
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-rule border border-rule rounded-md overflow-hidden mt-12">
         {/* Step 1 */}
-        <Step n="01" title="Enable rescue" delay={0}>
+        <Step n="01" title="Enhance prompt" delay={0}>
           <p className="text-ink2 text-[13px] leading-[1.6]">
             One flag on your existing each.run(). No SDK swap, no separate endpoint.
           </p>
@@ -45,7 +45,7 @@ export function EnhancerHowTo() {
               { indent: 2, tokens: [p('model: '), s('"kling-v3-12v"'), o(',')] },
               { indent: 2, tokens: [p('inputs: '), o('{ '), p('prompt: '), p('user.prompt'), o(' },')] },
               { indent: 2, tokens: [p('enhance: '), o('{')] },
-              { indent: 4, tokens: [p('rescue: '), s('true'), o(',')], highlight: true },
+              { indent: 4, tokens: [p('prompt: '), s('true'), o(',')], highlight: true },
               { indent: 4, tokens: [p('intent_priority: '), s('"preserve"'), o(',')] },
               { indent: 2, tokens: [o('}')] },
               { tokens: [v('})')] },
@@ -53,7 +53,7 @@ export function EnhancerHowTo() {
           />
           <div className="flex flex-col gap-1.5 mt-1">
             <Bullet text="Default off, opt in per call." />
-            <Bullet text="Bills only when an actual rescue fires." />
+            <Bullet text="Bills only when the enhancer actually fires." />
             <Bullet text={`Pass <code class="font-mono text-spark">intent_priority: "preserve"</code> to lock the user&rsquo;s meaning.`} />
           </div>
         </Step>
@@ -61,7 +61,7 @@ export function EnhancerHowTo() {
         {/* Step 2 */}
         <Step n="02" title="What gets caught" delay={0.1}>
           <p className="text-ink2 text-[13px] leading-[1.6]">
-            The rescuer adapts to each provider’s policy table. These are the
+            The enhancer adapts to each provider’s policy table. These are the
             categories it learns to swap automatically.
           </p>
           <div className="flex flex-col gap-1.5 mt-1">
@@ -72,16 +72,16 @@ export function EnhancerHowTo() {
         </Step>
 
         {/* Step 3 */}
-        <Step n="03" title="Read the rescue trace" delay={0.2}>
+        <Step n="03" title="Read the prompt trace" delay={0.2}>
           <p className="text-ink2 text-[13px] leading-[1.6]">
-            Every rescued call carries a <Code>trace.enhancer</Code> block, the
+            Every enhanced call carries a <Code>trace.enhancer</Code> block, the
             original, the rewritten, what got rejected, and the recheck verdict.
           </p>
           <CodeMini
             lines={[
               { tokens: [k('const '), p('e '), o('= '), p('result.trace.enhancer')] },
               { tokens: [c('// e = {')] },
-              { indent: 2, tokens: [c('//   rescued:   true,')] },
+              { indent: 2, tokens: [c('//   enhanced:  true,')] },
               { indent: 2, tokens: [c('//   rejected:  "brand_ip",')], highlight: true },
               { indent: 2, tokens: [c('//   original:  "...looks like Red Bull...",')] },
               { indent: 2, tokens: [c('//   rewritten: "...vibrant blue and silver...",')], highlight: true },

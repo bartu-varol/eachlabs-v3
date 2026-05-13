@@ -1,8 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { ArrowLeft } from 'lucide-react';
-import { Button } from '@/components/ui/Button';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 import {
   getAdjacentPosts,
   getBlogPost,
@@ -11,6 +10,7 @@ import {
 import { ArticleToC, type TocItem } from '@/components/blog/ArticleToC';
 import { ShareRow } from '@/components/blog/ShareRow';
 import { AdjacentPosts } from '@/components/blog/AdjacentPosts';
+import { ReadingProgress } from '@/components/blog/ReadingProgress';
 
 export const revalidate = 600;
 
@@ -104,20 +104,22 @@ export default async function BlogPostPage({
   const toc = extractToc(body);
 
   return (
-    <section className="container py-20 md:py-28">
+    <>
+      <ReadingProgress />
+      <section className="container py-20 md:py-28">
       <Link
         href="/blog"
         className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-eyebrow text-ink3 hover:text-ink transition-colors"
       >
-        <ArrowLeft size={12} /> all posts
+        <ArrowLeft size={12} /> all dispatches
       </Link>
 
-      <div className="mt-6 grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_260px] gap-x-12 gap-y-10 items-start">
-        <article className="max-w-[760px] min-w-0">
+      <div className="mt-6 grid grid-cols-1 lg:grid-cols-[minmax(0,820px)_1fr_300px] gap-y-10 items-start">
+        <article className="min-w-0 lg:col-start-1">
           <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-mono text-[11px] uppercase tracking-eyebrow text-ink3">
             {post.primaryTag && (
               <>
-                <span className="text-spark">{post.primaryTag.name}</span>
+                <span>{post.primaryTag.name}</span>
                 <span aria-hidden>·</span>
               </>
             )}
@@ -130,12 +132,12 @@ export default async function BlogPostPage({
             )}
           </div>
 
-          <h1 className="font-display font-semibold text-[36px] sm:text-[48px] md:text-[56px] leading-[1.06] tracking-tightest mt-5 text-ink">
+          <h1 className="font-display font-semibold text-[36px] sm:text-[52px] md:text-[64px] leading-[1.04] tracking-tightest mt-5 text-ink">
             {post.title}
           </h1>
 
           {post.excerpt && (
-            <p className="text-ink2 text-[17.5px] leading-[1.6] mt-6 max-w-[680px]">
+            <p className="text-ink2 text-[18px] leading-[1.55] mt-6 max-w-[680px] italic">
               {post.excerpt}
             </p>
           )}
@@ -180,56 +182,36 @@ export default async function BlogPostPage({
           )}
 
           <div
-            className="blog-prose mt-10"
+            className="blog-prose blog-prose--dropcap mt-10"
             dangerouslySetInnerHTML={{ __html: body }}
           />
 
           <AdjacentPosts previous={adjacent.previous} next={adjacent.next} />
 
-          <div className="mt-12 flex flex-wrap gap-3 pt-10 border-t border-rule">
-            <Button href="/blog" variant="secondary">
-              ← Back to blog
-            </Button>
-            <Button href="https://discord.gg/eachlabs" variant="primary">
-              Discuss in Discord →
-            </Button>
+          <div className="mt-12 pt-10 border-t border-rule flex flex-wrap items-center gap-x-8 gap-y-3 font-mono text-[11px] uppercase tracking-eyebrow">
+            <Link
+              href="/blog"
+              className="inline-flex items-center gap-1.5 text-ink3 hover:text-ink transition-colors"
+            >
+              <ArrowLeft size={12} /> all dispatches
+            </Link>
+            <a
+              href="https://discord.gg/eachlabs"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-ink3 hover:text-spark hover:italic transition-colors"
+            >
+              discuss in discord <ArrowRight size={12} />
+            </a>
           </div>
         </article>
 
-        <aside className="hidden lg:block lg:sticky lg:top-24 space-y-4 self-start">
+        <aside className="hidden lg:block lg:col-start-3 lg:sticky lg:top-32 space-y-4 self-start">
           <ArticleToC items={toc} />
           <ShareRow title={post.title} slug={post.slug} />
-          {post.author && (
-            <div className="border border-rule2 rounded-md p-5 bg-surface/40">
-              <div className="font-mono text-[10.5px] uppercase tracking-eyebrow text-ink3 mb-3">
-                Written by
-              </div>
-              <div className="flex items-start gap-3">
-                {post.author.profileImage ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    src={post.author.profileImage}
-                    alt={post.author.name}
-                    className="w-10 h-10 rounded-full object-cover flex-shrink-0"
-                  />
-                ) : (
-                  <div className="w-10 h-10 rounded-full flex items-center justify-center text-[12px] font-medium flex-shrink-0 bg-spark/15 text-spark">
-                    {initialsFrom(post.author.name)}
-                  </div>
-                )}
-                <div className="min-w-0">
-                  <div className="text-ink text-[13.5px] font-medium leading-tight">
-                    {post.author.name}
-                  </div>
-                  <div className="text-ink3 text-[12px] mt-1 leading-snug line-clamp-3">
-                    {post.author.bio ?? 'each::labs writer'}
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
         </aside>
       </div>
     </section>
+    </>
   );
 }

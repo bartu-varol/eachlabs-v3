@@ -12,7 +12,12 @@ type Props = {
 
 export function AuthShell({ children, brand }: Props) {
   return (
-    <div className="min-h-screen grid grid-cols-1 lg:grid-cols-2">
+    <div className="relative min-h-screen grid grid-cols-1 lg:grid-cols-2">
+      {/* Theme toggle, anchored to the page top-right */}
+      <div className="absolute top-6 sm:top-8 lg:top-10 right-6 sm:right-10 lg:right-14 z-10">
+        <ThemeToggle />
+      </div>
+
       {/* LEFT, form column */}
       <div className="relative flex flex-col px-6 sm:px-10 lg:px-14 py-8 lg:py-10 min-h-screen">
         <Link
@@ -27,26 +32,23 @@ export function AuthShell({ children, brand }: Props) {
           <div className="w-full max-w-[400px]">{children}</div>
         </div>
 
-        <div className="flex items-end justify-between gap-4">
-          <p className="text-ink3 text-[11px] max-w-[320px] leading-relaxed">
-            By continuing, you agree to our{' '}
-            <Link
-              href="/terms"
-              className="text-ink2 hover:text-ink underline underline-offset-2"
-            >
-              Terms
-            </Link>
-            {' & '}
-            <Link
-              href="/privacy"
-              className="text-ink2 hover:text-ink underline underline-offset-2"
-            >
-              Privacy
-            </Link>
-            .
-          </p>
-          <ThemeToggle />
-        </div>
+        <p className="text-ink3 text-[11px] leading-relaxed text-center max-w-[400px] mx-auto">
+          By continuing, you agree to our{' '}
+          <Link
+            href="/terms"
+            className="text-ink2 hover:text-ink underline underline-offset-2"
+          >
+            Terms
+          </Link>
+          {' & '}
+          <Link
+            href="/privacy"
+            className="text-ink2 hover:text-ink underline underline-offset-2"
+          >
+            Privacy
+          </Link>
+          .
+        </p>
       </div>
 
       {/* RIGHT, brand column */}

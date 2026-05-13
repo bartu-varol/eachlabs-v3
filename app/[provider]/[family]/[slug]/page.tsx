@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { getModelDetail } from '@/lib/modelDetail';
 import { ModelDetailHero } from '@/components/model-detail/ModelDetailHero';
 import { ModelApiSnippets } from '@/components/model-detail/ModelApiSnippets';
+import { ModelExamples } from '@/components/model-detail/ModelExamples';
 import { ModelPricing } from '@/components/model-detail/ModelPricing';
 import { ModelReadme } from '@/components/model-detail/ModelReadme';
 import { ModelRelated } from '@/components/model-detail/ModelRelated';
@@ -57,6 +58,7 @@ export default async function ModelDetailPage({
               inputs={model.inputs}
               examplePayload={model.defaultExampleInput}
             />
+            <ModelExamples model={model} />
             <ModelReadme readme={model.readme} />
           </div>
 

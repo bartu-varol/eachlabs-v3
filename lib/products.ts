@@ -19,14 +19,6 @@ export type ProductPoint = {
 };
 export type PairsWith = { product: string; body: string; href: string };
 
-export type Testimonial = {
-  metric: string;       // headline number, e.g. "3× faster"
-  metricLabel: string;  // what the metric measures
-  quote: string;
-  name: string;
-  role: string;
-};
-
 export type Accent = 'spark' | 'highlight' | 'success' | 'sun' | 'yellow' | 'ember';
 
 export type ProductDef = {
@@ -53,7 +45,6 @@ export type ProductDef = {
   whenTitle: string;
   whenPoints: ProductPoint[];
   code: string;
-  testimonial: Testimonial; // metric-driven customer quote
   pairsWith: PairsWith[];
   ctaTitle: string;
   ctaBody: string;
@@ -113,13 +104,6 @@ const result = await each.run({
 });`,
     providers: ['gpt-4o', 'Kling', 'Veo', 'FLUX', 'ElevenLabs', 'Suno'],
     trustedBy: ['NOVA', 'LUME', 'Helix', 'Maker', 'Forma'],
-    testimonial: {
-      metric: '4 → 1',
-      metricLabel: 'inference services collapsed into one workflow',
-      quote: 'We went from four inference services glued together with bash to one versioned workflow. Velocity tripled, and rollback is a string change.',
-      name: '',
-      role: '',
-    },
     pairsWith: [
       { product: 'Router', body: 'Each node uses the router for fallbacks.', href: '/router' },
       { product: 'Enhancer', body: '12× fewer errors per node, automatically.', href: '/enhancer' },
@@ -177,13 +161,6 @@ const result = await each.run({
 // result.trace shows which provider served the call.`,
     providers: ['Kling', 'Veo', 'Wan', 'FLUX', 'ElevenLabs', 'OpenAI'],
     trustedBy: ['LUME', 'Prism', 'Maker', 'Kairo', 'Ondra'],
-    testimonial: {
-      metric: 'weekly → 0',
-      metricLabel: '3AM pages, since router went live',
-      quote: 'Our 3AM pages went from weekly to zero. Worth the migration alone, and the failover trace told us exactly which provider had the bad night.',
-      name: '',
-      role: '',
-    },
     pairsWith: [
       { product: 'Workflows', body: 'Each workflow node uses the router for fallbacks.', href: '/workflows' },
       { product: 'Enhancer', body: 'Different model, different failure surface, handled.', href: '/enhancer' },
@@ -242,13 +219,6 @@ const result = await each.run({
 //   your code:           unchanged`,
     providers: ['Kling', 'Veo', 'FLUX', 'ElevenLabs', 'Suno', 'gpt-4o'],
     trustedBy: ['StoryForge', 'NOVA', 'Maker', 'Aster', 'Forma'],
-    testimonial: {
-      metric: '12.4% → 0.9%',
-      metricLabel: 'error rate vs raw provider, in production',
-      quote: 'Our error rate dropped from one-in-eight to under one-in-a-hundred. Same model, same call, we just flipped enhance: true.',
-      name: '',
-      role: '',
-    },
     pairsWith: [
       { product: 'Router', body: 'Different model, different failure surface, handled.', href: '/router' },
       { product: 'Workflows', body: 'Lower error rate on every node of every pipeline.', href: '/workflows' },

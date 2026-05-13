@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -154,12 +155,21 @@ export function HeroWidget() {
   const rateRising = phase === 'fail' || phase === 'fallback';
 
   return (
-    <div className="relative w-full max-w-[520px] mx-auto lg:mx-0">
+    <div className="relative w-full max-w-[520px] mx-auto lg:ml-auto lg:mr-0">
       {/* Subtle ambient glow */}
       <div
         aria-hidden
         className="absolute -inset-6 -z-10 rounded-[24px] bg-gradient-to-tr from-spark/[0.08] via-transparent to-spark/[0.04] blur-2xl"
       />
+
+      {/* "I am AI agent" caption above the card, matching the bottom caption style; routes to llm.txt */}
+      <Link
+        href="/llm.txt"
+        className="block mb-3 font-mono text-[10px] uppercase tracking-eyebrow text-ink3 hover:text-spark transition-colors text-center lg:text-right"
+      >
+        <span className="inline-block w-1 h-1 rounded-full bg-spark animate-pulse mr-2 align-middle" aria-hidden />
+        I am AI agent · llm.txt →
+      </Link>
 
       <div className="bg-surface border border-rule2 rounded-md overflow-hidden">
         {/* Header, orchestration + observability framing */}
@@ -545,7 +555,7 @@ function SwappingPill({ phase }: { phase: SwapPhase }) {
             animate={{ opacity: 1, y: 0, scale: 1, x: '-50%' }}
             exit={{ opacity: 0, y: -4, scale: 0.9, x: '-50%' }}
             transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute left-1/2 -top-[22px] font-mono text-[9px] uppercase tracking-eyebrow px-2 py-[2px] rounded-sm whitespace-nowrap pointer-events-none flex items-center gap-1"
+            className="absolute left-1/2 -top-[30px] font-mono text-[9px] uppercase tracking-eyebrow px-2 py-[2px] rounded-sm whitespace-nowrap pointer-events-none flex items-center gap-1"
             style={{
               color: isFail ? 'rgb(var(--c-fail))' : 'rgb(var(--c-spark))',
               backgroundColor: isFail

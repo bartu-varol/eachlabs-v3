@@ -41,10 +41,10 @@ export default function Signup4Page() {
       </ul>
 
       <div className="mt-9">
-        <OAuthButtons mode="signup" />
+        <OAuthButtons mode="signup" theme="boarding" redirectTo="/onboarding?theme=boarding" />
       </div>
 
-      <MagicLinkForm variant="signup" />
+      <MagicLinkForm variant="signup" theme="boarding" redirectTo="/onboarding?theme=boarding" />
 
       <p className="mt-9 text-ink3 text-[13px]">
         Already flown with us?{' '}

@@ -12,7 +12,9 @@ import {
 } from '@/lib/catalog';
 import type { WorkflowCategory, WorkflowSummary } from '@/lib/workflows';
 
-type Tab = 'MODELS' | 'WORKFLOWS' | 'TRENDS';
+type Tab = 'MODELS' | 'WORKFLOWS' | 'TRENDS' | 'LLMS';
+
+const LLM_CATEGORY_SLUG = 'text-to-text';
 
 /** Curated leading order so common categories sit on the left. */
 const CATEGORY_ORDER = [
@@ -74,6 +76,39 @@ export function ExploreShell({
   const [category, setCategory] = useState<string>('ALL');
   const [provider, setProvider] = useState<string>('ALL');
   const [showAll, setShowAll] = useState(false);
+
+  // LLMs filters (independent search + provider so switching tabs doesn't
+  // leak filter state between the Models grid and the LLMs grid).
+  const [llmQuery, setLlmQuery] = useState('');
+  const [llmProvider, setLlmProvider] = useState<string>('ALL');
+  const [llmShowAll, setLlmShowAll] = useState(false);
+
+  const llmAllModels = useMemo(
+    () => allModels.filter((m: CatalogModel) => m.categorySlug === LLM_CATEGORY_SLUG),
+    [],
+  );
+
+  const llmProviders = useMemo(() => {
+    const counts: Record<string, number> = {};
+    for (const m of llmAllModels) counts[m.providerSlug] = (counts[m.providerSlug] ?? 0) + 1;
+    return [...allProviders]
+      .filter((p) => counts[p.slug])
+      .sort((a, b) => (counts[b.slug] ?? 0) - (counts[a.slug] ?? 0));
+  }, [llmAllModels]);
+
+  const filteredLlms = useMemo(() => {
+    const q = llmQuery.trim().toLowerCase();
+    return llmAllModels.filter((m: CatalogModel) => {
+      if (llmProvider !== 'ALL' && m.providerSlug !== llmProvider) return false;
+      if (q) {
+        const hay = `${m.name} ${m.title ?? ''} ${m.providerSlug} ${m.familySlug} ${m.description ?? ''}`.toLowerCase();
+        if (!hay.includes(q)) return false;
+      }
+      return true;
+    });
+  }, [llmAllModels, llmQuery, llmProvider]);
+
+  const visibleLlms = llmShowAll ? filteredLlms : filteredLlms.slice(0, PAGE_SIZE);
 
   /** Models after the provider filter, used to derive available categories. */
   const providerScopedModels = useMemo(() => {
@@ -140,7 +175,7 @@ export function ExploreShell({
           />
           <Tab
             label="Workflows"
-            count={initialWorkflowTotal}
+            count={Math.max(0, initialWorkflowTotal - initialTrendsTotal)}
             active={tab === 'WORKFLOWS'}
             onClick={() => setTab('WORKFLOWS')}
           />
@@ -149,6 +184,12 @@ export function ExploreShell({
             count={initialTrendsTotal}
             active={tab === 'TRENDS'}
             onClick={() => setTab('TRENDS')}
+          />
+          <Tab
+            label="LLMs"
+            count={llmAllModels.length}
+            active={tab === 'LLMS'}
+            onClick={() => setTab('LLMS')}
           />
           <span className="ml-auto pb-3 font-mono text-[10px] uppercase tracking-eyebrow text-ink3">
             * {allProviders.length} providers
@@ -217,11 +258,35 @@ export function ExploreShell({
                 * AI WORKFLOWS · production-ready recipes
               </div>
             </div>
-          ) : (
+          ) : tab === 'TRENDS' ? (
             <div className="py-4">
               <div className="font-mono text-[11px] uppercase tracking-eyebrow text-ink3">
                 * TRENDS · what people are remixing right now
               </div>
+            </div>
+          ) : (
+            <div className="flex flex-col gap-3 py-4 sm:flex-row sm:items-center sm:gap-4">
+              <div className="relative flex-1">
+                <Search aria-hidden className="absolute left-3 top-1/2 -translate-y-1/2 text-ink3 w-4 h-4 pointer-events-none" />
+                <input
+                  type="text"
+                  value={llmQuery}
+                  onChange={(e) => setLlmQuery(e.target.value)}
+                  placeholder="Search LLMs..."
+                  className="w-full bg-surface border border-rule2 rounded-md pl-10 pr-4 py-2 text-[14px] text-ink placeholder:text-ink3 focus:outline-none focus:border-spark"
+                />
+              </div>
+              <select
+                value={llmProvider}
+                onChange={(e) => setLlmProvider(e.target.value)}
+                className="bg-surface border border-rule2 rounded-md px-3 py-2 text-[12px] font-mono uppercase tracking-eyebrow text-ink2 focus:outline-none focus:border-spark sm:shrink-0"
+                aria-label="LLM provider filter"
+              >
+                <option value="ALL">All providers</option>
+                {llmProviders.map((p) => (
+                  <option key={p.slug} value={p.slug}>{p.name}</option>
+                ))}
+              </select>
             </div>
           )}
         </div>
@@ -280,6 +345,39 @@ export function ExploreShell({
             initialTotal={initialTrendsTotal}
             initialCategories={initialWorkflowCategories}
           />
+        )}
+
+        {tab === 'LLMS' && (
+          <>
+            <div className="flex items-center justify-between mb-5">
+              <div className="font-mono text-[11px] uppercase tracking-eyebrow text-ink3">
+                {filteredLlms.length} of {llmAllModels.length} LLMs
+              </div>
+              <div className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3">
+                text-to-text · sorted by popularity
+              </div>
+            </div>
+            {filteredLlms.length === 0 ? (
+              <EmptyState message="No LLMs match those filters." />
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+                {visibleLlms.map((m) => (
+                  <ModelTile key={m.brandedSlug} model={m} />
+                ))}
+              </div>
+            )}
+            {!llmShowAll && filteredLlms.length > PAGE_SIZE && (
+              <div className="mt-10 text-center">
+                <button
+                  type="button"
+                  onClick={() => setLlmShowAll(true)}
+                  className="inline-flex items-center gap-2 px-5 py-3 border border-rule2 rounded-md text-[13px] font-semibold text-ink hover:bg-surface hover:border-spark/40 transition-colors"
+                >
+                  Load all {filteredLlms.length} <span aria-hidden>→</span>
+                </button>
+              </div>
+            )}
+          </>
         )}
       </section>
     </>
