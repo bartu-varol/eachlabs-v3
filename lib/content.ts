@@ -546,124 +546,108 @@ export const footer = {
 
 export const enterprise = {
   hero: {
-    pill: '* ENTERPRISE · WRITTEN BY THE ON-CALL',
+    pill: '* ENTERPRISE READY',
     pillCta: '',
     pillHref: '',
     headline: {
-      line1: 'Production AI ',
+      line1: 'Run AI at scale.',
       line1Underline: 'without',
-      line2Prefix: 'the',
-      line2Emph: '3 AM phone call.',
+      line2Prefix: '',
+      line2Emph: 'losing sleep over it.',
     },
     body:
-      'You already orchestrate around model failures, leaking budgets, and provider drift. Pay us, and the on-call shifts to our team. ',
+      'For CTOs and engineering leaders shipping AI in production. ',
     bodyLead:
-      'Same each.run(). Direct line to engineering, traceable spend, and a router that catches failures before pagerduty does. ',
+      'We are already handling millions of requests across hundreds of teams, with security and uptime that keep your platform online while you scale. ',
     ctas: [
-      { label: 'Talk to an engineer (a real one)', href: '/contact', variant: 'primary'   as const },
-      { label: 'See how the router works',         href: '/router',  variant: 'secondary' as const },
+      { label: 'Talk to engineering', href: '/contact', variant: 'primary' as const },
     ],
     stats: [
-      { value: '99.99%',  label: 'effective uptime',     sub: 'across the routed path' },
-      { value: '<120ms',  label: 'failover overhead',    sub: 'before your user notices' },
-      { value: '24/7',    label: 'engineer-led support', sub: 'no BDRs · no tier-1 queue' },
-      { value: '<24h',    label: 'incident response',    sub: 'written. signed. shared.' },
+      { value: '1M+',     label: 'requests handled / month', sub: 'across hundreds of customer teams' },
+      { value: '99.99%',  label: 'effective uptime',         sub: 'across the routed path' },
+      { value: '<120ms',  label: 'failover overhead',        sub: 'before your user notices' },
+      { value: '24/7',    label: 'engineer-led support',     sub: 'no BDRs · no tier-1 queue' },
     ],
-    subtext: '600+ MODELS · ONE API · DIRECT-TO-ENGINEERING SUPPORT',
+    subtext: '600+ MODELS · ONE API · TRUSTED BY TEAMS SHIPPING AI IN PRODUCTION',
   },
 
-  /** "What enterprise actually means" comparison, kills the competitors. */
-  meansWhat: {
-    eyebrow: '* THE WORD "ENTERPRISE"',
+  /** "Why enterprise" - single narrative, no comparison. Trust + reliability + scale. */
+  whyEnterprise: {
+    eyebrow: '* WHY ENTERPRISE TEAMS PICK US',
     headline: {
-      line1: 'Everyone says enterprise.',
-      line2: 'We wrote down what ours means.',
+      line1: 'Run safely.',
+      line2: 'Don\'t crash.',
     },
     body:
-      'Most platforms hide enterprise behind a sales call. The page promises "SLA," "support," "security." What you actually get arrives in the MSA, three weeks later. Here is ours, on this page, in plain English.',
-    rows: [
+      'The two things every CTO worries about when AI moves to production: a security gap that surfaces in an audit, or a provider outage that takes the whole product down. Each Labs is built so neither happens to you.',
+    pillars: [
       {
-        topic: 'Support',
-        others: 'A shared inbox. Tier-1 reads from a playbook.',
-        ours: 'A direct Slack channel with the engineers who built the router. P1 acknowledged the same business day.',
+        title: 'Won\'t crash on a bad provider day',
+        body: 'Quality-aware failover catches degradations on every call. When Kling 503s or Veo slows to a crawl, traffic spills to a healthy fallback in under 120ms, before your users notice.',
       },
       {
-        topic: 'Uptime',
-        others: '"99.9%" with no definition of "downtime" and no penalty schedule.',
-        ours: '99.99% effective uptime across the routed path. Failover catches provider outages before your users do.',
+        title: 'Won\'t leak through a security gap',
+        body: 'Zero retention by default. Provider-side retention disabled per request. We never train on your traffic. Your prompts and outputs stay where you need them, nowhere else.',
       },
       {
-        topic: 'Incident response',
-        others: 'A status page tweet. RCA "available on request."',
-        ours: 'Written RCA within 24h on every customer-impacting incident. Root cause, blast radius, fix, prevention.',
-      },
-      {
-        topic: 'Data',
-        others: '"Your data is yours." Sub-processor list available "on request."',
-        ours: 'Zero retention by default. Provider-side retention disabled per request. We never train on your traffic.',
-      },
-      {
-        topic: 'Procurement',
-        others: 'Sales-led, six weeks to MSA, "we don\'t share our security docs."',
-        ours: 'Custom MSA / DPA / security review on request, handled directly by engineering, not a sales handoff.',
-      },
-      {
-        topic: 'Pricing',
-        others: 'Bundle pricing. Inference markup hidden inside the platform fee.',
-        ours: 'Provider price is provider price. Zero markup on inference. You pay us for the platform.',
+        title: 'Won\'t blow your budget without warning',
+        body: 'Per-call traces tag every request with cost, latency, and the attributes you care about. Finance gets the answer to "who is expensive" without a quarterly instrumentation sprint.',
       },
     ],
   },
 
-  /** 6 capabilities, each with "why this exists" instead of generic bullet. */
-  capabilities: {
-    eyebrow: '* WHAT YOU ACTUALLY GET',
+  /** Social proof - "Top 20% of app studios" + customer logos. */
+  socialProof: {
+    eyebrow: '* TRUST · IN PRODUCTION',
+    metric: 'Top 20%',
+    metricLabel: 'of app studios shipping AI use Each Labs',
+    body: 'Consumer apps with millions of users, ad-tech platforms running billion+ monthly requests, and enterprise platforms with strict change control are all on the same router.',
+    customers: ['NOVA', 'LUME', 'Helix', 'Forma', 'Ondra', 'Kairo', 'Aster', 'Prism', 'Maker', 'Orbit'],
+  },
+
+  /** Enterprise features - 6 perks specific to enterprise accounts. */
+  features: {
+    eyebrow: '* WHAT YOU GET ON ENTERPRISE',
     headline: {
-      line1: 'The capabilities.',
-      line2: 'And why each one exists.',
+      line1: 'Enterprise features.',
+      line2: 'Built around how teams actually run AI in production.',
     },
     tiles: [
       {
         accent: 'spark' as const,
-        title: 'Quality-aware failover',
+        title: 'Team budget management',
         body:
-          'Every call is watched on quality, latency, and error rate. When the primary degrades, traffic spills to a healthy fallback in under 120ms, before your user notices.',
-        why: 'This is the product. The same router you use in production.',
+          'Set monthly inference budgets per team, per project, or per environment. Alert thresholds, hard caps, and rollovers, all enforced at the router so finance never gets surprised.',
       },
       {
         accent: 'highlight' as const,
-        title: '600+ models behind one API',
+        title: '24/7 contact with engineering',
         body:
-          'Kling, Veo, FLUX, ElevenLabs, OpenAI, and every other provider worth shipping. One signature, one bill, one trace. Swap models without rewriting a call site.',
-        why: 'You shouldn\'t pin your roadmap to a single provider\'s pricing.',
+          'Direct Slack channel with the engineers who built the router. P1 issues acknowledged the same business day; on-call coverage 24/7/365, not "business hours in our timezone."',
       },
       {
         accent: 'success' as const,
-        title: 'Per-call traces + cost attribution',
+        title: 'Dedicated customer success manager',
         body:
-          'Every each.run() emits a trace, every step, every fallback, every cost. Tag with user_id, tier, experiment; slice spend in the dashboard.',
-        why: 'Finance asks who is expensive. The trace answers without an instrumentation sprint.',
+          'A named CSM assigned at signing, walks your team through onboarding, traffic design, and quarterly business reviews. Direct input on roadmap.',
       },
       {
         accent: 'sun' as const,
-        title: 'Zero retention by default',
+        title: 'Custom volume pricing',
         body:
-          'We don\'t store prompts or outputs past what you need for traces. Provider-side retention is opt-in per provider. We never train on your traffic.',
-        why: 'Default-private is cheaper than auditing a permission you forgot you granted.',
+          'Commit to monthly inference volume and the platform fee drops. Provider price is still provider price. Zero markup on inference, ever.',
       },
       {
         accent: 'ember' as const,
-        title: 'Engineering-led onboarding',
+        title: 'Zero retention by default',
         body:
-          'A founding-team engineer walks your stack through integration, fallback design, and trace setup. Slack channel stays open afterward.',
-        why: 'The shortest path from "we want this in prod" to actually in prod.',
+          'We don\'t store prompts or outputs past what you opt into for traces. Provider-side retention disabled per provider. We never train on your traffic.',
       },
       {
         accent: 'yellow' as const,
-        title: 'Volume commits + custom terms',
+        title: 'Quarterly business reviews',
         body:
-          'Commit to monthly inference volume and the platform fee drops. Custom MSA / DPA / security review handled by engineering, not a sales handoff.',
-        why: 'Procurement should be a one-meeting problem, not a quarter.',
+          'Scheduled QBR with your CSM and a senior engineer. Cost trends, failover patterns, model swap opportunities, and what is shipping next quarter on our side.',
       },
     ],
   },
@@ -702,86 +686,6 @@ export const enterprise = {
     ],
     footnote:
       'IF THE FALLBACK ITSELF FAILS, OUR ON-CALL HANDLES IT BEFORE YOURS DOES. THE RCA LANDS IN YOUR INBOX BY THE END OF THE NEXT BUSINESS DAY.',
-  },
-
-  /** 3 deep customer outcomes, numbers, not logos. */
-  outcomes: {
-    eyebrow: '* OUTCOMES, NOT LOGOS',
-    headline: {
-      line1: 'What "enterprise"',
-      line2: 'looks like in production.',
-    },
-    cards: [
-      {
-        industry: 'CONSUMER AI · MILLIONS OF USERS',
-        metric: '14',
-        metricLabel: 'model swaps',
-        secondary: 'zero user-visible regressions',
-        body:
-          'Hot-swapped fourteen image and video models across two providers without a single user-visible regression. Their on-call hasn\'t been paged for inference in two quarters.',
-        contract: 'Failover routing · trace per call · engineering Slack',
-      },
-      {
-        industry: 'FINTECH · STRICT CHANGE CONTROL',
-        metric: '0',
-        metricLabel: 'inference-layer issues',
-        secondary: 'two internal reviews · clean',
-        body:
-          'Standardized on one each.run() signature across teams, locked the trace schema to their data warehouse, and disabled provider-side retention end-to-end. Internal reviews flagged zero issues on the inference layer.',
-        contract: 'Trace export · provider retention off · review-ready',
-      },
-      {
-        industry: 'AD-TECH · BILLION+ REQ/MO',
-        metric: '$340K',
-        metricLabel: 'monthly inference savings',
-        secondary: 'same quality · 3 providers · 1 API',
-        body:
-          'Quality-aware routing pulled traffic toward the cheapest healthy provider per request type. No engineer changed code; each::router did the arithmetic. Procurement team noticed first.',
-        contract: 'Volume pricing · cost attribution · quarterly reviews',
-      },
-    ],
-  },
-
-  /** Architecture diagram, text-based but reads like a real wire. */
-  architecture: {
-    eyebrow: '* THE WIRE',
-    headline: {
-      line1: 'How traffic moves.',
-      line2: 'One call. One trace. Direct to providers.',
-    },
-    body:
-      'The boring diagram every architect asks for. each.run() hits the router, the router talks to the provider you actually need, and a per-call trace lands in your dashboard. No retraining, no rewrites.',
-    nodes: [
-      {
-        label: 'Your app',
-        sub: 'each.run() · same signature',
-        kind: 'client',
-      },
-      {
-        label: 'each::router',
-        sub: 'quality-aware · auto-failover · <120ms',
-        kind: 'router',
-      },
-      {
-        label: 'Provider A · B · C',
-        sub: 'direct connections · zero retention by default',
-        kind: 'providers',
-      },
-    ],
-    sidecars: [
-      {
-        title: 'Per-call trace',
-        body: 'Step, status, cost, latency · queryable for 30 days',
-      },
-      {
-        title: 'Attribute tagging',
-        body: 'user_id · tier · experiment · slice spend by anything',
-      },
-      {
-        title: 'Engineering on-call',
-        body: 'Senior engineer paged on every customer-impacting incident',
-      },
-    ],
   },
 
   /** Procurement assets, available on request from engineering, not gated by sales. */
@@ -835,50 +739,57 @@ export const enterprise = {
       'NOTHING HERE IS BEHIND "JUMP ON A QUICK CALL." YOUR PROCUREMENT TEAM IS WELCOME.',
   },
 
-  /** FAQ tuned to senior-engineer / head-of-AI worries. */
+  /** FAQ in homepage style (tag + Q + A). Aimed at CTO-level concerns. */
   faq: {
-    eyebrow: '* WHAT THEY ACTUALLY ASK',
-    headline: 'The questions the procurement form won\'t fit.',
+    eyebrow: '* FAQ',
+    headline: 'FAQ',
+    italic: 'the questions every CTO asks before signing',
     items: [
       {
-        q: 'How is this not just another vendor in the middle?',
-        a: 'We bill on the platform, not the inference, your provider invoices stay direct. The router watches every call but doesn\'t store prompts or outputs by default; only traces stay around so you can debug.',
+        tag: 'UPTIME',
+        q: 'What if a model provider has an outage?',
+        a: 'Quality-aware failover catches it on every call. Traffic spills to a healthy fallback in under 120ms before your user notices. Your app does not depend on a single provider being healthy.',
       },
       {
-        q: 'What happens if each::labs goes down?',
-        a: 'The router caches its policy locally and keeps routing on the last-known-good config so your inference doesn\'t depend on our control plane being up. Same model providers, same direct connections.',
-      },
-      {
-        q: 'Can we negotiate uptime + custom terms?',
-        a: 'Yes. Talk to engineering at /contact, we walk through your traffic shape, sketch the failover topology, and put real numbers on a one-page agreement. No sales cycle.',
-      },
-      {
+        tag: 'SECURITY',
         q: 'Do you train on our prompts or outputs?',
-        a: 'No. We don\'t store prompts or outputs past what you opt into for traces, and we never train models on your traffic. Provider-side retention is opt-in per provider and disabled by default for production accounts.',
+        a: 'No. We do not store prompts or outputs past what you opt into for traces, and we never train models on your traffic. Provider-side retention is opt-in per provider and disabled by default for production accounts.',
       },
       {
-        q: 'How do we exit if it isn\'t working?',
-        a: 'each.run() is a thin wrapper. Remove our SDK, point at providers directly, your code is portable. Traces are exportable. We keep nothing after termination + 30 days.',
+        tag: 'PAGING',
+        q: 'What happens if Each Labs itself goes down?',
+        a: 'The router caches its policy locally and keeps routing on the last-known-good config so your inference does not depend on our control plane being up. Same providers, same direct connections.',
       },
       {
+        tag: 'BUDGET',
+        q: 'How do we keep AI spend predictable?',
+        a: 'Set monthly inference budgets per team, project, or environment. Alerts and hard caps are enforced at the router. Per-call traces tag every request with cost so finance can slice spend by any attribute.',
+      },
+      {
+        tag: 'SUPPORT',
         q: 'Who answers when something breaks?',
-        a: 'A founding-team engineer, every time. Direct Slack channel for accounts on a custom plan; same-day email otherwise. No tier-1 queue, no scripted demos.',
+        a: 'A founding-team engineer, every time. Direct Slack channel with your CSM and senior engineers, 24/7/365 coverage. No tier-1 queue, no scripted demos, no sales handoff.',
+      },
+      {
+        tag: 'EXIT',
+        q: 'How do we exit if it is not working?',
+        a: 'The SDK is a thin wrapper. Remove it, point at providers directly, your code is portable. Traces are exportable. We keep nothing after termination plus 30 days.',
       },
     ],
   },
 
   /** Final CTA, vortex-backed, but a sharper card stack than RabbitHole. */
   finalCta: {
-    eyebrow: '* TWO WAYS IN',
+    eyebrow: '* TALK TO ENGINEERING',
     headline: {
-      line1: 'Talk to an engineer.',
-      line2: 'Not a salesperson.',
+      line1: 'Get on a call with the team',
+      line2: 'building this.',
     },
     body:
-      'The first call is with a senior engineer who reviews your architecture, your traffic shape, your compliance posture. They will quote an SLA tier, a deployment model, and a price. If we can\'t help, we say so on the call.',
-    primary: { label: 'Book 30 minutes with engineering', href: '/contact', style: 'primary' as const },
-    secondary: { label: 'Email security@eachlabs.ai',     href: 'mailto:security@eachlabs.ai', style: 'outline' as const },
-    subtext: 'TYPICAL ENTERPRISE TIMELINE: KICKOFF TO PROD IN 3 WEEKS · LEGAL IN 5 BUSINESS DAYS',
+      'The first call is with a senior engineer who reviews your architecture, your traffic shape, and your scale targets. They will quote a deployment model and a price. If we cannot help, we say so on the call.',
+    primary: { label: 'Talk to engineering', href: '/contact', style: 'primary' as const },
+    secondary: { label: 'Email support@eachlabs.ai', href: 'mailto:support@eachlabs.ai', style: 'outline' as const },
+    subtext: 'TYPICAL ENTERPRISE TIMELINE: KICKOFF TO PROD IN 3 WEEKS',
   },
 };
 
