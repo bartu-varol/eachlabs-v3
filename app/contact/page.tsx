@@ -114,7 +114,7 @@ export default function ContactPage() {
                   required
                   value={data.name}
                   onChange={(v) => update('name', v)}
-                  placeholder="Furkan Sandal"
+                  placeholder="Your name"
                 />
                 <Field
                   label="Work email"
