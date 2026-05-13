@@ -1,4 +1,5 @@
 import { listChangelogEntries, type ChangelogEntry } from '@/lib/changelog';
+import { MOCK_ENTRIES } from './_mock';
 
 export const revalidate = 300;
 
@@ -56,7 +57,8 @@ function Entry({ entry }: { entry: ChangelogEntry }) {
 }
 
 export default async function ChangelogPage() {
-  const entries = await listChangelogEntries();
+  const real = await listChangelogEntries();
+  const entries = real.length > 0 ? real : MOCK_ENTRIES;
 
   return (
     <section className="container py-20 md:py-24">
