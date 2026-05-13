@@ -113,7 +113,7 @@ export const hero = {
   bodyLead: '600+ AI models behind one API',
   /** Body rest, descriptive, with playful flair. */
   body:
-    '- the hyped ones, the cheap ones, the one that broke yesterday. We do the boring parts: retries when models go down, per-user cost when finance asks, live A/B when product wants to ship. You write each.run(). We do the rest.',
+    '- the hyped ones, the cheap ones, the one that broke yesterday. We do the boring parts: retries when models go down, per-user cost when finance asks, live A/B when product wants to ship. You write the call. We do the rest.',
   ctas: [
     { label: 'Start Building',         href: '/signup',  variant: 'primary'   as const },
     { label: 'Talk to an engineer (a real one)',   href: '/contact', variant: 'secondary' as const },
@@ -176,7 +176,7 @@ export const receipts = {
       caption: 'auto-fallback fires in <120ms when the primary model dies',
       hero: { multiplier: '97×', suffix: 'FEWER ERRORS' },
       others: { label: 'OTHERS', sub: 'raw SDKs, no router' },
-      each:   { label: 'EACH.RUN', sub: 'quality-aware + fallback' },
+      each:   { label: 'EACH', sub: 'quality-aware + fallback' },
       format: 'percent',
       othersValue: 3.42,
       eachValue: 0.035,
@@ -187,7 +187,7 @@ export const receipts = {
       caption: 'how long until the user sees a recovered response',
       hero: { multiplier: '6,200×', suffix: 'FASTER RECOVERY' },
       others: { label: 'OTHERS', sub: 'manual rollover, on-call paged' },
-      each:   { label: 'EACH.RUN', sub: 'router failover · live' },
+      each:   { label: 'EACH', sub: 'router failover · live' },
       format: 'time',
       othersValue: 744, // seconds (12.4 min)
       eachValue: 0.12,  // seconds (120ms)
@@ -198,7 +198,7 @@ export const receipts = {
       caption: 'average $/successful output across 600+ models',
       hero: { multiplier: '3×', suffix: 'CHEAPER' },
       others: { label: 'OTHERS', sub: 'pinned to one provider' },
-      each:   { label: 'EACH.RUN', sub: 'quality-aware routing' },
+      each:   { label: 'EACH', sub: 'quality-aware routing' },
       format: 'usd',
       othersValue: 0.18,
       eachValue: 0.06,
@@ -209,7 +209,7 @@ export const receipts = {
       caption: 'time to first prod call after signing up',
       hero: { multiplier: '2,520×', suffix: 'FASTER TO SHIP' },
       others: { label: 'OTHERS', sub: 'new SDK · auth · QA' },
-      each:   { label: 'EACH.RUN', sub: 'one API · one signature' },
+      each:   { label: 'EACH', sub: 'one API · one signature' },
       format: 'days',
       othersValue: 14,    // days
       eachValue: 0.0056,  // days (8 minutes)
@@ -247,7 +247,7 @@ export const askSense = {
   answers: {
     'Model keeps failing': {
       text:
-        'Set fallbacks once on each.run(). The router watches every call and spills traffic to a backup the moment your primary degrades. Recovery in ~120ms; your users never see the error.',
+        'Set fallbacks once on each(). The router watches every call and spills traffic to a backup the moment your primary degrades. Recovery in ~120ms; your users never see the error.',
       docHref: '/docs/router/fallbacks',
       docLabel: 'each::router · fallbacks',
     },
@@ -259,7 +259,7 @@ export const askSense = {
     },
     'How do I track cost per customer': {
       text:
-        'Pass attributes at runtime (user_id, tier, anything) on each.run(). Every call is tagged at the platform layer; the dashboard slices cost, latency, and quality by any attribute in real time, no instrumentation sprint.',
+        'Pass attributes at runtime (user_id, tier, anything) on each(). Every call is tagged at the platform layer; the dashboard slices cost, latency, and quality by any attribute in real time, no instrumentation sprint.',
       docHref: 'https://docs.eachlabs.ai/introduction',
       docLabel: 'each::labs · attribution',
     },

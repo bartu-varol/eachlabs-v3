@@ -78,7 +78,7 @@ export function RouterShowcase() {
                 text={
                   <>
                     Add <code className="font-mono text-[12.5px] text-spark">router.fallback</code> to any
-                    each.run() call. The trace shows what fired.
+                    each() call. The trace shows what fired.
                   </>
                 }
               />

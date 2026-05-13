@@ -147,7 +147,7 @@ const LINE_TEXT_COLOR: Record<LineKind, string> = {
 };
 
 const LOG_LINES: { kind: LineKind; text: string }[] = [
-  { kind: 'cmd',     text: 'each.run("kling-v3", input, { fallback: ["wan-2.7"] })' },
+  { kind: 'cmd',     text: 'each("kling-v3", input, { fallback: ["wan-2.7"] })' },
   { kind: 'ok',      text: '[03:14:22] kling-v3 · 200 · 892ms · trace_8f2a' },
   { kind: 'fail',    text: '[03:14:24] kling-v3 · 503 · upstream timeout' },
   { kind: 'trace',   text: '[03:14:24] failover armed → wan-2.7' },

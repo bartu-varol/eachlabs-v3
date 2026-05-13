@@ -58,7 +58,7 @@ export const PROBLEMS: Problem[] = [
       body:
         'Set fallbacks once. The router watches every call and spills traffic to a backup the moment your primary degrades. Quality-aware, latency-aware, live.',
       terminal: [
-        { kind: 'cmd',   text: 'each.run("kling-v3-12v", input, { fallback: ["wan-2.7", "veo-3"] })' },
+        { kind: 'cmd',   text: 'each("kling-v3-12v", input, { fallback: ["wan-2.7", "veo-3"] })' },
         { kind: 'info',  text: 'primary: kling-v3-12v · health=ok' },
         { kind: 'fail',  text: 'kling-v3-12v → 503 (provider degraded)' },
         { kind: 'info',  text: 'failover armed → wan-2.7' },
@@ -81,7 +81,7 @@ export const PROBLEMS: Problem[] = [
       body:
         'When p95 latency on a provider exceeds your threshold, the router quietly shifts traffic until it recovers. Your users keep their speed; you keep the cost data.',
       terminal: [
-        { kind: 'cmd',   text: 'each.run("kling-v3-12v", input, { routing: "latency", threshold_p95: 800 })' },
+        { kind: 'cmd',   text: 'each("kling-v3-12v", input, { routing: "latency", threshold_p95: 800 })' },
         { kind: 'trace', text: 'monitoring p95 across providers · 30s window' },
         { kind: 'warn',  text: 'provider A · p95=1.42s · over threshold (800ms)' },
         { kind: 'info',  text: 'spilling 60% traffic → provider B' },
@@ -104,7 +104,7 @@ export const PROBLEMS: Problem[] = [
       body:
         'Set a split. Tag the experiment. Read the results when they’re significant. Ship the winner without redeploying. Statistical rigor, no SDK.',
       terminal: [
-        { kind: 'cmd',   text: 'each.run("kling-v3-12v", input, { experiment: "v3-vs-v2", split: { v3: 50, v2: 50 } })' },
+        { kind: 'cmd',   text: 'each("kling-v3-12v", input, { experiment: "v3-vs-v2", split: { v3: 50, v2: 50 } })' },
         { kind: 'trace', text: 'kling-v3 → 5,238 calls' },
         { kind: 'trace', text: 'kling-v2 → 5,219 calls' },
         { kind: 'info',  text: 'reaching significance · p < 0.05' },
@@ -127,7 +127,7 @@ export const PROBLEMS: Problem[] = [
       body:
         'Pass attributes at runtime. We tag the trace with whatever you send, user_id, tier, persona, experiment, anything. Then slice cost, latency, and quality by any of them.',
       terminal: [
-        { kind: 'cmd',   text: 'each.run("kling-v3-12v", input, { attributes: { user_id: "u_8f2a", tier: "pro", persona: "creator" } })' },
+        { kind: 'cmd',   text: 'each("kling-v3-12v", input, { attributes: { user_id: "u_8f2a", tier: "pro", persona: "creator" } })' },
         { kind: 'trace', text: 'tagged · user_id=u_8f2a' },
         { kind: 'trace', text: 'tagged · tier=pro' },
         { kind: 'trace', text: 'tagged · persona=creator' },
@@ -194,12 +194,12 @@ export const PROBLEMS: Problem[] = [
       feature: { prefix: '', name: '600+ models · one API' },
       tagline: 'One call signature. Every model, every modality.',
       body:
-        'Same each.run() for every model in the catalog. Image, video, audio, 3D, image-to-video, text-to-image, voice cloning, all of it. Try Veo 3 in one string change.',
+        'Same each() for every model in the catalog. Image, video, audio, 3D, image-to-video, text-to-image, voice cloning, all of it. Try Veo 3 in one string change.',
       terminal: [
-        { kind: 'cmd',   text: 'each.run("kling-v3-12v", { prompt, duration: 8 })' },
+        { kind: 'cmd',   text: 'each("kling-v3-12v", { prompt, duration: 8 })' },
         { kind: 'ok',    text: 'output ready · 4.2s' },
         { kind: 'comment', text: 'one string change ↓' },
-        { kind: 'cmd',   text: 'each.run("veo-3", { prompt, duration: 8 })' },
+        { kind: 'cmd',   text: 'each("veo-3", { prompt, duration: 8 })' },
         { kind: 'ok',    text: 'output ready · 5.8s' },
         { kind: 'info',  text: 'same call signature · zero SDK rewrites' },
       ],

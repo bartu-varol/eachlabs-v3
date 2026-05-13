@@ -84,7 +84,7 @@ const ITEMS: QA[] = [
     tag: 'SDKs',
     a: (
       <>
-        TypeScript, Python, Go. Plus a typed REST API. Same <code>each.run()</code> signature
+        TypeScript, Python, Go. Plus a typed REST API. Same <code>each()</code> signature
         across all of them. Docs at <InlineLink href="/docs">/docs</InlineLink>.
       </>
     ),
@@ -95,7 +95,7 @@ const ITEMS: QA[] = [
     a: (
       <>
         If you’re on Replicate, fal.ai, or calling provider APIs directly, about an hour. The{' '}
-        <code>each.run()</code> signature is similar enough to most that it’s mostly a
+        <code>each()</code> signature is similar enough to most that it’s mostly a
         search-and-replace job. Bring your hardest workflow to the migration call, we’ll port
         it live.
       </>

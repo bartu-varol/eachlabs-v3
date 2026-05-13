@@ -144,8 +144,7 @@ export default async function FamilyPage({
             <div className="text-[14px] md:text-[15px] text-ink2 leading-[1.65] space-y-4">
               <p>
                 Every variant in the <strong className="text-ink">{family.name}</strong> family
-                shares the same input contract and the same{' '}
-                <code className="font-mono text-spark">each.run()</code> signature. Switch from{' '}
+                shares the same input contract and the same call signature. Switch from{' '}
                 <em>standard</em> to <em>pro</em> to <em>4K</em> by changing one string, no client
                 code changes, no re-auth.
               </p>

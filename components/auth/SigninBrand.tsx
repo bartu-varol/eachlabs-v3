@@ -15,13 +15,13 @@ export function SigninBrand() {
       </div>
 
       <h1 className="font-display font-semibold text-[44px] sm:text-[52px] leading-[1.0] tracking-tightest mt-5 text-ink">
-        Back already?
+        The pipeline
         <br />
-        <em className="text-spark">the chaos missed you.</em>
+        <em className="text-spark">kept running.</em>
       </h1>
 
       <p className="text-ink2 text-[14.5px] leading-relaxed mt-5">
-        Same key, same <code className="font-mono text-[13px] text-spark">each.run()</code>. Pick up where you left off.
+        Same key, same workspace. Pick up where you left off.
       </p>
 
       <div className="mt-8">

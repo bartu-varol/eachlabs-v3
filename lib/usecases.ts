@@ -166,7 +166,7 @@ export const USE_CASES: Record<UseCaseSlug, UseCaseDef> = {
       { n: '01', title: 'SSO + RBAC on day 1',       body: 'Wire your IDP; we handle scopes per team. No homegrown auth glue.' },
       { n: '02', title: 'Per-team cost views',       body: 'Tag with team_id; finance sees exactly what each function costs.' },
       { n: '03', title: 'Built-in retention controls', body: 'Set retention per workflow; sensitive prompts auto-purge.' },
-      { n: '04', title: 'Composable workflows',      body: 'Slack bot? Internal gen UI? Same each.run(), six tools share one infra.' },
+      { n: '04', title: 'Composable workflows',      body: 'Slack bot? Internal gen UI? Same each(), six tools share one infra.' },
     ],
     story: {
       quote:

@@ -66,7 +66,7 @@ export function EnhancerShowcase() {
                 accent="HOW"
                 text={
                   <>
-                    Add <code className="font-mono text-[12.5px] text-spark">enhance.prompt: true</code> to your each.run() call.
+                    Add <code className="font-mono text-[12.5px] text-spark">enhance.prompt: true</code> to your each() call.
                     The trace tells you what was rewritten and why.
                   </>
                 }

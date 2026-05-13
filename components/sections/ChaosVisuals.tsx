@@ -623,11 +623,11 @@ function SwapVisual() {
   ];
   return (
     <div className={SHELL}>
-      <Eyebrow>each.run("…", input)</Eyebrow>
+      <Eyebrow>each("…", input)</Eyebrow>
 
       <div className="mt-5 bg-surface border border-rule2 rounded-md px-4 py-4 font-mono text-[14px]">
         <div className="flex items-center gap-1.5 flex-wrap">
-          <span className="text-ink3">each.run(</span>
+          <span className="text-ink3">each(</span>
           <span className="relative inline-block min-w-[160px] h-[22px]">
             {models.map((m, i) => (
               <motion.span

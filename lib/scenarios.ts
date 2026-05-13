@@ -13,7 +13,7 @@ export type Scenario = {
     caption: string;     // sub-caption under the label
     hero: { multiplier: string; suffix: string };
     others: { label: 'OTHERS'; sub: string; value: number };
-    each:   { label: 'EACH.RUN'; sub: string; value: number };
+    each:   { label: 'EACH'; sub: string; value: number };
     format: 'percent' | 'time' | 'usd' | 'days';
     /** Bar scale ceiling, both sides scale to this. */
     scaleMax: number;
@@ -39,7 +39,7 @@ export const SCENARIOS: Scenario[] = [
       caption: 'auto-fallback fires in <120ms when the primary model dies',
       hero: { multiplier: '97×', suffix: 'FEWER ERRORS' },
       others: { label: 'OTHERS',   sub: 'raw SDKs, no router',         value: 3.42 },
-      each:   { label: 'EACH.RUN', sub: 'quality-aware + fallback',     value: 0.04 },
+      each:   { label: 'EACH', sub: 'quality-aware + fallback',     value: 0.04 },
       format: 'percent',
       scaleMax: 4,
     },
@@ -62,7 +62,7 @@ export const SCENARIOS: Scenario[] = [
       caption: 'next-best provider picked before your user notices',
       hero: { multiplier: '6,200×', suffix: 'FASTER RECOVERY' },
       others: { label: 'OTHERS',   sub: 'manual rollover · on-call paged',  value: 744 },   // seconds
-      each:   { label: 'EACH.RUN', sub: 'router failover · live',          value: 0.12 },  // seconds
+      each:   { label: 'EACH', sub: 'router failover · live',          value: 0.12 },  // seconds
       format: 'time',
       scaleMax: 800,
     },
@@ -85,7 +85,7 @@ export const SCENARIOS: Scenario[] = [
       caption: 'average $/successful output across 600+ models',
       hero: { multiplier: '3×', suffix: 'CHEAPER' },
       others: { label: 'OTHERS',   sub: 'pinned to one provider',        value: 0.18 },
-      each:   { label: 'EACH.RUN', sub: 'quality-aware routing + tags',  value: 0.06 },
+      each:   { label: 'EACH', sub: 'quality-aware routing + tags',  value: 0.06 },
       format: 'usd',
       scaleMax: 0.2,
     },
@@ -108,7 +108,7 @@ export const SCENARIOS: Scenario[] = [
       caption: 'time to first prod call after signing up',
       hero: { multiplier: '2,520×', suffix: 'FASTER TO SHIP' },
       others: { label: 'OTHERS',   sub: 'new SDK · auth · QA',          value: 14 },     // days
-      each:   { label: 'EACH.RUN', sub: 'one API · one signature',       value: 0.0056 }, // ~8 minutes
+      each:   { label: 'EACH', sub: 'one API · one signature',       value: 0.0056 }, // ~8 minutes
       format: 'days',
       scaleMax: 14,
     },
@@ -118,7 +118,7 @@ export const SCENARIOS: Scenario[] = [
       feature: { prefix: '', name: '600+ models · one API' },
       tagline: 'One call signature. Every model, every modality.',
       body:
-        'Same each.run() for every model in the catalog. Image, video, audio, 3D, image-to-video, text-to-image, voice cloning, all of it. Try Veo 3 in one string change.',
+        'Same each() for every model in the catalog. Image, video, audio, 3D, image-to-video, text-to-image, voice cloning, all of it. Try Veo 3 in one string change.',
       docsHref: '#',
     },
     visual: 'swap',

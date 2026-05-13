@@ -2,23 +2,13 @@
 
 import { useRef } from 'react';
 import Link from 'next/link';
-import type { CatalogModel, Modality } from '@/lib/catalog';
+import type { CatalogModel } from '@/lib/catalog';
 import { modalityOf, displayName } from '@/lib/catalog';
 import { HoverVideo } from './HoverVideo';
 import { pickShineDirection } from './shine';
 
-/** Per-modality accent, drives the empty-state gradient + the ring + the glow. */
-const ACCENT: Record<Modality, string> = {
-  VIDEO: '#3D6BC9',
-  IMAGE: '#5B8F3A',
-  AUDIO: '#C98A00',
-  TEXT:  '#76726A',
-  OTHER: '#8A4FB8',
-};
-
 export function ModelTile({ model }: { model: CatalogModel }) {
   const mod = modalityOf(model);
-  const accent = ACCENT[mod];
   const href = `/${model.brandedSlug}`;
   const isVideo = model.thumbnailUrl?.match(/\.(webm|mp4|mov)$/i);
   const name = displayName(model);
@@ -37,13 +27,9 @@ export function ModelTile({ model }: { model: CatalogModel }) {
         el.style.setProperty('--my', `${e.clientY - r.top}px`);
       }}
       className="ec-card group relative block aspect-[4/5] rounded-lg overflow-hidden bg-surface no-underline"
-      style={{ ['--ec-accent' as string]: accent }}
     >
       {/* Media layer, image/video fills the card, blooms on hover. */}
-      <div
-        className="ec-card-media absolute inset-0"
-        style={{ background: `linear-gradient(135deg, ${accent}45, ${accent}15 55%, ${accent}05)` }}
-      >
+      <div className="ec-card-media absolute inset-0 bg-gradient-to-br from-surface2 via-surface to-surface2">
         {model.thumbnailUrl && !isVideo && (
           // eslint-disable-next-line @next/next/no-img-element
           <img
@@ -68,10 +54,7 @@ export function ModelTile({ model }: { model: CatalogModel }) {
       <div className="ec-card-scrim absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/85 via-black/45 to-transparent pointer-events-none z-[1]" />
 
       {/* Top-left: category pill. */}
-      <span
-        className="absolute top-3 left-3 z-10 max-w-[78%] truncate font-mono text-[10.5px] uppercase tracking-eyebrow font-semibold px-2.5 py-1 rounded-md backdrop-blur-md bg-white/90 shadow-sm"
-        style={{ color: accent }}
-      >
+      <span className="absolute top-3 left-3 z-10 max-w-[78%] truncate font-mono text-[10.5px] uppercase tracking-eyebrow font-semibold px-2.5 py-1 rounded-md backdrop-blur-md bg-white/90 text-zinc-900 shadow-sm">
         {model.categoryName ?? mod}
       </span>
 

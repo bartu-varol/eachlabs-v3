@@ -51,8 +51,7 @@ export default async function TemplatesPage() {
           <span className="block text-ink3 italic">Fork. Ship. Iterate.</span>
         </h1>
         <p className="text-[15px] md:text-[16px] text-ink2 leading-[1.55] max-w-[680px] mt-6">
-          Every template wires multiple models behind one{' '}
-          <code className="font-mono text-spark">each.run()</code>. Fallbacks tuned, prices pinned,
+          Every template wires multiple models behind a single call. Fallbacks tuned, prices pinned,
           observability on.{' '}
           <strong className="text-ink">{initialTotal}</strong> public workflows running in
           production today.

@@ -340,7 +340,7 @@ function PromptArrow({ phase }: { phase: Phase }) {
   );
 }
 
-/* ── Value chain, bottom strip showing user → app → each.run ───────────── */
+/* ── Value chain, bottom strip showing user → app → each ──────────────── */
 
 function ValueChain({ phase }: { phase: Phase }) {
   const shipped = phase === 'ship';

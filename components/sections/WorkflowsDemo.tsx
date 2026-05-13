@@ -569,7 +569,7 @@ export function WorkflowsDemo() {
 
       {/* Caption */}
       <div className="mt-3 font-mono text-[10px] uppercase tracking-eyebrow text-ink3 text-center lg:text-left">
-        five models · one each.run() · one trace · zero glue code
+        five models · one call · one trace · zero glue code
       </div>
     </div>
   );
@@ -643,7 +643,7 @@ function TraceFooter({ phase }: { phase: Phase }) {
             <>
               <span className="inline-block w-1 h-1 rounded-full bg-spark animate-pulse" aria-hidden />
               <span className="text-ink3 uppercase tracking-eyebrow">
-                each.run(&quot;the-last-hold-video&quot;)
+                each(&quot;the-last-hold-video&quot;)
               </span>
               <span className="ml-auto text-ink3 normal-case tracking-normal">
                 5 steps · v3.2 · 1 trace

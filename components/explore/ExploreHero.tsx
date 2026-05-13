@@ -21,7 +21,7 @@ export function ExploreHero({ workflowCount, modelsCount }: Props) {
       </h1>
       <p className="text-[15px] md:text-[16px] text-ink2 leading-[1.55] max-w-[680px] mt-6">
         {displayedModels} pinned models from {providers.length} providers, image, video, audio, text, all behind one{' '}
-        <code className="font-mono text-spark">each.run()</code>.
+        <code className="font-mono text-spark">each()</code>.
         {workflowCount && workflowCount > 0 ? (
           <>
             {' '}Plus <strong className="text-ink">{workflowCount}+</strong> pre-wired workflow

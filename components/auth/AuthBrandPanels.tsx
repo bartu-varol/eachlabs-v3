@@ -44,7 +44,7 @@ export function SignupBrandPanel() {
           <div><span className="text-ink3">$</span> pip install eachlabs</div>
           <div><span className="text-ink3">$</span> export EACH_KEY=<span className="text-spark">sk_live_…</span></div>
           <div><span className="text-ink3">$</span> python app.py</div>
-          <div className="text-ink3">  ▸ each.run() · gpt-5 · 252 tok</div>
+          <div className="text-ink3">  ▸ each() · gpt-5 · 252 tok</div>
           <div className="text-success">  ✓ 200 OK · 118ms · $0.0014</div>
         </div>
       </div>

@@ -15,7 +15,7 @@ export EACHLABS_API_KEY="elx_..."
 # 3. Make a call
 import { each } from "@eachlabs/sdk";
 
-const result = await each.run({
+const result = await each({
   task:   "image",
   prompt: "a cat surfing at sunset",
   attrs:  { user_id: "u_123" },

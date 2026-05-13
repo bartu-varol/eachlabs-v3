@@ -60,7 +60,7 @@ export const PRODUCTS: Record<ProductDef['slug'], ProductDef> = {
     eyebrow: 'PLATFORM · WORKFLOWS',
     title: 'Real apps don’t call one model.',
     body:
-      'Production-grade outputs come from chains: enhance the prompt, generate, upscale, compose, narrate. Workflows let you build this as a typed graph, versioned, diffed, rolled back, and ship the whole thing through one each.run() call.',
+      'Production-grade outputs come from chains: enhance the prompt, generate, upscale, compose, narrate. Workflows let you build this as a typed graph, versioned, diffed, rolled back, and ship the whole thing through one each() call.',
     stats: [
       { value: '8K+',  label: 'workflows in production' },
       { value: 'v1.0', label: 'versioned, rollback-safe' },
@@ -73,13 +73,13 @@ export const PRODUCTS: Record<ProductDef['slug'], ProductDef> = {
     whatPoints: [
       { n: '01', title: 'Versioned + diffed', body: 'v3.2 in prod, v3.3 in staging, v2.4 archived. Pin a version per call, diff two versions side by side, and roll back in one click, no rebuild, no redeploy.', detail: 'workflow.version("v3.1")', visual: 'diff' },
       { n: '02', title: 'Multi-model parallelism', body: 'Branches run concurrently. Image and video generated in parallel and merged at the next node, total latency = the slowest branch, not the sum of branches.', detail: 'graph: { image, video → merge }', visual: 'flow' },
-      { n: '03', title: 'Single endpoint', body: 'Your client calls each.run({ workflow: "X" }). The graph executes server-side; you don\'t orchestrate steps from the client. One trace_id covers the whole run.', detail: 'POST /v1/run', visual: 'rings' },
+      { n: '03', title: 'Single endpoint', body: 'Your client calls each({ workflow: "X" }). The graph executes server-side; you don\'t orchestrate steps from the client. One trace_id covers the whole run.', detail: 'POST /v1/run', visual: 'rings' },
     ],
     liveTitle: 'product-photo-v3 · executing now.',
     liveBody: 'A real workflow with 8 nodes, input, enhance, two parallel branches (image + video), upscale, audio, merge, output.',
     whenTitle: 'Reach for workflows when…',
     whenPoints: [
-      { n: '01', title: 'A consumer feature needs 4 model calls', body: 'Image + voice + music + compose, orchestrate that from your client and you\'ll be debugging glue code on weekends. Workflows make it one server-side call, one trace, one rollback unit.', detail: '4 calls → 1 each.run()', visual: 'flow' },
+      { n: '01', title: 'A consumer feature needs 4 model calls', body: 'Image + voice + music + compose, orchestrate that from your client and you\'ll be debugging glue code on weekends. Workflows make it one server-side call, one trace, one rollback unit.', detail: '4 calls → 1 each()', visual: 'flow' },
       { n: '02', title: 'QA wants the new version on 10% of traffic', body: 'Without versioning that\'s a redeploy with feature flags. With workflows, ship v3.3 to 10% sticky-by-user and watch the trace before promoting, or roll back in one click if quality drops.', detail: 'version("v3.3") · 10% rollout', visual: 'diff' },
       { n: '03', title: 'Step 3 of 4 just failed in production', body: 'Without resumable steps you re-run from scratch and double-bill the user. Workflows cache step outputs, retry from the failure point, and bill the user once, no half-finished outputs reaching customers.', detail: 'retry from step 3 · cached 1–2', visual: 'rings' },
       { n: '04', title: 'Marketing wants to A/B the whole pipeline', body: 'A/B isn\'t just for individual models, sometimes the whole pipeline (enhance + gen + voice) is what\'s changing. Workflows are A/B-able as a unit, with sticky cohorts and a single significance test.', detail: 'experiment: pipeline-v3 vs v4', visual: 'grid' },
@@ -97,7 +97,7 @@ each.workflows.define({
   },
 });
 
-const result = await each.run({
+const result = await each({
   workflow: "product-photo-v3",
   inputs: { prompt: user.prompt },
   attrs: { user_id: user.id },
@@ -146,7 +146,7 @@ const result = await each.run({
     ],
     code: `import { each } from "eachlabs";
 
-const result = await each.run({
+const result = await each({
   model: "kling-v3-12v",
   inputs: { prompt },
   router: {
@@ -177,7 +177,7 @@ const result = await each.run({
     eyebrow: 'PLATFORM · PROMPT ENHANCER',
     title: '12× fewer errors. Same model. Same call.',
     body:
-      'Refusals, malformed outputs, schema drift, hallucinated formats, the failure modes every provider ships with. The enhancer is a learned layer that catches these before the model call and reshapes the prompt so the failure never happens. Same model, same each.run(), 12× fewer broken responses.',
+      'Refusals, malformed outputs, schema drift, hallucinated formats, the failure modes every provider ships with. The enhancer is a learned layer that catches these before the model call and reshapes the prompt so the failure never happens. Same model, same each(), 12× fewer broken responses.',
     stats: [
       { value: '12×',    label: 'fewer errors vs raw' },
       { value: '<200ms', label: 'enhancer overhead' },
@@ -203,7 +203,7 @@ const result = await each.run({
     ],
     code: `import { each } from "eachlabs";
 
-const result = await each.run({
+const result = await each({
   model: "kling-v3-12v",
   inputs: { prompt: user.prompt },
   enhance: {

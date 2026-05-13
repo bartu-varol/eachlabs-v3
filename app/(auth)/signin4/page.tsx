@@ -30,8 +30,7 @@ export default function Signin4Page() {
       </h1>
 
       <p className="text-ink2 text-[14.5px] leading-relaxed mt-6 max-w-[460px]">
-        Your seat is still warm. Same key, same{' '}
-        <code className="font-mono text-[13px] text-spark">each.run()</code>,
+        Your seat is still warm. Same key, same workspace,
         pick up exactly where you left off.
       </p>
 

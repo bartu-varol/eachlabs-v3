@@ -66,7 +66,7 @@ export function WorkflowsShowcase() {
                 accent="HOW"
                 text={
                   <>
-                    Define the graph; call <code className="font-mono text-[12.5px] text-spark">each.run({'{'} workflow {'}'})</code>;
+                    Define the graph; call <code className="font-mono text-[12.5px] text-spark">each({'{'} workflow {'}'})</code>;
                     pin a version when you're ready.
                   </>
                 }

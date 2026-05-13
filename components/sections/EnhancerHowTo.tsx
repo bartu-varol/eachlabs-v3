@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 /* ──────────────────────────────────────────────────────────────────────────
    EnhancerHowTo, "30 seconds to wire up prompt enhance" section.
 
-     ① Enhance prompt         , one flag on the each.run() call
+     ① Enhance prompt         , one flag on the each() call
      ② Choose what's caught   , list of policy categories the enhancer handles
      ③ Read the prompt trace  , original + rewritten side by side
 ────────────────────────────────────────────────────────────────────────── */
@@ -28,7 +28,7 @@ export function EnhancerHowTo() {
         One flag. Five policies. Every refusal saved.
       </h2>
       <p className="text-ink2 text-[15px] leading-[1.65] max-w-[640px] mt-6">
-        Add <Code>enhance.prompt: true</Code> to any each.run() call. The enhancer
+        Add <Code>enhance.prompt: true</Code> to any each() call. The enhancer
         watches the policy verdict, rewrites only when it would have failed, and
         stamps the trace so you can audit what was changed.
       </p>
@@ -37,11 +37,11 @@ export function EnhancerHowTo() {
         {/* Step 1 */}
         <Step n="01" title="Enhance prompt" delay={0}>
           <p className="text-ink2 text-[13px] leading-[1.6]">
-            One flag on your existing each.run(). No SDK swap, no separate endpoint.
+            One flag on your existing each() call. No SDK swap, no separate endpoint.
           </p>
           <CodeMini
             lines={[
-              { tokens: [k('await '), v('each.run('), o('{')] },
+              { tokens: [k('await '), v('each('), o('{')] },
               { indent: 2, tokens: [p('model: '), s('"kling-v3-12v"'), o(',')] },
               { indent: 2, tokens: [p('inputs: '), o('{ '), p('prompt: '), p('user.prompt'), o(' },')] },
               { indent: 2, tokens: [p('enhance: '), o('{')] },

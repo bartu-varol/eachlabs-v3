@@ -291,7 +291,7 @@ function VersioningViz() {
         className="mt-3 flex items-center gap-1.5 text-success text-[10px]"
       >
         <span>✓</span>
-        <span>each.run({'{'} version: <span className="text-spark">"v3.2"</span> {'}'}) · no redeploy</span>
+        <span>each({'{'} version: <span className="text-spark">"v3.2"</span> {'}'}) · no redeploy</span>
       </motion.div>
     </div>
   );

@@ -26,7 +26,7 @@ const PRINCIPLES = [
   {
     n: '03',
     title: 'Observability is part of the call',
-    body: 'Tracing is not an SDK you bolt on. Every each.run() emits a complete trace by default.',
+    body: 'Tracing is not an SDK you bolt on. Every call emits a complete trace by default.',
   },
   {
     n: '04',

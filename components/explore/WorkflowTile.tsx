@@ -12,8 +12,6 @@ function runsMultiplier(workflowId: string): number {
   return 1000 + (Math.abs(h) % 1001);
 }
 
-const ACCENT = '#8A4FB8';
-
 export function WorkflowTile({ workflow }: { workflow: WorkflowSummary }) {
   const href = `/ai-flows/${workflow.slug}`;
   const isTrending = workflow.categories?.includes('trending');
@@ -35,12 +33,8 @@ export function WorkflowTile({ workflow }: { workflow: WorkflowSummary }) {
         el.style.setProperty('--my', `${e.clientY - r.top}px`);
       }}
       className="ec-card group relative block aspect-[4/5] rounded-lg overflow-hidden bg-surface no-underline"
-      style={{ ['--ec-accent' as string]: ACCENT }}
     >
-      <div
-        className="ec-card-media absolute inset-0"
-        style={{ background: `linear-gradient(135deg, ${ACCENT}45, ${ACCENT}15 55%, ${ACCENT}05)` }}
-      >
+      <div className="ec-card-media absolute inset-0 bg-gradient-to-br from-surface2 via-surface to-surface2">
         {workflow.thumbnail && !isVideo && (
           // eslint-disable-next-line @next/next/no-img-element
           <img
@@ -68,10 +62,7 @@ export function WorkflowTile({ workflow }: { workflow: WorkflowSummary }) {
 
       <div className="ec-card-scrim absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/85 via-black/45 to-transparent pointer-events-none z-[1]" />
 
-      <span
-        className="absolute top-3 left-3 z-10 max-w-[60%] truncate font-mono text-[10.5px] uppercase tracking-eyebrow font-semibold px-2.5 py-1 rounded-md backdrop-blur-md bg-white/90 shadow-sm"
-        style={{ color: ACCENT }}
-      >
+      <span className="absolute top-3 left-3 z-10 max-w-[60%] truncate font-mono text-[10.5px] uppercase tracking-eyebrow font-semibold px-2.5 py-1 rounded-md backdrop-blur-md bg-white/90 text-zinc-900 shadow-sm">
         Workflow
       </span>
 

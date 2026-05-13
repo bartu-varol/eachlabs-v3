@@ -42,16 +42,7 @@ export function Hero() {
           {/* Body, big lead + descriptive rest */}
           <p className="text-[15.5px] leading-[1.6] text-ink2 max-w-[560px] mx-auto lg:mx-0 mt-7">
             <strong className="text-ink font-semibold">{hero.bodyLead}</strong>{' '}
-            {hero.body.split('each.run()').map((part, i, arr) =>
-              i < arr.length - 1 ? (
-                <span key={i}>
-                  {part}
-                  <code className="!bg-transparent !border-0 !p-0 text-spark">each.run()</code>
-                </span>
-              ) : (
-                <span key={i}>{part}</span>
-              ),
-            )}
+            {hero.body}
           </p>
 
           {/* CTAs */}

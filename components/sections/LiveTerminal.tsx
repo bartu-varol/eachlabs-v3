@@ -48,7 +48,7 @@ const TEXT_COLOR: Record<LineKind, string> = {
 /* Per-product mock terminal scripts, each plays a believable production scene. */
 const SCRIPTS: Record<ProductDef['slug'], Line[]> = {
   router: [
-    { kind: 'cmd',  text: 'each.run("kling-v3-12v", input, { fallback: ["wan-2.7"] })' },
+    { kind: 'cmd',  text: 'each("kling-v3-12v", input, { fallback: ["wan-2.7"] })' },
     { kind: 'ok',   text: '[03:14:22] kling-v3 · 200 · 892ms · trace_8f2a' },
     { kind: 'fail', text: '[03:14:24] kling-v3 · 503 · upstream timeout · trace_8f2c' },
     { kind: 'trace', text: '[03:14:24] failover armed → wan-2.7' },
@@ -57,7 +57,7 @@ const SCRIPTS: Record<ProductDef['slug'], Line[]> = {
     { kind: 'comment', text: 'no pages fired · uptime preserved · 99.99%' },
   ],
   workflows: [
-    { kind: 'cmd',  text: 'each.run({ workflow: "product-photo-v3" })' },
+    { kind: 'cmd',  text: 'each({ workflow: "product-photo-v3" })' },
     { kind: 'info', text: '[12:01:03] enter · enhance (gpt-4o)' },
     { kind: 'ok',   text: '[12:01:04] step ok · enhance · 0.4s · $0.001' },
     { kind: 'info', text: '[12:01:04] enter · image (kling-v3) ║ voice (eleven-v3), parallel' },
@@ -67,7 +67,7 @@ const SCRIPTS: Record<ProductDef['slug'], Line[]> = {
     { kind: 'comment', text: 'workflow done · total 6.9s · $0.194 · v3.2' },
   ],
   enhancer: [
-    { kind: 'cmd',  text: 'each.run({ enhance: true, model: "kling-v3-12v", prompt })' },
+    { kind: 'cmd',  text: 'each({ enhance: true, model: "kling-v3-12v", prompt })' },
     { kind: 'info', text: 'raw prompt → kling-v3 · predicted_error 12.4% (refusal · malformed)' },
     { kind: 'info', text: 'enhancer reshaping · target=kling-v3 · 178ms' },
     { kind: 'ok',   text: 'enhanced prompt → kling-v3 · predicted_error 0.9%' },
