@@ -69,7 +69,7 @@ export const megaMenus: Record<'platform' | 'developers', MegaMenu> = {
           { title: 'Docs',          body: 'Concepts, recipes, the full reference.', href: 'https://docs.eachlabs.ai/introduction' },
           { title: 'API reference', body: 'Every endpoint. Every param. Live examples.', href: 'https://docs.eachlabs.ai/introduction' },
           { title: 'SDKs',          body: 'TypeScript · Python · Go · Rust.', href: 'https://docs.eachlabs.ai/introduction' },
-          { title: 'Changelog',     body: 'What shipped this week. And last.', href: 'https://docs.eachlabs.ai/introduction' },
+          { title: 'Changelog',     body: 'What shipped this week. And last.', href: '/changelog' },
         ],
       },
       {
@@ -513,7 +513,7 @@ export const footer = {
         { label: 'Docs',          href: 'https://docs.eachlabs.ai/introduction' },
         { label: 'API reference', href: 'https://docs.eachlabs.ai/introduction' },
         { label: 'SDKs',          href: 'https://docs.eachlabs.ai/introduction' },
-        { label: 'Changelog',     href: 'https://docs.eachlabs.ai/introduction' },
+        { label: 'Changelog',     href: '/changelog' },
         { label: 'GitHub',        href: 'https://github.com/eachlabs' },
         { label: 'Status',        href: 'https://docs.eachlabs.ai/introduction' },
       ],

@@ -98,6 +98,13 @@ export function MobileMenu({ open, onClose }: Props) {
             </div>
           );
         })}
+        <Link
+          href="/changelog"
+          onClick={onClose}
+          className="text-[24px] font-display py-3 border-b border-rule text-ink"
+        >
+          Changelog
+        </Link>
         <div className="mt-6 flex gap-3">
           <Link
             href="/signup"
