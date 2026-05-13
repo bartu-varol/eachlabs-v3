@@ -3,7 +3,7 @@ import { XMLParser } from 'fast-xml-parser';
 
 const RSS_URL =
   process.env.MINTLIFY_CHANGELOG_RSS_URL ||
-  'https://docs.eachlabs.ai/updates/rss.xml';
+  'https://docs.eachlabs.ai/changelog/rss.xml';
 
 export type ChangelogEntry = {
   id: string;
