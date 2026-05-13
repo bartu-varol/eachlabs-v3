@@ -1,24 +1,10 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Quote } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { RabbitButton } from '@/components/ui/RabbitButton';
-import { customerStories, type HeadlineToken } from '@/lib/content';
-
-function HeadlineText({ tokens }: { tokens: HeadlineToken[] }) {
-  return (
-    <h3 className="text-ink font-display font-semibold text-[22px] md:text-[24px] leading-[1.2] tracking-tight">
-      {tokens.map((t, i) =>
-        t.kind === 'spark' ? (
-          <span key={i} className="text-spark">{t.text}</span>
-        ) : (
-          <span key={i}>{t.text}</span>
-        ),
-      )}
-    </h3>
-  );
-}
+import { CustomerCard } from '@/components/sections/CustomerCard';
+import { customerStories } from '@/lib/content';
 
 export default function CustomersPage() {
   const c = customerStories;
@@ -112,54 +98,16 @@ export default function CustomersPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
             {c.caseStudies.map((cs, i) => (
-              <motion.article
+              <motion.div
                 key={`${cs.name}-${cs.role}`}
                 initial={{ opacity: 0, y: 12 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '0px 0px -60px 0px' }}
                 transition={{ duration: 0.4, delay: i * 0.04, ease: [0.16, 1, 0.3, 1] }}
                 whileHover={{ y: -3 }}
-                className="group relative bg-surface border border-rule2 rounded-md p-7 md:p-8 flex flex-col hover:border-spark/40 hover:bg-surface2 transition-colors"
               >
-                {/* Hanging quote glyph */}
-                <Quote
-                  size={28}
-                  strokeWidth={1.5}
-                  className="absolute top-6 right-6 text-ink3/30 group-hover:text-spark/40 transition-colors"
-                  aria-hidden
-                />
-
-                {/* Company eyebrow */}
-                <div className="font-mono text-[10px] uppercase tracking-eyebrow text-spark mb-4">
-                  {cs.role}
-                </div>
-
-                {/* Headline (= summary) */}
-                <HeadlineText tokens={cs.headline} />
-
-                {/* Full verbatim quote */}
-                <p className="text-ink2 text-[14px] leading-[1.7] mt-5 flex-1">
-                  {cs.quote}
-                </p>
-
-                {/* Author */}
-                <div className="border-t border-rule pt-5 mt-6 flex items-center gap-3">
-                  <div
-                    className={[
-                      'w-10 h-10 rounded-full flex items-center justify-center text-[12px] font-medium tracking-wide flex-shrink-0',
-                      cs.avatar.bg,
-                      cs.avatar.text,
-                    ].join(' ')}
-                    aria-hidden
-                  >
-                    {cs.avatar.initials}
-                  </div>
-                  <div className="min-w-0">
-                    <div className="text-ink text-[14px] font-medium truncate">{cs.name}</div>
-                    <div className="text-ink3 text-[12px] mt-0.5 truncate">{cs.role}</div>
-                  </div>
-                </div>
-              </motion.article>
+                <CustomerCard cs={cs} variant="grid" />
+              </motion.div>
             ))}
           </div>
         </div>

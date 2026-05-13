@@ -1,26 +1,21 @@
-import type { Metadata } from 'next';
 import Link from 'next/link';
 import { AuthTerminalShell } from '@/components/auth/AuthTerminalShell';
 import { AuthTerminalAuth } from '@/components/auth/AuthTerminalAuth';
 
-export const metadata: Metadata = {
-  title: 'each auth login · each::labs',
-  description: 'Welcome back. The chaos missed you.',
-};
-
 const LASTSEEN = [
-  { ts: '05:14:22', tone: 'ink2',    text: 'last login: 4 days ago from 78.x.x.x · macOS · zsh' },
-  { ts: '05:14:21', tone: 'sun',     text: 'session expired · please re-auth' },
-  { ts: '05:14:19', tone: 'spark',   text: 'welcome back. the chaos missed you.' },
+  { ts: '05:14:22', tone: 'ink2',  text: 'last login: 4 days ago from 78.x.x.x · macOS · zsh' },
+  { ts: '05:14:21', tone: 'sun',   text: 'session expired · please re-auth' },
+  { ts: '05:14:19', tone: 'spark', text: 'welcome back. the chaos missed you.' },
 ];
 
-export default function Signin2Page() {
+export function SigninTerminal() {
   return (
     <AuthTerminalShell
       cwd="~/each-auth/login"
+      brandHref="/signin?ui=brand"
       tabs={[
-        { label: 'signin', href: '/signin2', active: true },
-        { label: 'signup', href: '/signup2' },
+        { label: 'signin', href: '/signin?ui=terminal', active: true },
+        { label: 'signup', href: '/signup?ui=terminal' },
       ]}
     >
       <pre className="font-mono text-[13.5px] leading-[1.85] text-ink2 whitespace-pre-wrap">
@@ -54,7 +49,7 @@ export default function Signin2Page() {
 
       <p className="mt-10 text-[12.5px] text-ink3 font-mono">
         new here?{' '}
-        <Link href="/signup2" className="text-spark hover:underline underline-offset-4">
+        <Link href="/signup?ui=terminal" className="text-spark hover:underline underline-offset-4">
           $ each auth signup --new →
         </Link>
       </p>

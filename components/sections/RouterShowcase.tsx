@@ -28,9 +28,8 @@ import { ChaosVisual } from './ChaosVisuals';
      4. Live           , cinematic console: streaming logs + fallback scene
      5. Anatomy        , trigger / decision / outcome breakdown
      6. When to reach  , four scenarios with ambient point visuals
-     7. Testimonial    , metric-driven quote
-     8. Pairs with     , links to Workflows / Trace / Attributes
-     9. CTA            , start free / docs
+     7. Pairs with     , links to Workflows / Trace / Attributes
+     8. CTA            , start free / docs
 ────────────────────────────────────────────────────────────────────────── */
 
 export function RouterShowcase() {
@@ -230,52 +229,7 @@ export function RouterShowcase() {
         </div>
       </section>
 
-      {/* 7. TESTIMONIAL */}
-      <section className="relative border-t border-rule overflow-hidden">
-        <div
-          aria-hidden
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              'radial-gradient(ellipse 60% 50% at 50% 0%, rgb(var(--c-spark) / 0.06), transparent 65%)',
-          }}
-        />
-        <div className="container py-20 md:py-24 relative">
-          <div className="grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-10 lg:gap-16 items-center">
-            <div className="lg:border-r lg:border-rule lg:pr-16">
-              <div className="font-display font-semibold text-[44px] md:text-[64px] leading-[0.9] tracking-tightest text-spark tabular-nums whitespace-nowrap">
-                {product.testimonial.metric}
-              </div>
-              <div className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3 mt-3 max-w-[260px]">
-                {product.testimonial.metricLabel}
-              </div>
-            </div>
-            <div>
-              <blockquote className="font-display text-[20px] md:text-[26px] leading-[1.35] tracking-tight text-ink">
-                <span className="text-spark">“</span>
-                {product.testimonial.quote}
-                <span className="text-spark">”</span>
-              </blockquote>
-              {(product.testimonial.name || product.testimonial.role) && (
-                <div className="mt-5">
-                  {product.testimonial.name && (
-                    <div className="text-ink text-[14px] font-medium">
-                      {product.testimonial.name}
-                    </div>
-                  )}
-                  {product.testimonial.role && (
-                    <div className="text-ink3 text-[13px] mt-0.5">
-                      {product.testimonial.role}
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 8. PAIRS WELL WITH */}
+      {/* 7. PAIRS WELL WITH */}
       <section className="container border-t border-rule py-20 md:py-24">
         <div className="font-mono text-[11px] uppercase tracking-eyebrow text-spark mb-3">
           ● PAIRS WELL WITH
@@ -305,7 +259,7 @@ export function RouterShowcase() {
         </div>
       </section>
 
-      {/* 9. CTA */}
+      {/* 8. CTA */}
       <section className="container border-t border-rule py-24 md:py-32">
         <div className="max-w-[680px] mx-auto text-center">
           <h2 className="font-display font-semibold text-[34px] md:text-[48px] leading-[1.05] tracking-tightest text-ink">

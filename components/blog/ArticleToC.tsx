@@ -41,7 +41,7 @@ export function ArticleToC({ items }: Props) {
         {items.map((item) => {
           const isActive = item.id === active;
           return (
-            <li key={item.id} className={item.level === 3 ? 'pl-3' : ''}>
+            <li key={item.id}>
               <a
                 href={`#${item.id}`}
                 className={[
@@ -49,6 +49,7 @@ export function ArticleToC({ items }: Props) {
                   isActive
                     ? 'border-spark text-ink'
                     : 'border-transparent text-ink3 hover:text-ink hover:border-rule2',
+                  item.level === 3 ? 'text-[12.5px] text-ink3/80' : '',
                 ].join(' ')}
               >
                 {item.text}

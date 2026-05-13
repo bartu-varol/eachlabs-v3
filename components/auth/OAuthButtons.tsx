@@ -1,11 +1,33 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Github, Loader2 } from 'lucide-react';
+import { Github, Loader2, Check } from 'lucide-react';
 
 type Provider = 'github' | 'google';
 type Mode = 'signup' | 'signin';
+type Theme = 'default' | 'boarding';
+
+type Props = {
+  mode: Mode;
+  redirectTo?: string;
+  theme?: Theme;
+};
+
+const DEFAULT_DEST: Record<Mode, string> = {
+  signin: '/',
+  signup: '/onboarding',
+};
+
+const BOARDING_STEPS = [
+  'scanning boarding pass',
+  'verifying passenger',
+  'assigning seat',
+  'now boarding · gate 4',
+];
+
+const DEFAULT_STEPS_SIGNIN = ['signing you in', 'welcome back'];
+const DEFAULT_STEPS_SIGNUP = ['provisioning workspace', 'welcome aboard'];
 
 function GoogleGlyph({ className = '' }: { className?: string }) {
   return (
@@ -30,17 +52,68 @@ function GoogleGlyph({ className = '' }: { className?: string }) {
   );
 }
 
-export function OAuthButtons({ mode }: { mode: Mode }) {
+export function OAuthButtons({ mode, redirectTo, theme = 'default' }: Props) {
   const router = useRouter();
-  const [loading, setLoading] = useState<Provider | null>(null);
+  const [provider, setProvider] = useState<Provider | null>(null);
+  const [stepIndex, setStepIndex] = useState(-1);
 
-  function handleClick(provider: Provider) {
-    if (loading) return;
-    setLoading(provider);
-    // Mock, no real auth wired yet.
-    // eslint-disable-next-line no-console
-    console.log(`[mock] ${mode} via ${provider}`);
-    setTimeout(() => router.push('/'), 900);
+  const destination = redirectTo ?? DEFAULT_DEST[mode];
+  const steps =
+    theme === 'boarding'
+      ? BOARDING_STEPS
+      : mode === 'signin'
+        ? DEFAULT_STEPS_SIGNIN
+        : DEFAULT_STEPS_SIGNUP;
+  const stepInterval = theme === 'boarding' ? 620 : 520;
+
+  function handleClick(p: Provider) {
+    if (provider) return;
+    setProvider(p);
+    setStepIndex(0);
+  }
+
+  useEffect(() => {
+    if (stepIndex < 0) return;
+    if (stepIndex >= steps.length) {
+      const t = setTimeout(() => router.push(destination), 380);
+      return () => clearTimeout(t);
+    }
+    const t = setTimeout(() => setStepIndex((i) => i + 1), stepInterval);
+    return () => clearTimeout(t);
+  }, [stepIndex, steps.length, stepInterval, router, destination]);
+
+  if (provider) {
+    return (
+      <div className="rounded-md border border-rule2 bg-surface p-4 animate-panel-in">
+        <div className="font-mono text-[10.5px] uppercase tracking-eyebrow text-ink3 mb-3 flex items-center justify-between">
+          <span>{theme === 'boarding' ? '* boarding in progress' : '* one moment'}</span>
+          <span className="text-ink3">via {provider}</span>
+        </div>
+        <ul className="space-y-1.5">
+          {steps.map((s, i) => {
+            if (i > stepIndex) return null;
+            const isDone = i < stepIndex;
+            return (
+              <li key={s} className="font-mono text-[13px] flex items-center gap-2 animate-panel-in">
+                {isDone ? (
+                  <Check className="size-[14px] text-success shrink-0" strokeWidth={2.5} />
+                ) : (
+                  <Loader2 className="size-[14px] text-spark animate-spin shrink-0" />
+                )}
+                <span className={isDone ? 'text-ink' : 'text-ink2'}>{s}</span>
+                {!isDone && <span className="text-ink3 ml-0.5 animate-pulse">…</span>}
+              </li>
+            );
+          })}
+          {stepIndex >= steps.length && (
+            <li className="font-mono text-[12px] text-ink3 flex items-center gap-2 pt-1 animate-panel-in">
+              <span className="text-spark">↗</span>
+              <span>redirecting to {destination}</span>
+            </li>
+          )}
+        </ul>
+      </div>
+    );
   }
 
   return (
@@ -48,28 +121,18 @@ export function OAuthButtons({ mode }: { mode: Mode }) {
       <button
         type="button"
         onClick={() => handleClick('github')}
-        disabled={loading !== null}
-        className="group w-full inline-flex items-center justify-center gap-3 h-12 rounded-md border border-rule2 bg-surface text-ink hover:bg-surface2 hover:border-rule transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+        className="group w-full inline-flex items-center justify-center gap-3 h-12 rounded-md border border-rule2 bg-surface text-ink hover:bg-surface2 hover:border-rule transition-colors"
       >
-        {loading === 'github' ? (
-          <Loader2 className="size-[18px] animate-spin text-ink2" />
-        ) : (
-          <Github className="size-[18px]" strokeWidth={1.6} />
-        )}
+        <Github className="size-[18px]" strokeWidth={1.6} />
         <span className="text-[14px] font-medium">Continue with GitHub</span>
       </button>
 
       <button
         type="button"
         onClick={() => handleClick('google')}
-        disabled={loading !== null}
-        className="group w-full inline-flex items-center justify-center gap-3 h-12 rounded-md border border-rule2 bg-surface text-ink hover:bg-surface2 hover:border-rule transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+        className="group w-full inline-flex items-center justify-center gap-3 h-12 rounded-md border border-rule2 bg-surface text-ink hover:bg-surface2 hover:border-rule transition-colors"
       >
-        {loading === 'google' ? (
-          <Loader2 className="size-[18px] animate-spin text-ink2" />
-        ) : (
-          <GoogleGlyph className="size-[18px]" />
-        )}
+        <GoogleGlyph className="size-[18px]" />
         <span className="text-[14px] font-medium">Continue with Google</span>
       </button>
     </div>

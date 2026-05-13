@@ -69,7 +69,7 @@ export const megaMenus: Record<'platform' | 'developers', MegaMenu> = {
           { title: 'Docs',          body: 'Concepts, recipes, the full reference.', href: 'https://docs.eachlabs.ai/introduction' },
           { title: 'API reference', body: 'Every endpoint. Every param. Live examples.', href: 'https://docs.eachlabs.ai/introduction' },
           { title: 'SDKs',          body: 'TypeScript · Python · Go · Rust.', href: 'https://docs.eachlabs.ai/introduction' },
-          { title: 'Changelog',     body: 'What shipped this week. And last.', href: 'https://docs.eachlabs.ai/introduction' },
+          { title: 'Changelog',     body: 'What shipped this week. And last.', href: '/changelog' },
         ],
       },
       {
@@ -78,6 +78,7 @@ export const megaMenus: Record<'platform' | 'developers', MegaMenu> = {
           { title: 'GitHub',  body: 'Source, examples, issues.', href: 'https://github.com/eachlabs' },
           { title: 'Discord', body: 'Ship-talk, support, drama-free.', href: 'https://discord.gg/eachlabs' },
           { title: 'Status',  body: '99.99% · all systems operational.', href: 'https://docs.eachlabs.ai/introduction' },
+          { title: 'Blog',    body: 'Field notes & dispatches.', href: '/blog' },
         ],
       },
     ],
@@ -114,7 +115,7 @@ export const hero = {
   body:
     '- the hyped ones, the cheap ones, the one that broke yesterday. We do the boring parts: retries when models go down, per-user cost when finance asks, live A/B when product wants to ship. You write each.run(). We do the rest.',
   ctas: [
-    { label: 'Follow the white rabbit',         href: '/signup',  variant: 'primary'   as const },
+    { label: 'Start Building',         href: '/signup',  variant: 'primary'   as const },
     { label: 'Talk to an engineer (a real one)',   href: '/contact', variant: 'secondary' as const },
   ],
   /** Stats bar, 4 numbers each with a one-line cheeky sub. */
@@ -294,6 +295,23 @@ export type Avatar = {
   bg: string;
   /** Tailwind text utility class for the initials */
   text: string;
+  /**
+   * Portrait of the person, square, served from /public/customers/photos/.
+   * Initials block renders only when the file fails to load.
+   */
+  photo?: string;
+};
+
+/**
+ * Company mark shown under the customer name. Intrinsic dimensions are needed
+ * because the source files vary widely (some 90×60, some 750×180) and the
+ * card uses object-contain inside a fixed-height row.
+ */
+export type CompanyLogo = {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
 };
 
 export type CaseStudy = {
@@ -301,8 +319,10 @@ export type CaseStudy = {
   headline: HeadlineToken[];
   quote: string;
   name: string;
+  /** Company name, shown as a fallback when the logo asset is missing */
   role: string;
   avatar: Avatar;
+  logo: CompanyLogo;
   href: string;
 };
 
@@ -323,7 +343,8 @@ export const customerStories = {
         'We work with Eachlabs on selected products where flexibility, speed, and stability matter most. Their 24/7 support during critical moments has been especially valuable, knowing that there is always a responsive and technically capable team available gives us operational confidence while scaling.',
       name: 'Aziz Gündoğdu',
       role: 'Scate',
-      avatar: { initials: 'AG', bg: 'bg-spark', text: 'text-white' },
+      avatar: { initials: 'AG', bg: 'bg-spark', text: 'text-white', photo: '/customers/photos/aziz-gundogdu.jpg' },
+      logo: { src: '/customers/logos/scate.svg', alt: 'Scate', width: 93, height: 62 },
       href: '/customers',
     },
     {
@@ -336,7 +357,8 @@ export const customerStories = {
         'We work with Eachlabs because their team is highly solution-oriented and responsive, and we always receive quick support. Their APIs are also reliable and stable in production.',
       name: 'Osman Bahar',
       role: 'Byterise',
-      avatar: { initials: 'OB', bg: 'bg-highlight', text: 'text-white' },
+      avatar: { initials: 'OB', bg: 'bg-highlight', text: 'text-white', photo: '/customers/photos/osman-bahar.png' },
+      logo: { src: '/customers/logos/byterise.svg', alt: 'Byterise', width: 147, height: 23 },
       href: '/customers',
     },
     {
@@ -349,7 +371,8 @@ export const customerStories = {
         'Working with the each::labs team has been a genuinely great experience. Their communication is fast, friendly, and truly helpful. The feedback process feels collaborative rather than formal, like you’re actually building something together. They really understand developers and make everything smoother, we genuinely love each::labs!',
       name: 'Furkan Sandal',
       role: 'PixelByte',
-      avatar: { initials: 'FS', bg: 'bg-success', text: 'text-white' },
+      avatar: { initials: 'FS', bg: 'bg-success', text: 'text-white', photo: '/customers/photos/furkan-sandal.png' },
+      logo: { src: '/customers/logos/pixelbyte.svg', alt: 'PixelByte', width: 113, height: 32 },
       href: '/customers',
     },
     {
@@ -363,7 +386,8 @@ export const customerStories = {
         'The top two features I always highlight are the workflows and the model comparison tool. Their workflow templates are truly unique they help you see trends, understand what works, and build a great final result quickly. And the model comparison feature makes it incredibly easy to test different models and instantly find the one that performs best.',
       name: 'Osman Menci',
       role: 'Yoya Mobile',
-      avatar: { initials: 'OM', bg: 'bg-ember', text: 'text-white' },
+      avatar: { initials: 'OM', bg: 'bg-ember', text: 'text-white', photo: '/customers/photos/osman-menci.png' },
+      logo: { src: '/customers/logos/yoya.png', alt: 'Yoya Mobile', width: 616, height: 247 },
       href: '/customers',
     },
     {
@@ -377,7 +401,8 @@ export const customerStories = {
         'We use each::labs’ infrastructure to power the AI models in our applications. Their deep expertise in AI model market allows us to deliver the most up-to-date, highest-quality, and fastest models to our users.',
       name: 'Ekin Dursun',
       role: 'Pixel Wizard',
-      avatar: { initials: 'ED', bg: 'bg-sun', text: 'text-white' },
+      avatar: { initials: 'ED', bg: 'bg-sun', text: 'text-white', photo: '/customers/photos/ekin-dursun.jpeg' },
+      logo: { src: '/customers/logos/pixelwizard.png', alt: 'Pixel Wizard', width: 346, height: 53 },
       href: '/customers',
     },
     {
@@ -393,7 +418,8 @@ export const customerStories = {
         'each::labs is our choice because it’s reliable, easy to integrate, and incredibly user-friendly. Their strong support team resolves issues instantly, providing a stable and convenient experience.',
       name: 'Gökçe Oğuz',
       role: 'baby.ai',
-      avatar: { initials: 'GO', bg: 'bg-yellow', text: 'text-bg' },
+      avatar: { initials: 'GO', bg: 'bg-yellow', text: 'text-bg', photo: '/customers/photos/gokce-oguz.svg' },
+      logo: { src: '/customers/logos/baby.png', alt: 'baby.ai', width: 129, height: 37 },
       href: '/customers',
     },
     {
@@ -406,7 +432,8 @@ export const customerStories = {
         'each::labs gives us a single integration for a large range of Gen AI models. Integrating each AI model seperately would be wasting time and effort unnecessarily. With each::labs we are moving faster, test different model and scale our application efficiently.',
       name: 'Fatih Güler',
       role: 'Kata Technology',
-      avatar: { initials: 'FG', bg: 'bg-spark', text: 'text-white' },
+      avatar: { initials: 'FG', bg: 'bg-spark', text: 'text-white', photo: '/customers/photos/fatih-guler.svg' },
+      logo: { src: '/customers/logos/kata.png', alt: 'Kata Technology', width: 289, height: 36 },
       href: '/customers',
     },
     {
@@ -420,7 +447,8 @@ export const customerStories = {
         'The most important reason for working with each::labs is their ability to effectively address our needs in AI creative production and editing. In our industry, creating creative solutions tailored to the needs and expectations of advertisers is crucial. In this regard, each::labs’ fast and diverse services allow us to continuously improve the “AI Creative” aspect of our product.',
       name: 'Umut Gül',
       role: 'Wask',
-      avatar: { initials: 'UG', bg: 'bg-highlight', text: 'text-white' },
+      avatar: { initials: 'UG', bg: 'bg-highlight', text: 'text-white', photo: '/customers/photos/umut-gul.svg' },
+      logo: { src: '/customers/logos/wask.png', alt: 'Wask', width: 468, height: 124 },
       href: '/customers',
     },
     {
@@ -433,7 +461,8 @@ export const customerStories = {
         'We’re working with each::labs to power our consumer application with 1M+ downloads. We depend on many different models for different tasks, and each::labs makes it so easy to tackle this.',
       name: 'Cihat İmamoğlu',
       role: 'JoyoLabs',
-      avatar: { initials: 'Cİ', bg: 'bg-success', text: 'text-white' },
+      avatar: { initials: 'Cİ', bg: 'bg-success', text: 'text-white', photo: '/customers/photos/cihat-imamoglu.svg' },
+      logo: { src: '/customers/logos/joyolabs.png', alt: 'JoyoLabs', width: 752, height: 180 },
       href: '/customers',
     },
     {
@@ -446,7 +475,8 @@ export const customerStories = {
         'Flexible workflow feature allows us to combine and use multiple models within a single generation workflow, which gives us much more flexibility when designing the product experience. each::labs’ pricing helps us optimize costs while still giving us access to a wide range of models and capabilities.',
       name: 'Selimhan Çakır',
       role: 'MobileOcean',
-      avatar: { initials: 'SÇ', bg: 'bg-ember', text: 'text-white' },
+      avatar: { initials: 'SÇ', bg: 'bg-ember', text: 'text-white', photo: '/customers/photos/selimhan-cakir.svg' },
+      logo: { src: '/customers/logos/mobileocean.svg', alt: 'MobileOcean', width: 232, height: 42 },
       href: '/customers',
     },
   ] as CaseStudy[],
@@ -513,7 +543,7 @@ export const footer = {
         { label: 'Docs',          href: 'https://docs.eachlabs.ai/introduction' },
         { label: 'API reference', href: 'https://docs.eachlabs.ai/introduction' },
         { label: 'SDKs',          href: 'https://docs.eachlabs.ai/introduction' },
-        { label: 'Changelog',     href: 'https://docs.eachlabs.ai/introduction' },
+        { label: 'Changelog',     href: '/changelog' },
         { label: 'GitHub',        href: 'https://github.com/eachlabs' },
         { label: 'Status',        href: 'https://docs.eachlabs.ai/introduction' },
       ],

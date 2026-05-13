@@ -36,10 +36,10 @@ export default function Signin4Page() {
       </p>
 
       <div className="mt-9">
-        <OAuthButtons mode="signin" />
+        <OAuthButtons mode="signin" theme="boarding" />
       </div>
 
-      <MagicLinkForm variant="signin" />
+      <MagicLinkForm variant="signin" theme="boarding" />
 
       <p className="mt-9 text-ink3 text-[13px]">
         First time flying?{' '}

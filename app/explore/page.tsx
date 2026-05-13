@@ -18,9 +18,10 @@ export const revalidate = 60;
 
 type SearchParams = { tab?: string | string[] };
 
-function pickTab(t: string | undefined): 'MODELS' | 'WORKFLOWS' | 'TRENDS' {
+function pickTab(t: string | undefined): 'MODELS' | 'WORKFLOWS' | 'TRENDS' | 'LLMS' {
   if (t === 'workflows') return 'WORKFLOWS';
   if (t === 'trends') return 'TRENDS';
+  if (t === 'llms') return 'LLMS';
   return 'MODELS';
 }
 

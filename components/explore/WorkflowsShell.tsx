@@ -43,7 +43,13 @@ export function WorkflowsShell({
   const [discovery, setDiscovery] = useState<Discovery>(isTrends ? 'trending' : 'all');
   const [category, setCategory] = useState<string>('all');
 
-  const [workflows, setWorkflows] = useState<WorkflowSummary[]>(initialWorkflows);
+  // The upstream API has no "exclude trending" filter, so the workflows tab
+  // bleeds trending-tagged items into the regular list. Filter them out
+  // client-side in workflows mode; trends mode passes everything through.
+  const stripTrendingForMode = (list: WorkflowSummary[]) =>
+    isTrends ? list : list.filter((w) => !(w.categories?.includes('trending')));
+
+  const [workflows, setWorkflows] = useState<WorkflowSummary[]>(stripTrendingForMode(initialWorkflows));
   const [offset, setOffset] = useState<number | null>(initialOffset);
   const [total, setTotal] = useState<number>(initialTotal);
   const [loading, setLoading] = useState(false);
@@ -78,7 +84,7 @@ export function WorkflowsShell({
     )
       .then((res) => {
         if (reqId.current !== id) return;
-        setWorkflows(res.workflows ?? []);
+        setWorkflows(stripTrendingForMode(res.workflows ?? []));
         setOffset(res.offset);
         setTotal(res.total_count ?? 0);
       })
@@ -114,7 +120,7 @@ export function WorkflowsShell({
         limit: PAGE_LIMIT,
         offset,
       });
-      setWorkflows((cur) => [...cur, ...(res.workflows ?? [])]);
+      setWorkflows((cur) => [...cur, ...stripTrendingForMode(res.workflows ?? [])]);
       setOffset(res.offset);
       setTotal(res.total_count ?? total);
     } catch (e) {
@@ -191,7 +197,13 @@ export function WorkflowsShell({
         </select>
 
         <span className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3 lg:ml-auto">
-          {total ? `${total} ${isTrends ? 'trends' : 'workflows'}` : ''}
+          {isTrends
+            ? total
+              ? `${total} trends`
+              : ''
+            : workflows.length
+              ? `${workflows.length}${hasMore ? '+' : ''} workflows`
+              : ''}
         </span>
       </div>
 

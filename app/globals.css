@@ -349,7 +349,7 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
   color: rgb(var(--c-ink));
   letter-spacing: -0.02em;
   font-weight: 600;
-  scroll-margin-top: 5rem;
+  scroll-margin-top: 7.5rem;
 }
 .blog-prose h2 {
   font-size: 24px;
@@ -411,13 +411,43 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
   text-decoration-color: rgb(var(--c-spark));
 }
 .blog-prose blockquote {
-  border-left: 2px solid rgb(var(--c-spark));
-  padding: 0.1rem 0 0.1rem 1.15rem;
+  position: relative;
+  border: none;
+  padding: 0.5rem 0 0.5rem 2.25rem;
+  margin: 2.25rem 0;
   color: rgb(var(--c-ink));
   font-style: italic;
-  margin: 1.75rem 0;
+  font-size: 1.15rem;
+  line-height: 1.6;
+  letter-spacing: -0.005em;
+}
+.blog-prose blockquote::before {
+  content: '\201C';
+  position: absolute;
+  left: 0;
+  top: -0.45rem;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-style: normal;
+  font-size: 2.75rem;
+  line-height: 1;
+  color: rgb(var(--c-spark));
 }
 .blog-prose blockquote p { margin: 0.4rem 0; }
+
+/* Drop cap, applied only on the post body via .blog-prose--dropcap.
+   Targets the first letter of the first paragraph and gives the article
+   an editorial entry-point. */
+.blog-prose--dropcap > p:first-of-type::first-letter {
+  float: left;
+  font-family: var(--font-inter), system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 3.6rem;
+  line-height: 0.92;
+  padding: 0.35rem 0.75rem 0 0;
+  margin: 0.1rem 0.1rem 0 -0.1rem;
+  color: rgb(var(--c-ink));
+  letter-spacing: -0.03em;
+}
 .blog-prose code {
   background: rgb(var(--c-surface2));
   padding: 0.1rem 0.4rem;

@@ -29,22 +29,52 @@ const PROVIDERS: Provider[] = [
 
 type Mode = 'signup' | 'signin';
 
-export function AuthTerminalAuth({ mode }: { mode: Mode }) {
+const DEFAULT_DEST: Record<Mode, string> = {
+  signin: '/',
+  signup: '/onboarding',
+};
+
+const SIGNIN_LINES = [
+  'authenticating identity',
+  'restoring session',
+  'welcome back',
+];
+
+const SIGNUP_LINES = [
+  'authenticating identity',
+  'provisioning workspace',
+  'minting api key',
+  'welcome aboard',
+];
+
+export function AuthTerminalAuth({ mode, redirectTo }: { mode: Mode; redirectTo?: string }) {
   const router = useRouter();
   const [active, setActive] = useState(0);
-  const [loading, setLoading] = useState<Provider['id'] | null>(null);
+  const [confirmedProvider, setConfirmedProvider] = useState<Provider['id'] | null>(null);
+  const [lineIndex, setLineIndex] = useState(-1);
+
+  const destination = redirectTo ?? DEFAULT_DEST[mode];
+  const lines = mode === 'signup' ? SIGNUP_LINES : SIGNIN_LINES;
 
   function confirm(p: Provider) {
-    if (loading) return;
-    setLoading(p.id);
-    // eslint-disable-next-line no-console
-    console.log(`[mock] ${mode} via ${p.id}`);
-    setTimeout(() => router.push('/'), 950);
+    if (confirmedProvider) return;
+    setConfirmedProvider(p.id);
+    setLineIndex(0);
   }
 
   useEffect(() => {
+    if (lineIndex < 0) return;
+    if (lineIndex >= lines.length) {
+      const t = setTimeout(() => router.push(destination), 420);
+      return () => clearTimeout(t);
+    }
+    const t = setTimeout(() => setLineIndex((i) => i + 1), 540);
+    return () => clearTimeout(t);
+  }, [lineIndex, lines.length, router, destination]);
+
+  useEffect(() => {
     function onKey(e: KeyboardEvent) {
-      if (loading) return;
+      if (confirmedProvider) return;
       if (e.key === 'ArrowDown' || (e.key === 'Tab' && !e.shiftKey)) {
         e.preventDefault();
         setActive((i) => (i + 1) % PROVIDERS.length);
@@ -60,8 +90,8 @@ export function AuthTerminalAuth({ mode }: { mode: Mode }) {
     }
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [active, loading]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [active, confirmedProvider]);
 
   const question = mode === 'signup' ? 'choose an identity provider:' : 'continue as:';
 
@@ -74,17 +104,17 @@ export function AuthTerminalAuth({ mode }: { mode: Mode }) {
       <ul className="mt-2">
         {PROVIDERS.map((p, i) => {
           const isActive = i === active;
-          const isLoading = loading === p.id;
-          const isOther = loading !== null && !isLoading;
+          const isConfirmed = confirmedProvider === p.id;
+          const isOther = confirmedProvider !== null && !isConfirmed;
           return (
             <li key={p.id}>
               <button
                 type="button"
                 role="option"
                 aria-selected={isActive}
-                onMouseEnter={() => !loading && setActive(i)}
+                onMouseEnter={() => !confirmedProvider && setActive(i)}
                 onClick={() => confirm(p)}
-                disabled={loading !== null}
+                disabled={confirmedProvider !== null}
                 className={[
                   'group w-full text-left flex items-center gap-3 px-3 py-2 rounded-sm border transition-colors',
                   isActive
@@ -107,7 +137,7 @@ export function AuthTerminalAuth({ mode }: { mode: Mode }) {
                   {p.label}
                 </span>
                 <span className="text-ink3 ml-2"># {p.note}</span>
-                {isLoading && (
+                {isConfirmed && (
                   <span className="ml-auto text-spark inline-flex items-center gap-1">
                     <span className="inline-block animate-pulse">authenticating</span>
                     <span className="inline-block animate-pulse">…</span>
@@ -118,6 +148,30 @@ export function AuthTerminalAuth({ mode }: { mode: Mode }) {
           );
         })}
       </ul>
+
+      {confirmedProvider && (
+        <div className="mt-5 font-mono text-[13px] leading-[1.85] text-ink2 animate-panel-in">
+          {lines.map((line, i) => {
+            if (i > lineIndex) return null;
+            const isDone = i < lineIndex;
+            return (
+              <div key={line} className="animate-panel-in">
+                <span className={isDone ? 'text-success' : 'text-spark animate-pulse'}>
+                  {isDone ? '✓' : '·'}
+                </span>{' '}
+                <span className={isDone ? 'text-ink' : 'text-ink2'}>{line}</span>
+                {!isDone && <span className="text-ink3"> …</span>}
+              </div>
+            );
+          })}
+          {lineIndex >= lines.length && (
+            <div className="mt-2 animate-panel-in">
+              <span className="text-spark">↗</span>{' '}
+              <span className="text-ink3">redirecting to {destination}</span>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

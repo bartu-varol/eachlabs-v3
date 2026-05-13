@@ -14,7 +14,7 @@ import { AnimatePresence, motion } from 'framer-motion';
      idle      0.0 – 0.4s   reset
      check     0.4 – 1.1s   policy check on the original prompt
      reject    1.1 – 2.0s   REJECTED stamp + strike-through
-     rescue    2.0 – 2.5s   "enhancer activated" indicator
+     prompt    2.0 – 2.5s   "enhancer activated" indicator
      rewrite   2.5 – 3.7s   rewritten prompt fades in with highlighted swap
      recheck   3.7 – 4.3s   re-check on the rewritten prompt
      approved  4.3 – 5.1s   APPROVED stamp + green check
@@ -25,7 +25,7 @@ type Phase =
   | 'idle'
   | 'check'
   | 'reject'
-  | 'rescue'
+  | 'prompt'
   | 'rewrite'
   | 'recheck'
   | 'approved'
@@ -35,7 +35,7 @@ const TIMINGS: Record<Phase, number> = {
   idle: 400,
   check: 700,
   reject: 900,
-  rescue: 500,
+  prompt: 500,
   rewrite: 1200,
   recheck: 600,
   approved: 800,
@@ -61,7 +61,7 @@ const REWRITTEN = {
 };
 
 const REJECT_REASON = 'brand_ip';
-const RESCUE_MS = 156;
+const PROMPT_MS = 156;
 
 /* ── Main component ─────────────────────────────────────────────────────── */
 
@@ -78,7 +78,7 @@ export function EnhancerDemo() {
     function tick() {
       clearAll();
       setPhase('idle');
-      const order: Phase[] = ['check', 'reject', 'rescue', 'rewrite', 'recheck', 'approved', 'ship'];
+      const order: Phase[] = ['check', 'reject', 'prompt', 'rewrite', 'recheck', 'approved', 'ship'];
       let acc = TIMINGS.idle;
       for (const p of order) {
         const at = acc;
@@ -126,15 +126,15 @@ export function EnhancerDemo() {
         {/* First check verdict */}
         <CheckLine phase={phase} variant="first" />
 
-        {/* Rescue indicator + rewritten prompt */}
+        {/* Prompt-enhance indicator + rewritten prompt */}
         <AnimatePresence>
-          {(phase === 'rescue' ||
+          {(phase === 'prompt' ||
             phase === 'rewrite' ||
             phase === 'recheck' ||
             phase === 'approved' ||
             phase === 'ship') && (
             <motion.div
-              key="rescue-block"
+              key="prompt-block"
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
@@ -142,8 +142,8 @@ export function EnhancerDemo() {
               className="overflow-hidden"
             >
               <div className="px-4 md:px-5 pt-1 pb-2">
-                {/* "rescue activated" indicator */}
-                <RescueArrow phase={phase} />
+                {/* "enhancer activated" indicator */}
+                <PromptArrow phase={phase} />
                 {/* Rewritten prompt */}
                 <Label tone="spark">enhancer · rewritten</Label>
                 <PromptBox phase={phase} variant="rewritten" />
@@ -191,7 +191,7 @@ function Label({
 function PromptBox({ phase, variant }: { phase: Phase; variant: 'original' | 'rewritten' }) {
   if (variant === 'original') {
     // Strike-through kicks in once the policy reject lands.
-    const struck = phase === 'reject' || phase === 'rescue' || phase === 'rewrite' || phase === 'recheck' || phase === 'approved' || phase === 'ship';
+    const struck = phase === 'reject' || phase === 'prompt' || phase === 'rewrite' || phase === 'recheck' || phase === 'approved' || phase === 'ship';
     const dimmed = struck;
 
     return (
@@ -277,7 +277,7 @@ function CheckLine({
         : phase === 'check'
         ? 'running'
         : 'rejected'
-      : phase === 'rewrite' || phase === 'rescue'
+      : phase === 'rewrite' || phase === 'prompt'
         ? 'idle'
         : phase === 'recheck'
         ? 'running'
@@ -321,9 +321,9 @@ function CheckLine({
   );
 }
 
-/* ── Rescue arrow, small "enhancer activated" indicator ────────────────── */
+/* ── Prompt-enhance arrow, small "enhancer activated" indicator ────────── */
 
-function RescueArrow({ phase }: { phase: Phase }) {
+function PromptArrow({ phase }: { phase: Phase }) {
   return (
     <div className="flex items-center gap-2 mb-2 mt-1 font-mono text-[10px] uppercase tracking-eyebrow text-spark">
       <motion.span
@@ -333,9 +333,9 @@ function RescueArrow({ phase }: { phase: Phase }) {
       >
         ↓
       </motion.span>
-      <span>enhancer.rescue</span>
+      <span>enhancer.prompt</span>
       <span className="text-ink3 normal-case tracking-normal">·</span>
-      <span className="text-ink3 normal-case tracking-normal tabular-nums">{RESCUE_MS}ms</span>
+      <span className="text-ink3 normal-case tracking-normal tabular-nums">{PROMPT_MS}ms</span>
     </div>
   );
 }

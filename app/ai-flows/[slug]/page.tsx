@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { getFlowDetail, getRelatedFlows, listPopularFlowSlugs, type FlowDetail } from '@/lib/flowDetail';
 import { FlowDetailHero } from '@/components/flow-detail/FlowDetailHero';
 import { FlowTemplate } from '@/components/flow-detail/FlowTemplate';
+import { FlowExamples } from '@/components/flow-detail/FlowExamples';
 import { FlowApiSnippets } from '@/components/flow-detail/FlowApiSnippets';
 import { FlowPlayground } from '@/components/flow-detail/FlowPlayground';
 import { FlowRelated } from '@/components/flow-detail/FlowRelated';
@@ -181,6 +182,7 @@ export default async function FlowDetailPage({
       <section className="container py-12">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-10 items-start">
           <div className="space-y-8 min-w-0">
+            <FlowExamples flow={flow} inputJson={buildExampleInputJson(flow)} />
             <FlowTemplate flow={flow} />
             <FlowApiSnippets
               workflowId={flow.workflowId}
@@ -195,7 +197,7 @@ export default async function FlowDetailPage({
             <div className="border border-rule2 rounded-md p-5 bg-surface/40">
               <div className="flex items-baseline justify-between gap-3 mb-3">
                 <span className="font-mono text-[11px] uppercase tracking-eyebrow text-ink2">
-                  Template price
+                  Estimated price
                 </span>
                 <span className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3">
                   per run
