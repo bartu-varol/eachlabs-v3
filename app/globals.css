@@ -129,6 +129,20 @@ body {
     text-decoration-thickness: 5px;
     text-underline-offset: 10px;
   }
+
+  /* Theme-aware visibility for brand assets (wordmark SVGs, etc).
+     Default = light theme. Switches when [data-theme="dark"] is set,
+     or when no explicit choice + prefers-color-scheme: dark. */
+  .theme-dark-only  { display: none; }
+  .theme-light-only { display: initial; }
+}
+
+:root[data-theme="dark"] .theme-dark-only  { display: initial; }
+:root[data-theme="dark"] .theme-light-only { display: none; }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .theme-dark-only  { display: initial; }
+  :root:not([data-theme]) .theme-light-only { display: none; }
 }
 
 /* Ticker, pause on hover */

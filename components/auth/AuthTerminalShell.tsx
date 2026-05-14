@@ -52,7 +52,7 @@ export function AuthTerminalShell({
         className="fixed inset-0 z-40 flex flex-col bg-bg font-mono text-ink"
       >
         <header className="flex items-center gap-4 px-4 sm:px-6 h-11 border-b border-rule2 bg-surface select-none">
-          <div className="flex items-center gap-2 shrink-0">
+          <div className="flex items-center gap-2 shrink-0 group/traffic">
             <DotLink href={homeHref} color="red" title="Close · home" />
             <DotLink href={yellow} color="yellow" title="Close · brand mode" />
             <DotButton onClick={() => setMinimized(true)} color="green" title="Minimize" />
@@ -137,14 +137,54 @@ const DOT_COLOR: Record<DotColor, string> = {
   green: 'bg-success/80 hover:bg-success',
 };
 
+/* macOS-style hover glyphs. Stay invisible until the traffic-light cluster
+   is hovered (group/traffic on the parent), then fade in centered in each
+   dot, just like the real window chrome. */
+const DOT_GLYPH: Record<DotColor, React.ReactNode> = {
+  red: (
+    <svg viewBox="0 0 8 8" className="w-2.5 h-2.5" aria-hidden>
+      <path d="M2.2 2.2 L5.8 5.8 M5.8 2.2 L2.2 5.8" stroke="#1f0202" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  ),
+  yellow: (
+    <svg viewBox="0 0 8 8" className="w-2.5 h-2.5" aria-hidden>
+      <path d="M1.8 4 L6.2 4" stroke="#2e1d00" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  ),
+  green: (
+    <svg viewBox="0 0 8 8" className="w-2.5 h-2.5" aria-hidden>
+      <path
+        d="M2 2 L4.4 2 L2 4.4 Z M6 6 L3.6 6 L6 3.6 Z"
+        fill="#04240f"
+        stroke="#04240f"
+        strokeWidth="0.5"
+        strokeLinejoin="round"
+      />
+    </svg>
+  ),
+};
+
+function DotInner({ color }: { color: DotColor }) {
+  return (
+    <span
+      aria-hidden
+      className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/traffic:opacity-100 transition-opacity duration-150"
+    >
+      {DOT_GLYPH[color]}
+    </span>
+  );
+}
+
 function DotLink({ href, color, title }: { href: string; color: DotColor; title: string }) {
   return (
     <Link
       href={href}
       aria-label={title}
       title={title}
-      className={`size-3 rounded-full ${DOT_COLOR[color]} transition-colors cursor-pointer`}
-    />
+      className={`relative size-3 rounded-full ${DOT_COLOR[color]} transition-colors cursor-pointer`}
+    >
+      <DotInner color={color} />
+    </Link>
   );
 }
 
@@ -163,8 +203,10 @@ function DotButton({
       onClick={onClick}
       aria-label={title}
       title={title}
-      className={`size-3 rounded-full ${DOT_COLOR[color]} transition-colors cursor-pointer`}
-    />
+      className={`relative size-3 rounded-full ${DOT_COLOR[color]} transition-colors cursor-pointer`}
+    >
+      <DotInner color={color} />
+    </button>
   );
 }
 

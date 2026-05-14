@@ -14,18 +14,32 @@ export function SigninBrand() {
         <DevModeTitleToggle href="/signin?ui=terminal" />
       </div>
 
-      <h1 className="font-display font-semibold text-[44px] sm:text-[52px] leading-[1.0] tracking-tightest mt-5 text-ink">
-        The pipeline
-        <br />
-        <em className="text-spark">kept running.</em>
+      <h1 className="font-display font-semibold text-[44px] sm:text-[56px] md:text-[64px] leading-[0.98] tracking-tightest mt-7 text-ink">
+        <span className="block">
+          The <span className="hero-underline">pipeline</span>
+        </span>
+        <span className="block">
+          <em className="text-spark">kept running.</em>
+        </span>
       </h1>
 
-      <p className="text-ink2 text-[14.5px] leading-relaxed mt-5">
-        Same key, same workspace. Pick up where you left off.
+      <p className="text-[15.5px] leading-[1.6] text-ink2 mt-7">
+        <strong className="text-ink font-semibold">Same key, same workspace.</strong>{' '}
+        Pick up where you left off.
       </p>
 
       <div className="mt-8">
         <OAuthButtons mode="signin" />
+      </div>
+
+      <div className="mt-8 inline-flex items-center gap-2">
+        <span className="relative flex size-2" aria-hidden>
+          <span className="absolute inset-0 rounded-full bg-success/50 animate-ping" />
+          <span className="relative inline-flex size-2 rounded-full bg-success" />
+        </span>
+        <span className="font-mono text-[10.5px] uppercase tracking-eyebrow text-success">
+          99.99% &middot; all systems operational
+        </span>
       </div>
 
       <p className="mt-7 text-center text-ink3 text-[13px]">

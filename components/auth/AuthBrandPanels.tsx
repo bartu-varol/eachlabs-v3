@@ -18,9 +18,9 @@ export function SignupBrandPanel() {
         <div className="font-mono text-[11px] uppercase tracking-eyebrow text-spark">
           * WHAT YOU GET
         </div>
-        <ul className="mt-5 space-y-3.5">
+        <ul className="mt-5 grid grid-cols-1 gap-px bg-rule border border-rule rounded-md overflow-hidden">
           {SIGNUP_PERKS.map((p) => (
-            <li key={p.label} className="flex items-start gap-3">
+            <li key={p.label} className="bg-surface flex items-start gap-3 px-4 py-3.5">
               <Check className="size-4 text-spark mt-[3px] shrink-0" strokeWidth={2.5} />
               <div>
                 <div className="text-ink text-[14px] font-medium leading-tight">{p.label}</div>
@@ -49,8 +49,8 @@ export function SignupBrandPanel() {
         </div>
       </div>
 
-      <p className="font-display italic text-[19px] text-ink2 leading-snug max-w-[380px]">
-        We do the <span className="text-spark not-italic font-semibold">boring parts.</span>
+      <p className="font-display italic text-[20px] text-ink2 leading-snug max-w-[380px]">
+        We do the <span className="hero-underline not-italic text-ink font-semibold">boring parts.</span>
         <br />
         You ship the product.
       </p>
@@ -71,38 +71,26 @@ const SIGNIN_STATS = [
 export function SigninBrandPanel() {
   return (
     <div className="w-full max-w-[440px] space-y-10">
-      <div className="inline-flex items-center gap-2">
-        <span className="relative flex size-2" aria-hidden>
-          <span className="absolute inset-0 rounded-full bg-success/50 animate-ping" />
-          <span className="relative inline-flex size-2 rounded-full bg-success" />
-        </span>
-        <span className="font-mono text-[11px] uppercase tracking-eyebrow text-success">
-          99.99% · all systems operational
-        </span>
-      </div>
-
       <div>
-        <div className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3">
-          * LAST 24H · NETWORK-WIDE
+        <div className="font-mono text-[10px] uppercase tracking-eyebrow text-spark">
+          * LAST 24H &middot; NETWORK-WIDE
         </div>
-        <dl className="mt-5 space-y-4">
+        <div className="mt-5 grid grid-cols-3 gap-px bg-rule border border-rule rounded-md overflow-hidden">
           {SIGNIN_STATS.map((s) => (
-            <div key={s.k} className="flex items-baseline gap-5">
-              <dt className="font-display font-semibold text-[30px] tabular-nums text-spark min-w-[88px] leading-none">
+            <div key={s.k} className="bg-surface px-4 py-4">
+              <div className="font-display font-semibold text-[28px] tabular-nums text-spark leading-none">
                 {s.v}
-              </dt>
-              <dd>
-                <div className="text-ink text-[13.5px] font-medium leading-tight">{s.k}</div>
-                <div className="text-ink3 italic text-[12px] mt-0.5">{s.sub}</div>
-              </dd>
+              </div>
+              <div className="text-ink text-[11.5px] mt-2 font-medium leading-tight">{s.k}</div>
+              <div className="text-ink3 italic text-[10.5px] mt-0.5">{s.sub}</div>
             </div>
           ))}
-        </dl>
+        </div>
       </div>
 
       <div className="rounded-md border border-rule2 bg-bg p-4">
-        <div className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3">
-          * THIS WEEK · CHANGELOG
+        <div className="font-mono text-[10px] uppercase tracking-eyebrow text-spark">
+          * THIS WEEK &middot; CHANGELOG
         </div>
         <div className="mt-2 text-ink text-[14px] font-medium">
           each::router 1.4, quality-aware spill
@@ -112,8 +100,9 @@ export function SigninBrandPanel() {
         </div>
       </div>
 
-      <p className="font-display italic text-[19px] text-ink2 leading-snug max-w-[380px]">
-        <span className="text-spark not-italic font-semibold">The chaos</span> missed you.
+      <p className="font-display italic text-[20px] text-ink2 leading-snug max-w-[380px]">
+        <span className="hero-underline not-italic text-ink font-semibold">The chaos</span>{' '}
+        missed you.
       </p>
     </div>
   );
