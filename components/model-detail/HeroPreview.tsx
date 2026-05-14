@@ -157,6 +157,12 @@ type Props = {
   inputJson: string;
   outputData?: unknown;
   showInputOverlay?: boolean;
+  /**
+   * When true, the outer wrapper fills its parent (w-full / h-full) and the
+   * media stretches to cover. Use inside a parent grid cell that already
+   * controls width/height — e.g. the Examples gallery's resizing cells.
+   */
+  fillContainer?: boolean;
 };
 
 export function HeroPreview({
@@ -167,6 +173,7 @@ export function HeroPreview({
   inputJson,
   outputData,
   showInputOverlay = true,
+  fillContainer = false,
 }: Props) {
   const [pinned, setPinned] = useState(false);
   const [hovering, setHovering] = useState(false);
@@ -215,9 +222,11 @@ export function HeroPreview({
       onMouseEnter={allowHover ? () => setHovering(true) : undefined}
       onMouseLeave={allowHover ? () => setHovering(false) : undefined}
       className={`relative rounded-xl overflow-hidden bg-surface2 ${
-        fullWidthKinds
-          ? 'aspect-video w-full lg:w-[640px] max-w-full'
-          : 'w-fit max-w-full lg:max-w-[760px]'
+        fillContainer
+          ? 'w-full'
+          : fullWidthKinds
+            ? 'aspect-video w-full lg:w-[640px] max-w-full'
+            : 'w-fit max-w-full lg:max-w-[760px]'
       }`}
     >
       {mediaUrl && kind === 'video' ? (
@@ -233,8 +242,12 @@ export function HeroPreview({
           onLoadedData={detectAudio}
           onPlaying={detectAudio}
           onTimeUpdate={detectAudio}
-          style={{ maxHeight: 480 }}
-          className="block max-w-full w-auto h-auto"
+          style={fillContainer ? undefined : { maxHeight: 480 }}
+          className={
+            fillContainer
+              ? 'block w-full h-auto'
+              : 'block max-w-full w-auto h-auto'
+          }
         />
       ) : mediaUrl && kind === 'audio' ? (
         <>
@@ -266,8 +279,12 @@ export function HeroPreview({
         <img
           src={mediaUrl}
           alt=""
-          style={{ maxHeight: 480 }}
-          className="block max-w-full w-auto h-auto"
+          style={fillContainer ? undefined : { maxHeight: 480 }}
+          className={
+            fillContainer
+              ? 'block w-full h-auto'
+              : 'block max-w-full w-auto h-auto'
+          }
         />
       ) : kind === 'data' && outputData != null ? (
         <>

@@ -6,6 +6,7 @@ import { ModelDetailHero } from '@/components/model-detail/ModelDetailHero';
 import { ModelApiSnippets } from '@/components/model-detail/ModelApiSnippets';
 import { ModelExamples } from '@/components/model-detail/ModelExamples';
 import { ModelPricing } from '@/components/model-detail/ModelPricing';
+import { ModelStrengths } from '@/components/model-detail/ModelStrengths';
 import { ModelReadme } from '@/components/model-detail/ModelReadme';
 import { ModelRelated } from '@/components/model-detail/ModelRelated';
 
@@ -64,6 +65,7 @@ export default async function ModelDetailPage({
 
           <aside className="space-y-4 lg:sticky lg:top-28 lg:self-start">
             <ModelPricing model={model} />
+            <ModelStrengths model={model} />
             <Link
               href="https://docs.eachlabs.ai/introduction"
               className="flex items-center justify-between gap-2 px-5 py-4 border border-rule2 rounded-md text-[13px] text-ink hover:border-ink/40 hover:bg-surface/30 transition-colors"
