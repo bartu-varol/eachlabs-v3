@@ -5,9 +5,9 @@ import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 
 /* ──────────────────────────────────────────────────────────────────────────
-   PlatformBento, asymmetric grid of 6 products with typography-driven
+   PlatformBento, asymmetric grid of products with typography-driven
    micro-animations. Each tile has a subtle accent-tinted background so the
-   grid doesn't feel like 6 identical black boxes.
+   grid doesn't feel like identical black boxes.
 ────────────────────────────────────────────────────────────────────────── */
 
 type Tile = {
@@ -246,7 +246,7 @@ export function PlatformBento() {
           ● THE PLATFORM
         </div>
         <h2 className="font-display font-semibold text-[34px] md:text-[48px] leading-[1] tracking-tightest text-ink max-w-[800px]">
-          Six products. Two layers. <span className="text-ink3 italic">One control plane.</span>
+          Modular products. Two layers. <span className="text-ink3 italic">One control plane.</span>
         </h2>
         <p className="text-ink2 text-[15px] leading-[1.6] max-w-[620px] mt-5">
           Each tile is a real product, used in production today. Click any of them to see how it

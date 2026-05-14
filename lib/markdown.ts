@@ -4,6 +4,7 @@
  *  - paragraphs separated by blank lines
  *  - - / * unordered lists
  *  - **bold**, *italic*
+ *  - ```lang fenced code blocks``` → block-level <pre><code>
  *  - `inline code`
  *  - [text](url) links
  *  - autolinking of raw http(s) URLs
@@ -39,7 +40,8 @@ function inline(s: string): string {
 type Block =
   | { kind: 'h'; level: 2 | 3 | 4; text: string }
   | { kind: 'p'; text: string }
-  | { kind: 'ul'; items: string[] };
+  | { kind: 'ul'; items: string[] }
+  | { kind: 'code'; lang: string; text: string };
 
 function tokenize(md: string): Block[] {
   const lines = md.replace(/\r\n/g, '\n').split('\n');
@@ -49,6 +51,22 @@ function tokenize(md: string): Block[] {
   while (i < lines.length) {
     const raw = lines[i];
     const line = raw.trim();
+
+    // Fenced code block (```lang … ```). Preserve raw lines so indentation
+    // and blank lines inside the block survive untouched.
+    const fence = /^```\s*([\w-]*)\s*$/.exec(line);
+    if (fence) {
+      const lang = fence[1] || '';
+      const body: string[] = [];
+      i++;
+      while (i < lines.length && !/^```\s*$/.test(lines[i].trim())) {
+        body.push(lines[i]);
+        i++;
+      }
+      if (i < lines.length) i++; // consume closing fence
+      blocks.push({ kind: 'code', lang, text: body.join('\n') });
+      continue;
+    }
 
     if (!line) {
       i++;
@@ -83,7 +101,8 @@ function tokenize(md: string): Block[] {
       i < lines.length &&
       lines[i].trim() &&
       !/^[-*]\s+/.test(lines[i].trim()) &&
-      !/^#{1,6}\s+/.test(lines[i].trim())
+      !/^#{1,6}\s+/.test(lines[i].trim()) &&
+      !/^```/.test(lines[i].trim())
     ) {
       para.push(lines[i].trim());
       i++;
@@ -101,6 +120,10 @@ export function mdToHtml(md: string | null | undefined): string {
     .map((b) => {
       if (b.kind === 'h') return `<h${b.level}>${inline(b.text)}</h${b.level}>`;
       if (b.kind === 'p') return `<p>${inline(b.text)}</p>`;
+      if (b.kind === 'code') {
+        const langAttr = b.lang ? ` data-lang="${escapeHtml(b.lang)}"` : '';
+        return `<pre${langAttr}><code>${escapeHtml(b.text)}</code></pre>`;
+      }
       return `<ul>${b.items.map((it) => `<li>${inline(it)}</li>`).join('')}</ul>`;
     })
     .join('\n');

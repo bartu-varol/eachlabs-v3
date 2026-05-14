@@ -52,7 +52,7 @@ export default function PlatformPage() {
             One control plane for every AI call you ship.
           </h1>
           <p className="text-ink2 text-[16px] leading-[1.55] max-w-[640px] mt-7">
-            Six products, two layers.{' '}
+            Modular products, two layers.{' '}
             <strong className="text-ink font-semibold">Run</strong> orchestrates the calls, router,
             workflows, enhancer.{' '}
             <strong className="text-ink font-semibold">Observe</strong> tells you what happened:
@@ -73,7 +73,7 @@ export default function PlatformPage() {
         </motion.div>
       </section>
 
-      {/* Bento grid of all 6 products */}
+      {/* Bento grid of all products */}
       <PlatformBento />
 
       {/* Principles */}
@@ -109,7 +109,7 @@ export default function PlatformPage() {
       <section className="container border-t border-rule py-24 md:py-32">
         <div className="max-w-[680px] mx-auto text-center">
           <h2 className="font-display font-semibold text-[36px] md:text-[52px] leading-[1] tracking-tightest text-ink">
-            One platform. Six products. <span className="text-ink3 italic">Free to start.</span>
+            One platform. Modular products. <span className="text-ink3 italic">Free to start.</span>
           </h2>
           <p className="text-ink2 text-[15px] mt-6">
             API key in 60 seconds. Free plan covers your first 10K traces. Subscribe only when

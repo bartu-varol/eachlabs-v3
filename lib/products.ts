@@ -22,7 +22,7 @@ export type PairsWith = { product: string; body: string; href: string };
 export type Accent = 'spark' | 'highlight' | 'success' | 'sun' | 'yellow' | 'ember';
 
 export type ProductDef = {
-  slug: 'workflows' | 'router' | 'enhancer';
+  slug: 'workflows' | 'router' | 'enhancer' | 'sense';
   /** Mark as coming-soon, adds a 'COMING SOON' badge on the page header. */
   comingSoon?: boolean;
   /** Per-product primary accent, varies the page's signature color. */
@@ -227,5 +227,70 @@ const result = await each({
     ctaBody: 'Enhancer is free on every plan; schema-aware enhancement + per-team learning on Pro and up.',
     ctaPrimary:   { label: 'Follow the white rabbit',         href: '/signup' },
     ctaSecondary: { label: 'See enhancer docs',    href: '/docs' },
+  },
+  sense: {
+    slug: 'sense',
+    accent: 'spark',
+    signature: 'Plain English in → models picked + workflow built · OpenAI-compatible',
+    eyebrow: 'PLATFORM · SENSE',
+    title: 'Describe it. sense picks the models and builds the workflow.',
+    body:
+      'each::sense is the natural-language agent in front of every model in the catalog. Tell it what you want, an image, a video, a voiceover, a 3D asset, and it chooses the models, chains them into a workflow, and runs it. OpenAI-compatible base URL; drop into LangChain, CrewAI, AutoGen, or any agent SDK you already ship.',
+    stats: [
+      { value: '600+',     label: 'models · auto-picked' },
+      { value: '0',        label: 'model names to remember' },
+      { value: 'OpenAI',   label: 'compatible API' },
+      { value: '4',        label: 'modalities · image · video · audio · 3D' },
+    ],
+    whatTitle: 'An agent that owns model selection, so you don’t have to.',
+    whatBody:
+      'sense reads your request in plain English, decides which models can land it, chains them into the right order, and runs the pipeline. The model names, the failure surfaces, the cost trade-offs, all hidden behind one OpenAI-compatible endpoint.',
+    whatPoints: [
+      { n: '01', title: 'Natural-language requests', body: '"Make a 6-second product video with a voiceover" is the API. sense parses intent, maps to the right combo of image, video, and TTS models, and runs them, without you naming any of them.', detail: 'prompt → models · auto', visual: 'tags' },
+      { n: '02', title: 'Automatic workflow construction', body: 'Multi-step pipelines get built on the fly. Image → upscale → animate → narrate is one request to sense; one workflow under the hood, one trace, automatic recovery on failure.', detail: 'one prompt · N steps · 1 trace', visual: 'flow' },
+      { n: '03', title: 'OpenAI-compatible drop-in', body: 'Point any OpenAI SDK at https://eachsense-agent.core.eachlabs.run/v1 and start calling. Works with LangChain, CrewAI, AutoGen, and every agent framework you already wired up. Zero new SDK to learn.', detail: 'base_url: eachsense-agent.../v1', visual: 'swap' },
+    ],
+    liveTitle: '"a 6-second product video with a voiceover" · workflow built in 320ms.',
+    liveBody:
+      'A real call: prompt arrives, sense picks kling-v3 for the visual and suno-v3 for the voice, composes the workflow, runs it. You called one endpoint. Behind the scenes: three models, two retries, one trace, $0.19.',
+    whenTitle: 'Reach for sense when…',
+    whenPoints: [
+      { n: '01', title: 'You don’t want to be the one picking models', body: 'Six hundred models, each with its own quirks. sense knows which ones land on your prompt and picks them by quality × latency × cost. You ship; the model panel is sense’s problem now.', detail: '600 → auto · top-1', visual: 'tags' },
+      { n: '02', title: 'You need a pipeline, not a single call', body: 'Story → storyboard → video → narration → cut. That is four model calls and a join. sense builds the workflow from one prompt and runs it as one trace, with each::workflows handling versioning and rollback underneath.', detail: 'one prompt → workflow', visual: 'flow' },
+      { n: '03', title: 'You’re already on an agent framework', body: 'Wired into LangChain, CrewAI, AutoGen, Vercel AI SDK, or anything OpenAI-shaped? Change one base URL; sense becomes the model behind every tool call. Streaming and tool-use work exactly as your framework expects.', detail: 'base_url → swap', visual: 'swap' },
+      { n: '04', title: 'You want to ship without picking a winner', body: 'New product, no benchmarks yet. sense’s choice is good-enough on day 1 and gets better as the catalog ships new models, your code stays the same.', detail: 'catalog grows · code static', visual: 'graph' },
+    ],
+    code: `import OpenAI from "openai";
+
+// each::sense is OpenAI-compatible.
+// Point any OpenAI client (or LangChain / CrewAI /
+// AutoGen / Vercel AI SDK) at this base URL.
+const client = new OpenAI({
+  apiKey:  process.env.EACHLABS_API_KEY,
+  baseURL: "https://eachsense-agent.core.eachlabs.run/v1",
+});
+
+const response = await client.chat.completions.create({
+  model: "each::sense", // sense decides which media models to run
+  messages: [
+    { role: "user", content: "make me a 6s product video with a voiceover" },
+  ],
+});
+
+// behind the scenes:
+//   sense → kling-v3 (image)
+//         → suno-v3 (voice)
+//         → compose → 1 trace · $0.19`,
+    providers: ['OpenAI SDK', 'LangChain', 'CrewAI', 'AutoGen', 'Vercel AI SDK', 'Anthropic SDK'],
+    trustedBy: ['NOVA', 'Helix', 'LUME', 'Forma', 'Maker'],
+    pairsWith: [
+      { product: 'Workflows', body: 'sense builds the workflow; workflows give you version, rollback, and the trace.',    href: '/workflows' },
+      { product: 'Router',    body: 'Every model sense picks runs through the router; spills happen for free.',           href: '/router' },
+      { product: 'Enhancer',  body: 'Prompts that sense ships get enhancer-polished on the way in, lower error rates.',  href: '/enhancer' },
+    ],
+    ctaTitle: 'Stop picking models. Ship the request.',
+    ctaBody: 'OpenAI-compatible drop-in. Free tier covers your first 1,000 sense calls; usage-based after that.',
+    ctaPrimary:   { label: 'Get the base URL',   href: '/signup' },
+    ctaSecondary: { label: 'See sense docs',     href: 'https://docs.eachlabs.ai/introduction' },
   },
 };

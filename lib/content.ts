@@ -43,14 +43,7 @@ export const megaMenus: Record<'platform' | 'developers', MegaMenu> = {
           { title: 'each::router',    body: 'Model-aware fallbacks. Quality-aware routing.', href: '/router' },
           { title: 'each::workflows', body: 'Chain models. Version. Rollback.',              href: '/workflows' },
           { title: 'each::enhancer',  body: '12× fewer errors. Same model. Same call.',     href: '/enhancer' },
-        ],
-      },
-      {
-        eyebrow: 'BROWSE',
-        items: [
-          { title: 'Explore the catalog', body: '600+ models behind one API. Image, video, audio, 3D.', href: '/explore' },
-          { title: 'Customer stories',    body: 'How teams ship faster on each::labs.',                  href: '/customers' },
-          { title: 'Pricing',             body: 'Start free. Pay when retention pays off.',              href: '/pricing' },
+          { title: 'each::sense',     body: 'The agent that reads your stack and points to the fix.', href: '/each-sense' },
         ],
       },
     ],

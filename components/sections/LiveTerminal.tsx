@@ -75,6 +75,15 @@ const SCRIPTS: Record<ProductDef['slug'], Line[]> = {
     { kind: 'data', text: 'cohort · 1,000 calls · raw 124 errors · enhanced 9 errors' },
     { kind: 'comment', text: '12× fewer errors vs raw provider · same model · same call' },
   ],
+  sense: [
+    { kind: 'cmd',  text: 'each.sense → "make a 6s product video with a voiceover"' },
+    { kind: 'info', text: '[03:14:22] sense · parsing intent · 600 models cross-checked' },
+    { kind: 'trace', text: '[03:14:22] selected · kling-v3 (image) · suno-v3 (voice) · compose' },
+    { kind: 'data', text: 'workflow assembled · 3 steps · est $0.19 · 6.4s · 1 trace' },
+    { kind: 'ok',   text: '[03:14:23] step ok · image · 4.8s · kling-v3 · trace_b1' },
+    { kind: 'ok',   text: '[03:14:23] step ok · voice · 0.5s · suno-v3 · trace_b2' },
+    { kind: 'comment', text: 'one prompt · 3 models · 1 workflow · OpenAI-compatible' },
+  ],
 };
 
 const TOTAL_DURATION_S = 10; // full cycle including a brief reset

@@ -71,12 +71,26 @@ export function MegaMenu({ menu, open }: Props) {
     <div className="absolute top-full left-0 right-0 z-40 pt-2">
       <div className="container">
         <div className="bg-surface border border-rule2 rounded-md p-10 grid grid-cols-3 gap-10 shadow-[0_8px_24px_-12px_rgba(0,0,0,0.6)]">
-          {menu.columns.map((col) => (
-            <div key={col.eyebrow} className="flex flex-col gap-5">
+          {menu.columns.map((col) => {
+            // When there's only one content column, let it span the first two
+            // grid cells and lay its items out in a 2-up grid so the panel
+            // doesn't leave a dead column next to the featured card.
+            const wide = menu.columns.length === 1;
+            return (
+            <div
+              key={col.eyebrow}
+              className={`flex flex-col gap-5 ${wide ? 'col-span-2' : ''}`}
+            >
               <div className="font-mono text-[11px] uppercase tracking-eyebrow text-spark">
                 * {col.eyebrow}
               </div>
-              <ul className="flex flex-col gap-4">
+              <ul
+                className={
+                  wide
+                    ? 'grid grid-cols-2 gap-x-8 gap-y-4'
+                    : 'flex flex-col gap-4'
+                }
+              >
                 {col.items.map((item) => {
                   const isExternal = item.href.startsWith('http');
                   return (
@@ -107,10 +121,11 @@ export function MegaMenu({ menu, open }: Props) {
                 })}
               </ul>
             </div>
-          ))}
+            );
+          })}
 
           {menu.featured && (
-            <div className="bg-surface2 border border-rule2 p-6 rounded-md flex flex-col gap-3">
+            <div className="bg-surface2 border border-rule2 p-6 rounded-md flex flex-col gap-3 col-start-3">
               <div className="font-mono text-[11px] uppercase tracking-eyebrow text-spark">
                 {menu.featured.eyebrow}
               </div>
