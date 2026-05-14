@@ -9,7 +9,7 @@ import { ThemeToggle } from '@/components/ui/ThemeToggle';
 const SUCCESS_DESTINATIONS = ['/explore', '/docs'] as const;
 type SuccessIndex = 0 | 1;
 
-type Step = 1 | 2 | 3 | 4;
+type Step = 1 | 2 | 3 | 4 | 5;
 
 const USE_CASES = [
   { id: 'chat',   label: 'Chat & assistants',   sub: 'Conversational UX, RAG, support' },
@@ -26,6 +26,17 @@ const TEAM_SIZES = [
   { id: 'large', label: '50+ people',   sub: 'Enterprise · talk to sales' },
 ];
 
+const REFERRAL_SOURCES = [
+  { id: 'twitter',    label: 'X / Twitter',     sub: 'Saw a post, a thread, an edit-the-tweet thing' },
+  { id: 'linkedin',   label: 'LinkedIn',        sub: 'Founder post, hiring update, company page' },
+  { id: 'discord',    label: 'Discord',         sub: 'Our server, or a friend dropped the link' },
+  { id: 'reddit',     label: 'Reddit',          sub: 'r/machinelearning, r/LocalLLaMA, the usual' },
+  { id: 'producthunt', label: 'Product Hunt',   sub: 'Launch page or comments' },
+  { id: 'search',     label: 'Search',          sub: 'Google, Bing, Kagi, the open web' },
+  { id: 'friend',     label: 'From a friend',   sub: 'Word-of-mouth, the best kind' },
+  { id: 'other',      label: 'Somewhere else',  sub: 'Tell us later, no pressure' },
+];
+
 type WizardState = ReturnType<typeof useWizardState>;
 
 function useWizardState() {
@@ -34,13 +45,15 @@ function useWizardState() {
   const [role, setRole] = useState('');
   const [useCase, setUseCase] = useState('');
   const [teamSize, setTeamSize] = useState('');
+  const [referralSource, setReferralSource] = useState('');
   const [successIndex, setSuccessIndex] = useState<SuccessIndex>(0);
 
   const canNext =
     (step === 1 && orgName.trim().length > 0 && role.trim().length > 0) ||
     (step === 2 && useCase.length > 0) ||
     (step === 3 && teamSize.length > 0) ||
-    step === 4;
+    (step === 4 && referralSource.length > 0) ||
+    step === 5;
 
   return {
     step,
@@ -53,11 +66,13 @@ function useWizardState() {
     setUseCase,
     teamSize,
     setTeamSize,
+    referralSource,
+    setReferralSource,
     successIndex,
     setSuccessIndex,
     canNext,
     next: () => {
-      if (canNext) setStep((s) => Math.min(4, s + 1) as Step);
+      if (canNext) setStep((s) => Math.min(5, s + 1) as Step);
     },
     back: () => setStep((s) => Math.max(1, s - 1) as Step),
   };
@@ -75,7 +90,7 @@ function useWizardKeyboard(w: WizardState) {
           target.tagName === 'SELECT' ||
           target.isContentEditable);
 
-      if (w.step === 4) {
+      if (w.step === 5) {
         if (inField) return;
         if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
           e.preventDefault();
@@ -124,10 +139,13 @@ function useWizardKeyboard(w: WizardState) {
         return;
       }
 
-      if ((w.step === 2 || w.step === 3) && !inField) {
-        const options = w.step === 2 ? USE_CASES : TEAM_SIZES;
-        const current = w.step === 2 ? w.useCase : w.teamSize;
-        const setter = w.step === 2 ? w.setUseCase : w.setTeamSize;
+      if ((w.step === 2 || w.step === 3 || w.step === 4) && !inField) {
+        const options =
+          w.step === 2 ? USE_CASES : w.step === 3 ? TEAM_SIZES : REFERRAL_SOURCES;
+        const current =
+          w.step === 2 ? w.useCase : w.step === 3 ? w.teamSize : w.referralSource;
+        const setter =
+          w.step === 2 ? w.setUseCase : w.step === 3 ? w.setTeamSize : w.setReferralSource;
         const idx = options.findIndex((o) => o.id === current);
 
         if (e.key === 'ArrowDown') {
@@ -152,7 +170,7 @@ function useWizardKeyboard(w: WizardState) {
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [w.step, w.useCase, w.teamSize, w.canNext, w.successIndex]);
+  }, [w.step, w.useCase, w.teamSize, w.referralSource, w.canNext, w.successIndex]);
 }
 
 export function OnboardingWizard() {
@@ -190,14 +208,14 @@ function BrandOnboarding() {
       <div className="flex-1 flex items-center justify-center py-10">
         <div className="w-full max-w-[520px]">
           <div className="flex items-center gap-2 mb-6" aria-hidden>
-            {[1, 2, 3, 4].map((s) => (
+            {[1, 2, 3, 4, 5].map((s) => (
               <div key={s} className="flex-1">
                 <div className={['h-1 rounded-full transition-colors', s <= w.step ? 'bg-spark' : 'bg-rule2'].join(' ')} />
               </div>
             ))}
           </div>
           <div className="font-mono text-[11px] uppercase tracking-eyebrow text-ink3 mb-8">
-            Step {w.step} of 4
+            Step {w.step} of 5
           </div>
 
           {w.step === 1 && (
@@ -238,6 +256,18 @@ function BrandOnboarding() {
           )}
 
           {w.step === 4 && (
+            <BrandStep eyebrow="* CHAPTER FOUR · WHERE DID WE FIND YOU" title={<>How did you<br /><span className="text-spark">hear about us?</span></>} sub="Helps us figure out where to spend our weekends.">
+              <ul className="space-y-2" role="radiogroup" aria-label="Referral source">
+                {REFERRAL_SOURCES.map((r) => (
+                  <li key={r.id}>
+                    <BrandRadio checked={w.referralSource === r.id} onClick={() => w.setReferralSource(r.id)} label={r.label} sub={r.sub} />
+                  </li>
+                ))}
+              </ul>
+            </BrandStep>
+          )}
+
+          {w.step === 5 && (
             <div className="text-center">
               <div className="font-mono text-[11px] uppercase tracking-eyebrow text-spark">* YOU&rsquo;RE IN</div>
               <h1 className="font-display font-semibold text-[44px] sm:text-[56px] leading-[1.0] tracking-tightest mt-5 text-ink">
@@ -250,7 +280,7 @@ function BrandOnboarding() {
             </div>
           )}
 
-          {w.step < 4 && <BrandNav state={w} />}
+          {w.step < 5 && <BrandNav state={w} />}
         </div>
       </div>
 
@@ -357,7 +387,7 @@ function TerminalOnboarding() {
           each@labs · zsh
         </div>
         <div className="ml-auto sm:ml-0 sm:mx-auto text-[11px] uppercase tracking-eyebrow text-spark">
-          ▸ each onboard {w.step < 4 ? `--step ${w.step}` : '--done'}
+          ▸ each onboard {w.step < 5 ? `--step ${w.step}` : '--done'}
         </div>
         <div className="ml-auto flex items-center gap-2 shrink-0">
           <ThemeToggle />
@@ -372,7 +402,7 @@ function TerminalOnboarding() {
         <span className="ml-2">
           <span className="text-ink2">~/each-onboarding/setup</span>
           <span className="text-spark"> ↗</span>
-          <span className="ml-3 text-ink3">[{w.step}/4]</span>
+          <span className="ml-3 text-ink3">[{w.step}/5]</span>
         </span>
       </div>
 
@@ -402,6 +432,10 @@ function TerminalOnboarding() {
           )}
 
           {w.step === 4 && (
+            <TerminalRadio label="where did you hear about us?" options={REFERRAL_SOURCES} value={w.referralSource} onChange={w.setReferralSource} />
+          )}
+
+          {w.step === 5 && (
             <div className="mt-6 space-y-1 text-[13.5px] leading-[1.85] text-ink2">
               <Line tone="success">✓ workspace provisioned</Line>
               <Line tone="success">✓ api key issued · sk_live_•••••</Line>
@@ -449,7 +483,7 @@ function TerminalOnboarding() {
             </div>
           )}
 
-          {w.step < 4 && <TerminalNav state={w} />}
+          {w.step < 5 && <TerminalNav state={w} />}
         </div>
       </main>
 
@@ -525,10 +559,11 @@ function TerminalNav({ state: w }: { state: WizardState }) {
 ───────────────────────────────────────────────────────────────────── */
 
 const GATES = [
-  { n: '01', label: 'Pre-flight check', sub: 'Passenger & role' },
-  { n: '02', label: 'Cabin survey',     sub: 'What you&rsquo;re building' },
-  { n: '03', label: 'Crew size',        sub: 'How many hands' },
-  { n: '04', label: 'Cleared for takeoff', sub: 'Welcome aboard' },
+  { n: '01', label: 'Pre-flight check',     sub: 'Passenger &amp; role' },
+  { n: '02', label: 'Cabin survey',         sub: 'What you&rsquo;re building' },
+  { n: '03', label: 'Crew size',            sub: 'How many hands' },
+  { n: '04', label: 'Origin of journey',    sub: 'Where you heard about us' },
+  { n: '05', label: 'Cleared for takeoff',  sub: 'Welcome aboard' },
 ];
 
 function BoardingOnboarding() {
@@ -553,7 +588,7 @@ function BoardingOnboarding() {
               </span>
             </div>
             <span className="font-mono text-[10.5px] uppercase tracking-eyebrow text-bg/70 truncate">
-              Gate {gate.n} of 04
+              Gate {gate.n} of 05
             </span>
           </div>
 
@@ -624,6 +659,26 @@ function BoardingOnboarding() {
 
               {w.step === 4 && (
                 <>
+                  <h1 className="font-display font-semibold text-[36px] sm:text-[48px] leading-[0.98] tracking-tightest text-ink mt-5">
+                    Origin of
+                    <br />
+                    <em className="text-spark not-italic">journey.</em>
+                  </h1>
+                  <p className="text-ink2 text-[14.5px] leading-relaxed mt-5 max-w-[460px]">
+                    Last manifest line: where did you hear about us? It helps us figure out where to spend our weekends.
+                  </p>
+                  <ul className="mt-8 space-y-2 max-w-[480px]" role="radiogroup" aria-label="Referral source">
+                    {REFERRAL_SOURCES.map((r) => (
+                      <li key={r.id}>
+                        <BoardingRadio checked={w.referralSource === r.id} onClick={() => w.setReferralSource(r.id)} label={r.label} sub={r.sub} />
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
+
+              {w.step === 5 && (
+                <>
                   <h1 className="font-display font-semibold text-[36px] sm:text-[52px] leading-[0.98] tracking-tightest text-ink mt-5">
                     Cleared for
                     <br />
@@ -664,7 +719,7 @@ function BoardingOnboarding() {
                 </>
               )}
 
-              {w.step < 4 && <BoardingNav state={w} />}
+              {w.step < 5 && <BoardingNav state={w} />}
             </div>
 
             <div aria-hidden className="hidden lg:block absolute top-0 bottom-0 left-[calc(100%-320px)] w-px border-l border-dashed border-ink/25 dark:border-rule2" />
@@ -675,7 +730,7 @@ function BoardingOnboarding() {
             <aside className="relative bg-surface2/60 px-7 sm:px-8 py-10 sm:py-12 lg:py-10">
               <div className="flex items-baseline justify-between">
                 <span className="font-mono text-[10.5px] uppercase tracking-eyebrow text-ink3">Boarding pass · stub</span>
-                <span aria-hidden className="font-mono text-[10px] text-ink3 tabular-nums">{gate.n} / 04</span>
+                <span aria-hidden className="font-mono text-[10px] text-ink3 tabular-nums">{gate.n} / 05</span>
               </div>
 
               <ol className="mt-7 space-y-3">
@@ -706,7 +761,7 @@ function BoardingOnboarding() {
                 </div>
               </div>
 
-              {w.step === 4 && (
+              {w.step === 5 && (
                 <div aria-hidden className="absolute bottom-6 right-6 w-20 h-20 rounded-full border-[1.5px] border-spark/40 text-spark/70 flex items-center justify-center rotate-[-14deg]">
                   <span className="font-mono text-[9px] uppercase tracking-[0.22em] text-center leading-[1.1]">
                     each::<br />approved

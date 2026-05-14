@@ -524,7 +524,7 @@ export const rabbitHole = {
 // ---------- FOOTER ----------
 
 export const footer = {
-  tagline: 'The orchestration + observability layer for production AI.',
+  tagline: 'The reliability layer for production AI.',
   city: 'San Francisco',
   columns: [
     {
@@ -600,6 +600,7 @@ export const enterprise = {
       'We are already handling millions of requests across hundreds of teams, with security and uptime that keep your platform online while you scale. ',
     ctas: [
       { label: 'Talk to engineering', href: '/contact', variant: 'primary' as const },
+      { label: 'Contact Sales', href: '/contact-sales', variant: 'secondary' as const },
     ],
     stats: [
       { value: '1M+',     label: 'requests handled / month', sub: 'across hundreds of customer teams' },
