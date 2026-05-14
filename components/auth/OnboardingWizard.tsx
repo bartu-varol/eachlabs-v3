@@ -3,8 +3,12 @@
 import { Suspense, useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import { Wordmark } from '@/components/ui/Wordmark';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
+import { DotIcon, MinimizedWindow } from '@/components/auth/AuthTerminalShell';
+
+const easeOutExpo: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
 const SUCCESS_DESTINATIONS = ['/explore', '/docs'] as const;
 type SuccessIndex = 0 | 1;
@@ -78,9 +82,10 @@ function useWizardState() {
   };
 }
 
-function useWizardKeyboard(w: WizardState) {
+function useWizardKeyboard(w: WizardState, enabled: boolean = true) {
   const router = useRouter();
   useEffect(() => {
+    if (!enabled) return;
     function onKey(e: KeyboardEvent) {
       const target = e.target as HTMLElement | null;
       const inField =
@@ -170,32 +175,78 @@ function useWizardKeyboard(w: WizardState) {
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [w.step, w.useCase, w.teamSize, w.referralSource, w.canNext, w.successIndex]);
+  }, [enabled, w.step, w.useCase, w.teamSize, w.referralSource, w.canNext, w.successIndex]);
 }
 
 export function OnboardingWizard() {
   return (
-    <Suspense fallback={<BrandOnboarding />}>
+    <Suspense fallback={<BrandFallback />}>
       <ThemedOnboarding />
     </Suspense>
   );
 }
 
+function BrandFallback() {
+  const w = useWizardState();
+  return <BrandOnboarding state={w} isActive />;
+}
+
 function ThemedOnboarding() {
   const searchParams = useSearchParams();
   const theme = searchParams.get('theme');
-  if (theme === 'terminal') return <TerminalOnboarding />;
   if (theme === 'boarding') return <BoardingOnboarding />;
-  return <BrandOnboarding />;
+  return <BrandOrTerminal isTerminal={theme === 'terminal'} />;
+}
+
+function BrandOrTerminal({ isTerminal }: { isTerminal: boolean }) {
+  const w = useWizardState();
+  const [minimized, setMinimized] = useState(false);
+  const showTerminal = isTerminal && !minimized;
+  return (
+    <>
+      <BrandOnboarding state={w} isActive={!showTerminal} />
+      {isTerminal && (
+        <>
+          <motion.div
+            animate={{
+              scale: minimized ? 0.18 : 1,
+              opacity: minimized ? 0 : 1,
+              x: minimized ? -200 : 0,
+              y: minimized ? 220 : 0,
+            }}
+            transition={{ duration: 0.4, ease: easeOutExpo }}
+            style={{ transformOrigin: 'bottom left', pointerEvents: minimized ? 'none' : 'auto' }}
+            aria-hidden={minimized}
+            className="fixed inset-0 z-40 flex flex-col bg-bg font-mono text-ink"
+          >
+            <TerminalOnboarding state={w} onMinimize={() => setMinimized(true)} isActive={showTerminal} />
+          </motion.div>
+
+          <motion.div
+            animate={{ scale: minimized ? 1 : 0, opacity: minimized ? 1 : 0 }}
+            transition={{ duration: 0.4, ease: easeOutExpo }}
+            style={{ transformOrigin: 'bottom left', pointerEvents: minimized ? 'auto' : 'none' }}
+            className="fixed bottom-4 left-4 z-50"
+            aria-hidden={!minimized}
+          >
+            <MinimizedWindow
+              cwd="~/each-onboarding/setup"
+              homeHref="/"
+              onRestore={() => setMinimized(false)}
+            />
+          </motion.div>
+        </>
+      )}
+    </>
+  );
 }
 
 /* ─────────────────────────────────────────────────────────────────────
    BRAND
 ───────────────────────────────────────────────────────────────────── */
 
-function BrandOnboarding() {
-  const w = useWizardState();
-  useWizardKeyboard(w);
+function BrandOnboarding({ state: w, isActive }: { state: WizardState; isActive: boolean }) {
+  useWizardKeyboard(w, isActive);
   return (
     <div className="min-h-screen flex flex-col px-6 sm:px-10 lg:px-14 py-8 lg:py-10 bg-bg">
       <div className="flex items-center justify-between gap-4">
@@ -372,16 +423,39 @@ function BrandNav({ state: w }: { state: WizardState }) {
    TERMINAL
 ───────────────────────────────────────────────────────────────────── */
 
-function TerminalOnboarding() {
-  const w = useWizardState();
-  useWizardKeyboard(w);
+function TerminalOnboarding({ state: w, onMinimize, isActive }: { state: WizardState; onMinimize: () => void; isActive: boolean }) {
+  useWizardKeyboard(w, isActive);
   return (
-    <div className="min-h-screen flex flex-col bg-bg font-mono text-ink">
+    <>
       <header className="flex items-center gap-4 px-4 sm:px-6 h-11 border-b border-rule2 bg-surface select-none">
-        <div className="flex items-center gap-1.5 shrink-0">
-          <span className="size-2.5 rounded-full bg-fail/80" aria-hidden />
-          <span className="size-2.5 rounded-full bg-sun/80" aria-hidden />
-          <span className="size-2.5 rounded-full bg-success/80" aria-hidden />
+        <div className="flex items-center gap-2 shrink-0">
+          <Link
+            href="/"
+            aria-label="Close · home"
+            title="Close · home"
+            className="size-3 rounded-full bg-fail/80 hover:bg-fail text-black/55 hover:text-black/80 transition-colors cursor-pointer inline-flex items-center justify-center"
+          >
+            <DotIcon color="red" />
+          </Link>
+          <button
+            type="button"
+            disabled
+            aria-label="Disabled"
+            aria-disabled
+            title="Disabled"
+            className="size-3 rounded-full bg-sun/30 text-black/30 cursor-not-allowed inline-flex items-center justify-center"
+          >
+            <DotIcon color="yellow" />
+          </button>
+          <button
+            type="button"
+            onClick={onMinimize}
+            aria-label="Minimize"
+            title="Minimize"
+            className="size-3 rounded-full bg-success/80 hover:bg-success text-black/55 hover:text-black/80 transition-colors cursor-pointer inline-flex items-center justify-center"
+          >
+            <DotIcon color="green" />
+          </button>
         </div>
         <div className="hidden sm:block text-[11px] uppercase tracking-eyebrow text-ink3 shrink-0">
           each@labs · zsh
@@ -389,11 +463,8 @@ function TerminalOnboarding() {
         <div className="ml-auto sm:ml-0 sm:mx-auto text-[11px] uppercase tracking-eyebrow text-spark">
           ▸ each onboard {w.step < 5 ? `--step ${w.step}` : '--done'}
         </div>
-        <div className="ml-auto flex items-center gap-2 shrink-0">
+        <div className="ml-auto flex items-center shrink-0 [&_button]:size-7 [&_button_svg]:size-3.5">
           <ThemeToggle />
-          <Link href="/" aria-label="each::labs home" className="inline-flex items-center justify-center size-10 border border-rule2 rounded-md text-ink2 hover:text-fail hover:border-fail transition-colors text-[14px]">
-            ✕
-          </Link>
         </div>
       </header>
 
@@ -406,7 +477,7 @@ function TerminalOnboarding() {
         </span>
       </div>
 
-      <main className="flex-1 flex justify-center px-4 sm:px-6 py-8 sm:py-12">
+      <main className="flex-1 overflow-y-auto flex justify-center px-4 sm:px-6 py-8 sm:py-12">
         <div className="w-full max-w-[760px]">
           <pre className="text-[13.5px] leading-[1.85] text-ink2 whitespace-pre-wrap">
             <span className="text-ink3">$</span> each onboard <span className="text-spark">--step {w.step}</span>
@@ -492,7 +563,7 @@ function TerminalOnboarding() {
         <span className="hidden sm:inline">[<span className="text-ink2">↑↓</span>] move · [<span className="text-ink2">1-9</span>] pick · [<span className="text-ink2">↵</span>] go</span>
         <span>each::labs · 2026</span>
       </footer>
-    </div>
+    </>
   );
 }
 

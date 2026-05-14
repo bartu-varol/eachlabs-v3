@@ -1,4 +1,5 @@
 import { Check } from 'lucide-react';
+import { DotIcon } from '@/components/auth/AuthTerminalShell';
 
 /* ──────────────────────────────────────────────────────────────────────────
    SignupBrandPanel, "what you get" + fake terminal + tagline.
@@ -32,10 +33,16 @@ export function SignupBrandPanel() {
       </div>
 
       <div className="rounded-md border border-rule2 bg-bg overflow-hidden shadow-sm">
-        <div className="flex items-center gap-1.5 px-4 py-2.5 border-b border-rule2">
-          <span className="size-2 rounded-full bg-fail/70" aria-hidden />
-          <span className="size-2 rounded-full bg-sun/70" aria-hidden />
-          <span className="size-2 rounded-full bg-success/70" aria-hidden />
+        <div className="flex items-center gap-1.5 px-4 py-2.5 border-b border-rule2 text-black/50">
+          <span aria-hidden className="size-2 rounded-full bg-fail/70 inline-flex items-center justify-center">
+            <DotIcon color="red" className="size-1.5" />
+          </span>
+          <span aria-hidden className="size-2 rounded-full bg-sun/70 inline-flex items-center justify-center">
+            <DotIcon color="yellow" className="size-1.5" />
+          </span>
+          <span aria-hidden className="size-2 rounded-full bg-success/70 inline-flex items-center justify-center">
+            <DotIcon color="green" className="size-1.5" />
+          </span>
           <span className="ml-3 font-mono text-[10px] uppercase tracking-eyebrow text-ink3">
             ~/your-app
           </span>

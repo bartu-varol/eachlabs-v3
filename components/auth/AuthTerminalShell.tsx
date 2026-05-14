@@ -129,7 +129,7 @@ export function AuthTerminalShell({
   );
 }
 
-type DotColor = 'red' | 'yellow' | 'green';
+export type DotColor = 'red' | 'yellow' | 'green';
 
 const DOT_COLOR: Record<DotColor, string> = {
   red: 'bg-fail/80 hover:bg-fail',
@@ -175,6 +175,53 @@ function DotInner({ color }: { color: DotColor }) {
   );
 }
 
+/* Always-visible dot icon, used by onboarding where the icons must stay
+   active across every step (no hover trigger). */
+export function DotIcon({
+  color,
+  className = 'size-2',
+}: {
+  color: DotColor;
+  className?: string;
+}) {
+  if (color === 'red') {
+    return (
+      <svg
+        viewBox="0 0 8 8"
+        className={className}
+        aria-hidden
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      >
+        <path d="M2.5 2.5 L5.5 5.5 M5.5 2.5 L2.5 5.5" />
+      </svg>
+    );
+  }
+  if (color === 'yellow') {
+    return (
+      <svg
+        viewBox="0 0 8 8"
+        className={className}
+        aria-hidden
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+      >
+        <path d="M2 4 L6 4" />
+      </svg>
+    );
+  }
+  return (
+    <svg viewBox="0 0 8 8" className={className} aria-hidden fill="currentColor">
+      <path d="M2 2 L4.3 2 L2 4.3 Z" />
+      <path d="M6 6 L3.7 6 L6 3.7 Z" />
+    </svg>
+  );
+}
+
 function DotLink({ href, color, title }: { href: string; color: DotColor; title: string }) {
   return (
     <Link
@@ -210,7 +257,7 @@ function DotButton({
   );
 }
 
-function MinimizedWindow({
+export function MinimizedWindow({
   cwd,
   homeHref,
   brandHref,
@@ -218,7 +265,7 @@ function MinimizedWindow({
 }: {
   cwd: string;
   homeHref: string;
-  brandHref: string;
+  brandHref?: string;
   onRestore: () => void;
 }) {
   return (
@@ -232,21 +279,40 @@ function MinimizedWindow({
           href={homeHref}
           aria-label="Close · home"
           title="Close · home"
-          className="size-2 rounded-full bg-fail/80 hover:bg-fail transition-colors"
-        />
-        <Link
-          href={brandHref}
-          aria-label="Close · brand mode"
-          title="Close · brand mode"
-          className="size-2 rounded-full bg-sun/80 hover:bg-sun transition-colors"
-        />
+          className="size-2 rounded-full bg-fail/80 hover:bg-fail text-black/55 hover:text-black/80 transition-colors inline-flex items-center justify-center"
+        >
+          <DotIcon color="red" className="size-1.5" />
+        </Link>
+        {brandHref ? (
+          <Link
+            href={brandHref}
+            aria-label="Close · brand mode"
+            title="Close · brand mode"
+            className="size-2 rounded-full bg-sun/80 hover:bg-sun text-black/55 hover:text-black/80 transition-colors inline-flex items-center justify-center"
+          >
+            <DotIcon color="yellow" className="size-1.5" />
+          </Link>
+        ) : (
+          <button
+            type="button"
+            disabled
+            aria-disabled
+            aria-label="Disabled"
+            title="Disabled"
+            className="size-2 rounded-full bg-sun/30 text-black/30 cursor-not-allowed inline-flex items-center justify-center"
+          >
+            <DotIcon color="yellow" className="size-1.5" />
+          </button>
+        )}
         <button
           type="button"
           onClick={onRestore}
           aria-label="Restore"
           title="Restore"
-          className="size-2 rounded-full bg-success/80 hover:bg-success transition-colors"
-        />
+          className="size-2 rounded-full bg-success/80 hover:bg-success text-black/55 hover:text-black/80 transition-colors inline-flex items-center justify-center"
+        >
+          <DotIcon color="green" className="size-1.5" />
+        </button>
         <span className="ml-1.5 font-mono text-[9px] uppercase tracking-eyebrow text-ink3 truncate flex-1">
           {cwd}
         </span>
