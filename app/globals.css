@@ -136,6 +136,25 @@ body {
   animation-play-state: paused;
 }
 
+/* Customer logos. Source assets are designed for dark backgrounds (white
+   text, bright cyan/blue brand colors), so they vanish on the pale cream
+   light-mode surface. In light mode invert luminosity but preserve hue via
+   hue-rotate(180deg) — white→near-black, brand colors stay readable. In dark
+   mode (system default or explicit toggle) leave them alone. */
+.customer-logo {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .customer-logo {
+    filter: none;
+  }
+}
+
+:root[data-theme="dark"] .customer-logo {
+  filter: none;
+}
+
 /* Inline code (e.g. each.run() in body copy) */
 code {
   font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
@@ -145,6 +164,16 @@ code {
   border-radius: 4px;
   font-size: 0.9em;
   color: rgb(var(--c-ink));
+}
+
+/* Reset inline pill styling when <code> is a child of <pre> — block-level
+   code lives inside <pre> and is styled by the surrounding prose container. */
+pre code {
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-size: inherit;
+  color: inherit;
 }
 
 /* Code-snippet panel inside the widget, uses different shell */
@@ -212,6 +241,16 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
   padding: 0 0.3rem;
   border-radius: 4px;
   font-size: 0.88em;
+}
+.model-readme-prose pre {
+  background: rgb(var(--c-surface));
+  border: 1px solid rgb(var(--c-rule2));
+  border-radius: 8px;
+  padding: 0.9rem 1rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+  font-size: 12.5px;
+  line-height: 1.6;
 }
 .model-readme-prose a {
   color: rgb(var(--c-ink));
@@ -298,6 +337,16 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
   padding: 0 0.3rem;
   border-radius: 4px;
   font-size: 0.88em;
+}
+.catalog-readme-prose pre {
+  background: rgb(var(--c-surface));
+  border: 1px solid rgb(var(--c-rule2));
+  border-radius: 8px;
+  padding: 1.05rem 1.15rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  font-size: 13px;
+  line-height: 1.65;
 }
 .catalog-readme-prose a {
   color: rgb(var(--c-ink));

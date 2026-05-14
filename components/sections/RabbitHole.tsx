@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { rabbitHole } from '@/lib/content';
 import { Button } from '@/components/ui/Button';
+import { RabbitButton } from '@/components/ui/RabbitButton';
 
 /* Vortex, concentric rotating rings + pulsing opacity, sits behind the headline. */
 function Vortex() {
@@ -125,13 +126,21 @@ export function RabbitHole() {
               <div className="text-ink2 italic text-[14px] mt-1">{card.subline}</div>
               <p className="text-ink2 text-[14px] leading-relaxed mt-4">{card.body}</p>
               <div className="mt-auto pt-6">
-                <Button
-                  href={card.cta.href}
-                  variant={card.cta.style as 'primary' | 'outline' | 'text'}
-                  fullWidth
-                >
-                  {card.cta.label}
-                </Button>
+                {card.cta.style === 'primary' ? (
+                  <RabbitButton
+                    href={card.cta.href}
+                    label={card.cta.label}
+                    fullWidth
+                  />
+                ) : (
+                  <Button
+                    href={card.cta.href}
+                    variant={card.cta.style as 'primary' | 'outline' | 'text'}
+                    fullWidth
+                  >
+                    {card.cta.label}
+                  </Button>
+                )}
               </div>
             </motion.div>
           ))}

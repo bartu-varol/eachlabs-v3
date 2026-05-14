@@ -69,7 +69,7 @@ function CompanyMark({ cs }: { cs: CaseStudy }) {
         alt={logo.alt}
         width={logo.width}
         height={logo.height}
-        className="h-full w-full object-contain object-left opacity-90"
+        className="customer-logo h-full w-full object-contain object-left opacity-90"
         unoptimized
       />
       <span className="sr-only">{role}</span>
