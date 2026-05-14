@@ -1,22 +1,37 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Download, Check } from 'lucide-react';
+import { ArrowLeft, Download, Check } from 'lucide-react';
 
 const EASE_OUT_EXPO = [0.16, 1, 0.3, 1] as const;
 
-type Palette = { name: string; hex: string };
+/* ──────────────────────────────────────────────────────────────────────────
+   Brand page. Mirrors the rest of the redesign: mono eyebrows, bordered
+   grid tiles with bg-rule separators, terse copy, technical-confident
+   voice. Colors are pulled from globals.css tokens, not legacy values.
+────────────────────────────────────────────────────────────────────────── */
+
+type Palette = {
+  name: string;
+  hex: string;
+  cssVar: string;
+  rgb: string;
+  /** What this color is for, in one phrase. */
+  use: string;
+};
 
 const PALETTE: Palette[] = [
-  { name: 'Quantum Navy',  hex: '#060228' },
-  { name: 'Chaos Spark',   hex: '#FF3C15' },
-  { name: 'Deep Purple',   hex: '#2B0A34' },
-  { name: 'Crimson',       hex: '#450830' },
-  { name: 'Sunset Orange', hex: '#FB9000' },
-  { name: 'Golden Yellow', hex: '#FFC534' },
-  { name: 'Background',    hex: '#00011D' },
-  { name: 'Highlight',     hex: '#5046E6' },
+  { name: 'Spark',     hex: '#FF3C15', cssVar: '--c-spark',     rgb: '255 60 21',   use: 'Primary accent · everything that matters.' },
+  { name: 'Ember',     hex: '#D63310', cssVar: '--c-ember',     rgb: '214 51 16',   use: 'Deep spark · hover and pressed states.' },
+  { name: 'Sun',       hex: '#FB9000', cssVar: '--c-sun',       rgb: '251 144 0',   use: 'Warm support · workflows, secondary CTAs.' },
+  { name: 'Highlight', hex: '#5046E6', cssVar: '--c-highlight', rgb: '80 70 230',   use: 'Cool support · code, infra, depth.' },
+  { name: 'Yellow',    hex: '#FFC534', cssVar: '--c-yellow',    rgb: '255 197 52',  use: 'Caution · coming-soon, attention pulls.' },
+  { name: 'Success',   hex: '#22C55E', cssVar: '--c-success',   rgb: '34 197 94',   use: 'Positive · 200s, healthy traces.' },
+  { name: 'Fail',      hex: '#EF4444', cssVar: '--c-fail',      rgb: '239 68 68',   use: 'Negative · 5xx, refused, broken.' },
+  { name: 'Ink',       hex: '#0E0D0A', cssVar: '--c-ink',       rgb: '14 13 10',    use: 'Text on light · the near-black we use.' },
+  { name: 'Bg',        hex: '#F5F2EB', cssVar: '--c-bg',        rgb: '245 242 235', use: 'Canvas · warm cream, not white.' },
 ];
 
 type AssetCard = {
@@ -41,96 +56,141 @@ const SENSE_CARD: AssetCard = {
   download: 'each-sense-logo.svg',
 };
 
+const DONTS: { rule: string; why: string }[] = [
+  { rule: 'Don’t recolor the mark',  why: 'It’s ink on cream, or cream on ink. Spark for the eyes, not the wordmark.' },
+  { rule: 'Don’t squish or stretch', why: 'The mark has a fixed aspect ratio. Scale uniformly. No exceptions.' },
+  { rule: 'Don’t rotate',            why: 'It reads left-to-right. Always. Even when the layout is being clever.' },
+  { rule: 'Don’t replace the ::',    why: 'The double-colon is the icon. Hyphens, dots, slashes break the cadence.' },
+  { rule: 'Don’t add effects',       why: 'No shadows, glows, gradients, embosses. The mark ships flat or it doesn’t ship.' },
+  { rule: 'Don’t crowd it',          why: 'Leave at least one cap-height of clear space on every side. Always.' },
+];
+
 export default function BrandPage() {
   return (
     <>
-      {/* HERO — centered */}
-      <section className="relative border-b border-rule overflow-hidden">
-        <div
-          aria-hidden
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              'radial-gradient(ellipse 60% 50% at 50% 0%, rgb(var(--c-spark) / 0.07), transparent 65%)',
-          }}
-        />
-        <div className="container py-24 md:py-32 relative">
-          <motion.div
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, ease: EASE_OUT_EXPO }}
-            className="text-center max-w-[920px] mx-auto"
-          >
-            <h1 className="font-display font-semibold text-[44px] sm:text-[64px] lg:text-[88px] leading-[0.96] tracking-tightest text-ink">
-              Brand Guidelines<br className="hidden sm:block" /> and Press Kit
-            </h1>
-            <p className="text-ink2 text-[16px] leading-[1.6] max-w-[560px] mx-auto mt-7">
-              Resources and guidelines for using the Eachlabs brand in your projects, press, and
-              partnerships.
-            </p>
-          </motion.div>
-        </div>
+      {/* 1. HERO */}
+      <section className="container py-14 md:py-20">
+        <Link
+          href="/"
+          className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-eyebrow text-ink3 hover:text-ink transition-colors"
+        >
+          <ArrowLeft size={12} /> back to home
+        </Link>
+
+        <motion.div
+          initial={{ opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, ease: EASE_OUT_EXPO }}
+          className="max-w-[860px] mt-8"
+        >
+          <div className="font-mono text-[11px] uppercase tracking-eyebrow text-spark">
+            * BRAND · PRESS KIT
+          </div>
+          <h1 className="font-display font-semibold text-[44px] sm:text-[60px] lg:text-[80px] leading-[0.98] tracking-tightest mt-6 text-ink">
+            Use it well, use it wrong,<br className="hidden sm:block" /> just don’t squish it.
+          </h1>
+          <p className="text-ink2 text-[16px] leading-[1.6] max-w-[640px] mt-7">
+            The mark, the palette, the type, the voice. Everything you need to drop each::labs into a deck, a press release, a partnership page, or a stylesheet. SVGs are below. Hex codes copy on click.
+          </p>
+
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <a
+              href="#wordmark"
+              className="inline-flex items-center gap-2 bg-ink text-bg hover:opacity-90 transition rounded-md px-4 py-2.5 text-[13.5px] font-medium"
+            >
+              <Download size={14} /> Get the marks
+            </a>
+            <a
+              href="#colors"
+              className="inline-flex items-center gap-2 border border-rule2 text-ink hover:bg-surface transition rounded-md px-4 py-2.5 text-[13.5px] font-medium"
+            >
+              Copy a hex
+            </a>
+            <span className="font-mono text-[11px] uppercase tracking-eyebrow text-ink3 ml-2">
+              v1 · refreshed Q1 2026
+            </span>
+          </div>
+        </motion.div>
       </section>
 
-      {/* WORDMARK */}
+      {/* 2. WORDMARK */}
       <BrandSection
-        eyebrow="Wordmark"
-        body="The primary Eachlabs wordmark. Use on dark backgrounds for best contrast."
+        id="wordmark"
+        eyebrow="● WORDMARK"
+        title="The full mark."
+        body="The primary lockup. Use it whenever you have the room. Always on a flat ink or cream surface; never on Spark, never on a photo."
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-rule border border-rule rounded-md overflow-hidden">
           {WORDMARK_CARDS.map((card) => (
             <AssetTile key={card.variant} card={card} kind="wordmark" />
           ))}
         </div>
       </BrandSection>
 
-      {/* ICON */}
+      {/* 3. ICON */}
       <BrandSection
-        eyebrow="Icon"
-        body={'The "::" icon mark for compact usage, favicons, app icons, social profiles, and small displays.'}
+        eyebrow="● ICON"
+        title="The double-colon."
+        body={'The :: mark for compact use, favicons, app icons, social avatars, embed badges. Same flat treatment as the wordmark.'}
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-rule border border-rule rounded-md overflow-hidden">
           {ICON_CARDS.map((card) => (
             <AssetTile key={card.variant} card={card} kind="icon" />
           ))}
         </div>
       </BrandSection>
 
-      {/* PRODUCT LOGO — each::sense */}
+      {/* 4. PRODUCT MARK — each::sense */}
       <BrandSection
-        eyebrow="each::sense"
-        body="The product logo for each::sense, our intelligent media generation layer."
+        eyebrow="● PRODUCT MARK · EACH::SENSE"
+        title="The agent has its own mark."
+        body="each::sense is the natural-language agent in front of the catalog. Its mark ships alongside the platform wordmark when sense is the named product."
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:max-w-[50%] gap-px bg-rule border border-rule rounded-md overflow-hidden">
           <AssetTile card={SENSE_CARD} kind="wordmark" />
         </div>
       </BrandSection>
 
-      {/* COLORS */}
-      <section className="container border-t border-rule py-20 md:py-24">
+      {/* 5. DO / DON'T */}
+      <BrandSection
+        eyebrow="● USAGE · DON’T"
+        title="Six ways to ruin the mark."
+        body="Most of these are obvious. We list them because someone, somewhere, has already tried."
+      >
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-rule border border-rule rounded-md overflow-hidden">
+          {DONTS.map((d, i) => (
+            <DontCard key={d.rule} d={d} index={i} />
+          ))}
+        </div>
+      </BrandSection>
+
+      {/* 6. COLORS */}
+      <section id="colors" className="container border-t border-rule py-20 md:py-24">
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '0px 0px -80px 0px' }}
           transition={{ duration: 0.4, ease: EASE_OUT_EXPO }}
         >
+          <div className="font-mono text-[11px] uppercase tracking-eyebrow text-spark mb-3">
+            ● COLOR · PALETTE
+          </div>
           <h2 className="font-display font-semibold text-[32px] md:text-[44px] leading-[1.05] tracking-tightest text-ink">
-            Colors
+            Spark is the hero. Everything else gets out of the way.
           </h2>
-          <p className="text-ink2 text-[15px] leading-[1.6] max-w-[560px] mt-3">
-            Our core brand palette. Chaos Spark red and Quantum Navy are the primary identifiers.
-            Click any value to copy.
+          <p className="text-ink2 text-[15px] leading-[1.6] max-w-[640px] mt-4">
+            Nine tokens. Spark is the only accent that earns attention by itself; the rest support, signal, or recede. Values match the live CSS variables; click any hex to copy.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-10">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-px bg-rule border border-rule rounded-md overflow-hidden mt-10">
           {PALETTE.map((c, i) => (
-            <ColorTile key={c.hex} color={c} delay={i * 0.04} />
+            <ColorTile key={c.cssVar} color={c} delay={i * 0.03} />
           ))}
         </div>
       </section>
 
-      {/* TYPOGRAPHY */}
+      {/* 7. TYPOGRAPHY */}
       <section className="container border-t border-rule py-20 md:py-24">
         <motion.div
           initial={{ opacity: 0, y: 8 }}
@@ -138,12 +198,14 @@ export default function BrandPage() {
           viewport={{ once: true, margin: '0px 0px -80px 0px' }}
           transition={{ duration: 0.4, ease: EASE_OUT_EXPO }}
         >
+          <div className="font-mono text-[11px] uppercase tracking-eyebrow text-spark mb-3">
+            ● TYPE · INTER
+          </div>
           <h2 className="font-display font-semibold text-[32px] md:text-[44px] leading-[1.05] tracking-tightest text-ink">
-            Typography
+            One face. Four weights. That’s it.
           </h2>
-          <p className="text-ink2 text-[15px] leading-[1.6] max-w-[560px] mt-3">
-            Inter is our primary typeface. It&rsquo;s optimized for screen readability and
-            available on{' '}
+          <p className="text-ink2 text-[15px] leading-[1.6] max-w-[640px] mt-4">
+            Inter handles every label, headline, and paragraph on the site. Optical sizing on display; tightened tracking on big type. Free from{' '}
             <a
               href="https://fonts.google.com/specimen/Inter"
               target="_blank"
@@ -157,15 +219,14 @@ export default function BrandPage() {
         </motion.div>
 
         <div className="mt-10 bg-surface border border-rule2 rounded-md p-8 md:p-12">
-          {/* Aa specimen */}
-          <div className="font-display font-bold text-[120px] md:text-[160px] text-ink leading-none">
+          <div className="font-display font-bold text-[120px] md:text-[180px] text-ink leading-none tracking-tightest">
             Aa
           </div>
-          <div className="font-mono text-[11px] uppercase tracking-eyebrow text-ink3 mt-1">
-            Inter
+          <div className="font-mono text-[11px] uppercase tracking-eyebrow text-ink3 mt-2">
+            Inter · display · semibold
           </div>
 
-          <div className="border-t border-rule mt-8 pt-8 grid grid-cols-1 md:grid-cols-2 gap-10">
+          <div className="border-t border-rule mt-10 pt-10 grid grid-cols-1 md:grid-cols-3 gap-10">
             <div>
               <div className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3 mb-4">
                 Weights
@@ -195,59 +256,84 @@ export default function BrandPage() {
               <p className="text-ink text-[18px] leading-[1.55]">
                 The quick brown fox jumps over the lazy dog.
               </p>
-              <p className="text-ink text-[14px] leading-[1.5] mt-3 font-mono">
+              <p className="text-ink2 text-[13.5px] leading-[1.6] mt-3 font-mono">
                 ABCDEFGHIJKLMNOPQRSTUVWXYZ
                 <br />
                 abcdefghijklmnopqrstuvwxyz 0123456789
               </p>
             </div>
+
+            <div>
+              <div className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3 mb-4">
+                In product
+              </div>
+              <ul className="flex flex-col gap-3 text-[13.5px] leading-[1.6]">
+                <li className="text-ink2">
+                  Display · <span className="text-ink font-semibold">font-display semibold</span> · tracking-tightest
+                </li>
+                <li className="text-ink2">
+                  Body · <span className="text-ink">font-sans regular</span> · 1.55 leading
+                </li>
+                <li className="text-ink2">
+                  Mono · <span className="text-ink font-mono">font-mono medium</span> · tracking-eyebrow for labels
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </section>
+
     </>
   );
 }
 
-/* ── Section shell with eyebrow + body ──────────────────────────────── */
+/* ── Section shell with eyebrow + headline + body ───────────────────── */
 
 function BrandSection({
+  id,
   eyebrow,
+  title,
   body,
   children,
 }: {
+  id?: string;
   eyebrow: string;
+  title: string;
   body: string;
   children: React.ReactNode;
 }) {
   return (
-    <section className="container border-t border-rule py-20 md:py-24">
+    <section id={id} className="container border-t border-rule py-20 md:py-24">
       <motion.div
         initial={{ opacity: 0, y: 8 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '0px 0px -80px 0px' }}
         transition={{ duration: 0.4, ease: EASE_OUT_EXPO }}
       >
-        <h2 className="font-display font-semibold text-[28px] md:text-[36px] leading-[1.05] tracking-tightest text-ink">
+        <div className="font-mono text-[11px] uppercase tracking-eyebrow text-spark mb-3">
           {eyebrow}
+        </div>
+        <h2 className="font-display font-semibold text-[28px] md:text-[36px] leading-[1.05] tracking-tightest text-ink max-w-[680px]">
+          {title}
         </h2>
         <p className="text-ink2 text-[14.5px] leading-[1.6] max-w-[560px] mt-3">
           {body}
         </p>
       </motion.div>
-      <div className="mt-8">{children}</div>
+      <div className="mt-10">{children}</div>
     </section>
   );
 }
 
-/* ── Asset tile (wordmark / icon variants) ──────────────────────────── */
+/* ── Asset tile, dark/light variant + download ──────────────────────── */
 
 function AssetTile({ card, kind }: { card: AssetCard; kind: 'wordmark' | 'icon' }) {
   const isDark = card.variant === 'dark';
-  // Match the screenshot palette: navy-ish for dark variant, white for light.
-  const previewBg = isDark ? '#0E0A2E' : '#FFFFFF';
+  // Brand-true backgrounds: ink for dark, cream for light.
+  const previewBg = isDark ? '#0E0D0A' : '#F5F2EB';
 
   return (
-    <div className="bg-surface border border-rule2 rounded-md overflow-hidden">
+    <div className="bg-surface flex flex-col">
       <div
         className="flex items-center justify-center"
         style={{
@@ -264,13 +350,13 @@ function AssetTile({ card, kind }: { card: AssetCard; kind: 'wordmark' | 'icon' 
         />
       </div>
       <div className="flex items-center justify-between px-5 py-3.5 border-t border-rule2">
-        <span className="text-ink2 text-[13px]">
+        <span className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3">
           On {card.variant}
         </span>
         <a
           href={card.src}
           download={card.download}
-          className="inline-flex items-center gap-1.5 bg-white text-bg hover:bg-ink/90 transition-colors rounded-full px-3.5 py-1.5 text-[12px] font-medium"
+          className="inline-flex items-center gap-1.5 bg-ink text-bg hover:opacity-90 transition rounded-full px-3.5 py-1.5 text-[12px] font-medium"
         >
           <Download size={12} />
           SVG
@@ -280,7 +366,36 @@ function AssetTile({ card, kind }: { card: AssetCard; kind: 'wordmark' | 'icon' 
   );
 }
 
-/* ── Color tile with copy-on-click ──────────────────────────────────── */
+/* ── Don't card ─────────────────────────────────────────────────────── */
+
+function DontCard({
+  d,
+  index,
+}: {
+  d: { rule: string; why: string };
+  index: number;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 8 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '0px 0px -40px 0px' }}
+      transition={{ duration: 0.3, delay: index * 0.04, ease: EASE_OUT_EXPO }}
+      className="bg-surface p-6 flex flex-col gap-3"
+    >
+      <span className="font-mono text-[10px] uppercase tracking-eyebrow text-fail inline-flex items-center gap-1.5">
+        <span className="inline-block w-1.5 h-1.5 rounded-full bg-fail" aria-hidden />
+        DON’T
+      </span>
+      <h3 className="font-display font-semibold text-[17px] text-ink leading-snug">
+        {d.rule}
+      </h3>
+      <p className="text-ink2 text-[13px] leading-[1.6]">{d.why}</p>
+    </motion.div>
+  );
+}
+
+/* ── Color tile with copy-on-click + variable metadata ──────────────── */
 
 function ColorTile({ color, delay }: { color: Palette; delay: number }) {
   const [copied, setCopied] = useState(false);
@@ -299,52 +414,68 @@ function ColorTile({ color, delay }: { color: Palette; delay: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '0px 0px -40px 0px' }}
       transition={{ duration: 0.3, delay, ease: EASE_OUT_EXPO }}
-      className="bg-surface border border-rule2 rounded-md overflow-hidden flex flex-col"
+      className="bg-surface flex flex-col"
     >
       <div
-        className="relative aspect-[3/2] flex items-end p-4"
+        className="relative aspect-[16/9] flex items-end p-5"
         style={{ background: color.hex }}
         aria-hidden
       >
         <span
-          className={`font-display font-semibold text-[15px] ${
-            isLightish(color.hex) ? 'text-bg' : 'text-white'
+          className={`font-display font-semibold text-[18px] tracking-tight ${
+            isLightish(color.hex) ? 'text-ink' : 'text-bg'
           }`}
         >
           {color.name}
         </span>
-      </div>
-      <button
-        type="button"
-        onClick={copy}
-        className="flex items-center justify-between px-4 py-3 text-left transition-colors hover:bg-bg/40"
-      >
-        <span className="font-mono text-[12px] text-ink2">{color.hex}</span>
         <span
-          className={`font-mono text-[11px] inline-flex items-center gap-1 ${
-            copied ? 'text-success' : 'text-ink3'
+          className={`absolute top-4 right-4 font-mono text-[10px] uppercase tracking-eyebrow ${
+            isLightish(color.hex) ? 'text-ink2' : 'text-bg/70'
           }`}
         >
-          {copied ? (
-            <>
-              <Check size={11} /> Copied
-            </>
-          ) : (
-            'Copy'
-          )}
+          {color.cssVar}
         </span>
-      </button>
+      </div>
+      <div className="px-5 py-4 flex flex-col gap-3">
+        <button
+          type="button"
+          onClick={copy}
+          className="flex items-center justify-between text-left group"
+        >
+          <span className="font-mono text-[12.5px] text-ink2 group-hover:text-ink transition-colors">
+            {color.hex}
+          </span>
+          <span
+            className={`font-mono text-[10.5px] inline-flex items-center gap-1 ${
+              copied ? 'text-success' : 'text-ink3 group-hover:text-spark'
+            } transition-colors`}
+          >
+            {copied ? (
+              <>
+                <Check size={11} /> Copied
+              </>
+            ) : (
+              'Copy'
+            )}
+          </span>
+        </button>
+        <div className="font-mono text-[10.5px] text-ink3">
+          rgb({color.rgb.replace(/ /g, ', ')})
+        </div>
+        <p className="text-ink2 text-[12px] leading-[1.45] border-t border-rule2 pt-3">
+          {color.use}
+        </p>
+      </div>
     </motion.div>
   );
 }
 
-/** Simple readability check so light-tinted swatches keep dark text. */
+/** Light-vs-dark luminance check for text contrast on color swatches. */
 function isLightish(hex: string): boolean {
   const m = hex.replace('#', '');
   if (m.length !== 6) return false;
   const r = parseInt(m.slice(0, 2), 16);
   const g = parseInt(m.slice(2, 4), 16);
   const b = parseInt(m.slice(4, 6), 16);
-  // Perceived luminance (Rec. 601), >= 160 we treat as "light enough" for dark text.
   return r * 0.299 + g * 0.587 + b * 0.114 >= 160;
 }

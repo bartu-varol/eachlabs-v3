@@ -4,17 +4,17 @@ import { useMemo, useState } from 'react';
 import { Search } from 'lucide-react';
 import { Pill } from '@/components/ui/Pill';
 import { ModelTile } from './ModelTile';
+import { LlmTile } from './LlmTile';
 import { WorkflowsShell } from './WorkflowsShell';
 import {
   models as allModels,
   providers as allProviders,
   type CatalogModel,
 } from '@/lib/catalog';
+import { llmRouterModels, getLlmRouterProviders } from '@/lib/llmRouter';
 import type { WorkflowCategory, WorkflowSummary } from '@/lib/workflows';
 
 type Tab = 'MODELS' | 'WORKFLOWS' | 'TRENDS' | 'LLMS';
-
-const LLM_CATEGORY_SLUG = 'text-to-text';
 
 /** Curated leading order so common categories sit on the left. */
 const CATEGORY_ORDER = [
@@ -83,25 +83,19 @@ export function ExploreShell({
   const [llmProvider, setLlmProvider] = useState<string>('ALL');
   const [llmShowAll, setLlmShowAll] = useState(false);
 
-  const llmAllModels = useMemo(
-    () => allModels.filter((m: CatalogModel) => m.categorySlug === LLM_CATEGORY_SLUG),
-    [],
-  );
+  // LLMs are sourced from the eachlabs-llm-router model's supported model enum,
+  // not the global catalog. This keeps the LLMs tab in sync with what the router
+  // can actually dispatch to.
+  const llmAllModels = llmRouterModels;
 
-  const llmProviders = useMemo(() => {
-    const counts: Record<string, number> = {};
-    for (const m of llmAllModels) counts[m.providerSlug] = (counts[m.providerSlug] ?? 0) + 1;
-    return [...allProviders]
-      .filter((p) => counts[p.slug])
-      .sort((a, b) => (counts[b.slug] ?? 0) - (counts[a.slug] ?? 0));
-  }, [llmAllModels]);
+  const llmProviders = useMemo(() => getLlmRouterProviders(), []);
 
   const filteredLlms = useMemo(() => {
     const q = llmQuery.trim().toLowerCase();
-    return llmAllModels.filter((m: CatalogModel) => {
+    return llmAllModels.filter((m) => {
       if (llmProvider !== 'ALL' && m.providerSlug !== llmProvider) return false;
       if (q) {
-        const hay = `${m.name} ${m.title ?? ''} ${m.providerSlug} ${m.familySlug} ${m.description ?? ''}`.toLowerCase();
+        const hay = `${m.name} ${m.routerSlug} ${m.providerName} ${m.familySlug ?? ''}`.toLowerCase();
         if (!hay.includes(q)) return false;
       }
       return true;
@@ -354,7 +348,7 @@ export function ExploreShell({
                 {filteredLlms.length} of {llmAllModels.length} LLMs
               </div>
               <div className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3">
-                text-to-text · sorted by popularity
+                routed via eachlabs-llm-router
               </div>
             </div>
             {filteredLlms.length === 0 ? (
@@ -362,7 +356,7 @@ export function ExploreShell({
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
                 {visibleLlms.map((m) => (
-                  <ModelTile key={m.brandedSlug} model={m} />
+                  <LlmTile key={m.routerSlug} model={m} />
                 ))}
               </div>
             )}

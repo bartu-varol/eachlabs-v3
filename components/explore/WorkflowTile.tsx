@@ -62,9 +62,11 @@ export function WorkflowTile({ workflow }: { workflow: WorkflowSummary }) {
 
       <div className="ec-card-scrim absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/85 via-black/45 to-transparent pointer-events-none z-[1]" />
 
-      <span className="absolute top-3 left-3 z-10 max-w-[60%] truncate font-mono text-[10.5px] uppercase tracking-eyebrow font-semibold px-2.5 py-1 rounded-md backdrop-blur-md bg-white/90 text-zinc-900 shadow-sm">
-        Workflow
-      </span>
+      {!isTrending && (
+        <span className="absolute top-3 left-3 z-10 max-w-[60%] truncate font-mono text-[10.5px] uppercase tracking-eyebrow font-semibold px-2.5 py-1 rounded-md backdrop-blur-md bg-white/90 text-zinc-900 shadow-sm">
+          Workflow
+        </span>
+      )}
 
       {isTrending && (
         <span className="absolute top-3 right-3 z-10 inline-flex items-center gap-1 font-mono text-[10.5px] uppercase tracking-eyebrow font-semibold px-2.5 py-1 rounded-md bg-spark text-white shadow-sm">

@@ -317,7 +317,15 @@ export function ProofSection() {
                 ✓ THE FIX
               </div>
               <h3 className="font-display font-semibold text-[26px] sm:text-[30px] leading-[1.05] mt-3 text-ink">
-                {s.fix.feature.prefix && <span className="text-ink3">{s.fix.feature.prefix}</span>}
+                {s.fix.feature.prefix &&
+                  (s.fix.feature.prefix.endsWith('::') ? (
+                    <>
+                      {s.fix.feature.prefix.slice(0, -2)}
+                      <span className="text-spark">::</span>
+                    </>
+                  ) : (
+                    <span className="text-ink3">{s.fix.feature.prefix}</span>
+                  ))}
                 {s.fix.feature.name}
                 {s.fix.feature.tail && (
                   <span className="text-ink3 italic font-normal text-[18px] sm:text-[20px] ml-2">

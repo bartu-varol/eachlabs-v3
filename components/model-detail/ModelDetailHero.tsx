@@ -55,12 +55,6 @@ function formatRuntime(seconds: number | null | undefined): string {
   return `${Math.round(seconds / 60)}m`;
 }
 
-function formatNumber(n: number | null | undefined): string {
-  if (n == null || n === 0) return '-';
-  if (n >= 1000) return `${(n / 1000).toFixed(1).replace(/\.0$/, '')}k`;
-  return String(n);
-}
-
 function priceHeadline(model: ModelDetail): string {
   if (model.chargeType === 'dynamic' && model.pricingRules?.rules?.[0]) {
     const unit = model.pricingRules.rules[0].formula?.params?.unit_price;
@@ -180,9 +174,8 @@ export function ModelDetailHero({ model }: Props) {
             <AskAiPanel modelTitle={headline} modelSlug={model.slug} fullWidth />
           </div>
 
-          <dl className="grid grid-cols-3 gap-x-5 gap-y-3">
+          <dl className="grid grid-cols-2 gap-x-5 gap-y-3">
             <Stat label="Runtime" value={formatRuntime(model.averageResponseTime)} mono />
-            <Stat label="Runs" value={formatNumber(model.executionCount)} mono />
             <Stat label="Estimated price" value={priceHeadline(model)} mono />
           </dl>
         </div>
