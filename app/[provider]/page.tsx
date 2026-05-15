@@ -5,9 +5,9 @@ import {
   getProvider,
   familiesByProvider,
   modelsByProvider,
-  providerFaqs,
   providers,
 } from '@/lib/catalog';
+import { providerFaqsWithFallback } from '@/lib/catalogFaq';
 import { ProviderSidebar } from '@/components/explore/ProviderSidebar';
 import { FilterableModelGrid } from '@/components/explore/FilterableModelGrid';
 import { ReadmeSection } from '@/components/explore/ReadmeSection';
@@ -49,7 +49,7 @@ export default async function ProviderPage({
 
   const families = familiesByProvider(providerSlug);
   const models = modelsByProvider(providerSlug);
-  const faqs = providerFaqs(providerSlug);
+  const faqs = providerFaqsWithFallback(provider, models.length, families.length);
 
   const countsByFamily: Record<string, number> = {};
   for (const m of models) countsByFamily[m.familySlug] = (countsByFamily[m.familySlug] ?? 0) + 1;

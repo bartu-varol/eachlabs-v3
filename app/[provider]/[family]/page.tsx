@@ -8,8 +8,8 @@ import {
   modelsByProvider,
   modelsByFamily,
   families,
-  familyFaqs,
 } from '@/lib/catalog';
+import { familyFaqsWithFallback } from '@/lib/catalogFaq';
 import { ProviderSidebar } from '@/components/explore/ProviderSidebar';
 import { FilterableModelGrid } from '@/components/explore/FilterableModelGrid';
 import { ReadmeSection } from '@/components/explore/ReadmeSection';
@@ -52,7 +52,7 @@ export default async function FamilyPage({
   const allFamilies = familiesByProvider(providerSlug);
   const allModels = modelsByProvider(providerSlug);
   const variants = modelsByFamily(providerSlug, familySlug);
-  const faqs = familyFaqs(providerSlug, familySlug);
+  const faqs = familyFaqsWithFallback(provider, family, variants.length);
 
   const countsByFamily: Record<string, number> = {};
   for (const m of allModels) countsByFamily[m.familySlug] = (countsByFamily[m.familySlug] ?? 0) + 1;

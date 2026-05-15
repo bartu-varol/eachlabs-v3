@@ -1,6 +1,9 @@
 import { ExploreHero } from '@/components/explore/ExploreHero';
 import { ExploreShell } from '@/components/explore/ExploreShell';
 import { TemplatesStrip } from '@/components/explore/TemplatesStrip';
+import { ReadmeSection } from '@/components/explore/ReadmeSection';
+import { FaqSection } from '@/components/explore/FaqSection';
+import { exploreFaqs, exploreReadmeMd } from '@/lib/catalogFaq';
 import {
   fetchWorkflowsServer,
   fetchWorkflowCategoriesServer,
@@ -76,6 +79,16 @@ export default async function ExplorePage({
         liveModelsCount={liveModelsTotal}
       />
       <TemplatesStrip />
+      <ReadmeSection
+        markdown={exploreReadmeMd}
+        eyebrow="* ABOUT THE CATALOG"
+        heading="How the catalog works"
+      />
+      <FaqSection
+        faqs={exploreFaqs(liveModelsTotal, initialTotal)}
+        eyebrow="* FREQUENTLY ASKED"
+        heading="About the each::labs catalog"
+      />
     </>
   );
 }

@@ -50,7 +50,7 @@ export const SCENARIOS: Scenario[] = [
       tagline: 'Quality-aware routing. Automatic fallback.',
       body:
         'Set fallbacks once. The router watches every call and spills traffic to a backup the moment your primary degrades. Quality-aware, latency-aware, live.',
-      docsHref: '#',
+      docsHref: 'https://docs.eachlabs.ai/api/overview',
     },
     visual: 'fallback',
   },
@@ -73,7 +73,7 @@ export const SCENARIOS: Scenario[] = [
       tagline: 'Auto-spill to faster providers when yours degrades.',
       body:
         'When p95 latency on a provider exceeds your threshold, the router quietly shifts traffic until it recovers. Your users keep their speed; you keep the cost data.',
-      docsHref: '#',
+      docsHref: 'https://docs.eachlabs.ai/api/overview',
     },
     visual: 'latency',
   },
@@ -96,7 +96,7 @@ export const SCENARIOS: Scenario[] = [
       tagline: 'Tag every call. Slice cost by user, tier, anything.',
       body:
         'Pass attributes at runtime. We tag the trace with whatever you send, user_id, tier, persona, experiment, anything. Then slice cost, latency, and quality by any of them.',
-      docsHref: '#',
+      docsHref: 'https://docs.eachlabs.ai/api/overview',
     },
     visual: 'attribution',
   },
@@ -119,7 +119,7 @@ export const SCENARIOS: Scenario[] = [
       tagline: 'One call signature. Every model, every modality.',
       body:
         'Same each() for every model in the catalog. Image, video, audio, 3D, image-to-video, text-to-image, voice cloning, all of it. Try Veo 3 in one string change.',
-      docsHref: '#',
+      docsHref: 'https://docs.eachlabs.ai/introduction',
     },
     visual: 'swap',
   },

@@ -339,6 +339,8 @@ export function ProofSection() {
               </p>
               <Link
                 href={s.fix.docsHref}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-spark text-[13px] font-medium hover:underline underline-offset-4 mt-6 inline-flex items-center gap-1.5 self-start"
               >
                 See the docs <ArrowRight size={14} />

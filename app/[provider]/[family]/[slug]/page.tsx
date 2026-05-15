@@ -9,6 +9,9 @@ import { ModelPricing } from '@/components/model-detail/ModelPricing';
 import { ModelStrengths } from '@/components/model-detail/ModelStrengths';
 import { ModelReadme } from '@/components/model-detail/ModelReadme';
 import { ModelRelated } from '@/components/model-detail/ModelRelated';
+import { FaqSection } from '@/components/explore/FaqSection';
+import { modelFaqsFallback } from '@/lib/catalogFaq';
+import { displayName } from '@/lib/catalog';
 
 type RouteParams = { provider: string; family: string; slug: string };
 
@@ -47,6 +50,19 @@ export default async function ModelDetailPage({
   const model = await getModelDetail(provider, family, slug);
   if (!model) notFound();
 
+  const faqs = modelFaqsFallback({
+    slug: model.slug,
+    name: model.name,
+    title: model.title,
+    description: model.description,
+    avgPrice: null,
+    avgResponseSec: model.averageResponseTime,
+    providerSlug: model.provider.slug,
+    providerName: model.provider.name,
+    familySlug: model.family.slug,
+    familyName: model.family.name,
+  });
+
   return (
     <>
       <ModelDetailHero model={model} />
@@ -78,6 +94,12 @@ export default async function ModelDetailPage({
       </section>
 
       <ModelRelated items={model.related} />
+
+      <FaqSection
+        faqs={faqs}
+        eyebrow="* FAQ"
+        heading={`About ${displayName({ name: model.name, title: model.title })}`}
+      />
     </>
   );
 }

@@ -269,7 +269,7 @@ export const askSense = {
 // ---------- TRUSTED BY ----------
 
 export const trustedBy = {
-  eyebrow: '* TRUSTED BY 120+ TEAMS IN PROD',
+  eyebrow: '* TRUSTED BY THE BEST · POWERED BY THE BEST',
   customers: [
     'NOVA', 'Helix', 'LUME', 'Forma', 'Ondra', 'Kairo',
     'Aster', 'Volt', 'Prism', 'Maker', 'Orbit', 'Finch',
@@ -544,11 +544,11 @@ export const footer = {
     {
       title: 'COMPANY',
       links: [
-        { label: 'About',     href: '#' },
+        { label: 'About',     href: '/about' },
         { label: 'Customers', href: '/customers' },
         { label: 'Enterprise', href: '/enterprise' },
         { label: 'Blog',      href: '/blog' },
-        { label: 'Careers',   href: '#' },
+        { label: 'Careers',   href: '/career' },
       ],
     },
     {
@@ -612,7 +612,7 @@ export const enterprise = {
       line2: 'Don\'t crash.',
     },
     body:
-      'The two things every CTO worries about when AI moves to production: a security gap that surfaces in an audit, or a provider outage that takes the whole product down. Each Labs is built so neither happens to you.',
+      'The two things every CTO worries about when AI moves to production: a security gap that surfaces in an audit, or a provider outage that takes the whole product down. each::labs is built so neither happens to you.',
     pillars: [
       {
         title: 'Won\'t crash on a bad provider day',
@@ -633,7 +633,7 @@ export const enterprise = {
   socialProof: {
     eyebrow: '* TRUST · IN PRODUCTION',
     metric: 'Top 20%',
-    metricLabel: 'of app studios shipping AI use Each Labs',
+    metricLabel: 'of app studios shipping AI use each::labs',
     body: 'Consumer apps with millions of users, ad-tech platforms running billion+ monthly requests, and enterprise platforms with strict change control are all on the same router.',
     customers: ['NOVA', 'LUME', 'Helix', 'Forma', 'Ondra', 'Kairo', 'Aster', 'Prism', 'Maker', 'Orbit'],
   },
@@ -790,7 +790,7 @@ export const enterprise = {
       },
       {
         tag: 'PAGING',
-        q: 'What happens if Each Labs itself goes down?',
+        q: 'What happens if each::labs itself goes down?',
         a: 'The router caches its policy locally and keeps routing on the last-known-good config so your inference does not depend on our control plane being up. Same providers, same direct connections.',
       },
       {

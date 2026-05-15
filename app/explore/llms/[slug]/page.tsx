@@ -6,6 +6,9 @@ import {
   getRelatedLlmRouterModels,
   llmRouterModels,
 } from '@/lib/llmRouter';
+import { ReadmeSection } from '@/components/explore/ReadmeSection';
+import { FaqSection } from '@/components/explore/FaqSection';
+import { llmFaqsFallback, llmReadmeMarkdown } from '@/lib/catalogFaq';
 
 type Params = { slug: string };
 
@@ -39,6 +42,8 @@ export default async function LlmDetailPage({
   if (!model) notFound();
 
   const related = getRelatedLlmRouterModels(model);
+  const readme = llmReadmeMarkdown(model);
+  const faqs = llmFaqsFallback(model);
 
   const curlExample = [
     'curl -X POST https://api.eachlabs.ai/v1/prediction/eachlabs-llm-router \\',
@@ -72,7 +77,8 @@ console.log(result.output);
 `;
 
   return (
-    <section className="container py-12 md:py-16">
+    <>
+      <section className="container py-12 md:py-16">
       <div className="font-mono text-[11px] uppercase tracking-eyebrow text-ink3 mb-6">
         <Link
           href="/explore?tab=llms"
@@ -174,6 +180,19 @@ console.log(result.output);
         </aside>
       </div>
     </section>
+
+      <ReadmeSection
+        markdown={readme}
+        eyebrow="* README"
+        heading={`Working with ${model.name}`}
+      />
+
+      <FaqSection
+        faqs={faqs}
+        eyebrow="* FAQ"
+        heading={`About ${model.name}`}
+      />
+    </>
   );
 }
 

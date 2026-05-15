@@ -1,11 +1,12 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { ReactNode, useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowRight, ArrowUpRight, Shield, Zap, Users, BarChart3, Lock, CalendarCheck } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
-import { enterprise } from '@/lib/content';
+import { customerStories, enterprise } from '@/lib/content';
 
 const EASE_OUT_EXPO = [0.16, 1, 0.3, 1] as const;
 
@@ -421,13 +422,22 @@ function SocialProof() {
 
         {/* Customer logos row */}
         <div className="mt-14 border-t border-b border-rule py-7">
-          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
-            {sp.customers.map((c) => (
+          <div className="flex flex-wrap items-center justify-center gap-x-10 md:gap-x-14 gap-y-6">
+            {customerStories.caseStudies.map((cs) => (
               <span
-                key={c}
-                className="font-mono text-[13px] uppercase tracking-eyebrow text-ink3 hover:text-ink transition-colors"
+                key={cs.role}
+                className="inline-flex h-10 md:h-12 w-28 md:w-36 items-center justify-center text-ink3 hover:text-ink transition-colors"
+                aria-label={cs.logo.alt}
               >
-                {c}
+                <Image
+                  src={cs.logo.src}
+                  alt={cs.logo.alt}
+                  width={cs.logo.width}
+                  height={cs.logo.height}
+                  className="customer-logo h-full w-full object-contain opacity-90"
+                  unoptimized
+                />
+                <span className="sr-only">{cs.role}</span>
               </span>
             ))}
           </div>
@@ -642,22 +652,6 @@ function EnterpriseFAQ() {
             </AnimatePresence>
           </div>
         </div>
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4, delay: 0.2 }}
-          className="italic text-ink3 text-[14px] text-center mt-14"
-        >
-          Still have a question?{' '}
-          <a
-            href="mailto:support@eachlabs.ai"
-            className="text-spark hover:underline underline-offset-4"
-          >
-            Ask an engineer →
-          </a>
-        </motion.p>
       </div>
     </section>
   );

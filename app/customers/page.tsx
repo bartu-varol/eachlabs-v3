@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
 import { RabbitButton } from '@/components/ui/RabbitButton';
@@ -9,9 +10,9 @@ import { customerStories } from '@/lib/content';
 export default function CustomersPage() {
   const c = customerStories;
 
-  // Companies list (preserve order from caseStudies), derived from real testimonial data.
-  const companies = c.caseStudies.map((cs) => cs.role);
-  const marqueeRow = [...companies, ...companies, ...companies];
+  // Logo list (preserve order from caseStudies), derived from real testimonial data.
+  const logos = c.caseStudies.map((cs) => ({ ...cs.logo, role: cs.role }));
+  const marqueeRow = [...logos, ...logos, ...logos];
 
   return (
     <>
@@ -58,13 +59,22 @@ export default function CustomersPage() {
         <div className="absolute inset-y-0 left-0 w-24 md:w-40 bg-gradient-to-r from-[rgb(var(--c-bg))] to-transparent z-10 pointer-events-none" />
         <div className="absolute inset-y-0 right-0 w-24 md:w-40 bg-gradient-to-l from-[rgb(var(--c-bg))] to-transparent z-10 pointer-events-none" />
 
-        <div className="flex gap-12 md:gap-16 w-max animate-marquee" style={{ willChange: 'transform' }}>
-          {marqueeRow.map((name, i) => (
+        <div className="flex items-center gap-12 md:gap-16 w-max animate-marquee" style={{ willChange: 'transform' }}>
+          {marqueeRow.map((logo, i) => (
             <span
-              key={`${name}-${i}`}
-              className="font-display font-medium text-[18px] md:text-[22px] text-ink3 hover:text-ink transition-colors whitespace-nowrap tracking-tight"
+              key={`${logo.alt}-${i}`}
+              className="inline-flex h-10 md:h-12 w-32 md:w-40 items-center justify-center text-ink3 hover:text-ink transition-colors shrink-0"
+              aria-label={logo.alt}
             >
-              {name}
+              <Image
+                src={logo.src}
+                alt={logo.alt}
+                width={logo.width}
+                height={logo.height}
+                className="customer-logo h-full w-full object-contain opacity-90"
+                unoptimized
+              />
+              <span className="sr-only">{logo.role}</span>
             </span>
           ))}
         </div>

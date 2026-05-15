@@ -1,6 +1,7 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import type { VisualKey } from '@/lib/problems';
 
 /* ──────────────────────────────────────────────────────────────────────────
@@ -614,13 +615,29 @@ function PipelineStep({
    7. Swap, model name cycles through several. Same call, different model.
 ────────────────────────────────────────────────────────────────────────── */
 
+const SWAP_MODELS = [
+  { name: 'kling-v3-12v', tag: 'VIDEO' },
+  { name: 'veo-3',        tag: 'VIDEO' },
+  { name: 'flux-pro',     tag: 'IMAGE' },
+  { name: 'eleven-v3',    tag: 'AUDIO' },
+] as const;
+
+// One model on screen at a time. State drives both the name and the pill —
+// no keyframe interpolation, so two states can never be visible at once.
+const SWAP_HOLD_MS = 2000;
+
 function SwapVisual() {
-  const models = [
-    { name: 'kling-v3-12v', tag: 'VIDEO',   tone: 'border-highlight text-highlight' },
-    { name: 'veo-3',        tag: 'VIDEO',   tone: 'border-highlight text-highlight' },
-    { name: 'flux-pro',     tag: 'IMAGE',   tone: 'border-emerald-500 text-emerald-400' },
-    { name: 'eleven-v3',    tag: 'AUDIO',   tone: 'border-yellow text-yellow' },
-  ];
+  const [activeIdx, setActiveIdx] = useState(0);
+
+  useEffect(() => {
+    const id = window.setInterval(() => {
+      setActiveIdx((i) => (i + 1) % SWAP_MODELS.length);
+    }, SWAP_HOLD_MS);
+    return () => window.clearInterval(id);
+  }, []);
+
+  const active = SWAP_MODELS[activeIdx];
+
   return (
     <div className={SHELL}>
       <Eyebrow>each("…", input)</Eyebrow>
@@ -628,45 +645,44 @@ function SwapVisual() {
       <div className="mt-5 bg-surface border border-rule2 rounded-md px-4 py-4 font-mono text-[14px]">
         <div className="flex items-center gap-1.5 flex-wrap">
           <span className="text-ink3">each(</span>
-          <span className="relative inline-block min-w-[160px] h-[22px]">
-            {models.map((m, i) => (
+          {/* mode="wait" guarantees the old name is fully gone before the
+              new one renders, so the two never overlap on screen. */}
+          <span className="relative inline-block min-w-[160px] h-[22px] overflow-hidden">
+            <AnimatePresence mode="wait" initial={false}>
               <motion.span
-                key={m.name}
+                key={active.name}
                 className="absolute inset-0 text-spark whitespace-nowrap"
-                animate={{
-                  opacity: models.map((_, j) => (j === i ? 1 : 0)),
-                  y:       models.map((_, j) => (j === i ? 0 : -8)),
-                }}
-                transition={{
-                  duration: 4,
-                  times: [0, 0.25, 0.5, 0.75],
-                  repeat: Infinity,
-                  ease: 'easeInOut',
-                }}
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -6 }}
+                transition={{ duration: 0.22, ease: 'easeOut' }}
               >
-                "{m.name}"
+                &quot;{active.name}&quot;
               </motion.span>
-            ))}
+            </AnimatePresence>
           </span>
           <span className="text-ink3">, input</span>
           <span className="text-ink3">)</span>
         </div>
       </div>
 
-      {/* Active modality pills */}
+      {/* Active modality pill — single brand accent, only one ever lit */}
       <div className="mt-5 grid grid-cols-4 gap-2">
-        {models.map((m, i) => (
-          <motion.div
-            key={i}
-            className={`px-2 py-1.5 rounded-md border text-[10px] uppercase tracking-eyebrow text-center ${m.tone}`}
-            animate={{
-              opacity: models.map((_, j) => (j === i ? 1 : 0.25)),
-            }}
-            transition={{ duration: 4, times: [0, 0.25, 0.5, 0.75], repeat: Infinity }}
-          >
-            {m.tag}
-          </motion.div>
-        ))}
+        {SWAP_MODELS.map((m, i) => {
+          const isActive = i === activeIdx;
+          return (
+            <div
+              key={i}
+              className={`px-2 py-1.5 rounded-md border text-[10px] uppercase tracking-eyebrow text-center transition-colors duration-200 ${
+                isActive
+                  ? 'border-spark text-spark'
+                  : 'border-rule2 text-ink3'
+              }`}
+            >
+              {m.tag}
+            </div>
+          );
+        })}
       </div>
 
       <div className="mt-4 font-mono text-[10px] text-ink3 text-center">

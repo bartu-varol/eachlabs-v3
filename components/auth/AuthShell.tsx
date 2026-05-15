@@ -35,14 +35,14 @@ export function AuthShell({ children, brand }: Props) {
         <p className="text-ink3 text-[11px] leading-relaxed text-center max-w-[400px] mx-auto">
           By continuing, you agree to our{' '}
           <Link
-            href="/terms"
+            href="/terms-of-service"
             className="text-ink2 hover:text-ink underline underline-offset-2"
           >
             Terms
           </Link>
           {' & '}
           <Link
-            href="/privacy"
+            href="/privacy-policy"
             className="text-ink2 hover:text-ink underline underline-offset-2"
           >
             Privacy

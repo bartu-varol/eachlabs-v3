@@ -34,32 +34,94 @@ const ACCENT: Record<Tile['accent'], { var: string; tint: string; deepTint: stri
    Typography micro-animations, same dev/mono aesthetic across all tiles.
 ────────────────────────────────────────────────────────────────────────── */
 
-function RouterMini() {
-  // kling-v3 (struck out, red) → wan-2.7 (spark)
+type RouterRowState = 'PICK' | 'STANDBY' | 'DOWN' | 'FALLBACK';
+
+const ROUTER_ROWS: { name: string; pct: number; state: RouterRowState }[] = [
+  { name: 'claude-opus-4',   pct: 94, state: 'PICK' },
+  { name: 'gpt-4o',          pct: 91, state: 'STANDBY' },
+  { name: 'gemini-2.0-pro',  pct: 88, state: 'STANDBY' },
+  { name: 'kling-v3',        pct: 0,  state: 'DOWN' },
+  { name: 'wan-2.7',         pct: 87, state: 'FALLBACK' },
+];
+
+function RouterRow({ row, i }: { row: (typeof ROUTER_ROWS)[number]; i: number }) {
+  const tone =
+    row.state === 'DOWN'     ? 'text-fail'
+    : row.state === 'PICK'   ? 'text-spark'
+    : row.state === 'FALLBACK' ? 'text-spark'
+    : 'text-ink2';
+  const barColor =
+    row.state === 'DOWN'     ? 'bg-fail/70'
+    : row.state === 'PICK'   ? 'bg-spark'
+    : row.state === 'FALLBACK' ? 'bg-spark/70'
+    : 'bg-ink2/60';
+  const struck = row.state === 'DOWN' ? 'line-through decoration-fail/60' : '';
+
   return (
-    <div className="font-mono text-[12.5px] flex items-center gap-2 flex-wrap">
-      <motion.span
-        className="text-ink2 line-through decoration-fail/70 decoration-2"
-        animate={{ opacity: [0.6, 1, 0.6] }}
-        transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
+    <motion.div
+      className="flex items-center gap-3 py-1.5"
+      initial={{ opacity: 0, x: -4 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true, margin: '-40px' }}
+      transition={{ duration: 0.35, delay: 0.15 + i * 0.08, ease: 'easeOut' }}
+    >
+      <span className={`flex-1 truncate ${tone} ${struck}`}>{row.name}</span>
+      <div className="w-[60px] md:w-[80px] h-[3px] bg-rule2 rounded-full overflow-hidden">
+        <motion.div
+          className={`h-full ${barColor}`}
+          initial={{ width: 0 }}
+          whileInView={{ width: `${row.pct}%` }}
+          viewport={{ once: true, margin: '-40px' }}
+          transition={{ duration: 0.7, delay: 0.25 + i * 0.08, ease: 'easeOut' }}
+        />
+      </div>
+      <span
+        className={`w-[60px] md:w-[72px] text-right text-[9.5px] tracking-eyebrow uppercase ${tone}`}
       >
-        kling-v3
-      </motion.span>
-      <motion.span
-        className="text-spark"
-        animate={{ x: [0, 4, 0], opacity: [0.7, 1, 0.7] }}
-        transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
-      >
-        →
-      </motion.span>
-      <motion.span
-        className="text-spark"
-        animate={{ opacity: [0.5, 1, 0.5] }}
-        transition={{ duration: 2.4, delay: 0.2, repeat: Infinity, ease: 'easeInOut' }}
-        style={{ textShadow: '0 0 10px rgb(var(--c-spark) / 0.5)' }}
-      >
-        wan-2.7
-      </motion.span>
+        {row.state === 'PICK' && (
+          <motion.span
+            animate={{ opacity: [0.7, 1, 0.7] }}
+            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+            style={{ textShadow: '0 0 8px rgb(var(--c-spark) / 0.5)' }}
+          >
+            {row.state}
+          </motion.span>
+        )}
+        {row.state !== 'PICK' && row.state}
+      </span>
+    </motion.div>
+  );
+}
+
+function RouterMini() {
+  return (
+    <div className="font-mono text-[11.5px] w-full flex flex-col gap-2">
+      {/* Header */}
+      <div className="flex items-center gap-3 pb-2 border-b border-rule2 text-ink3 text-[9.5px] uppercase tracking-eyebrow">
+        <span className="flex-1">CANDIDATE</span>
+        <span className="w-[60px] md:w-[80px]">SCORE</span>
+        <span className="w-[60px] md:w-[72px] text-right">STATE</span>
+      </div>
+
+      {/* Rows */}
+      <div className="flex flex-col">
+        {ROUTER_ROWS.map((row, i) => (
+          <RouterRow key={row.name} row={row} i={i} />
+        ))}
+      </div>
+
+      {/* Footer */}
+      <div className="mt-2 pt-3 border-t border-rule2 flex items-center justify-between text-[10px]">
+        <span className="text-ink3">1.2M routes · 24h</span>
+        <motion.span
+          className="text-spark inline-flex items-center gap-1.5"
+          animate={{ opacity: [0.65, 1, 0.65] }}
+          transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+        >
+          <span className="inline-block h-1.5 w-1.5 rounded-full bg-spark" />
+          routing live
+        </motion.span>
+      </div>
     </div>
   );
 }
@@ -216,9 +278,9 @@ function BentoTile({ tile, idx }: { tile: Tile; idx: number }) {
           {tile.tagline}
         </p>
 
-        {/* Visual area, typography-driven, fills the lower half of the tile */}
+        {/* Visual area, typography-driven, expands to fill the tile */}
         <div
-          className="mt-auto pt-5 flex items-center min-h-[64px]"
+          className="mt-5 flex-1 flex items-center min-h-[64px]"
           aria-hidden
         >
           {tile.visual}
@@ -254,7 +316,7 @@ export function PlatformBento() {
         </p>
 
         {/* Bento grid, 3 cols × 3 rows on lg, stacks on mobile */}
-        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:grid-rows-[repeat(3,minmax(0,1fr))] gap-3 md:gap-4 auto-rows-[200px] lg:auto-rows-auto">
+        <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:grid-rows-[repeat(2,minmax(0,1fr))] gap-3 md:gap-4 auto-rows-[200px] lg:auto-rows-auto">
           {TILES.map((tile, i) => (
             <BentoTile key={tile.name} tile={tile} idx={i} />
           ))}

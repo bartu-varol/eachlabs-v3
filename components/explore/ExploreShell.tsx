@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Search } from 'lucide-react';
 import { Pill } from '@/components/ui/Pill';
 import { ModelTile } from './ModelTile';
@@ -82,6 +82,54 @@ export function ExploreShell({
   const [llmQuery, setLlmQuery] = useState('');
   const [llmProvider, setLlmProvider] = useState<string>('ALL');
   const [llmShowAll, setLlmShowAll] = useState(false);
+
+  // Hide-on-scroll-down / show-on-scroll-up for the sticky filter bar.
+  // We only allow hiding once the user has scrolled past the bar's natural
+  // bottom — otherwise the sticky element's reserved flow space is still
+  // in view, and hiding the bar would expose an empty gap below the global
+  // header. Small scroll deltas are ignored to avoid flicker on inertia /
+  // trackpad scrolls.
+  //
+  // `offsetTop` on a sticky element tracks its *currently rendered* top
+  // (not its natural in-flow position) once it's stuck, so we measure
+  // the natural bottom once on mount via a non-sticky sentinel.
+  const filterBarRef = useRef<HTMLElement | null>(null);
+  const filterSentinelRef = useRef<HTMLDivElement | null>(null);
+  const [filterHidden, setFilterHidden] = useState(false);
+  useEffect(() => {
+    let lastY = window.scrollY;
+    let safeY = 0;
+    const measure = () => {
+      const sentinel = filterSentinelRef.current;
+      const bar = filterBarRef.current;
+      if (sentinel && bar) {
+        // Sentinel sits right above the bar in flow, so its bottom in the
+        // document is the bar's natural top.
+        const sentinelRect = sentinel.getBoundingClientRect();
+        const naturalTop = sentinelRect.bottom + window.scrollY;
+        safeY = naturalTop + bar.offsetHeight;
+      }
+    };
+    measure();
+    const onScroll = () => {
+      const y = window.scrollY;
+      const dy = y - lastY;
+      if (y < safeY) {
+        setFilterHidden(false);
+      } else if (dy > 6) {
+        setFilterHidden(true);
+      } else if (dy < -6) {
+        setFilterHidden(false);
+      }
+      lastY = y;
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', measure);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', measure);
+    };
+  }, []);
 
   // LLMs are sourced from the eachlabs-llm-router model's supported model enum,
   // not the global catalog. This keeps the LLMs tab in sync with what the router
@@ -191,8 +239,18 @@ export function ExploreShell({
         </div>
       </section>
 
-      {/* Filters bar, sticky */}
-      <section className="bg-bg border-b border-rule sticky top-[100px] z-30 backdrop-blur-sm">
+      {/* Sentinel: not sticky, so its in-document position never moves —
+          we use it to compute the filter bar's natural offsetTop. */}
+      <div ref={filterSentinelRef} aria-hidden className="h-0" />
+
+      {/* Filters bar, sticky. Hides when the user scrolls down past the
+          header zone, reappears the moment they scroll up. */}
+      <section
+        ref={filterBarRef}
+        className={`bg-bg border-b border-rule sticky top-[100px] z-30 backdrop-blur-sm transition-transform duration-300 ease-out ${
+          filterHidden ? '-translate-y-[calc(100%_+_100px)]' : 'translate-y-0'
+        }`}
+      >
         <div className="container">
           {tab === 'MODELS' ? (
             <div className="flex flex-col gap-3 py-4">

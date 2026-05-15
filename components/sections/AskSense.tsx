@@ -100,7 +100,7 @@ export function AskSense() {
       </motion.div>
 
       <motion.div
-        className="container py-32 md:py-40 relative z-[5]"
+        className="container pt-48 md:pt-56 pb-32 md:pb-40 relative z-[5]"
         style={{ y: contentY, scale: contentScale, opacity: contentOpacity }}
       >
       <div className="font-mono text-[11px] uppercase tracking-eyebrow text-spark">
