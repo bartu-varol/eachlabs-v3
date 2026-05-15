@@ -13,9 +13,9 @@ type Props = {
   cwd: string;
   /** Window tabs at the top, used for the signup/signin switcher. */
   tabs: Tab[];
-  /** Red dot destination — close terminal, go home. Default "/". */
+  /** Red dot destination, close terminal, go home. Default "/". */
   homeHref?: string;
-  /** Yellow dot destination — close terminal, show brand variant. */
+  /** Yellow dot destination, close terminal, show brand variant. */
   brandHref?: string;
   children: ReactNode;
 };

@@ -77,7 +77,7 @@ export default function ContactPage() {
             </p>
 
             <ul className="mt-10 flex flex-col gap-4 max-w-[480px]">
-              <Expectation label="WHO" body="A founding-team engineer reads every message. No tier-1 support queue, no chatbot." />
+              <Expectation label="WHO" body="A founding team engineer reads every message. No tier-1 support queue, no chatbot." />
               <Expectation label="WHEN" body="Same-day response on weekdays; within 24h on weekends." />
               <Expectation label="WHAT" body="Concrete answers with code, traces, or pricing maths. We don't pitch." />
             </ul>

@@ -9,15 +9,15 @@ import { AnimatePresence, motion } from 'framer-motion';
    Four-phase loop (~7.2s total). Tells: "Router watches all candidates.
    Primary degrades. Failover decision in <120ms. Trace shows what fired."
 
-     0.0 – 1.8s  STEADY      kling-v3 healthy, traffic flowing, p95 stable
-     1.8 – 3.0s  DEGRADE     kling-v3 latency spikes + error rate climbs
-     3.0 – 3.8s  DECIDE      router scores 3 candidates → wan-2.7 wins
-     3.8 – 7.2s  FAILOVER   traffic on wan-2.7, "saved 1 page" footer
+     0.0 - 1.8s  STEADY      kling-v3 healthy, traffic flowing, p95 stable
+     1.8 - 3.0s  DEGRADE     kling-v3 latency spikes + error rate climbs
+     3.0 - 3.8s  DECIDE      router scores 3 candidates → wan-2.7 wins
+     3.8 - 7.2s  FAILOVER   traffic on wan-2.7, "saved 1 page" footer
 
    Primary signal each phase tells in isolation:
      · STEADY  , "many candidates exist"
      · DEGRADE , "router sees the problem first"
-     · DECIDE  , "the choice is data-driven"
+     · DECIDE  , "the choice is data driven"
      · SPILL   , "users never noticed"
 ────────────────────────────────────────────────────────────────────────── */
 
@@ -206,7 +206,7 @@ function LaneRow({
       ? lane.p95.degrade
       : lane.p95.steady;
 
-  // Latency bar fill (0–100%), relative to a 1500ms ceiling.
+  // Latency bar fill (0-100%), relative to a 1500ms ceiling.
   const fill = Math.min(100, (p95 / 1500) * 100);
 
   // Status tone for the badge on the right.

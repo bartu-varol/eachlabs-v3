@@ -156,7 +156,7 @@ function SignalMeter({
   bars: number[];
   breachAt: number;
 }) {
-  // Cycle: 0–60% baseline value (ok) · 60–95% peak value (breach) · 95–100% baseline.
+  // Cycle: 0-60% baseline value (ok) · 60-95% peak value (breach) · 95-100% baseline.
   return (
     <div className="flex flex-col gap-1.5">
       <div className="flex items-baseline justify-between">

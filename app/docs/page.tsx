@@ -60,7 +60,7 @@ const SECTIONS = [
     items: [
       { title: 'Build a consumer image generator', body: 'Multi-tier, fallback, moderation. 8 min.', href: '#' },
       { title: 'A/B two video models',             body: 'Sticky cohort + auto-promote. 6 min.',     href: '#' },
-      { title: 'Per-user cost dashboards',         body: 'Tag, slice, export to BigQuery. 12 min.',  href: '#' },
+      { title: 'Per user cost dashboards',         body: 'Tag, slice, export to BigQuery. 12 min.',  href: '#' },
       { title: 'Brand-safe ad fan-out',            body: '200 variants + brand_safety gate. 10 min.', href: '#' },
       { title: 'Streaming workflow outputs',       body: 'WebSockets + chunked responses. 7 min.',    href: '#' },
     ],

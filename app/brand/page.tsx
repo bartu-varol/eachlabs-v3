@@ -59,8 +59,8 @@ const SENSE_CARD: AssetCard = {
 const DONTS: { rule: string; why: string }[] = [
   { rule: 'Don’t recolor the mark',  why: 'It’s ink on cream, or cream on ink. Spark for the eyes, not the wordmark.' },
   { rule: 'Don’t squish or stretch', why: 'The mark has a fixed aspect ratio. Scale uniformly. No exceptions.' },
-  { rule: 'Don’t rotate',            why: 'It reads left-to-right. Always. Even when the layout is being clever.' },
-  { rule: 'Don’t replace the ::',    why: 'The double-colon is the icon. Hyphens, dots, slashes break the cadence.' },
+  { rule: 'Don’t rotate',            why: 'It reads left to right. Always. Even when the layout is being clever.' },
+  { rule: 'Don’t replace the ::',    why: 'The double colon is the icon. Hyphens, dots, slashes break the cadence.' },
   { rule: 'Don’t add effects',       why: 'No shadows, glows, gradients, embosses. The mark ships flat or it doesn’t ship.' },
   { rule: 'Don’t crowd it',          why: 'Leave at least one cap-height of clear space on every side. Always.' },
 ];
@@ -130,7 +130,7 @@ export default function BrandPage() {
       {/* 3. ICON */}
       <BrandSection
         eyebrow="● ICON"
-        title="The double-colon."
+        title="The double colon."
         body={'The :: mark for compact use, favicons, app icons, social avatars, embed badges. Same flat treatment as the wordmark.'}
       >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-rule border border-rule rounded-md overflow-hidden">
@@ -140,11 +140,11 @@ export default function BrandPage() {
         </div>
       </BrandSection>
 
-      {/* 4. PRODUCT MARK — each::sense */}
+      {/* 4. PRODUCT MARK, each::sense */}
       <BrandSection
         eyebrow="● PRODUCT MARK · EACH::SENSE"
         title="The agent has its own mark."
-        body="each::sense is the natural-language agent in front of the catalog. Its mark ships alongside the platform wordmark when sense is the named product."
+        body="each::sense is the natural language agent in front of the catalog. Its mark ships alongside the platform wordmark when sense is the named product."
       >
         <div className="grid grid-cols-1 md:max-w-[50%] gap-px bg-rule border border-rule rounded-md overflow-hidden">
           <AssetTile card={SENSE_CARD} kind="wordmark" />

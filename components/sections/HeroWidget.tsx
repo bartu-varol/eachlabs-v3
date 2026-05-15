@@ -353,7 +353,7 @@ export function HeroWidget() {
    OrchestratePane, compact pipeline strip showing a live workflow.
    The packet pauses at the kling-v3 step, kling fails (red flash), and the
    pill swaps to wan-2.7 (the fallback). Then the packet continues to OUTPUT.
-   Loops forever. Sells the "ORCHESTRATION + auto-failover" story in 6s.
+   Loops forever. Sells the "ORCHESTRATION + auto failover" story in 6s.
 ────────────────────────────────────────────────────────────────────────── */
 
 const PIPELINE_LOOP_S = 6;
@@ -444,9 +444,9 @@ function OrchestratePane() {
   );
 }
 
-/* Highlight peak (normalized 0–1 in the 6s loop) for each pill index.
+/* Highlight peak (normalized 0-1 in the 6s loop) for each pill index.
    Calibrated to fire when the packet ARRIVES at that pill, not before.
-   Packet path (timeline 0–1):
+   Packet path (timeline 0-1):
      0 → 0.32   packet  4 → 50  (INPUT → kling)
      0.32 → 0.45 pause at 50    (swap)
      0.45 → 0.70 packet 50 → 96 (kling → OUTPUT)

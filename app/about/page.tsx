@@ -15,7 +15,7 @@ const BELIEFS = [
     label: 'OBSERVABILITY',
     title: 'If you can\'t see it, you can\'t ship it.',
     body:
-      'Per-call traces, cost, latency, and routing decisions are exposed by default. Debugging shouldn\'t require a quarterly instrumentation sprint.',
+      'Per call traces, cost, latency, and routing decisions are exposed by default. Debugging shouldn\'t require a quarterly instrumentation sprint.',
   },
   {
     label: 'COMPOSITION',
@@ -138,7 +138,7 @@ export default function AboutPage() {
             <p>
               each::labs is what we wish we had when we were the team in that room. One API across
               600+ models, a router that picks the right one and fails over when it doesn't, and
-              per-call traces that answer "what happened, what did it cost, where did it go" without
+              per call traces that answer "what happened, what did it cost, where did it go" without
               an instrumentation sprint.
             </p>
             <p className="text-ink">

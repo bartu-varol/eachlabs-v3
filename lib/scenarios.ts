@@ -36,20 +36,20 @@ export const SCENARIOS: Scenario[] = [
     category: 'Outage',
     metric: {
       label: 'USER-VISIBLE ERRORS',
-      caption: 'auto-fallback fires in <120ms when the primary model dies',
+      caption: 'auto fallback fires in <120ms when the primary model dies',
       hero: { multiplier: '97×', suffix: 'FEWER ERRORS' },
       others: { label: 'OTHERS',   sub: 'raw SDKs, no router',         value: 3.42 },
-      each:   { label: 'EACHLABS', sub: 'quality-aware + fallback',     value: 0.04 },
+      each:   { label: 'EACHLABS', sub: 'quality aware + fallback',     value: 0.04 },
       format: 'percent',
       scaleMax: 4,
     },
     chaos:
-      '03:14 AM. PagerDuty fires. You debug on Slack with the on-call. Users see broken videos for 47 minutes.',
+      '03:14 AM. PagerDuty fires. You debug on Slack with the on call. Users see broken videos for 47 minutes.',
     fix: {
       feature: { prefix: 'each::', name: 'router' },
-      tagline: 'Quality-aware routing. Automatic fallback.',
+      tagline: 'Quality aware routing. Automatic fallback.',
       body:
-        'Set fallbacks once. The router watches every call and spills traffic to a backup the moment your primary degrades. Quality-aware, latency-aware, live.',
+        'Set fallbacks once. The router watches every call and spills traffic to a backup the moment your primary degrades. Quality aware, latency aware, live.',
       docsHref: 'https://docs.eachlabs.ai/api/overview',
     },
     visual: 'fallback',
@@ -59,9 +59,9 @@ export const SCENARIOS: Scenario[] = [
     category: 'Latency',
     metric: {
       label: 'P99 RECOVERY ON FAIL',
-      caption: 'next-best provider picked before your user notices',
+      caption: 'next best provider picked before your user notices',
       hero: { multiplier: '6,200×', suffix: 'FASTER RECOVERY' },
-      others: { label: 'OTHERS',   sub: 'manual rollover · on-call paged',  value: 744 },   // seconds
+      others: { label: 'OTHERS',   sub: 'manual rollover · on call paged',  value: 744 },   // seconds
       each:   { label: 'EACHLABS', sub: 'router failover · live',          value: 0.12 },  // seconds
       format: 'time',
       scaleMax: 800,
@@ -70,7 +70,7 @@ export const SCENARIOS: Scenario[] = [
       'p95 doubles overnight. Users abandon. You add timeouts, which make it worse. Retros pile up.',
     fix: {
       feature: { prefix: 'each::', name: 'router' },
-      tagline: 'Auto-spill to faster providers when yours degrades.',
+      tagline: 'Auto spill to faster providers when yours degrades.',
       body:
         'When p95 latency on a provider exceeds your threshold, the router quietly shifts traffic until it recovers. Your users keep their speed; you keep the cost data.',
       docsHref: 'https://docs.eachlabs.ai/api/overview',
@@ -85,7 +85,7 @@ export const SCENARIOS: Scenario[] = [
       caption: 'average $/successful output across 600+ models',
       hero: { multiplier: '3×', suffix: 'CHEAPER' },
       others: { label: 'OTHERS',   sub: 'pinned to one provider',        value: 0.18 },
-      each:   { label: 'EACHLABS', sub: 'quality-aware routing + tags',  value: 0.06 },
+      each:   { label: 'EACHLABS', sub: 'quality aware routing + tags',  value: 0.06 },
       format: 'usd',
       scaleMax: 0.2,
     },

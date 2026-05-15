@@ -108,7 +108,7 @@ console.log(result.output);
         <p className="max-w-2xl text-[15px] leading-[1.6] text-ink2">
           {model.name} is available through the eachlabs LLM Router. The router
           handles authentication, retries, and provider fallback so you can
-          target this model with a single API surface — no per-provider SDK
+          target this model with a single API surface, no per-provider SDK
           required.
         </p>
         <dl className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-2">
@@ -139,7 +139,7 @@ console.log(result.output);
               Why route?
             </h2>
             <ul className="space-y-2 text-[14.5px] leading-[1.6] text-ink2 list-disc pl-5">
-              <li>One key, one endpoint — swap models without rotating SDKs.</li>
+              <li>One key, one endpoint, swap models without rotating SDKs.</li>
               <li>
                 Automatic retries and provider failover when {model.providerName}{' '}
                 hits rate limits.

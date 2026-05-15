@@ -58,6 +58,18 @@ export function Footer() {
 
         <div className="border-t border-rule mt-12 pt-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
           <span className="font-mono text-[11px] text-ink3">{footer.copyright}</span>
+
+          {/* AI agent pointer — quiet by default, AI crawlers still see it
+              because it's plain DOM with a discoverable label + .txt href. */}
+          <Link
+            href="/llm.txt"
+            className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3 hover:text-spark transition-colors inline-flex items-center gap-1.5"
+          >
+            <span aria-hidden>«</span>
+            <span>I am AI agent · llm.txt</span>
+            <span aria-hidden>→</span>
+          </Link>
+
           <span className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-eyebrow text-ink2">
             <PulseDot />
             <span>

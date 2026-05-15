@@ -82,7 +82,7 @@ const SCRIPTS: Record<ProductDef['slug'], Line[]> = {
     { kind: 'data', text: 'workflow assembled · 3 steps · est $0.19 · 6.4s · 1 trace' },
     { kind: 'ok',   text: '[03:14:23] step ok · image · 4.8s · kling-v3 · trace_b1' },
     { kind: 'ok',   text: '[03:14:23] step ok · voice · 0.5s · suno-v3 · trace_b2' },
-    { kind: 'comment', text: 'one prompt · 3 models · 1 workflow · OpenAI-compatible' },
+    { kind: 'comment', text: 'one prompt · 3 models · 1 workflow · OpenAI compatible' },
   ],
 };
 

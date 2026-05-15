@@ -60,7 +60,7 @@ export function WorkflowsShowcase() {
               />
               <BulletLine
                 accent="WHY"
-                text="Versioned, branched in parallel, traced end-to-end. No glue code."
+                text="Versioned, branched in parallel, traced end to end. No glue code."
               />
               <BulletLine
                 accent="HOW"

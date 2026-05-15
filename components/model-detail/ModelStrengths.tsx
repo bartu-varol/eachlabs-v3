@@ -18,39 +18,39 @@ import type { ModelDetail } from '@/lib/modelDetail';
 type Strength = { title: string; body: string };
 
 const VIDEO_STRENGTHS: readonly Strength[] = [
-  { title: 'Cinematic framing', body: 'Atmospheric wide shots, golden-hour grading, depth that feels shot — not rendered.' },
+  { title: 'Cinematic framing', body: 'Atmospheric wide shots, golden hour grading, depth that feels shot, not rendered.' },
   { title: 'Character consistency', body: 'Subject locks across the clip. No face morph, no outfit drift.' },
   { title: 'Style transfer', body: 'Match a reference image’s palette, grain, and color grade in one pass.' },
-  { title: 'Motion quality', body: 'Smooth camera moves, physics-aware object motion, no jelly limbs.' },
-  { title: 'Prompt adherence', body: 'Long, structured prompts land as written — beat order intact.' },
+  { title: 'Motion quality', body: 'Smooth camera moves, physics aware object motion, no jelly limbs.' },
+  { title: 'Prompt adherence', body: 'Long, structured prompts land as written, beat order intact.' },
   { title: 'Edge cases', body: 'Abstract or stylized requests don’t fall apart at higher guidance.' },
 ];
 
 const IMAGE_STRENGTHS: readonly Strength[] = [
-  { title: 'Photoreal portraits', body: 'Skin micro-detail, catchlights in the eyes, no plasticky smoothing.' },
-  { title: 'Compositional control', body: 'Rule-of-thirds, leading lines, negative space — when you ask for them.' },
-  { title: 'Style range', body: 'Anime, oil, watercolor, isometric — picks up the cue without fighting you.' },
-  { title: 'Text legibility', body: 'Short typography in-frame stays readable; the model spells what you wrote.' },
-  { title: 'Lighting fidelity', body: 'Hard rim light, soft window light, neon backwash — actually lit, not stamped.' },
-  { title: 'Edge cases', body: 'Hands, jewelry, micro-pattern fabric — the usual fail modes don’t fail here.' },
+  { title: 'Photoreal portraits', body: 'Skin micro detail, catchlights in the eyes, no plasticky smoothing.' },
+  { title: 'Compositional control', body: 'Rule of thirds, leading lines, negative space, when you ask for them.' },
+  { title: 'Style range', body: 'Anime, oil, watercolor, isometric, picks up the cue without fighting you.' },
+  { title: 'Text legibility', body: 'Short typography in frame stays readable; the model spells what you wrote.' },
+  { title: 'Lighting fidelity', body: 'Hard rim light, soft window light, neon backwash, actually lit, not stamped.' },
+  { title: 'Edge cases', body: 'Hands, jewelry, micro pattern fabric, the usual fail modes don’t fail here.' },
 ];
 
 const AUDIO_STRENGTHS: readonly Strength[] = [
   { title: 'Voice character', body: 'Holds a single speaker across a long clip; tone and timbre don’t drift.' },
-  { title: 'Emotional range', body: 'Whisper, laugh, urgency — the line reads the way you wrote it.' },
-  { title: 'Pacing control', body: 'Beat pauses, breath room, deliberate phrasing — not a flat machine read.' },
-  { title: 'Pronunciation', body: 'Names, acronyms, foreign loanwords — pronounced, not phonetic-guessed.' },
+  { title: 'Emotional range', body: 'Whisper, laugh, urgency, the line reads the way you wrote it.' },
+  { title: 'Pacing control', body: 'Beat pauses, breath room, deliberate phrasing, not a flat machine read.' },
+  { title: 'Pronunciation', body: 'Names, acronyms, foreign loanwords, pronounced, not phonetic guessed.' },
   { title: 'Background tolerance', body: 'Works clean even when the prompt asks for ambience or score under voice.' },
-  { title: 'Edge cases', body: 'Numbers, dates, code spellings — the things every TTS quietly mangles.' },
+  { title: 'Edge cases', body: 'Numbers, dates, code spellings, the things every TTS quietly mangles.' },
 ];
 
 const GENERIC_STRENGTHS: readonly Strength[] = [
-  { title: 'Prompt adherence', body: 'Long, structured prompts land as written — your intent survives the round-trip.' },
+  { title: 'Prompt adherence', body: 'Long, structured prompts land as written, your intent survives the round-trip.' },
   { title: 'Output fidelity', body: 'Detail holds at the resolution you asked for. No quiet downsampling.' },
-  { title: 'Style range', body: 'Switches register without losing the brief — clean, gritty, painterly, technical.' },
+  { title: 'Style range', body: 'Switches register without losing the brief, clean, gritty, painterly, technical.' },
   { title: 'Consistency', body: 'Same prompt, same seed → same output. Stable enough to ship behind a feature flag.' },
-  { title: 'Speed', body: 'Inference time stays in the band advertised. No long-tail outliers under load.' },
-  { title: 'Edge cases', body: 'The off-distribution requests other models fold on — this one keeps standing.' },
+  { title: 'Speed', body: 'Inference time stays in the band advertised. No long tail outliers under load.' },
+  { title: 'Edge cases', body: 'The off-distribution requests other models fold on, this one keeps standing.' },
 ];
 
 function pickStrengths(model: ModelDetail): readonly Strength[] {
@@ -185,10 +185,10 @@ export function ModelStrengths({ model }: { model: ModelDetail }) {
   const strengths = useMemo(() => pickStrengths(model).slice(0, 6), [model]);
 
   // Three sources of emphasis, OR'd together:
-  //   pinnedIdx       — last clicked, persists until another row is clicked
+  //   pinnedIdx      , last clicked, persists until another row is clicked
   //                     or the mouse leaves the card.
-  //   localHoverIdx   — mouse is over this row right now.
-  //   exampleHoverIdx — mouse is over the matching example card on the left.
+  //   localHoverIdx  , mouse is over this row right now.
+  //   exampleHoverIdx, mouse is over the matching example card on the left.
   const [pinnedIdx, setPinnedIdx] = useState<number | null>(null);
   const [localHoverIdx, setLocalHoverIdx] = useState<number | null>(null);
   const [exampleHoverIdx, setExampleHoverIdx] = useState<number | null>(null);

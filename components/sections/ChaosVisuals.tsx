@@ -622,7 +622,7 @@ const SWAP_MODELS = [
   { name: 'eleven-v3',    tag: 'AUDIO' },
 ] as const;
 
-// One model on screen at a time. State drives both the name and the pill —
+// One model on screen at a time. State drives both the name and the pill,
 // no keyframe interpolation, so two states can never be visible at once.
 const SWAP_HOLD_MS = 2000;
 
@@ -666,7 +666,7 @@ function SwapVisual() {
         </div>
       </div>
 
-      {/* Active modality pill — single brand accent, only one ever lit */}
+      {/* Active modality pill, single brand accent, only one ever lit */}
       <div className="mt-5 grid grid-cols-4 gap-2">
         {SWAP_MODELS.map((m, i) => {
           const isActive = i === activeIdx;

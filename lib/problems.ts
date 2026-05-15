@@ -166,7 +166,7 @@ export const PROBLEMS: Problem[] = [
     shortLabel: 'Pipeline',
     label: 'My pipeline is 4 model calls long',
     chaos:
-      'Step 3 fails. You pay for steps 1–2. User sees a half-baked output. Re-running it costs you twice.',
+      'Step 3 fails. You pay for steps 1-2. User sees a half-baked output. Re-running it costs you twice.',
     fix: {
       feature: { prefix: 'each::', name: 'workflows' },
       tagline: 'Chain models like functions. Version like code.',
@@ -177,7 +177,7 @@ export const PROBLEMS: Problem[] = [
         { kind: 'ok',    text: 'step 1/4 · enhance (gpt-4o) · 1.2s' },
         { kind: 'ok',    text: 'step 2/4 · generate (kling-v3) · 4.8s' },
         { kind: 'fail',  text: 'step 3/4 · voice (eleven-v3) · timeout' },
-        { kind: 'info',  text: 'retry from step 3 · cached steps 1–2 · no double-bill' },
+        { kind: 'info',  text: 'retry from step 3 · cached steps 1-2 · no double-bill' },
         { kind: 'ok',    text: 'step 4/4 · done · workflow v3.2' },
       ],
       visual: 'pipeline',

@@ -81,7 +81,7 @@ export const PRODUCTS: Record<ProductDef['slug'], ProductDef> = {
     whenPoints: [
       { n: '01', title: 'A consumer feature needs 4 model calls', body: 'Image + voice + music + compose, orchestrate that from your client and you\'ll be debugging glue code on weekends. Workflows make it one server-side call, one trace, one rollback unit.', detail: '4 calls → 1 each()', visual: 'flow' },
       { n: '02', title: 'QA wants the new version on 10% of traffic', body: 'Without versioning that\'s a redeploy with feature flags. With workflows, ship v3.3 to 10% sticky-by-user and watch the trace before promoting, or roll back in one click if quality drops.', detail: 'version("v3.3") · 10% rollout', visual: 'diff' },
-      { n: '03', title: 'Step 3 of 4 just failed in production', body: 'Without resumable steps you re-run from scratch and double-bill the user. Workflows cache step outputs, retry from the failure point, and bill the user once, no half-finished outputs reaching customers.', detail: 'retry from step 3 · cached 1–2', visual: 'rings' },
+      { n: '03', title: 'Step 3 of 4 just failed in production', body: 'Without resumable steps you re-run from scratch and double bill the user. Workflows cache step outputs, retry from the failure point, and bill the user once, no half finished outputs reaching customers.', detail: 'retry from step 3 · cached 1-2', visual: 'rings' },
       { n: '04', title: 'Marketing wants to A/B the whole pipeline', body: 'A/B isn\'t just for individual models, sometimes the whole pipeline (enhance + gen + voice) is what\'s changing. Workflows are A/B-able as a unit, with sticky cohorts and a single significance test.', detail: 'experiment: pipeline-v3 vs v4', visual: 'grid' },
     ],
     code: `import { each } from "eachlabs";
@@ -120,26 +120,26 @@ const result = await each({
     eyebrow: 'PLATFORM · ROUTER',
     title: 'Pick the best model. Route around the broken one.',
     body:
-      'A quality-aware router that watches every call. When your primary degrades, by error, latency, or output quality, traffic spills to a backup in <120ms. Set it once; never page on-call again.',
+      'A quality aware router that watches every call. When your primary degrades, by error, latency, or output quality, traffic spills to a backup in <120ms. Set it once; never page on call again.',
     stats: [
       { value: '<120ms',  label: 'failover latency' },
       { value: '97×',     label: 'fewer user-visible errors' },
       { value: '99.99%',  label: 'effective uptime' },
       { value: 'every',   label: 'call routed' },
     ],
-    whatTitle: 'Quality-aware. Latency-aware. Live.',
+    whatTitle: 'Quality aware. Latency aware. Live.',
     whatBody:
       'The router doesn’t just retry on 5xx. It watches output quality, latency, and provider health, and reroutes traffic the moment any signal degrades. Set fallbacks once; we handle the chaos.',
     whatPoints: [
-      { n: '01', title: 'Quality-aware fallback', body: 'Most routers retry on 5xx. Ours measures output drift in real time, perceptual hashing on images, audio fingerprinting on TTS, and reroutes the moment the signal degrades. The check lives on the call path; no separate ML pipeline.', detail: 'routing: "quality-aware"', visual: 'swap' },
+      { n: '01', title: 'Quality aware fallback', body: 'Most routers retry on 5xx. Ours measures output drift in real time, perceptual hashing on images, audio fingerprinting on TTS, and reroutes the moment the signal degrades. The check lives on the call path; no separate ML pipeline.', detail: 'routing: "quality aware"', visual: 'swap' },
       { n: '02', title: 'Latency thresholds', body: 'Set a p95 threshold per provider. When one breaches, the router shifts traffic until it recovers, globally, per-tier, or per-experiment. Every failover lands in the trace with a reason.', detail: 'threshold_p95: 800 // ms', visual: 'graph' },
       { n: '03', title: 'Sticky cohorts', body: 'Variant assignment is sticky-by-user. The same user always lands on the same provider until the router has a reason to switch, keeping cohort data clean for A/B tests and tier-based pricing.', detail: 'cohort: user.id', visual: 'grid' },
     ],
     liveTitle: 'kling-v3 just degraded. wan-2.7 took over.',
-    liveBody: 'A real failover at 03:14 AM. User latency unchanged, no on-call paged, traced end-to-end.',
+    liveBody: 'A real failover at 03:14 AM. User latency unchanged, no on call paged, traced end to end.',
     whenTitle: 'Reach for router when…',
     whenPoints: [
-      { n: '01', title: 'It\'s 3:14 AM and kling-v3 just died', body: 'Your on-call hasn\'t slept in two days. The dashboard is red. Users are seeing broken videos. Router catches this 124ms in, before your pager fires, before users notice, before the team reaches Slack.', detail: 'incident.caught = true', visual: 'pulse' },
+      { n: '01', title: 'It\'s 3:14 AM and kling-v3 just died', body: 'Your on call hasn\'t slept in two days. The dashboard is red. Users are seeing broken videos. Router catches this 124ms in, before your pager fires, before users notice, before the team reaches Slack.', detail: 'incident.caught = true', visual: 'pulse' },
       { n: '02', title: 'Your bill jumped 40% this week', body: 'Cost shifts when fallbacks fire, wan-2.7 might be 2× the cost of kling-v3, and you have no idea which calls switched. Router writes the served-provider on every trace; finance gets the answer in two clicks.', detail: 'trace.served_by · per call', visual: 'graph' },
       { n: '03', title: 'p95 tripled overnight, no one knows why', body: 'A provider degraded silently, same status codes, slower outputs. Without router you\'d be hunting in logs at 11 PM. With it, the failover already fired and the trace tells you which provider went bad and when.', detail: 'p95: 540ms → 1.42s → spilled', visual: 'flow' },
       { n: '04', title: 'You\'re shipping to 3 regions on day 30', body: 'Single-provider capacity has a ceiling, region throttles, daily limits, model deprecations land at the worst time. Router lets you shop across providers without rewriting a single call site.', detail: 'regions: us, eu, apac', visual: 'grid' },
@@ -151,7 +151,7 @@ const result = await each({
   inputs: { prompt },
   router: {
     fallback:      ["wan-2.7", "veo-3"],
-    routing:       "quality-aware",
+    routing:       "quality aware",
     threshold_p95: 800, // ms
   },
 });
@@ -166,7 +166,7 @@ const result = await each({
       { product: 'Enhancer', body: 'Different model, different failure surface, handled.', href: '/enhancer' },
     ],
     ctaTitle: 'Stop writing retry loops. Start routing.',
-    ctaBody: 'Router is included on every plan. Quality-aware mode + custom fallback chains on Pro and up.',
+    ctaBody: 'Router is included on every plan. Quality aware mode + custom fallback chains on Pro and up.',
     ctaPrimary:   { label: 'Follow the white rabbit',     href: '/signup' },
     ctaSecondary: { label: 'See router docs',  href: '/docs' },
   },
@@ -190,7 +190,7 @@ const result = await each({
     whatPoints: [
       { n: '01', title: 'Refusal repair', body: 'Provider returns a refusal on an ambiguous-but-harmless prompt? The enhancer catches the trigger before the call and reshapes it. Your user sees a result, not a "sorry, I can\'t help with that".', detail: 'refusal: caught · reshaped', visual: 'swap' },
       { n: '02', title: 'Schema-aware enhancement', body: 'When you need JSON, you get JSON. The enhancer enforces shape before the model sees the prompt, malformed-output bugs collapse from ~8% to <1%. Your parsers stop crashing.', detail: 'schema_hint: auto', visual: 'diff' },
-      { n: '03', title: 'Per-model failure mapping', body: 'Each model has its own failure surface, kling refuses different prompts than veo; flux malforms differently than nano-banana. The enhancer maps to the target model, so cross-provider swaps stay reliable.', detail: 'enhance: { target: "auto" }', visual: 'tags' },
+      { n: '03', title: 'Per model failure mapping', body: 'Each model has its own failure surface, kling refuses different prompts than veo; flux malforms differently than nano-banana. The enhancer maps to the target model, so cross provider swaps stay reliable.', detail: 'enhance: { target: "auto" }', visual: 'tags' },
     ],
     liveTitle: '"draw a person" · 0.3% errors vs 12.4%.',
     liveBody: 'A real comparison: 1,000 production prompts, same model, with and without the enhancer. Raw provider: 124 refusals/malformed. Enhanced: 3.',
@@ -224,18 +224,18 @@ const result = await each({
       { product: 'Workflows', body: 'Lower error rate on every node of every pipeline.', href: '/workflows' },
     ],
     ctaTitle: 'Stop debugging prompts. Start shipping reliable outputs.',
-    ctaBody: 'Enhancer is free on every plan; schema-aware enhancement + per-team learning on Pro and up.',
+    ctaBody: 'Enhancer is free on every plan; schema-aware enhancement + per team learning on Pro and up.',
     ctaPrimary:   { label: 'Follow the white rabbit',         href: '/signup' },
     ctaSecondary: { label: 'See enhancer docs',    href: '/docs' },
   },
   sense: {
     slug: 'sense',
     accent: 'spark',
-    signature: 'Plain English in → models picked + workflow built · OpenAI-compatible',
+    signature: 'Plain English in → models picked + workflow built · OpenAI compatible',
     eyebrow: 'PLATFORM · SENSE',
     title: 'Describe it. sense picks the models and builds the workflow.',
     body:
-      'each::sense is the natural-language agent in front of every model in the catalog. Tell it what you want, an image, a video, a voiceover, a 3D asset, and it chooses the models, chains them into a workflow, and runs it. OpenAI-compatible base URL; drop into LangChain, CrewAI, AutoGen, or any agent SDK you already ship.',
+      'each::sense is the natural language agent in front of every model in the catalog. Tell it what you want, an image, a video, a voiceover, a 3D asset, and it chooses the models, chains them into a workflow, and runs it. OpenAI compatible base URL; drop into LangChain, CrewAI, AutoGen, or any agent SDK you already ship.',
     stats: [
       { value: '600+',     label: 'models · auto-picked' },
       { value: '0',        label: 'model names to remember' },
@@ -244,11 +244,11 @@ const result = await each({
     ],
     whatTitle: 'An agent that owns model selection, so you don’t have to.',
     whatBody:
-      'sense reads your request in plain English, decides which models can land it, chains them into the right order, and runs the pipeline. The model names, the failure surfaces, the cost trade-offs, all hidden behind one OpenAI-compatible endpoint.',
+      'sense reads your request in plain English, decides which models can land it, chains them into the right order, and runs the pipeline. The model names, the failure surfaces, the cost trade-offs, all hidden behind one OpenAI compatible endpoint.',
     whatPoints: [
-      { n: '01', title: 'Natural-language requests', body: '"Make a 6-second product video with a voiceover" is the API. sense parses intent, maps to the right combo of image, video, and TTS models, and runs them, without you naming any of them.', detail: 'prompt → models · auto', visual: 'tags' },
-      { n: '02', title: 'Automatic workflow construction', body: 'Multi-step pipelines get built on the fly. Image → upscale → animate → narrate is one request to sense; one workflow under the hood, one trace, automatic recovery on failure.', detail: 'one prompt · N steps · 1 trace', visual: 'flow' },
-      { n: '03', title: 'OpenAI-compatible drop-in', body: 'Point any OpenAI SDK at https://eachsense-agent.core.eachlabs.run/v1 and start calling. Works with LangChain, CrewAI, AutoGen, and every agent framework you already wired up. Zero new SDK to learn.', detail: 'base_url: eachsense-agent.../v1', visual: 'swap' },
+      { n: '01', title: 'Natural language requests', body: '"Make a 6-second product video with a voiceover" is the API. sense parses intent, maps to the right combo of image, video, and TTS models, and runs them, without you naming any of them.', detail: 'prompt → models · auto', visual: 'tags' },
+      { n: '02', title: 'Automatic workflow construction', body: 'Multi step pipelines get built on the fly. Image → upscale → animate → narrate is one request to sense; one workflow under the hood, one trace, automatic recovery on failure.', detail: 'one prompt · N steps · 1 trace', visual: 'flow' },
+      { n: '03', title: 'OpenAI compatible drop in', body: 'Point any OpenAI SDK at https://eachsense-agent.core.eachlabs.run/v1 and start calling. Works with LangChain, CrewAI, AutoGen, and every agent framework you already wired up. Zero new SDK to learn.', detail: 'base_url: eachsense-agent.../v1', visual: 'swap' },
     ],
     liveTitle: '"a 6-second product video with a voiceover" · workflow built in 320ms.',
     liveBody:
@@ -262,7 +262,7 @@ const result = await each({
     ],
     code: `import OpenAI from "openai";
 
-// each::sense is OpenAI-compatible.
+// each::sense is OpenAI compatible.
 // Point any OpenAI client (or LangChain / CrewAI /
 // AutoGen / Vercel AI SDK) at this base URL.
 const client = new OpenAI({
@@ -289,7 +289,7 @@ const response = await client.chat.completions.create({
       { product: 'Enhancer',  body: 'Prompts that sense ships get enhancer-polished on the way in, lower error rates.',  href: '/enhancer' },
     ],
     ctaTitle: 'Stop picking models. Ship the request.',
-    ctaBody: 'OpenAI-compatible drop-in. Free tier covers your first 1,000 sense calls; usage-based after that.',
+    ctaBody: 'OpenAI compatible drop in. Free tier covers your first 1,000 sense calls; usage based after that.',
     ctaPrimary:   { label: 'Get the base URL',   href: '/signup' },
     ctaSecondary: { label: 'See sense docs',     href: 'https://docs.eachlabs.ai/introduction' },
   },

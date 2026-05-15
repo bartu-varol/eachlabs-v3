@@ -72,7 +72,7 @@ export function SignupBrandPanel() {
 const SIGNIN_STATS = [
   { v: '284K', k: 'requests routed',     sub: 'across 600+ models'       },
   { v: '0',    k: 'user-visible errors', sub: 'fallback fires in <120ms' },
-  { v: '14',   k: 'model swaps fired',   sub: 'your on-call slept'       },
+  { v: '14',   k: 'model swaps fired',   sub: 'your on call slept'       },
 ];
 
 export function SigninBrandPanel() {

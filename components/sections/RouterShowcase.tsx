@@ -67,7 +67,7 @@ export function RouterShowcase() {
             <ul className="mt-8 flex flex-col gap-2.5 max-w-[520px]">
               <BulletLine
                 accent="WHAT"
-                text="An auto-failover layer between your code and every model provider."
+                text="An auto failover layer between your code and every model provider."
               />
               <BulletLine
                 accent="WHY"

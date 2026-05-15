@@ -5,7 +5,7 @@ export const ticker = [
   '* 99.99% UPTIME · 284K REQ/24H',
   '* THE MODEL THAT BROKE YESTERDAY? STILL SHIPPING',
   '* 600+ MODELS · 4 MODALITIES · 1 API',
-  '* NO 3AM PAGES (ASK YOUR ON-CALL)',
+  '* NO 3AM PAGES (ASK YOUR ON CALL)',
 ];
 
 // ---------- NAV ----------
@@ -40,7 +40,7 @@ export const megaMenus: Record<'platform' | 'developers', MegaMenu> = {
       {
         eyebrow: 'THE PLATFORM',
         items: [
-          { title: 'each::router',    body: 'Model-aware fallbacks. Quality-aware routing.', href: '/router' },
+          { title: 'each::router',    body: 'Model aware fallbacks. Quality aware routing.', href: '/router' },
           { title: 'each::workflows', body: 'Chain models. Version. Rollback.',              href: '/workflows' },
           { title: 'each::enhancer',  body: '12× fewer errors. Same model. Same call.',     href: '/enhancer' },
           { title: 'each::sense',     body: 'The agent that reads your stack and points to the fix.', href: '/each-sense' },
@@ -49,7 +49,7 @@ export const megaMenus: Record<'platform' | 'developers', MegaMenu> = {
     ],
     featured: {
       eyebrow: '* THIS WEEK',
-      title: 'each::router 1.4, quality-aware spill',
+      title: 'each::router 1.4, quality aware spill',
       body: 'We now route around quality degradations, not just failures.',
       link: 'Read more →',
     },
@@ -69,7 +69,7 @@ export const megaMenus: Record<'platform' | 'developers', MegaMenu> = {
         eyebrow: 'COMMUNITY',
         items: [
           { title: 'GitHub',  body: 'Source, examples, issues.', href: 'https://github.com/eachlabs' },
-          { title: 'Discord', body: 'Ship-talk, support, drama-free.', href: 'https://discord.gg/eachlabs' },
+          { title: 'Discord', body: 'Ship talk, support, drama free.', href: 'https://discord.gg/eachlabs' },
           { title: 'Status',  body: '99.99% · all systems operational.', href: 'https://docs.eachlabs.ai/introduction' },
           { title: 'Blog',    body: 'Field notes & dispatches.', href: '/blog' },
         ],
@@ -78,7 +78,7 @@ export const megaMenus: Record<'platform' | 'developers', MegaMenu> = {
     featured: {
       eyebrow: '* NEW',
       title: 'TypeScript SDK 2.0, typed workflows + streaming',
-      body: 'Workflow IDs are now type-safe at build time. Streaming responses without ceremony.',
+      body: 'Workflow IDs are now type safe at build time. Streaming responses without ceremony.',
       link: 'See the upgrade →',
     },
   },
@@ -106,7 +106,7 @@ export const hero = {
   bodyLead: '600+ AI models behind one API',
   /** Body rest, descriptive, with playful flair. */
   body:
-    '- the hyped ones, the cheap ones, the one that broke yesterday. We do the boring parts: retries when models go down, per-user cost when finance asks, live A/B when product wants to ship. You write the call. We do the rest.',
+    '- the hyped ones, the cheap ones, the one that broke yesterday. We do the boring parts: retries when models go down, per user cost when finance asks, live A/B when product wants to ship. You write the call. We do the rest.',
   ctas: [
     { label: 'Start Building',         href: '/signup',  variant: 'primary'   as const },
     { label: 'Talk to an engineer (a real one)',   href: '/contact', variant: 'secondary' as const },
@@ -114,7 +114,7 @@ export const hero = {
   /** Stats bar, 4 numbers each with a one-line cheeky sub. */
   stats: [
     { value: '600+',    label: 'models',          sub: 'one API · one signature' },
-    { value: '10×',     label: 'fewer errors',    sub: 'auto-fallback in <120ms' },
+    { value: '10×',     label: 'fewer errors',    sub: 'auto fallback in <120ms' },
     { value: '99.99%',  label: 'uptime',          sub: 'no asterisks' },
     { value: '<120ms',  label: 'router overhead', sub: 'faster than a tweet' },
   ],
@@ -166,10 +166,10 @@ export const receipts = {
   metrics: [
     {
       label: 'USER-VISIBLE ERRORS',
-      caption: 'auto-fallback fires in <120ms when the primary model dies',
+      caption: 'auto fallback fires in <120ms when the primary model dies',
       hero: { multiplier: '97×', suffix: 'FEWER ERRORS' },
       others: { label: 'OTHERS', sub: 'raw SDKs, no router' },
-      each:   { label: 'EACH', sub: 'quality-aware + fallback' },
+      each:   { label: 'EACH', sub: 'quality aware + fallback' },
       format: 'percent',
       othersValue: 3.42,
       eachValue: 0.035,
@@ -179,7 +179,7 @@ export const receipts = {
       label: 'P99 RECOVERY ON FAIL',
       caption: 'how long until the user sees a recovered response',
       hero: { multiplier: '6,200×', suffix: 'FASTER RECOVERY' },
-      others: { label: 'OTHERS', sub: 'manual rollover, on-call paged' },
+      others: { label: 'OTHERS', sub: 'manual rollover, on call paged' },
       each:   { label: 'EACH', sub: 'router failover · live' },
       format: 'time',
       othersValue: 744, // seconds (12.4 min)
@@ -191,7 +191,7 @@ export const receipts = {
       caption: 'average $/successful output across 600+ models',
       hero: { multiplier: '3×', suffix: 'CHEAPER' },
       others: { label: 'OTHERS', sub: 'pinned to one provider' },
-      each:   { label: 'EACH', sub: 'quality-aware routing' },
+      each:   { label: 'EACH', sub: 'quality aware routing' },
       format: 'usd',
       othersValue: 0.18,
       eachValue: 0.06,
@@ -347,7 +347,7 @@ export const customerStories = {
         { kind: 'plain', text: ' and responsive.' },
       ],
       quote:
-        'We work with Eachlabs because their team is highly solution-oriented and responsive, and we always receive quick support. Their APIs are also reliable and stable in production.',
+        'We work with Eachlabs because their team is highly solution oriented and responsive, and we always receive quick support. Their APIs are also reliable and stable in production.',
       name: 'Osman Bahar',
       role: 'Byterise',
       avatar: { initials: 'OB', bg: 'bg-highlight', text: 'text-white', photo: '/customers/photos/osman-bahar.png' },
@@ -391,7 +391,7 @@ export const customerStories = {
         { kind: 'plain', text: '.' },
       ],
       quote:
-        'We use each::labs’ infrastructure to power the AI models in our applications. Their deep expertise in AI model market allows us to deliver the most up-to-date, highest-quality, and fastest models to our users.',
+        'We use each::labs’ infrastructure to power the AI models in our applications. Their deep expertise in AI model market allows us to deliver the most up to date, highest quality, and fastest models to our users.',
       name: 'Ekin Dursun',
       role: 'Pixel Wizard',
       avatar: { initials: 'ED', bg: 'bg-sun', text: 'text-white', photo: '/customers/photos/ekin-dursun.jpeg' },
@@ -408,7 +408,7 @@ export const customerStories = {
         { kind: 'plain', text: '.' },
       ],
       quote:
-        'each::labs is our choice because it’s reliable, easy to integrate, and incredibly user-friendly. Their strong support team resolves issues instantly, providing a stable and convenient experience.',
+        'each::labs is our choice because it’s reliable, easy to integrate, and incredibly user friendly. Their strong support team resolves issues instantly, providing a stable and convenient experience.',
       name: 'Gökçe Oğuz',
       role: 'baby.ai',
       avatar: { initials: 'GO', bg: 'bg-yellow', text: 'text-bg', photo: '/customers/photos/gokce-oguz.svg' },
@@ -447,7 +447,7 @@ export const customerStories = {
     {
       industry: 'CUSTOMER STORY',
       headline: [
-        { kind: 'spark', text: 'Multi-model AI' },
+        { kind: 'spark', text: 'Multi model AI' },
         { kind: 'plain', text: ', simplified at scale.' },
       ],
       quote:
@@ -499,7 +499,7 @@ export const rabbitHole = {
     {
       eyebrow: '* TAKE A HAND',
       title: 'Talk to an engineer.',
-      subline: 'A real engineer. Not a sales-call.',
+      subline: 'A real engineer. Not a sales call.',
       body: 'We’ll show you how each::labs would fit your stack at your scale. Bring your hard questions.',
       cta: { label: 'Book 30 minutes →', href: '/contact', style: 'outline' as const },
     },
@@ -599,7 +599,7 @@ export const enterprise = {
       { value: '1M+',     label: 'requests handled / month', sub: 'across hundreds of customer teams' },
       { value: '99.99%',  label: 'effective uptime',         sub: 'across the routed path' },
       { value: '<120ms',  label: 'failover overhead',        sub: 'before your user notices' },
-      { value: '24/7',    label: 'engineer-led support',     sub: 'no BDRs · no tier-1 queue' },
+      { value: '24/7',    label: 'engineer led support',     sub: 'no BDRs · no tier-1 queue' },
     ],
     subtext: '600+ MODELS · ONE API · TRUSTED BY TEAMS SHIPPING AI IN PRODUCTION',
   },
@@ -616,15 +616,15 @@ export const enterprise = {
     pillars: [
       {
         title: 'Won\'t crash on a bad provider day',
-        body: 'Quality-aware failover catches degradations on every call. When Kling 503s or Veo slows to a crawl, traffic spills to a healthy fallback in under 120ms, before your users notice.',
+        body: 'Quality aware failover catches degradations on every call. When Kling 503s or Veo slows to a crawl, traffic spills to a healthy fallback in under 120ms, before your users notice.',
       },
       {
         title: 'Won\'t leak through a security gap',
-        body: 'Zero retention by default. Provider-side retention disabled per request. We never train on your traffic. Your prompts and outputs stay where you need them, nowhere else.',
+        body: 'Zero retention by default. Provider side retention disabled per request. We never train on your traffic. Your prompts and outputs stay where you need them, nowhere else.',
       },
       {
         title: 'Won\'t blow your budget without warning',
-        body: 'Per-call traces tag every request with cost, latency, and the attributes you care about. Finance gets the answer to "who is expensive" without a quarterly instrumentation sprint.',
+        body: 'Per call traces tag every request with cost, latency, and the attributes you care about. Finance gets the answer to "who is expensive" without a quarterly instrumentation sprint.',
       },
     ],
   },
@@ -634,7 +634,7 @@ export const enterprise = {
     eyebrow: '* TRUST · IN PRODUCTION',
     metric: 'Top 20%',
     metricLabel: 'of app studios shipping AI use each::labs',
-    body: 'Consumer apps with millions of users, ad-tech platforms running billion+ monthly requests, and enterprise platforms with strict change control are all on the same router.',
+    body: 'Consumer apps with millions of users, ad tech platforms running billion+ monthly requests, and enterprise platforms with strict change control are all on the same router.',
     customers: ['NOVA', 'LUME', 'Helix', 'Forma', 'Ondra', 'Kairo', 'Aster', 'Prism', 'Maker', 'Orbit'],
   },
 
@@ -656,7 +656,7 @@ export const enterprise = {
         accent: 'highlight' as const,
         title: '24/7 contact with engineering',
         body:
-          'Direct Slack channel with the engineers who built the router. P1 issues acknowledged the same business day; on-call coverage 24/7/365, not "business hours in our timezone."',
+          'Direct Slack channel with the engineers who built the router. P1 issues acknowledged the same business day; on call coverage 24/7/365, not "business hours in our timezone."',
       },
       {
         accent: 'success' as const,
@@ -674,7 +674,7 @@ export const enterprise = {
         accent: 'ember' as const,
         title: 'Zero retention by default',
         body:
-          'We don\'t store prompts or outputs past what you opt into for traces. Provider-side retention disabled per provider. We never train on your traffic.',
+          'We don\'t store prompts or outputs past what you opt into for traces. Provider side retention disabled per provider. We never train on your traffic.',
       },
       {
         accent: 'yellow' as const,
@@ -690,7 +690,7 @@ export const enterprise = {
     eyebrow: '* THE 3 AM PROMISE',
     headline: {
       line1: 'When your model dies at 3 AM,',
-      line2: 'our on-call wakes up.',
+      line2: 'our on call wakes up.',
       line3: 'Yours doesn\'t.',
     },
     body:
@@ -699,16 +699,16 @@ export const enterprise = {
       {
         time: 'T+0ms',
         title: 'Primary model fails.',
-        body: 'Provider returns 5xx, timeout, or degraded quality (per-call signal). Router catches it before the SDK returns.',
+        body: 'Provider returns 5xx, timeout, or degraded quality (per call signal). Router catches it before the SDK returns.',
       },
       {
         time: 'T+~120ms',
         title: 'Failover to fallback.',
-        body: 'Quality-aware route picks the next-best healthy model. User sees a response. No retry storm, no half-cached corpses.',
+        body: 'Quality aware route picks the next best healthy model. User sees a response. No retry storm, no half cached corpses.',
       },
       {
         time: 'T+~30s',
-        title: 'Our on-call gets paged.',
+        title: 'Our on call gets paged.',
         body: 'Senior engineer on PagerDuty. Your stack lit a fire; ours is already at the console. You are still asleep.',
       },
       {
@@ -718,7 +718,7 @@ export const enterprise = {
       },
     ],
     footnote:
-      'IF THE FALLBACK ITSELF FAILS, OUR ON-CALL HANDLES IT BEFORE YOURS DOES. THE RCA LANDS IN YOUR INBOX BY THE END OF THE NEXT BUSINESS DAY.',
+      'IF THE FALLBACK ITSELF FAILS, OUR ON CALL HANDLES IT BEFORE YOURS DOES. THE RCA LANDS IN YOUR INBOX BY THE END OF THE NEXT BUSINESS DAY.',
   },
 
   /** Procurement assets, available on request from engineering, not gated by sales. */
@@ -733,12 +733,12 @@ export const enterprise = {
     assets: [
       {
         title: 'Security review',
-        sub: 'Architecture, retention, sub-processors, in one document',
+        sub: 'Architecture, retention, sub processors, in one document',
         cta: 'Request under NDA',
         href: 'mailto:support@eachlabs.ai?subject=Security%20review%20request',
       },
       {
-        title: 'Sub-processor list',
+        title: 'Sub processor list',
         sub: 'Current providers and their role · updated as we add models',
         cta: 'Request the list →',
         href: 'mailto:support@eachlabs.ai?subject=Sub-processor%20list',
@@ -757,7 +757,7 @@ export const enterprise = {
       },
       {
         title: 'Uptime + incident process',
-        sub: 'How we run on-call, what counts as a P1, and how we report it',
+        sub: 'How we run on call, what counts as a P1, and how we report it',
         cta: 'Read the process →',
         href: '/contact',
       },
@@ -781,27 +781,27 @@ export const enterprise = {
       {
         tag: 'UPTIME',
         q: 'What if a model provider has an outage?',
-        a: 'Quality-aware failover catches it on every call. Traffic spills to a healthy fallback in under 120ms before your user notices. Your app does not depend on a single provider being healthy.',
+        a: 'Quality aware failover catches it on every call. Traffic spills to a healthy fallback in under 120ms before your user notices. Your app does not depend on a single provider being healthy.',
       },
       {
         tag: 'SECURITY',
         q: 'Do you train on our prompts or outputs?',
-        a: 'No. We do not store prompts or outputs past what you opt into for traces, and we never train models on your traffic. Provider-side retention is opt-in per provider and disabled by default for production accounts.',
+        a: 'No. We do not store prompts or outputs past what you opt into for traces, and we never train models on your traffic. Provider side retention is opt in per provider and disabled by default for production accounts.',
       },
       {
         tag: 'PAGING',
         q: 'What happens if each::labs itself goes down?',
-        a: 'The router caches its policy locally and keeps routing on the last-known-good config so your inference does not depend on our control plane being up. Same providers, same direct connections.',
+        a: 'The router caches its policy locally and keeps routing on the last known good config so your inference does not depend on our control plane being up. Same providers, same direct connections.',
       },
       {
         tag: 'BUDGET',
         q: 'How do we keep AI spend predictable?',
-        a: 'Set monthly inference budgets per team, project, or environment. Alerts and hard caps are enforced at the router. Per-call traces tag every request with cost so finance can slice spend by any attribute.',
+        a: 'Set monthly inference budgets per team, project, or environment. Alerts and hard caps are enforced at the router. Per call traces tag every request with cost so finance can slice spend by any attribute.',
       },
       {
         tag: 'SUPPORT',
         q: 'Who answers when something breaks?',
-        a: 'A founding-team engineer, every time. Direct Slack channel with your CSM and senior engineers, 24/7/365 coverage. No tier-1 queue, no scripted demos, no sales handoff.',
+        a: 'A founding team engineer, every time. Direct Slack channel with your CSM and senior engineers, 24/7/365 coverage. No tier-1 queue, no scripted demos, no sales handoff.',
       },
       {
         tag: 'EXIT',

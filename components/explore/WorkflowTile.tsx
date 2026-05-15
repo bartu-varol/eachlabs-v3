@@ -5,7 +5,7 @@ import Link from 'next/link';
 import type { WorkflowSummary } from '@/lib/workflows';
 import { pickShineDirection } from './shine';
 
-/** Deterministic 1000–2000 multiplier from workflow_id, stable across renders. */
+/** Deterministic 1000-2000 multiplier from workflow_id, stable across renders. */
 function runsMultiplier(workflowId: string): number {
   let h = 0;
   for (let i = 0; i < workflowId.length; i++) h = (h * 31 + workflowId.charCodeAt(i)) | 0;

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { MegaMenu as MegaMenuType } from '@/lib/content';
+import { EachColons } from '@/components/ui/EachColons';
 
 type Props = {
   menu: MegaMenuType;
@@ -17,7 +18,7 @@ function FeatureTitle({ title }: { title: string }) {
     return (
       <span className="font-medium text-[15px] inline-flex items-baseline">
         <span className="text-ink group-hover:text-spark transition-colors">each</span>
-        <span className="text-spark">::</span>
+        <EachColons />
         <span className="text-ink group-hover:text-spark transition-colors">{name}</span>
       </span>
     );

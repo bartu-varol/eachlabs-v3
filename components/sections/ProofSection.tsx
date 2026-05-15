@@ -12,6 +12,7 @@ import {
 import { ArrowRight } from 'lucide-react';
 import { SCENARIOS, type Scenario } from '@/lib/scenarios';
 import { ChaosVisual } from './ChaosVisuals';
+import { EachColons } from '@/components/ui/EachColons';
 
 const CYCLE_MS = 5500;
 
@@ -321,7 +322,7 @@ export function ProofSection() {
                   (s.fix.feature.prefix.endsWith('::') ? (
                     <>
                       {s.fix.feature.prefix.slice(0, -2)}
-                      <span className="text-spark">::</span>
+                      <EachColons />
                     </>
                   ) : (
                     <span className="text-ink3">{s.fix.feature.prefix}</span>

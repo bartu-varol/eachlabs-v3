@@ -40,19 +40,19 @@ const initial: FormState = {
 };
 
 const COMPANY_SIZES: { value: CompanySize; label: string }[] = [
-  { value: '1-10',     label: '1–10' },
-  { value: '11-50',    label: '11–50' },
-  { value: '51-200',   label: '51–200' },
-  { value: '201-1000', label: '201–1000' },
+  { value: '1-10',     label: '1-10' },
+  { value: '11-50',    label: '11-50' },
+  { value: '51-200',   label: '51-200' },
+  { value: '201-1000', label: '201-1000' },
   { value: '1000+',    label: '1,000+' },
 ];
 
 const INTERESTS: { value: Interest; label: string; sub: string }[] = [
   { value: 'volume-pricing',   label: 'Volume pricing',          sub: 'monthly commits, lower platform fee' },
   { value: 'sla-terms',        label: 'Custom uptime / terms',   sub: 'tailored to your traffic shape' },
-  { value: 'security-review',  label: 'Security review',         sub: 'DPA, MSA, retention, sub-processors' },
+  { value: 'security-review',  label: 'Security review',         sub: 'DPA, MSA, retention, sub processors' },
   { value: 'csm',              label: 'Dedicated CSM',           sub: 'named contact + quarterly reviews' },
-  { value: 'budget-controls',  label: 'Team budget controls',    sub: 'caps, alerts, per-team reporting' },
+  { value: 'budget-controls',  label: 'Team budget controls',    sub: 'caps, alerts, per team reporting' },
   { value: 'other',            label: 'Something else',          sub: 'tell us in the message' },
 ];
 
@@ -107,7 +107,7 @@ export default function ContactSalesPage() {
             </p>
 
             <ul className="mt-10 flex flex-col gap-4 max-w-[480px]">
-              <Note label="WHO" body="Founding-team engineer + sales lead read every form. Same business day reply." />
+              <Note label="WHO" body="Founding team engineer + sales lead read every form. Same business day reply." />
               <Note label="WHAT" body="Volume pricing, custom uptime, security docs, CSM, budget controls." />
               <Note label="WHEN" body="Typical timeline: kickoff to production in three weeks." />
             </ul>

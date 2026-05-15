@@ -39,9 +39,9 @@ const SECTIONS: Section[] = [
           'Content, any material posted or accessed on the website, including code, data, text, graphics, images, applications, or software.',
           'Dataset, structured data collections used to train machine learning models.',
           'Eachlabs Inference, hosting platform for building, benchmarking, sharing, versioning, and deploying repositories containing Models, Datasets, and Applications.',
-          'Model, pre-trained machine learning models including algorithms and weights for predictions.',
+          'Model, pre trained machine learning models including algorithms and weights for predictions.',
           'Repository, data structure containing project files and revision history; can be public (viewable by all, editable only by the owner / organization) or private (restricted access).',
-          'Services, products and offerings including Open-Source Libraries, Inference API, AutoTrain, Expert Acceleration Program, Infinity, and Inference Endpoints.',
+          'Services, products and offerings including Open Source Libraries, Inference API, AutoTrain, Expert Acceleration Program, Infinity, and Inference Endpoints.',
         ],
       },
     ],
@@ -53,11 +53,11 @@ const SECTIONS: Section[] = [
       {
         kind: 'ul',
         items: [
-          'Open-Source Libraries (Transformers, Datasets, Tokenizers)',
+          'Open Source Libraries (Transformers, Datasets, Tokenizers)',
           'Public workflows for building and deploying Models and Applications',
           'Private workflows accessible only to user / organization',
           'Inference API Service for running inference on hosted models',
-          'AutoTrain premium service for creating state-of-the-art Models from custom training data',
+          'AutoTrain premium service for creating state of the art Models from custom training data',
           'Expert Acceleration Program providing premium support',
           'Infinity Service for optimized inference pipelines',
           'Hardware Partner Program for hardware-specific optimization',
@@ -111,12 +111,12 @@ const SECTIONS: Section[] = [
       { kind: 'h3', text: 'Granted licenses' },
       {
         kind: 'p',
-        text: 'By posting Content, users grant the company a worldwide, royalty-free, and non-exclusive license to use, display, publish, reproduce, distribute, and make derivative works of such Content to provide Services.',
+        text: 'By posting Content, users grant the company a worldwide, royalty free, and non exclusive license to use, display, publish, reproduce, distribute, and make derivative works of such Content to provide Services.',
       },
       { kind: 'h3', text: 'Public repository license' },
       {
         kind: 'p',
-        text: 'Setting a Repository public grants all users a perpetual, irrevocable, worldwide, royalty-free, non-exclusive license to use, display, publish, reproduce, distribute, and make derivative works of your Content.',
+        text: 'Setting a Repository public grants all users a perpetual, irrevocable, worldwide, royalty free, non exclusive license to use, display, publish, reproduce, distribute, and make derivative works of your Content.',
       },
       { kind: 'h3', text: 'Private repository protection' },
       {
@@ -132,11 +132,11 @@ const SECTIONS: Section[] = [
   },
   {
     id: 'ai-music',
-    title: 'AI-generated music and audio (non-commercial use only)',
+    title: 'AI generated music and audio (non commercial use only)',
     body: [
       {
         kind: 'p',
-        text: 'AI Music Features are provided strictly for non-commercial use unless expressly authorized in writing by Eachlabs.',
+        text: 'AI Music Features are provided strictly for non commercial use unless expressly authorized in writing by Eachlabs.',
       },
       { kind: 'h3', text: 'Prohibited commercial uses' },
       {
@@ -152,12 +152,12 @@ const SECTIONS: Section[] = [
       { kind: 'h3', text: 'No ownership rights' },
       {
         kind: 'p',
-        text: 'Eachlabs does not grant ownership rights, copyright interests, or commercial licenses in AI-generated outputs. Generated outputs may resemble existing works and are not guaranteed to be original or copyright-free.',
+        text: 'Eachlabs does not grant ownership rights, copyright interests, or commercial licenses in AI generated outputs. Generated outputs may resemble existing works and are not guaranteed to be original or copyright-free.',
       },
       { kind: 'h3', text: 'User responsibility and liability' },
       {
         kind: 'p',
-        text: 'Users are solely responsible for how AI-generated music or audio is used, shared, or distributed. Eachlabs assumes no liability for claims, disputes, damages, or losses arising from use, misuse, or distribution of AI-generated music or audio, including copyright or intellectual property claims. Use of AI Music Features is entirely at the user\'s own risk.',
+        text: 'Users are solely responsible for how AI generated music or audio is used, shared, or distributed. Eachlabs assumes no liability for claims, disputes, damages, or losses arising from use, misuse, or distribution of AI generated music or audio, including copyright or intellectual property claims. Use of AI Music Features is entirely at the user\'s own risk.',
       },
     ],
   },
@@ -183,12 +183,12 @@ const SECTIONS: Section[] = [
       { kind: 'h3', text: 'Billing' },
       {
         kind: 'p',
-        text: 'Plans are billed monthly in advance; usage-based fees are billed as incurred.',
+        text: 'Plans are billed monthly in advance; usage based fees are billed as incurred.',
       },
       { kind: 'h3', text: 'Payment processing' },
       {
         kind: 'p',
-        text: 'Payment is processed via third-party payment processors. The processor\'s agreement governs the designated account or credit card, not these Terms. By providing payment information, users authorize immediate invoicing for all due fees without additional notice or consent.',
+        text: 'Payment is processed via third party payment processors. The processor\'s agreement governs the designated account or credit card, not these Terms. By providing payment information, users authorize immediate invoicing for all due fees without additional notice or consent.',
       },
       { kind: 'h3', text: 'Non-refundable fees' },
       {
@@ -251,7 +251,7 @@ const SECTIONS: Section[] = [
       { kind: 'h3', text: 'Feedback license' },
       {
         kind: 'p',
-        text: 'If users provide feedback regarding the website, Services, or business functionality, they grant the company a perpetual, irrevocable, worldwide, royalty-free, and non-exclusive right and license to exploit and commercialize the Feedback and develop new offerings, which the company will solely own. The company may aggregate, anonymize, or learn from usage data, subject to the Privacy Policy.',
+        text: 'If users provide feedback regarding the website, Services, or business functionality, they grant the company a perpetual, irrevocable, worldwide, royalty free, and non exclusive right and license to exploit and commercialize the Feedback and develop new offerings, which the company will solely own. The company may aggregate, anonymize, or learn from usage data, subject to the Privacy Policy.',
       },
       { kind: 'h3', text: 'DMCA policy' },
       {
@@ -292,7 +292,7 @@ const SECTIONS: Section[] = [
     body: [
       {
         kind: 'p',
-        text: 'Users are solely and exclusively responsible for their Service use and agree to indemnify, defend, and hold harmless the company and Related Parties from all claims, liability, and expenses, including attorney\'s fees, arising out of or in connection with use of (or inability to use) the Services, including violations of Terms, law, or regulation, any user-posted Content or data, or any third-party use with user credentials. This does not apply to claims arising directly from Eachlabs\'s fraud, gross negligence, recklessness, or willful or criminal misconduct.',
+        text: 'Users are solely and exclusively responsible for their Service use and agree to indemnify, defend, and hold harmless the company and Related Parties from all claims, liability, and expenses, including attorney\'s fees, arising out of or in connection with use of (or inability to use) the Services, including violations of Terms, law, or regulation, any user-posted Content or data, or any third party use with user credentials. This does not apply to claims arising directly from Eachlabs\'s fraud, gross negligence, recklessness, or willful or criminal misconduct.',
       },
     ],
   },

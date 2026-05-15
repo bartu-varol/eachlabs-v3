@@ -53,8 +53,8 @@ export const USE_CASES: Record<UseCaseSlug, UseCaseDef> = {
     beforeAfter: [
       {
         anchor: 'Model goes down at 3 AM.',
-        without: 'On-call paged. App degrades. 47 minutes of broken videos.',
-        withus:  'Auto-fallback fires in 124ms. User latency unchanged.',
+        without: 'On call paged. App degrades. 47 minutes of broken videos.',
+        withus:  'Auto fallback fires in 124ms. User latency unchanged.',
       },
       {
         anchor: 'A free user generates 200 images.',
@@ -70,7 +70,7 @@ export const USE_CASES: Record<UseCaseSlug, UseCaseDef> = {
     fitTitle: 'Why consumer apps ship faster on each::labs.',
     fitPoints: [
       { n: '01', title: 'Sticky speed under load',  body: 'Router auto-spills to faster providers when p95 spikes, your users keep the snappy feel.' },
-      { n: '02', title: 'Per-user cost ceilings',   body: 'Tag user_id and tier. Cap free-tier spend automatically; never get surprised by abuse.' },
+      { n: '02', title: 'Per user cost ceilings',   body: 'Tag user_id and tier. Cap free-tier spend automatically; never get surprised by abuse.' },
       { n: '03', title: 'Built-in moderation',      body: 'Safety pre-checks before inference. Failover routes around content_moderation blocks.' },
       { n: '04', title: 'Same-day model swaps',     body: 'New model drops? Change one string. A/B it on 10%. Promote when significant.' },
     ],
@@ -164,7 +164,7 @@ export const USE_CASES: Record<UseCaseSlug, UseCaseDef> = {
     fitTitle: 'Internal apps without an ML platform team.',
     fitPoints: [
       { n: '01', title: 'SSO + RBAC on day 1',       body: 'Wire your IDP; we handle scopes per team. No homegrown auth glue.' },
-      { n: '02', title: 'Per-team cost views',       body: 'Tag with team_id; finance sees exactly what each function costs.' },
+      { n: '02', title: 'Per team cost views',       body: 'Tag with team_id; finance sees exactly what each function costs.' },
       { n: '03', title: 'Built-in retention controls', body: 'Set retention per workflow; sensitive prompts auto-purge.' },
       { n: '04', title: 'Composable workflows',      body: 'Slack bot? Internal gen UI? Same each(), six tools share one infra.' },
     ],
@@ -227,7 +227,7 @@ export const USE_CASES: Record<UseCaseSlug, UseCaseDef> = {
   'ad-tech': {
     slug: 'ad-tech',
     n: '05',
-    category: 'AD-TECH & GROWTH',
+    category: 'AD TECH & GROWTH',
     title: 'Programmatic ad creative',
     sub: 'Performance ads. Live A/B. Per-creative attribution.',
     body:
@@ -259,7 +259,7 @@ export const USE_CASES: Record<UseCaseSlug, UseCaseDef> = {
     fitPoints: [
       { n: '01', title: 'Per-creative attribution', body: 'Tag creative_id; pull conversion; we slice it back to cost-per-result.' },
       { n: '02', title: 'Live A/B with auto-promote', body: 'Set confidence threshold; winning variant ships itself.' },
-      { n: '03', title: 'Real-time spend visibility', body: 'Live cost feed sliced by campaign, surface, region, audience.' },
+      { n: '03', title: 'Real time spend visibility', body: 'Live cost feed sliced by campaign, surface, region, audience.' },
       { n: '04', title: 'Brand-safety gates',       body: 'Programmatic doesn’t mean unsafe. Moderation layer on every generated asset.' },
     ],
     story: {
@@ -306,8 +306,8 @@ export const USE_CASES: Record<UseCaseSlug, UseCaseDef> = {
     fitPoints: [
       { n: '01', title: 'Voice in 30+ languages',   body: 'One workflow, multi-locale VO with consistent character voice.' },
       { n: '02', title: 'Asset versioning',         body: 'Workflow versions = asset cohorts. Roll back a bad event in one click.' },
-      { n: '03', title: 'On-prem for sensitive IP', body: 'Enterprise plan supports VPC deploy with the same SDK and dashboard.' },
-      { n: '04', title: 'Live-event burst capacity', body: 'Router spills to high-throughput providers during seasonal spikes; back when calm.' },
+      { n: '03', title: 'On prem for sensitive IP', body: 'Enterprise plan supports VPC deploy with the same SDK and dashboard.' },
+      { n: '04', title: 'Live-event burst capacity', body: 'Router spills to high throughput providers during seasonal spikes; back when calm.' },
     ],
     story: {
       quote:

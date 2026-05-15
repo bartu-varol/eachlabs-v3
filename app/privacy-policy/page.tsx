@@ -39,7 +39,7 @@ const SECTIONS: Section[] = [
       { kind: 'h3', text: 'E. "Do Not Track"' },
       {
         kind: 'p',
-        text: 'The company honors do-not-track signals and does not track or use cookies when such mechanisms are active. California residents may request information about third-party disclosures by contacting support@eachlabs.ai.',
+        text: 'The company honors do-not-track signals and does not track or use cookies when such mechanisms are active. California residents may request information about third party disclosures by contacting support@eachlabs.ai.',
       },
     ],
   },
@@ -154,7 +154,7 @@ const SECTIONS: Section[] = [
   },
   {
     id: 'subprocessors',
-    title: '10. List of third-party service providers',
+    title: '10. List of third party service providers',
     body: [
       {
         kind: 'ul',

@@ -44,7 +44,7 @@ function templateFixedPrice(flow: FlowDetail): { headline: string; matched: bool
     for (let i = 0; i < flow.slug.length; i++) {
       h = (h * 31 + flow.slug.charCodeAt(i)) >>> 0;
     }
-    // 4¢ – 39¢ per step, varied per slug.
+    // 4¢ - 39¢ per step, varied per slug.
     const perStep = 0.04 + ((h % 36) / 100); // 0.04 → 0.39
     total = +(perStep * stepBaseline).toFixed(3);
   }
@@ -80,7 +80,7 @@ const MOCK_README: FlowReadmeData = {
   `,
   whatCanIUseFor: `
     <ul>
-      <li>Short-form social: TikTok / Reels / Shorts cinematic edits</li>
+      <li>Short form social: TikTok / Reels / Shorts cinematic edits</li>
       <li>Music-video teasers built around two-person chemistry</li>
       <li>Mood films, brand storytelling, festival submission proofs</li>
       <li>Wedding and anniversary keepsake reels from a single pair of stills</li>
@@ -102,7 +102,7 @@ const MOCK_README: FlowReadmeData = {
       <li><strong>Duration:</strong> 15s · <strong>Resolution:</strong> 720p · <strong>Aspect:</strong> 16:9</li>
       <li><strong>Audio:</strong> generated (voice + ambience + score)</li>
       <li><strong>Inputs:</strong> two image URLs (Person1, Person2), PNG / JPG / WebP</li>
-      <li><strong>Avg. runtime:</strong> ~90–120 seconds end-to-end</li>
+      <li><strong>Avg. runtime:</strong> ~90-120 seconds end to end</li>
     </ul>
   `,
   thingsToBeAwareOf: `

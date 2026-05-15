@@ -7,7 +7,7 @@ import { extractMediaUrl, pickExample } from '@/lib/modelOutput';
 import { HeroPreview } from './HeroPreview';
 
 /**
- * Examples gallery — wrappers carry id="example-N" so the Strengths card on
+ * Examples gallery, wrappers carry id="example-N" so the Strengths card on
  * the right can deep-link / sync hover with a specific example.
  *
  * Each event-driven state change (flash on click, ring on strengths hover)
@@ -75,7 +75,7 @@ function deriveCards(model: ModelDetail): CardData[] {
     return usable;
   }
 
-  // No example has a URL — fall back to pickExample (which checks the same
+  // No example has a URL, fall back to pickExample (which checks the same
   // outputs in a slightly looser way) and replicate.
   const picked = pickExample(model);
   if (!picked) return [];

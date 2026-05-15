@@ -160,7 +160,7 @@ type Props = {
   /**
    * When true, the outer wrapper fills its parent (w-full / h-full) and the
    * media stretches to cover. Use inside a parent grid cell that already
-   * controls width/height — e.g. the Examples gallery's resizing cells.
+   * controls width/height, e.g. the Examples gallery's resizing cells.
    */
   fillContainer?: boolean;
 };

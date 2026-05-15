@@ -259,7 +259,7 @@ export function BlogIndex({ posts }: Props) {
         <div className="mt-2">
           {filtered.length === 0 ? (
             <div className="py-24 text-center font-mono text-[12px] text-ink3 border-t border-rule">
-              No dispatches match — try a different category or search.
+              No dispatches match, try a different category or search.
             </div>
           ) : (
             <div>

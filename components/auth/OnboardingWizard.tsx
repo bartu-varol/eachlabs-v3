@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Wordmark } from '@/components/ui/Wordmark';
+import { EachColons } from '@/components/ui/EachColons';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { DotIcon, MinimizedWindow } from '@/components/auth/AuthTerminalShell';
 
@@ -25,8 +26,8 @@ const USE_CASES = [
 
 const TEAM_SIZES = [
   { id: 'solo',  label: 'Just me',      sub: 'Side project, prototype' },
-  { id: 'small', label: '2–10 people',  sub: 'Startup or small team' },
-  { id: 'mid',   label: '11–50 people', sub: 'Scaling org' },
+  { id: 'small', label: '2-10 people',  sub: 'Startup or small team' },
+  { id: 'mid',   label: '11-50 people', sub: 'Scaling org' },
   { id: 'large', label: '50+ people',   sub: 'Enterprise · talk to sales' },
 ];
 
@@ -651,7 +652,7 @@ function BoardingOnboarding() {
           <div className="relative flex items-center justify-between gap-4 px-6 sm:px-10 py-3.5 border-b border-dashed border-ink/20 dark:border-rule2 bg-ink text-bg">
             <div className="flex items-center gap-3 min-w-0">
               <span className="font-display text-[16px] sm:text-[17px] tracking-tightest font-semibold">
-                each<span className="text-spark">::</span>labs
+                each<EachColons />labs
               </span>
               <span className="text-bg/40">·</span>
               <span className="font-mono text-[10.5px] uppercase tracking-eyebrow text-bg/70 truncate">

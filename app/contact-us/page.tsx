@@ -92,7 +92,7 @@ export default function ContactUsPage() {
             <ul className="mt-10 flex flex-col gap-4 max-w-[480px]">
               <Note label="ANYONE" body="No password, no signup, no waitlist. Fill the form, hit send." />
               <Note label="ANYWHERE" body="Compliance, sales, billing, the API, your cat's opinion on AI, all welcome." />
-              <Note label="ANYTIME" body="Roughly one business day to reply. Sometimes faster, sometimes the on-call is napping." />
+              <Note label="ANYTIME" body="Roughly one business day to reply. Sometimes faster, sometimes the on call is napping." />
             </ul>
 
             <div className="mt-10 pt-8 border-t border-rule">

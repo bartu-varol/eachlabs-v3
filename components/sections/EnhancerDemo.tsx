@@ -11,14 +11,14 @@ import { AnimatePresence, motion } from 'framer-motion';
    output ships. Customer keeps the paid session; we get billed for the call.
 
    ~7-phase loop (~6.4s):
-     idle      0.0 – 0.4s   reset
-     check     0.4 – 1.1s   policy check on the original prompt
-     reject    1.1 – 2.0s   REJECTED stamp + strike-through
-     prompt    2.0 – 2.5s   "enhancer activated" indicator
-     rewrite   2.5 – 3.7s   rewritten prompt fades in with highlighted swap
-     recheck   3.7 – 4.3s   re-check on the rewritten prompt
-     approved  4.3 – 5.1s   APPROVED stamp + green check
-     ship      5.1 – 6.4s   output shipped + value chain footer
+     idle      0.0 - 0.4s   reset
+     check     0.4 - 1.1s   policy check on the original prompt
+     reject    1.1 - 2.0s   REJECTED stamp + strike-through
+     prompt    2.0 - 2.5s   "enhancer activated" indicator
+     rewrite   2.5 - 3.7s   rewritten prompt fades in with highlighted swap
+     recheck   3.7 - 4.3s   re-check on the rewritten prompt
+     approved  4.3 - 5.1s   APPROVED stamp + green check
+     ship      5.1 - 6.4s   output shipped + value chain footer
 ────────────────────────────────────────────────────────────────────────── */
 
 type Phase =
@@ -224,7 +224,7 @@ function PromptBox({ phase, variant }: { phase: Phase; variant: 'original' | 're
     );
   }
 
-  // Rewritten: tokens fade in left-to-right; the swap is highlighted.
+  // Rewritten: tokens fade in left to right; the swap is highlighted.
   const visible = phase === 'rewrite' || phase === 'recheck' || phase === 'approved' || phase === 'ship';
 
   return (

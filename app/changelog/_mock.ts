@@ -5,13 +5,13 @@ import type { ChangelogEntry } from '@/lib/changelog';
 export const MOCK_ENTRIES: ChangelogEntry[] = [
   {
     id: 'mock-2026-05-12-router',
-    title: 'Smarter router: latency-aware failover',
+    title: 'Smarter router: latency aware failover',
     link: 'https://docs.eachlabs.ai/changelog',
     description:
       'Cold-start cut by 38% on first-tier providers. The router now scores routes on observed p95 latency, not just availability.',
     publishedAt: 'Tue, 12 May 2026 09:00:00 GMT',
     contentHtml: `
-      <p>When the primary provider slips past your latency budget, the next-best path takes over without dropping the request. Retries respect provider-specific 429 backoff hints.</p>
+      <p>When the primary provider slips past your latency budget, the next best path takes over without dropping the request. Retries respect provider-specific 429 backoff hints.</p>
       <h3>Highlights</h3>
       <ul>
         <li>38% faster cold start on first-tier providers</li>

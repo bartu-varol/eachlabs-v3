@@ -622,7 +622,7 @@ function EnterpriseFAQ() {
           </div>
         </motion.div>
 
-        {/* Split layout matches homepage FAQ — pill rows + animated answer card */}
+        {/* Split layout matches homepage FAQ, pill rows + animated answer card */}
         <div className="mt-12 grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] gap-6 lg:gap-8">
           {/* Left, question list */}
           <div className="flex flex-col gap-1 lg:sticky lg:top-32 self-start">

@@ -2,9 +2,9 @@
 
 Two subdirectories, one per asset class:
 
-- `photos/` – square portrait of the person (one face per file), referenced by
+- `photos/` - square portrait of the person (one face per file), referenced by
   `lib/content.ts → customerStories.caseStudies[].avatar.photo`
-- `logos/` – company mark, referenced by `caseStudies[].logo.src`
+- `logos/` - company mark, referenced by `caseStudies[].logo.src`
 
 Assets here were copied/downloaded from the main eachlabs-web repo. To refresh
 or replace a single file, drop it in at the matching path; the card component

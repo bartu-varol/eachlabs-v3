@@ -85,7 +85,7 @@ export function ExploreShell({
 
   // Hide-on-scroll-down / show-on-scroll-up for the sticky filter bar.
   // We only allow hiding once the user has scrolled past the bar's natural
-  // bottom — otherwise the sticky element's reserved flow space is still
+  // bottom, otherwise the sticky element's reserved flow space is still
   // in view, and hiding the bar would expose an empty gap below the global
   // header. Small scroll deltas are ignored to avoid flicker on inertia /
   // trackpad scrolls.
@@ -239,7 +239,7 @@ export function ExploreShell({
         </div>
       </section>
 
-      {/* Sentinel: not sticky, so its in-document position never moves —
+      {/* Sentinel: not sticky, so its in-document position never moves,
           we use it to compute the filter bar's natural offsetTop. */}
       <div ref={filterSentinelRef} aria-hidden className="h-0" />
 
@@ -307,7 +307,7 @@ export function ExploreShell({
             // Keep this row empty so the sticky section keeps a consistent height.
             <div className="py-4">
               <div className="font-mono text-[11px] uppercase tracking-eyebrow text-ink3">
-                * AI WORKFLOWS · production-ready recipes
+                * AI WORKFLOWS · production ready recipes
               </div>
             </div>
           ) : tab === 'TRENDS' ? (

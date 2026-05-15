@@ -1,4 +1,8 @@
+'use client';
+
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { Film } from 'lucide-react';
 import type { RelatedModel } from '@/lib/modelDetail';
 
 type Props = { items: RelatedModel[] };
@@ -12,6 +16,47 @@ function runtimeLabel(seconds: number | null): string {
   if (!seconds) return '-';
   if (seconds < 60) return `${seconds}s`;
   return `${Math.round(seconds / 60)}m`;
+}
+
+function Thumb({ src, slug }: { src: string | null; slug: string }) {
+  const [failed, setFailed] = useState(false);
+
+  // Reset failure state when the src changes (different model card).
+  useEffect(() => {
+    setFailed(false);
+  }, [src]);
+
+  const showImage = !!src && !failed;
+
+  return (
+    <>
+      {showImage && (
+        /* eslint-disable-next-line @next/next/no-img-element */
+        <img
+          src={src}
+          alt=""
+          loading="lazy"
+          decoding="async"
+          onError={() => setFailed(true)}
+          onLoad={(e) => {
+            const img = e.currentTarget;
+            if (img.naturalWidth === 0 || img.naturalHeight === 0) {
+              setFailed(true);
+            }
+          }}
+          className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300"
+        />
+      )}
+      {!showImage && (
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 text-ink3">
+          <Film size={22} strokeWidth={1.4} />
+          <span className="font-mono text-[10px] uppercase tracking-eyebrow truncate max-w-[80%] text-center">
+            {slug}
+          </span>
+        </div>
+      )}
+    </>
+  );
 }
 
 export function ModelRelated({ items }: Props) {
@@ -35,14 +80,7 @@ export function ModelRelated({ items }: Props) {
             className="group bg-surface border border-rule2 rounded-md overflow-hidden hover:border-ink/40 transition-colors flex flex-col"
           >
             <div className="bg-surface2 aspect-[16/10] relative overflow-hidden">
-              {m.thumbnailUrl ? (
-                /* eslint-disable-next-line @next/next/no-img-element */
-                <img
-                  src={m.thumbnailUrl}
-                  alt=""
-                  className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300"
-                />
-              ) : null}
+              <Thumb src={m.thumbnailUrl} slug={m.slug} />
               <span className="absolute top-3 right-3 font-mono text-[10px] uppercase tracking-eyebrow text-ink2 bg-bg/80 backdrop-blur rounded-full px-2 py-0.5">
                 {runtimeLabel(m.averageResponseTime)}
               </span>
