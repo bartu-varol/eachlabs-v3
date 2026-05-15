@@ -6,7 +6,7 @@ export const MOCK_ENTRIES: ChangelogEntry[] = [
   {
     id: 'mock-2026-05-12-router',
     title: 'Smarter router: latency-aware failover',
-    link: 'https://docs.eachlabs.ai/updates/overview',
+    link: 'https://docs.eachlabs.ai/changelog',
     description:
       'Cold-start cut by 38% on first-tier providers. The router now scores routes on observed p95 latency, not just availability.',
     publishedAt: 'Tue, 12 May 2026 09:00:00 GMT',
@@ -23,7 +23,7 @@ export const MOCK_ENTRIES: ChangelogEntry[] = [
   {
     id: 'mock-2026-04-30-models',
     title: '80+ new image and video models',
-    link: 'https://docs.eachlabs.ai/updates/overview',
+    link: 'https://docs.eachlabs.ai/changelog',
     description:
       'Catalog adds new entries from open-weight image and video providers across photoreal, anime, and motion families.',
     publishedAt: 'Wed, 30 Apr 2026 14:30:00 GMT',
@@ -34,7 +34,7 @@ export const MOCK_ENTRIES: ChangelogEntry[] = [
   {
     id: 'mock-2026-04-18-nested-workflows',
     title: 'Nested workflows in beta',
-    link: 'https://docs.eachlabs.ai/updates/overview',
+    link: 'https://docs.eachlabs.ai/changelog',
     description:
       'A workflow step can now reference another workflow by ID. Outputs flow through as if the sub-workflow were a single step.',
     publishedAt: 'Fri, 18 Apr 2026 11:15:00 GMT',
@@ -51,7 +51,7 @@ export const MOCK_ENTRIES: ChangelogEntry[] = [
   {
     id: 'mock-2026-04-02-webhooks',
     title: 'Webhook delivery: stricter retries and signature rotation',
-    link: 'https://docs.eachlabs.ai/updates/overview',
+    link: 'https://docs.eachlabs.ai/changelog',
     description:
       'Failed webhooks now retry on a 1/5/30/180/720 minute schedule with jitter. Signing keys can rotate without dropping inflight deliveries.',
     publishedAt: 'Thu, 02 Apr 2026 16:00:00 GMT',
@@ -62,7 +62,7 @@ export const MOCK_ENTRIES: ChangelogEntry[] = [
   {
     id: 'mock-2026-03-15-pricing',
     title: 'Estimated price on every model card',
-    link: 'https://docs.eachlabs.ai/updates/overview',
+    link: 'https://docs.eachlabs.ai/changelog',
     description:
       'Each model now exposes a typical cost figure derived from the last 24 hours of production runs.',
     publishedAt: 'Sun, 15 Mar 2026 08:45:00 GMT',
