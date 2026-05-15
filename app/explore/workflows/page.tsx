@@ -6,20 +6,20 @@ import { exploreFaqs, exploreReadmeMd } from '@/lib/catalogFaq';
 import { fetchExploreData } from '@/lib/exploreData';
 
 export const metadata = {
-  title: 'Explore models · each::labs',
+  title: 'Workflow templates · each::labs',
   description:
-    'Every public AI model in the each::labs catalog, image, video, audio, text. Plus the workflow recipes that wire them up.',
+    'Pre-wired AI workflow templates from each::labs, fork into your account and ship production AI features in hours.',
 };
 
 export const revalidate = 60;
 
-export default async function ExplorePage() {
+export default async function ExploreWorkflowsPage() {
   const d = await fetchExploreData();
 
   return (
     <>
       <ExploreShell
-        initialTab="MODELS"
+        initialTab="WORKFLOWS"
         initialWorkflows={d.initialWorkflows}
         initialWorkflowOffset={d.initialWorkflowOffset}
         initialWorkflowTotal={d.initialWorkflowTotal}

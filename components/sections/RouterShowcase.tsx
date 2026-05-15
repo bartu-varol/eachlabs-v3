@@ -1,11 +1,12 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
-import { EachLabel } from '@/components/ui/EachLabel';
+import { ProductMark } from '@/components/ui/ProductMark';
 import { PointVisual } from '@/components/ui/PointVisual';
 import { PRODUCTS, type ProductPoint } from '@/lib/products';
 import { RouterDemo } from './RouterDemo';
@@ -83,18 +84,6 @@ export function RouterShowcase() {
                 }
               />
             </ul>
-
-            {/* Trusted by, quick social proof */}
-            <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-3">
-              <span className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3">
-                SHIPPED BY
-              </span>
-              {product.trustedBy.map((name) => (
-                <span key={name} className="font-mono text-[12px] text-ink2">
-                  {name}
-                </span>
-              ))}
-            </div>
           </motion.div>
 
           {/* RIGHT, live demo */}
@@ -247,9 +236,9 @@ export function RouterShowcase() {
               <div className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3">
                 PLATFORM
               </div>
-              <h3 className="font-display font-semibold text-[20px] text-ink">
-                <EachLabel name={pw.product} />
-              </h3>
+              <div className="h-[22px] flex items-center text-ink font-display font-semibold text-[20px]">
+                <ProductMark name={pw.product} />
+              </div>
               <p className="text-ink2 text-[13.5px] leading-[1.6] flex-1">{pw.body}</p>
               <span className="text-spark text-[12.5px] font-medium group-hover:underline underline-offset-4 inline-flex items-center gap-1.5">
                 Read more <ArrowRight size={13} />
@@ -434,8 +423,15 @@ function LiveConsoleFooter() {
   return (
     <div className="flex items-center justify-between px-5 md:px-6 py-2.5 border-t border-rule2 bg-surface/30 font-mono text-[10px] text-ink3 uppercase tracking-eyebrow">
       <span>region: us-east-1 · eu-west-1 · apac-1</span>
-      <span className="hidden sm:inline">
-        powered by <span className="text-ink2">each::router</span>
+      <span className="hidden sm:inline-flex items-center gap-1.5 normal-case tracking-normal">
+        <span>powered by</span>
+        <Image
+          src="/brand/each-router-logo.svg"
+          alt="each::router"
+          width={1527}
+          height={327}
+          className="h-[14px] w-auto translate-y-[1px]"
+        />
       </span>
     </div>
   );

@@ -33,7 +33,7 @@ export async function TemplatesStrip() {
           </p>
         </div>
         <Link
-          href="/templates"
+          href="/explore/workflows"
           className="self-start md:self-end inline-flex items-center gap-2 px-5 py-3 border border-rule2 rounded-md text-[13px] font-semibold text-ink hover:bg-surface hover:border-spark/40 transition-colors no-underline"
         >
           All templates <span aria-hidden>→</span>

@@ -144,8 +144,8 @@ export function llmFaqsFallback(model: LlmRouterModel): CatalogFaq[] {
   ];
 }
 
-export function exploreFaqs(modelCount: number, workflowCount: number): CatalogFaq[] {
-  const models = modelCount > 0 ? modelCount.toLocaleString() : '600+';
+export function exploreFaqs(workflowCount: number): CatalogFaq[] {
+  const models = '600+';
   const flows = workflowCount > 0 ? workflowCount.toLocaleString() : 'hundreds of';
   return [
     makeFaq('explore', null, 'What is the each::labs catalog?',

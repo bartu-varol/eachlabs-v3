@@ -388,6 +388,8 @@ function WhyEnterprise() {
    ─────────────────────────────────────────────────────────────────── */
 function SocialProof() {
   const { socialProof: sp } = enterprise;
+  const logos = customerStories.caseStudies.map((cs) => ({ ...cs.logo, role: cs.role }));
+  const marqueeRow = [...logos, ...logos, ...logos];
   return (
     <section className="relative border-t border-rule overflow-hidden">
       <div
@@ -398,7 +400,7 @@ function SocialProof() {
             'radial-gradient(ellipse 70% 50% at 50% 50%, rgb(var(--c-spark) / 0.06), transparent 70%)',
         }}
       />
-      <div className="container py-20 md:py-24 relative">
+      <div className="container pt-20 md:pt-24 relative">
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -419,28 +421,31 @@ function SocialProof() {
             {sp.body}
           </p>
         </motion.div>
+      </div>
 
-        {/* Customer logos row */}
-        <div className="mt-14 border-t border-b border-rule py-7">
-          <div className="flex flex-wrap items-center justify-center gap-x-10 md:gap-x-14 gap-y-6">
-            {customerStories.caseStudies.map((cs) => (
-              <span
-                key={cs.role}
-                className="inline-flex h-10 md:h-12 w-28 md:w-36 items-center justify-center text-ink3 hover:text-ink transition-colors"
-                aria-label={cs.logo.alt}
-              >
-                <Image
-                  src={cs.logo.src}
-                  alt={cs.logo.alt}
-                  width={cs.logo.width}
-                  height={cs.logo.height}
-                  className="customer-logo h-full w-full object-contain opacity-90"
-                  unoptimized
-                />
-                <span className="sr-only">{cs.role}</span>
-              </span>
-            ))}
-          </div>
+      {/* Customer logos row — full-width marquee */}
+      <div className="mt-14 border-t border-rule py-8 md:py-10 overflow-hidden relative">
+        <div className="absolute inset-y-0 left-0 w-24 md:w-40 bg-gradient-to-r from-[rgb(var(--c-bg))] to-transparent z-10 pointer-events-none" />
+        <div className="absolute inset-y-0 right-0 w-24 md:w-40 bg-gradient-to-l from-[rgb(var(--c-bg))] to-transparent z-10 pointer-events-none" />
+
+        <div className="flex items-center gap-12 md:gap-16 w-max animate-marquee" style={{ willChange: 'transform' }}>
+          {marqueeRow.map((logo, i) => (
+            <span
+              key={`${logo.alt}-${i}`}
+              className="inline-flex h-10 md:h-12 w-32 md:w-40 items-center justify-center text-ink3 hover:text-ink transition-colors shrink-0"
+              aria-label={logo.alt}
+            >
+              <Image
+                src={logo.src}
+                alt={logo.alt}
+                width={logo.width}
+                height={logo.height}
+                className="customer-logo h-full w-full object-contain opacity-90"
+                unoptimized
+              />
+              <span className="sr-only">{logo.role}</span>
+            </span>
+          ))}
         </div>
       </div>
     </section>
@@ -843,9 +848,6 @@ function FinalCta() {
               {finalCta.secondary.label}
             </Button>
           </div>
-          <p className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3 mt-8">
-            {finalCta.subtext}
-          </p>
         </div>
       </div>
     </section>

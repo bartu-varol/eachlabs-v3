@@ -6,20 +6,20 @@ import { exploreFaqs, exploreReadmeMd } from '@/lib/catalogFaq';
 import { fetchExploreData } from '@/lib/exploreData';
 
 export const metadata = {
-  title: 'Explore models · each::labs',
+  title: 'LLMs · each::labs',
   description:
-    'Every public AI model in the each::labs catalog, image, video, audio, text. Plus the workflow recipes that wire them up.',
+    'Every LLM available through the eachlabs-llm-router, one signature, one bill, automatic failover.',
 };
 
 export const revalidate = 60;
 
-export default async function ExplorePage() {
+export default async function ExploreLlmsPage() {
   const d = await fetchExploreData();
 
   return (
     <>
       <ExploreShell
-        initialTab="MODELS"
+        initialTab="LLMS"
         initialWorkflows={d.initialWorkflows}
         initialWorkflowOffset={d.initialWorkflowOffset}
         initialWorkflowTotal={d.initialWorkflowTotal}

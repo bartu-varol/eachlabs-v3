@@ -50,11 +50,51 @@ const ICON_CARDS: AssetCard[] = [
   { variant: 'light', src: '/brand/icon-light.svg', download: 'eachlabs-icon-on-light.svg' },
 ];
 
-const SENSE_CARD: AssetCard = {
-  variant: 'dark',
-  src: '/brand/each-sense-logo.svg',
-  download: 'each-sense-logo.svg',
+type ProductMark = {
+  slug: string;
+  name: string;
+  tagline: string;
+  cards: AssetCard[];
 };
+
+const PRODUCT_MARKS: ProductMark[] = [
+  {
+    slug: 'router',
+    name: 'each::router',
+    tagline: 'Quality-aware routing and automatic fallback.',
+    cards: [
+      { variant: 'dark',  src: '/brand/each-router-logo-dark.svg', download: 'each-router-logo-on-dark.svg'  },
+      { variant: 'light', src: '/brand/each-router-logo.svg',      download: 'each-router-logo-on-light.svg' },
+    ],
+  },
+  {
+    slug: 'trace',
+    name: 'each::trace',
+    tagline: 'Tag every call. Slice cost by anything.',
+    cards: [
+      { variant: 'dark',  src: '/brand/each-trace-logo-dark.svg',  download: 'each-trace-logo-on-dark.svg'   },
+      { variant: 'light', src: '/brand/each-trace-logo.svg',       download: 'each-trace-logo-on-light.svg'  },
+    ],
+  },
+  {
+    slug: 'sense',
+    name: 'each::sense',
+    tagline: 'The natural-language agent in front of the catalog.',
+    cards: [
+      { variant: 'dark',  src: '/brand/each-sense-logo-dark.svg',  download: 'each-sense-logo-on-dark.svg'   },
+      { variant: 'light', src: '/brand/each-sense-logo.svg',       download: 'each-sense-logo-on-light.svg'  },
+    ],
+  },
+  {
+    slug: 'workflows',
+    name: 'each::workflows',
+    tagline: 'A typed graph that chains models as one call.',
+    cards: [
+      { variant: 'dark',  src: '/brand/each-workflows-logo-dark.svg', download: 'each-workflows-logo-on-dark.svg'  },
+      { variant: 'light', src: '/brand/each-workflows-logo.svg',      download: 'each-workflows-logo-on-light.svg' },
+    ],
+  },
+];
 
 const DONTS: { rule: string; why: string }[] = [
   { rule: 'Don’t recolor the mark',  why: 'It’s ink on cream, or cream on ink. Spark for the eyes, not the wordmark.' },
@@ -140,14 +180,16 @@ export default function BrandPage() {
         </div>
       </BrandSection>
 
-      {/* 4. PRODUCT MARK, each::sense */}
+      {/* 4. PRODUCT MARKS · router · trace · sense · workflows */}
       <BrandSection
-        eyebrow="● PRODUCT MARK · EACH::SENSE"
-        title="The agent has its own mark."
-        body="each::sense is the natural language agent in front of the catalog. Its mark ships alongside the platform wordmark when sense is the named product."
+        eyebrow="● PRODUCT MARKS"
+        title="Each product gets its own mark."
+        body="Router, trace, sense and workflows ship alongside the platform wordmark when the named product is the subject. Same construction, same colon cadence, same two surfaces."
       >
-        <div className="grid grid-cols-1 md:max-w-[50%] gap-px bg-rule border border-rule rounded-md overflow-hidden">
-          <AssetTile card={SENSE_CARD} kind="wordmark" />
+        <div className="flex flex-col gap-px bg-rule border border-rule rounded-md overflow-hidden">
+          {PRODUCT_MARKS.map((p) => (
+            <ProductMarkRow key={p.slug} product={p} />
+          ))}
         </div>
       </BrandSection>
 
@@ -362,6 +404,29 @@ function AssetTile({ card, kind }: { card: AssetCard; kind: 'wordmark' | 'icon' 
           SVG
         </a>
       </div>
+    </div>
+  );
+}
+
+/* ── Product mark row, label + light + dark variant tiles ───────────── */
+
+function ProductMarkRow({ product }: { product: ProductMark }) {
+  return (
+    <div className="bg-surface grid grid-cols-1 md:grid-cols-[minmax(0,220px)_minmax(0,1fr)_minmax(0,1fr)] gap-px bg-rule">
+      <div className="bg-surface px-5 py-6 md:py-0 md:flex md:flex-col md:justify-center">
+        <div className="font-mono text-[10px] uppercase tracking-eyebrow text-spark">
+          ● {product.slug}
+        </div>
+        <div className="font-display font-semibold text-[18px] text-ink mt-2 leading-tight">
+          {product.name}
+        </div>
+        <div className="text-ink3 italic text-[12.5px] leading-snug mt-1.5">
+          {product.tagline}
+        </div>
+      </div>
+      {product.cards.map((card) => (
+        <AssetTile key={`${product.slug}-${card.variant}`} card={card} kind="wordmark" />
+      ))}
     </div>
   );
 }

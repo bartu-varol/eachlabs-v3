@@ -25,7 +25,7 @@ export function RouterAnatomy() {
         }}
       />
       <div className="container py-24 md:py-28 relative">
-        <div className="font-mono text-[11px] uppercase tracking-eyebrow text-highlight mb-3">
+        <div className="font-mono text-[11px] uppercase tracking-eyebrow text-spark mb-3">
           ● ANATOMY OF A FAILOVER
         </div>
         <h2 className="font-display font-semibold text-[32px] md:text-[44px] leading-[1.05] tracking-tightest text-ink max-w-[760px]">

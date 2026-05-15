@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
-import { EachLabel } from '@/components/ui/EachLabel';
+import { ProductMark } from '@/components/ui/ProductMark';
 import { PointVisual } from '@/components/ui/PointVisual';
 import { PRODUCTS, type ProductPoint } from '@/lib/products';
 import { AskSense } from './AskSense';
@@ -186,9 +186,9 @@ export function SenseShowcase() {
               <div className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3">
                 PLATFORM
               </div>
-              <h3 className="font-display font-semibold text-[20px] text-ink">
-                <EachLabel name={pw.product} />
-              </h3>
+              <div className="h-[22px] flex items-center text-ink font-display font-semibold text-[20px]">
+                <ProductMark name={pw.product} />
+              </div>
               <p className="text-ink2 text-[13.5px] leading-[1.6] flex-1">{pw.body}</p>
               <span className="text-spark text-[12.5px] font-medium group-hover:underline underline-offset-4 inline-flex items-center gap-1.5">
                 Read more <ArrowRight size={13} />

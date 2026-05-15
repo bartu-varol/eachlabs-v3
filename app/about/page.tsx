@@ -44,7 +44,7 @@ const TIMELINE = [
   },
   {
     year: '2026',
-    title: '1M+ requests / month',
+    title: '8M+ requests / month',
     body: 'Millions of requests routed across providers each month, with enterprise customers in production.',
   },
 ];
@@ -90,7 +90,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-2 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-rule">
             {[
               { v: '600+', l: 'models · one API' },
-              { v: '1M+',  l: 'requests / month' },
+              { v: '8M+',  l: 'requests / month' },
               { v: '10+',  l: 'production teams' },
               { v: '99.99%', l: 'uptime' },
             ].map((s, i) => (

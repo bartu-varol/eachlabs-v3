@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Search } from 'lucide-react';
+import { MonoSelect } from '@/components/ui/MonoSelect';
 import { WorkflowTile, WorkflowTileSkeleton } from './WorkflowTile';
 import {
   fetchWorkflowCategories,
@@ -171,30 +172,28 @@ export function WorkflowsShell({
 
         {/* Trends tab is hard-pinned to discovery=trending, no selector. */}
         {!isTrends && (
-          <select
+          <MonoSelect
+            label="Discovery"
             value={discovery}
-            onChange={(e) => setDiscovery(e.target.value as Discovery)}
-            className="bg-surface border border-rule2 rounded-md px-3 py-1.5 text-[12px] font-mono uppercase tracking-eyebrow text-ink2 focus:outline-none focus:border-spark"
-            aria-label="Discovery"
-          >
-            <option value="all">Discovery: All</option>
-            <option value="newest">Discovery: Newest</option>
-          </select>
+            onChange={(v) => setDiscovery(v as Discovery)}
+            ariaLabel="Discovery"
+            options={[
+              { value: 'all',    label: 'All' },
+              { value: 'newest', label: 'Newest' },
+            ]}
+          />
         )}
 
-        <select
+        <MonoSelect
+          label="Events"
           value={category}
-          onChange={(e) => setCategory(e.target.value)}
-          className="bg-surface border border-rule2 rounded-md px-3 py-1.5 text-[12px] font-mono uppercase tracking-eyebrow text-ink2 focus:outline-none focus:border-spark"
-          aria-label="Events"
-        >
-          <option value="all">Events: All</option>
-          {availableCategories.map((c) => (
-            <option key={c.slug} value={c.slug}>
-              Events: {c.label}
-            </option>
-          ))}
-        </select>
+          onChange={setCategory}
+          ariaLabel="Events"
+          options={[
+            { value: 'all', label: 'All' },
+            ...availableCategories.map((c) => ({ value: c.slug, label: c.label })),
+          ]}
+        />
 
         <span className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3 lg:ml-auto">
           {isTrends

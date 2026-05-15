@@ -106,7 +106,7 @@ export const hero = {
   bodyLead: '600+ AI models behind one API',
   /** Body rest, descriptive, with playful flair. */
   body:
-    '- the hyped ones, the cheap ones, the one that broke yesterday. We do the boring parts: retries when models go down, per user cost when finance asks, live A/B when product wants to ship. You write the call. We do the rest.',
+    '- the hyped ones, the cheap ones, the one that broke yesterday. We do the boring parts: retries when models go down, per user cost when finance asks. You write the call. We do the rest.',
   ctas: [
     { label: 'Start Building',         href: '/signup',  variant: 'primary'   as const },
     { label: 'Talk to an engineer (a real one)',   href: '/contact', variant: 'secondary' as const },
@@ -596,7 +596,7 @@ export const enterprise = {
       { label: 'Contact Sales', href: '/contact-sales', variant: 'secondary' as const },
     ],
     stats: [
-      { value: '1M+',     label: 'requests handled / month', sub: 'across hundreds of customer teams' },
+      { value: '8M+',     label: 'requests handled / month', sub: 'across hundreds of customer teams' },
       { value: '99.99%',  label: 'effective uptime',         sub: 'across the routed path' },
       { value: '<120ms',  label: 'failover overhead',        sub: 'before your user notices' },
       { value: '24/7',    label: 'engineer led support',     sub: 'no BDRs · no tier-1 queue' },

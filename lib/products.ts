@@ -105,8 +105,9 @@ const result = await each({
     providers: ['gpt-4o', 'Kling', 'Veo', 'FLUX', 'ElevenLabs', 'Suno'],
     trustedBy: ['NOVA', 'LUME', 'Helix', 'Maker', 'Forma'],
     pairsWith: [
-      { product: 'Router', body: 'Each node uses the router for fallbacks.', href: '/router' },
+      { product: 'Router',   body: 'Each node uses the router for fallbacks.', href: '/router' },
       { product: 'Enhancer', body: '12× fewer errors per node, automatically.', href: '/enhancer' },
+      { product: 'Sense',    body: 'sense builds the workflow; you keep version, rollback, and the trace.', href: '/each-sense' },
     ],
     ctaTitle: 'Build the pipeline once. Ship it from anywhere.',
     ctaBody: 'Workflows are free on every plan. Versioning, rollback, and visual editor are unlimited.',
@@ -163,7 +164,8 @@ const result = await each({
     trustedBy: ['LUME', 'Prism', 'Maker', 'Kairo', 'Ondra'],
     pairsWith: [
       { product: 'Workflows', body: 'Each workflow node uses the router for fallbacks.', href: '/workflows' },
-      { product: 'Enhancer', body: 'Different model, different failure surface, handled.', href: '/enhancer' },
+      { product: 'Enhancer',  body: 'Different model, different failure surface, handled.', href: '/enhancer' },
+      { product: 'Sense',     body: 'Every model sense picks runs through the router; spills happen for free.', href: '/each-sense' },
     ],
     ctaTitle: 'Stop writing retry loops. Start routing.',
     ctaBody: 'Router is included on every plan. Quality aware mode + custom fallback chains on Pro and up.',
@@ -220,8 +222,9 @@ const result = await each({
     providers: ['Kling', 'Veo', 'FLUX', 'ElevenLabs', 'Suno', 'gpt-4o'],
     trustedBy: ['StoryForge', 'NOVA', 'Maker', 'Aster', 'Forma'],
     pairsWith: [
-      { product: 'Router', body: 'Different model, different failure surface, handled.', href: '/router' },
+      { product: 'Router',    body: 'Different model, different failure surface, handled.', href: '/router' },
       { product: 'Workflows', body: 'Lower error rate on every node of every pipeline.', href: '/workflows' },
+      { product: 'Sense',     body: 'Prompts that sense ships get enhancer-polished on the way in, lower error rates.', href: '/each-sense' },
     ],
     ctaTitle: 'Stop debugging prompts. Start shipping reliable outputs.',
     ctaBody: 'Enhancer is free on every plan; schema-aware enhancement + per team learning on Pro and up.',

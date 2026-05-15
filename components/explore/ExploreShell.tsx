@@ -1,11 +1,13 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Search } from 'lucide-react';
 import { Pill } from '@/components/ui/Pill';
+import { MonoSelect } from '@/components/ui/MonoSelect';
 import { ModelTile } from './ModelTile';
 import { LlmTile } from './LlmTile';
 import { WorkflowsShell } from './WorkflowsShell';
+import { TabHero } from './TabHero';
 import {
   models as allModels,
   providers as allProviders,
@@ -15,6 +17,16 @@ import { llmRouterModels, getLlmRouterProviders } from '@/lib/llmRouter';
 import type { WorkflowCategory, WorkflowSummary } from '@/lib/workflows';
 
 type Tab = 'MODELS' | 'WORKFLOWS' | 'TRENDS' | 'LLMS';
+
+/** Each tab maps to its own deep-linkable URL. Tab clicks rewrite the URL
+ * via history.replaceState so the page never remounts, mirroring the
+ * eachlabs-web /explore pattern. */
+const TAB_PATHS: Record<Tab, string> = {
+  MODELS: '/explore',
+  WORKFLOWS: '/explore/workflows',
+  TRENDS: '/explore/trends',
+  LLMS: '/explore/llms',
+};
 
 /** Curated leading order so common categories sit on the left. */
 const CATEGORY_ORDER = [
@@ -69,7 +81,19 @@ export function ExploreShell({
   initialTrendsTotal,
   liveModelsCount,
 }: ExploreShellProps) {
-  const [tab, setTab] = useState<Tab>(initialTab);
+  const [tab, setTabState] = useState<Tab>(initialTab);
+
+  /** Tab switch keeps the page mounted (no router.push) but updates the URL
+   * so each tab stays deep-linkable. Mirrors eachlabs-web onTabChange. */
+  const setTab = useCallback((next: Tab) => {
+    setTabState((prev) => {
+      if (prev === next) return prev;
+      if (typeof window !== 'undefined') {
+        window.history.replaceState(null, '', TAB_PATHS[next]);
+      }
+      return next;
+    });
+  }, []);
 
   // Model filters
   const [query, setQuery] = useState('');
@@ -199,13 +223,22 @@ export function ExploreShell({
   const providersWithCount = useMemo(() => {
     const counts: Record<string, number> = {};
     for (const m of allModels) counts[m.providerSlug] = (counts[m.providerSlug] ?? 0) + 1;
-    return [...allProviders].sort((a, b) => (counts[b.slug] ?? 0) - (counts[a.slug] ?? 0));
+    return [...allProviders]
+      .sort((a, b) => (counts[b.slug] ?? 0) - (counts[a.slug] ?? 0))
+      .map((p) => ({ ...p, count: counts[p.slug] ?? 0 }));
   }, []);
 
   const visibleModels = showAll ? filteredModels : filteredModels.slice(0, PAGE_SIZE);
 
   return (
     <>
+      <TabHero
+        tab={tab}
+        workflowCount={initialWorkflowTotal}
+        trendsCount={initialTrendsTotal}
+        onSwitchTab={setTab}
+      />
+
       {/* Tabs */}
       <section className="container">
         <div role="tablist" aria-label="Explore tabs" className="flex items-end gap-6 border-b border-rule">
@@ -266,17 +299,21 @@ export function ExploreShell({
                     className="w-full bg-surface border border-rule2 rounded-md pl-10 pr-4 py-2 text-[14px] text-ink placeholder:text-ink3 focus:outline-none focus:border-spark"
                   />
                 </div>
-                <select
+                <MonoSelect
+                  label="Provider"
                   value={provider}
-                  onChange={(e) => setProvider(e.target.value)}
-                  className="bg-surface border border-rule2 rounded-md px-3 py-2 text-[12px] font-mono uppercase tracking-eyebrow text-ink2 focus:outline-none focus:border-spark sm:shrink-0"
-                  aria-label="Provider filter"
-                >
-                  <option value="ALL">All providers</option>
-                  {providersWithCount.map((p) => (
-                    <option key={p.slug} value={p.slug}>{p.name}</option>
-                  ))}
-                </select>
+                  onChange={setProvider}
+                  ariaLabel="Provider filter"
+                  className="sm:shrink-0"
+                  options={[
+                    { value: 'ALL', label: 'All providers', hint: allModels.length },
+                    ...providersWithCount.map((p) => ({
+                      value: p.slug,
+                      label: p.name,
+                      hint: p.count,
+                    })),
+                  ]}
+                />
               </div>
 
               {/* Row 2: category chip rail, uses the full container width. */}
@@ -328,17 +365,21 @@ export function ExploreShell({
                   className="w-full bg-surface border border-rule2 rounded-md pl-10 pr-4 py-2 text-[14px] text-ink placeholder:text-ink3 focus:outline-none focus:border-spark"
                 />
               </div>
-              <select
+              <MonoSelect
+                label="Provider"
                 value={llmProvider}
-                onChange={(e) => setLlmProvider(e.target.value)}
-                className="bg-surface border border-rule2 rounded-md px-3 py-2 text-[12px] font-mono uppercase tracking-eyebrow text-ink2 focus:outline-none focus:border-spark sm:shrink-0"
-                aria-label="LLM provider filter"
-              >
-                <option value="ALL">All providers</option>
-                {llmProviders.map((p) => (
-                  <option key={p.slug} value={p.slug}>{p.name}</option>
-                ))}
-              </select>
+                onChange={setLlmProvider}
+                ariaLabel="LLM provider filter"
+                className="sm:shrink-0"
+                options={[
+                  { value: 'ALL', label: 'All providers', hint: llmRouterModels.length },
+                  ...llmProviders.map((p) => ({
+                    value: p.slug,
+                    label: p.name,
+                    hint: p.count,
+                  })),
+                ]}
+              />
             </div>
           )}
         </div>

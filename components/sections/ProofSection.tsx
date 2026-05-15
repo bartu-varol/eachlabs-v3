@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import {
@@ -13,6 +14,13 @@ import { ArrowRight } from 'lucide-react';
 import { SCENARIOS, type Scenario } from '@/lib/scenarios';
 import { ChaosVisual } from './ChaosVisuals';
 import { EachColons } from '@/components/ui/EachColons';
+
+const EACH_PRODUCT_LOGOS: Record<string, { src: string; width: number; height: number }> = {
+  router:    { src: '/brand/each-router-logo.svg',    width: 1527, height: 327 },
+  trace:     { src: '/brand/each-trace-logo.svg',     width: 1411, height: 327 },
+  workflows: { src: '/brand/each-workflows-logo.svg', width: 1927, height: 327 },
+  sense:     { src: '/brand/each-sense-logo.svg',     width: 1517, height: 327 },
+};
 
 const CYCLE_MS = 5500;
 
@@ -317,23 +325,41 @@ export function ProofSection() {
               <div className="font-mono text-[11px] uppercase tracking-eyebrow text-success">
                 ✓ THE FIX
               </div>
-              <h3 className="font-display font-semibold text-[26px] sm:text-[30px] leading-[1.05] mt-3 text-ink">
-                {s.fix.feature.prefix &&
-                  (s.fix.feature.prefix.endsWith('::') ? (
-                    <>
-                      {s.fix.feature.prefix.slice(0, -2)}
-                      <EachColons />
-                    </>
-                  ) : (
-                    <span className="text-ink3">{s.fix.feature.prefix}</span>
-                  ))}
-                {s.fix.feature.name}
-                {s.fix.feature.tail && (
-                  <span className="text-ink3 italic font-normal text-[18px] sm:text-[20px] ml-2">
-                    ({s.fix.feature.tail})
-                  </span>
-                )}
-              </h3>
+              {s.fix.feature.prefix === 'each::' && EACH_PRODUCT_LOGOS[s.fix.feature.name] ? (
+                <div className="mt-3 flex items-center gap-3 flex-wrap">
+                  <Image
+                    src={EACH_PRODUCT_LOGOS[s.fix.feature.name].src}
+                    alt={`each::${s.fix.feature.name}`}
+                    width={EACH_PRODUCT_LOGOS[s.fix.feature.name].width}
+                    height={EACH_PRODUCT_LOGOS[s.fix.feature.name].height}
+                    priority
+                    className="h-[34px] sm:h-[38px] w-auto"
+                  />
+                  {s.fix.feature.tail && (
+                    <span className="text-ink3 italic font-normal text-[16px] sm:text-[18px]">
+                      ({s.fix.feature.tail})
+                    </span>
+                  )}
+                </div>
+              ) : (
+                <h3 className="font-display font-semibold text-[26px] sm:text-[30px] leading-[1.05] mt-3 text-ink">
+                  {s.fix.feature.prefix &&
+                    (s.fix.feature.prefix.endsWith('::') ? (
+                      <>
+                        {s.fix.feature.prefix.slice(0, -2)}
+                        <EachColons />
+                      </>
+                    ) : (
+                      <span className="text-ink3">{s.fix.feature.prefix}</span>
+                    ))}
+                  {s.fix.feature.name}
+                  {s.fix.feature.tail && (
+                    <span className="text-ink3 italic font-normal text-[18px] sm:text-[20px] ml-2">
+                      ({s.fix.feature.tail})
+                    </span>
+                  )}
+                </h3>
+              )}
               <div className="text-ink2 italic text-[14px] mt-2">{s.fix.tagline}</div>
               <p className="text-ink2 text-[14px] leading-relaxed mt-3 max-w-[480px]">
                 {s.fix.body}

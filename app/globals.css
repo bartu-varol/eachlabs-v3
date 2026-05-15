@@ -113,6 +113,17 @@ body {
   color: rgb(var(--c-bg));
 }
 
+/* Brand-mark SVGs use #060228 ink on transparent. invert + hue-rotate(180deg)
+   flips the dark glyph for dark mode while keeping the spark accent recognizable. */
+:root[data-theme="dark"] .product-mark-img {
+  filter: invert(1) hue-rotate(180deg);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .product-mark-img {
+    filter: invert(1) hue-rotate(180deg);
+  }
+}
+
 @layer utilities {
   .italic-spark {
     font-style: italic;
