@@ -3,28 +3,20 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Github, Loader2, Check } from 'lucide-react';
+import { RaisedBox } from '@/components/ui/RaisedBox';
 
 type Provider = 'github' | 'google';
 type Mode = 'signup' | 'signin';
-type Theme = 'default' | 'boarding';
 
 type Props = {
   mode: Mode;
   redirectTo?: string;
-  theme?: Theme;
 };
 
 const DEFAULT_DEST: Record<Mode, string> = {
   signin: '/',
   signup: '/onboarding',
 };
-
-const BOARDING_STEPS = [
-  'scanning boarding pass',
-  'verifying passenger',
-  'assigning seat',
-  'now boarding · gate 4',
-];
 
 const DEFAULT_STEPS_SIGNIN = ['signing you in', 'welcome back'];
 const DEFAULT_STEPS_SIGNUP = ['provisioning workspace', 'welcome aboard'];
@@ -52,19 +44,14 @@ function GoogleGlyph({ className = '' }: { className?: string }) {
   );
 }
 
-export function OAuthButtons({ mode, redirectTo, theme = 'default' }: Props) {
+export function OAuthButtons({ mode, redirectTo }: Props) {
   const router = useRouter();
   const [provider, setProvider] = useState<Provider | null>(null);
   const [stepIndex, setStepIndex] = useState(-1);
 
   const destination = redirectTo ?? DEFAULT_DEST[mode];
-  const steps =
-    theme === 'boarding'
-      ? BOARDING_STEPS
-      : mode === 'signin'
-        ? DEFAULT_STEPS_SIGNIN
-        : DEFAULT_STEPS_SIGNUP;
-  const stepInterval = theme === 'boarding' ? 620 : 520;
+  const steps = mode === 'signin' ? DEFAULT_STEPS_SIGNIN : DEFAULT_STEPS_SIGNUP;
+  const stepInterval = 520;
 
   function handleClick(p: Provider) {
     if (provider) return;
@@ -84,56 +71,58 @@ export function OAuthButtons({ mode, redirectTo, theme = 'default' }: Props) {
 
   if (provider) {
     return (
-      <div className="rounded-md border border-rule2 bg-surface p-4 animate-panel-in">
-        <div className="font-mono text-[10.5px] uppercase tracking-eyebrow text-ink3 mb-3 flex items-center justify-between">
-          <span>{theme === 'boarding' ? '* boarding in progress' : '* one moment'}</span>
-          <span className="text-ink3">via {provider}</span>
+      <RaisedBox padding="sm" className="animate-panel-in">
+        <div className="font-mono text-micro uppercase tracking-eyebrow text-ink-faint mb-3 flex items-center justify-between">
+          <span>* one moment</span>
+          <span className="text-ink-faint">via {provider}</span>
         </div>
         <ul className="space-y-1.5">
           {steps.map((s, i) => {
             if (i > stepIndex) return null;
             const isDone = i < stepIndex;
             return (
-              <li key={s} className="font-mono text-[13px] flex items-center gap-2 animate-panel-in">
+              <li key={s} className="font-mono text-body-sm flex items-center gap-2 animate-panel-in">
                 {isDone ? (
-                  <Check className="size-[14px] text-success shrink-0" strokeWidth={2.5} />
+                  <Check className="size-[14px] text-ok shrink-0" strokeWidth={2.5} />
                 ) : (
-                  <Loader2 className="size-[14px] text-spark animate-spin shrink-0" />
+                  <Loader2 className="size-[14px] text-brand animate-spin shrink-0" />
                 )}
-                <span className={isDone ? 'text-ink' : 'text-ink2'}>{s}</span>
-                {!isDone && <span className="text-ink3 ml-0.5 animate-pulse">…</span>}
+                <span className={isDone ? 'text-ink' : 'text-ink-muted'}>{s}</span>
+                {!isDone && <span className="text-ink-faint ml-0.5 animate-pulse">…</span>}
               </li>
             );
           })}
           {stepIndex >= steps.length && (
-            <li className="font-mono text-[12px] text-ink3 flex items-center gap-2 pt-1 animate-panel-in">
-              <span className="text-spark">↗</span>
+            <li className="font-mono text-caption text-ink-faint flex items-center gap-2 pt-1 animate-panel-in">
+              <span className="text-brand">↗</span>
               <span>redirecting to {destination}</span>
             </li>
           )}
         </ul>
-      </div>
+      </RaisedBox>
     );
   }
+
+  const ctaPrefix = mode === 'signin' ? 'Sign in with' : 'Sign up with';
 
   return (
     <div className="flex flex-col gap-3 w-full">
       <button
         type="button"
         onClick={() => handleClick('github')}
-        className="group w-full inline-flex items-center justify-center gap-3 h-12 rounded-md border border-rule2 bg-surface text-ink hover:bg-surface2 hover:border-rule transition-colors"
+        className="group w-full inline-flex items-center justify-center gap-3 h-12 rounded-md border border-field bg-surface-raised text-ink hover:bg-surface-sunken hover:border-divider transition-colors"
       >
         <Github className="size-[18px]" strokeWidth={1.6} />
-        <span className="text-[14px] font-medium">Continue with GitHub</span>
+        <span className="text-body font-medium">{ctaPrefix} GitHub</span>
       </button>
 
       <button
         type="button"
         onClick={() => handleClick('google')}
-        className="group w-full inline-flex items-center justify-center gap-3 h-12 rounded-md border border-rule2 bg-surface text-ink hover:bg-surface2 hover:border-rule transition-colors"
+        className="group w-full inline-flex items-center justify-center gap-3 h-12 rounded-md border border-field bg-surface-raised text-ink hover:bg-surface-sunken hover:border-divider transition-colors"
       >
         <GoogleGlyph className="size-[18px]" />
-        <span className="text-[14px] font-medium">Continue with Google</span>
+        <span className="text-body font-medium">{ctaPrefix} Google</span>
       </button>
     </div>
   );

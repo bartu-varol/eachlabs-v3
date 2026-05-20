@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { models as catalogModels, type CatalogModel } from '@/lib/catalog';
 import { ModelTile } from '@/components/explore/ModelTile';
+import { SectionHeader } from '@/components/ui/SectionHeader';
 
 /**
  * Curated homepage picks: top recommended models from the real catalog, deduped
@@ -51,7 +52,7 @@ export function ModelCatalog() {
   return (
     <section
       id="catalog"
-      className="container border-t border-rule py-24 md:py-32"
+      className="container border-t border-divider py-24 md:py-32"
     >
       {/* Header */}
       <motion.div
@@ -62,17 +63,15 @@ export function ModelCatalog() {
         transition={{ duration: 0.4, ease: 'easeOut' }}
       >
         <div className="max-w-[680px]">
-          <div className="font-mono text-[11px] uppercase tracking-eyebrow text-spark mb-4">
-            * THE CATALOG · 600+ MODELS
-          </div>
-          <h2 className="font-display font-semibold text-[40px] md:text-[64px] leading-[0.95] tracking-tightest">
-            <span className="block text-ink">Every model worth shipping.</span>
-            <span className="block text-ink3 italic">A few of the loud ones.</span>
-          </h2>
+          <SectionHeader
+            eyebrow="* THE CATALOG · 600+ MODELS"
+            headline="Every model worth shipping."
+            headlineSub="A few of the loud ones."
+          />
         </div>
         <Link
           href="/explore"
-          className="self-start md:self-end inline-flex items-center gap-2 px-5 py-3 border border-rule2 rounded-md text-[13px] font-semibold text-ink hover:bg-surface hover:border-spark/40 transition-colors"
+          className="self-start md:self-end inline-flex items-center gap-2 px-5 py-3 border border-field rounded-md text-body-sm font-semibold text-ink hover:bg-surface-raised hover:border-brand/40 transition-colors"
         >
           Browse all 600+ <span aria-hidden>→</span>
         </Link>
@@ -94,9 +93,9 @@ export function ModelCatalog() {
       </div>
 
       {/* Pro tip footer */}
-      <div className="mt-12 font-mono text-[10px] uppercase tracking-eyebrow text-ink3 text-center">
+      <div className="mt-12 font-mono text-micro uppercase tracking-eyebrow text-ink-faint text-center">
         PRO TIP · pin a version, swap providers without touching client code · missing one?{' '}
-        <Link href="/contact" className="text-spark hover:underline">
+        <Link href="/contact" className="text-brand hover:underline">
           request a model →
         </Link>
       </div>

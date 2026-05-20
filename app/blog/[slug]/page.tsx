@@ -109,14 +109,14 @@ export default async function BlogPostPage({
       <section className="container py-20 md:py-28">
       <Link
         href="/blog"
-        className="inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-eyebrow text-ink3 hover:text-ink transition-colors"
+        className="inline-flex items-center gap-1.5 font-mono text-eyebrow uppercase tracking-eyebrow text-ink-faint hover:text-ink transition-colors"
       >
         <ArrowLeft size={12} /> all dispatches
       </Link>
 
       <div className="mt-6 grid grid-cols-1 lg:grid-cols-[minmax(0,820px)_1fr_300px] gap-y-10 items-start">
         <article className="min-w-0 lg:col-start-1">
-          <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-mono text-[11px] uppercase tracking-eyebrow text-ink3">
+          <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 font-mono text-eyebrow uppercase tracking-eyebrow text-ink-faint">
             {post.primaryTag && (
               <>
                 <span>{post.primaryTag.name}</span>
@@ -132,18 +132,18 @@ export default async function BlogPostPage({
             )}
           </div>
 
-          <h1 className="font-display font-semibold text-[36px] sm:text-[52px] md:text-[64px] leading-[1.04] tracking-tightest mt-5 text-ink">
+          <h1 className="font-sans font-semibold text-h2 sm:text-display-lg md:text-hero leading-[1.04] tracking-tightest mt-5 text-ink">
             {post.title}
           </h1>
 
           {post.excerpt && (
-            <p className="text-ink2 text-[18px] leading-[1.55] mt-6 max-w-[680px] italic">
+            <p className="text-ink-muted text-h4 leading-[1.55] mt-6 max-w-[680px] italic">
               {post.excerpt}
             </p>
           )}
 
           {post.author && (
-            <div className="flex items-center gap-3 mt-8 pb-8 border-b border-rule">
+            <div className="flex items-center gap-3 mt-8 pb-8 border-b border-divider">
               {post.author.profileImage ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
@@ -154,15 +154,15 @@ export default async function BlogPostPage({
                   className="w-10 h-10 rounded-full object-cover flex-shrink-0"
                 />
               ) : (
-                <div className="w-10 h-10 rounded-full flex items-center justify-center text-[12.5px] font-medium flex-shrink-0 bg-spark/15 text-spark">
+                <div className="w-10 h-10 rounded-full flex items-center justify-center text-caption font-medium flex-shrink-0 bg-brand/15 text-brand">
                   {initialsFrom(post.author.name)}
                 </div>
               )}
               <div className="min-w-0">
-                <div className="text-ink text-[13.5px] font-medium leading-tight">
+                <div className="text-ink text-body-sm font-medium leading-tight">
                   {post.author.name}
                 </div>
-                <div className="text-ink3 text-[12px] mt-0.5 truncate">
+                <div className="text-ink-faint text-caption mt-0.5 truncate">
                   {post.author.bio ?? 'each::labs'}
                 </div>
               </div>
@@ -188,10 +188,10 @@ export default async function BlogPostPage({
 
           <AdjacentPosts previous={adjacent.previous} next={adjacent.next} />
 
-          <div className="mt-12 pt-10 border-t border-rule flex flex-wrap items-center gap-x-8 gap-y-3 font-mono text-[11px] uppercase tracking-eyebrow">
+          <div className="mt-12 pt-10 border-t border-divider flex flex-wrap items-center gap-x-8 gap-y-3 font-mono text-eyebrow uppercase tracking-eyebrow">
             <Link
               href="/blog"
-              className="inline-flex items-center gap-1.5 text-ink3 hover:text-ink transition-colors"
+              className="inline-flex items-center gap-1.5 text-ink-faint hover:text-ink transition-colors"
             >
               <ArrowLeft size={12} /> all dispatches
             </Link>
@@ -199,7 +199,7 @@ export default async function BlogPostPage({
               href="https://discord.gg/eachlabs"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-ink3 hover:text-spark hover:italic transition-colors"
+              className="inline-flex items-center gap-1.5 text-ink-faint hover:text-brand hover:italic transition-colors"
             >
               discuss in discord <ArrowRight size={12} />
             </a>

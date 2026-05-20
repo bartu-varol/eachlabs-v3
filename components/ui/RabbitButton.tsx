@@ -43,7 +43,7 @@ type Props = {
 };
 
 const baseStyles =
-  'relative inline-flex items-center justify-center px-5 py-3 rounded-md text-[14px] font-medium transition-colors duration-150 whitespace-nowrap bg-spark text-white hover:bg-ember';
+  'relative inline-flex items-center justify-center px-5 py-3 rounded-md text-body font-medium transition-colors duration-150 whitespace-nowrap bg-brand text-on-brand hover:bg-brand-deep';
 
 export function RabbitButton({
   href,

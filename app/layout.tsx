@@ -31,7 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeBootstrap }} />
       </head>
-      <body className="bg-bg text-ink font-sans">
+      <body className="bg-surface text-ink font-sans">
         <ChromeGuard>
           <Ticker />
           <Nav />

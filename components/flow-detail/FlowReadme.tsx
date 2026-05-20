@@ -1,3 +1,5 @@
+import { Eyebrow } from '@/components/ui/Eyebrow';
+
 export type FlowReadmeData = {
   overview: string | null;
   capabilities: string | null;
@@ -42,24 +44,20 @@ export function FlowReadme({ readme }: Props) {
   if (sections.length === 0) return null;
 
   return (
-    <div className="border border-rule2 rounded-md overflow-hidden">
-      <header className="px-5 py-3 border-b border-rule2 bg-surface/40 flex items-baseline justify-between">
-        <span className="font-mono text-[11px] uppercase tracking-eyebrow text-ink2">
-          Documentation
-        </span>
-        <span className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3">
-          {sections.length} sections
-        </span>
+    <div className="border border-field rounded-md overflow-hidden">
+      <header className="px-5 py-3 border-b border-field bg-surface-raised/40 flex items-baseline justify-between">
+        <Eyebrow as="span" tone="ink-muted">Documentation</Eyebrow>
+        <Eyebrow as="span" size="sm" tone="ink-faint">{sections.length} sections</Eyebrow>
       </header>
-      <ul className="divide-y divide-rule2">
+      <ul className="divide-y divide-field">
         {sections.map((s) => (
           <li key={s.id}>
             <details className="group">
-              <summary className="flex items-center justify-between gap-4 px-5 py-4 cursor-pointer select-none list-none hover:bg-surface/30 transition-colors">
-                <span className="text-[14px] font-medium text-ink">{s.label}</span>
+              <summary className="flex items-center justify-between gap-4 px-5 py-4 cursor-pointer select-none list-none hover:bg-surface-raised/30 transition-colors">
+                <span className="text-body font-medium text-ink">{s.label}</span>
                 <span
                   aria-hidden
-                  className="font-mono text-[14px] text-ink3 group-open:rotate-45 transition-transform"
+                  className="font-mono text-body text-ink-faint group-open:rotate-45 transition-transform"
                 >
                   +
                 </span>

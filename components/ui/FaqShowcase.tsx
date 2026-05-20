@@ -3,6 +3,7 @@
 import { ReactNode, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
+import { Eyebrow } from '@/components/ui/Eyebrow';
 
 export type FaqItem = {
   q: string;
@@ -47,21 +48,21 @@ function QuestionRow({
       {isActive && (
         <motion.span
           layoutId="faq-active"
-          className="absolute inset-0 bg-surface border border-spark/30 rounded-md"
+          className="absolute inset-0 bg-surface-raised border border-brand/30 rounded-md"
           transition={{ type: 'spring', stiffness: 380, damping: 32 }}
         />
       )}
       <div className="relative flex items-center gap-4 px-4 py-3.5">
         <span
-          className={`font-mono text-[11px] tabular-nums w-6 shrink-0 transition-colors ${
-            isActive ? 'text-spark' : 'text-ink3 group-hover:text-ink2'
+          className={`font-mono text-eyebrow tabular-nums w-6 shrink-0 transition-colors ${
+            isActive ? 'text-brand' : 'text-ink-faint group-hover:text-ink-muted'
           }`}
         >
           {String(index + 1).padStart(2, '0')}
         </span>
         <span
-          className={`flex-1 text-[14.5px] leading-snug transition-colors ${
-            isActive ? 'text-ink' : 'text-ink2 group-hover:text-ink'
+          className={`flex-1 text-body leading-snug transition-colors ${
+            isActive ? 'text-ink' : 'text-ink-muted group-hover:text-ink'
           }`}
         >
           {item.q}
@@ -71,7 +72,7 @@ function QuestionRow({
           animate={{
             opacity: isActive ? 1 : 0,
             x: isActive ? 0 : -4,
-            color: isActive ? 'rgb(var(--c-spark))' : 'rgb(var(--c-ink3))',
+            color: isActive ? 'rgb(var(--brand))' : 'rgb(var(--ink-faint))',
           }}
           transition={{ duration: 0.2 }}
         >
@@ -98,11 +99,11 @@ function AnswerPanel({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -8 }}
       transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-      className="relative bg-surface border border-rule2 rounded-md p-7 md:p-9 overflow-hidden"
+      className="relative bg-surface-raised border border-field rounded-md p-7 md:p-9 overflow-hidden"
     >
       <motion.div
         aria-hidden
-        className="absolute -top-20 -right-20 w-56 h-56 rounded-full bg-spark/10 blur-3xl pointer-events-none"
+        className="absolute -top-20 -right-20 w-56 h-56 rounded-full bg-brand/10 blur-3xl pointer-events-none"
         initial={{ opacity: 0, scale: 0.6 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.6 }}
@@ -110,18 +111,18 @@ function AnswerPanel({
 
       <div className="flex items-baseline justify-between mb-6 relative">
         <motion.div
-          className="font-mono text-[11px] uppercase tracking-eyebrow text-ink3 tabular-nums"
+          className="font-mono text-eyebrow uppercase tracking-eyebrow text-ink-faint tabular-nums"
           initial={{ opacity: 0, y: 4 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0.08 }}
         >
           {String(index + 1).padStart(2, '0')}{' '}
-          <span className="text-ink3/60">/</span>{' '}
-          <span className="text-ink3/60">{String(total).padStart(2, '0')}</span>
+          <span className="text-ink-faint/60">/</span>{' '}
+          <span className="text-ink-faint/60">{String(total).padStart(2, '0')}</span>
         </motion.div>
         {item.tag && (
           <motion.div
-            className="font-mono text-[10px] uppercase tracking-eyebrow text-spark"
+            className="font-mono text-micro uppercase tracking-eyebrow text-brand"
             initial={{ opacity: 0, y: 4 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: 0.14 }}
@@ -135,13 +136,13 @@ function AnswerPanel({
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.36, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
-        className="font-display font-semibold text-[24px] md:text-[30px] leading-[1.15] tracking-tightest text-ink"
+        className="font-sans font-semibold text-h3 md:text-h2 leading-[1.15] tracking-tightest text-ink"
       >
         {item.q}
       </motion.h3>
 
       <motion.div
-        className="h-px bg-spark/40 my-5 origin-left"
+        className="h-px bg-brand/40 my-5 origin-left"
         initial={{ scaleX: 0 }}
         animate={{ scaleX: 1 }}
         transition={{ duration: 0.5, delay: 0.34, ease: [0.16, 1, 0.3, 1] }}
@@ -151,7 +152,7 @@ function AnswerPanel({
         initial={{ opacity: 0, y: 6 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.34, delay: 0.42 }}
-        className="text-ink2 text-[15px] leading-[1.7] max-w-[640px]"
+        className="text-ink-muted text-body-lg leading-[1.7] max-w-[640px]"
       >
         {item.a}
       </motion.div>
@@ -174,7 +175,7 @@ export function FaqShowcase({
   const active = items[activeIdx] ?? items[0];
 
   return (
-    <section className="relative border-t border-rule py-24 md:py-32 overflow-hidden">
+    <section className="relative border-t border-divider py-24 md:py-32 overflow-hidden">
       {ambient && (
         <div aria-hidden className="absolute inset-0 pointer-events-none">
           {[
@@ -193,8 +194,8 @@ export function FaqShowcase({
                 transform: 'translate(-50%, -50%)',
                 background:
                   orb.tone === 'spark'
-                    ? 'rgb(var(--c-spark) / 0.05)'
-                    : 'rgb(var(--c-highlight) / 0.05)',
+                    ? 'rgb(var(--brand) / 0.05)'
+                    : 'rgb(var(--cobrand) / 0.05)',
               }}
               animate={{ y: [0, -16, 0], opacity: [0.7, 1, 0.7] }}
               transition={{
@@ -215,15 +216,13 @@ export function FaqShowcase({
           viewport={{ once: true, margin: '0px 0px -80px 0px' }}
           transition={{ duration: 0.4, ease: 'easeOut' }}
         >
-          <div className="font-mono text-[11px] uppercase tracking-eyebrow text-spark mb-6">
-            {eyebrow}
-          </div>
+          <Eyebrow className="mb-6">{eyebrow}</Eyebrow>
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-            <h2 className="font-display font-semibold text-[clamp(36px,5.5vw,72px)] tracking-tightest text-ink leading-[1.02]">
+            <h2 className="font-sans font-semibold text-[clamp(36px,5.5vw,72px)] tracking-tightest text-ink leading-[1.02]">
               {heading}
             </h2>
             {subtitle && (
-              <p className="italic text-ink3 text-[15px] md:max-w-[280px]">
+              <p className="italic text-ink-faint text-body-lg md:max-w-[280px]">
                 {subtitle}
               </p>
             )}
@@ -261,7 +260,7 @@ export function FaqShowcase({
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: 0.2 }}
-            className="italic text-ink3 text-[14px] text-center mt-14"
+            className="italic text-ink-faint text-body text-center mt-14"
           >
             {footer}
           </motion.div>

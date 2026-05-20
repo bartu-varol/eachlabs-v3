@@ -4,6 +4,8 @@ import { motion } from 'framer-motion';
 import { rabbitHole } from '@/lib/content';
 import { Button } from '@/components/ui/Button';
 import { RabbitButton } from '@/components/ui/RabbitButton';
+import { SectionHeader } from '@/components/ui/SectionHeader';
+import { Eyebrow } from '@/components/ui/Eyebrow';
 
 /* Vortex, concentric rotating rings + pulsing opacity, sits behind the headline. */
 function Vortex() {
@@ -26,7 +28,7 @@ function Vortex() {
       {rings.map((r, i) => (
         <motion.div
           key={i}
-          className={`absolute rounded-full border border-spark`}
+          className={`absolute rounded-full border border-brand`}
           style={{
             width: r.size,
             height: r.size,
@@ -46,13 +48,13 @@ function Vortex() {
 
       {/* Center spark glow */}
       <motion.div
-        className="absolute w-3 h-3 rounded-full bg-spark"
+        className="absolute w-3 h-3 rounded-full bg-brand"
         animate={{
           opacity: [0.6, 1, 0.6],
           boxShadow: [
-            '0 0 0 0 rgb(var(--c-spark) / 0.5)',
-            '0 0 24px 6px rgb(var(--c-spark) / 0.4)',
-            '0 0 0 0 rgb(var(--c-spark) / 0.5)',
+            '0 0 0 0 rgb(var(--brand) / 0.5)',
+            '0 0 24px 6px rgb(var(--brand) / 0.4)',
+            '0 0 0 0 rgb(var(--brand) / 0.5)',
           ],
         }}
         transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
@@ -63,7 +65,7 @@ function Vortex() {
 
 export function RabbitHole() {
   return (
-    <section className="border-t border-rule py-28 md:py-36 relative overflow-hidden">
+    <section className="border-t border-divider py-28 md:py-36 relative overflow-hidden">
       {/* Vortex behind everything */}
       <Vortex />
 
@@ -73,33 +75,23 @@ export function RabbitHole() {
         className="absolute inset-x-0 bottom-0 h-1/2 pointer-events-none"
         style={{
           background:
-            'linear-gradient(to bottom, transparent, rgb(var(--c-bg)) 65%)',
+            'linear-gradient(to bottom, transparent, rgb(var(--surface-raised)) 65%)',
         }}
       />
 
       <div className="container relative">
-        {/* Eyebrow */}
         <motion.div
-          className="font-mono text-[11px] uppercase tracking-eyebrow text-spark"
-          initial={{ opacity: 0, y: 6 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '0px 0px -80px 0px' }}
-          transition={{ duration: 0.4 }}
-        >
-          {rabbitHole.eyebrow}
-        </motion.div>
-
-        {/* Headline */}
-        <motion.h2
-          className="font-display font-semibold text-[40px] md:text-[64px] leading-[0.95] tracking-tightest mt-4"
           initial={{ opacity: 0, y: 8 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '0px 0px -80px 0px' }}
-          transition={{ duration: 0.45, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
         >
-          <span className="block text-ink">{rabbitHole.headline.line1}</span>
-          <span className="block text-ink3 italic">{rabbitHole.headline.line2}</span>
-        </motion.h2>
+          <SectionHeader
+            eyebrow={rabbitHole.eyebrow}
+            headline={rabbitHole.headline.line1}
+            headlineSub={rabbitHole.headline.line2}
+          />
+        </motion.div>
 
         {/* 3 doors, drop in stagger */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-12">
@@ -115,16 +107,14 @@ export function RabbitHole() {
                 ease: [0.16, 1, 0.3, 1],
               }}
               whileHover={{ y: -3 }}
-              className="bg-surface/90 backdrop-blur border border-rule2 rounded-md p-8 flex flex-col hover:border-spark/40 hover:bg-surface transition-colors duration-200"
+              className="bg-surface-raised/90 backdrop-blur border border-field rounded-md p-8 flex flex-col hover:border-brand/40 hover:bg-surface-raised transition-colors duration-200"
             >
-              <div className="font-mono text-[11px] uppercase tracking-eyebrow text-spark">
-                {card.eyebrow}
-              </div>
-              <h3 className="font-display font-semibold text-2xl mt-4 text-ink">
+              <Eyebrow>{card.eyebrow}</Eyebrow>
+              <h3 className="font-sans font-semibold text-2xl mt-4 text-ink">
                 {card.title}
               </h3>
-              <div className="text-ink2 italic text-[14px] mt-1">{card.subline}</div>
-              <p className="text-ink2 text-[14px] leading-relaxed mt-4">{card.body}</p>
+              <div className="text-ink-muted italic text-body mt-1">{card.subline}</div>
+              <p className="text-ink-muted text-body leading-relaxed mt-4">{card.body}</p>
               <div className="mt-auto pt-6">
                 {card.cta.style === 'primary' ? (
                   <RabbitButton
@@ -148,7 +138,7 @@ export function RabbitHole() {
 
         {/* Subtext */}
         <motion.p
-          className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3 text-center mt-12 relative"
+          className="font-mono text-micro uppercase tracking-eyebrow text-ink-faint text-center mt-12 relative"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}

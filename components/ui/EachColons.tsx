@@ -8,7 +8,7 @@ export function EachColons({ className = '' }: Props) {
       aria-hidden
       viewBox="0 0 14 14"
       fill="currentColor"
-      className={`inline-block text-spark align-baseline mx-[0.06em] ${className}`}
+      className={`inline-block text-brand align-baseline mx-[0.06em] ${className}`}
       style={{
         height: '0.62em',
         width: '0.59em',

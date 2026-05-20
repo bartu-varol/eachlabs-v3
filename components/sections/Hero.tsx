@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { hero } from '@/lib/content';
 import { Button } from '@/components/ui/Button';
+import { StatTile, StatGrid } from '@/components/ui/StatTile';
 import { HeroWidget } from './HeroWidget';
 
 export function Hero() {
@@ -11,14 +12,14 @@ export function Hero() {
         <div className="text-center lg:text-left">
           {/* Top pill, optional */}
           {hero.pill && (
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-4 gap-y-2 font-mono text-[11px] uppercase tracking-eyebrow">
-              <span className="text-spark">{hero.pill}</span>
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-x-4 gap-y-2 font-mono text-eyebrow uppercase tracking-eyebrow">
+              <span className="text-brand">{hero.pill}</span>
               {hero.pillCta && (
                 <>
-                  <span className="text-ink3">·</span>
+                  <span className="text-ink-faint">·</span>
                   <Link
                     href="#"
-                    className="text-ink2 hover:text-ink transition-colors normal-case tracking-normal"
+                    className="text-ink-muted hover:text-ink transition-colors normal-case tracking-normal"
                   >
                     {hero.pillCta}
                   </Link>
@@ -29,18 +30,18 @@ export function Hero() {
 
           {/* H1, "AI apps" gets a thick spark underline,
               "We handle" sits in muted ink3, "the chaos." in italic spark. */}
-          <h1 className="font-display font-semibold text-[44px] sm:text-[56px] md:text-[68px] lg:text-[72px] leading-[0.98] tracking-tightest mt-8 text-ink">
+          <h1 className="font-sans font-semibold text-display sm:text-display-lg md:text-hero lg:text-hero leading-[0.98] tracking-tightest mt-8 text-ink">
             <span className="block">
               Ship reliable <span className="hero-underline">AI apps</span>.
             </span>
             <span className="block">
-              <span className="text-ink3">We handle</span>{' '}
-              <em className="text-spark">the chaos.</em>
+              <span className="text-ink-faint">We handle</span>{' '}
+              <em className="text-brand">the chaos.</em>
             </span>
           </h1>
 
           {/* Body, big lead + descriptive rest */}
-          <p className="text-[15.5px] leading-[1.6] text-ink2 max-w-[560px] mx-auto lg:mx-0 mt-7">
+          <p className="text-body-lg leading-[1.6] text-ink-muted max-w-[560px] mx-auto lg:mx-0 mt-7">
             <strong className="text-ink font-semibold">{hero.bodyLead}</strong>{' '}
             {hero.body}
           </p>
@@ -55,20 +56,14 @@ export function Hero() {
           </div>
 
           {/* Stats, 4 numbers with cheeky sublines */}
-          <div className="mt-10 grid grid-cols-2 sm:grid-cols-4 gap-px bg-rule border border-rule rounded-md overflow-hidden max-w-[640px] mx-auto lg:mx-0">
+          <StatGrid columns={4} className="mt-10 max-w-[640px] mx-auto lg:mx-0">
             {hero.stats.map((s) => (
-              <div key={s.label} className="bg-surface px-4 py-4 text-left">
-                <div className="font-display font-semibold text-[22px] md:text-[24px] text-spark tabular-nums leading-none">
-                  {s.value}
-                </div>
-                <div className="text-ink text-[11px] mt-1.5 font-medium">{s.label}</div>
-                <div className="text-ink3 text-[10.5px] italic mt-0.5">{s.sub}</div>
-              </div>
+              <StatTile key={s.label} value={s.value} label={s.label} sub={s.sub} className="text-left" />
             ))}
-          </div>
+          </StatGrid>
 
           {/* Subtext */}
-          <p className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3 mt-7">
+          <p className="font-mono text-micro uppercase tracking-eyebrow text-ink-faint mt-7">
             {hero.subtext}
           </p>
         </div>

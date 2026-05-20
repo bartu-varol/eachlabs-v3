@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { askSense, type SenseAnswer } from '@/lib/content';
+import { Eyebrow } from '@/components/ui/Eyebrow';
 
 export function AskSense() {
   const [value, setValue] = useState('');
@@ -63,7 +64,7 @@ export function AskSense() {
     <section
       ref={sectionRef}
       id="ask-sense"
-      className="relative border-t border-rule overflow-hidden"
+      className="relative border-t border-divider overflow-hidden"
     >
       {/* Soft spark glow that bleeds down from the top edge as you scroll in */}
       <motion.div
@@ -72,7 +73,7 @@ export function AskSense() {
         style={{
           opacity: glowOpacity,
           background:
-            'radial-gradient(ellipse 60% 100% at 50% 0%, rgb(var(--c-spark) / 0.18), transparent 70%)',
+            'radial-gradient(ellipse 60% 100% at 50% 0%, rgb(var(--brand) / 0.18), transparent 70%)',
         }}
       />
 
@@ -84,14 +85,14 @@ export function AskSense() {
         style={{ opacity: bridgeOpacity }}
       >
         <motion.span
-          className="block w-[2px] h-24 bg-gradient-to-b from-transparent via-spark/60 to-spark origin-top rounded-full"
+          className="block w-[2px] h-24 bg-gradient-to-b from-transparent via-brand/60 to-brand origin-top rounded-full"
           style={{
             scaleY: bridgeScaleY,
-            boxShadow: '0 0 8px 1px rgb(var(--c-spark) / 0.5)',
+            boxShadow: '0 0 8px 1px rgb(var(--brand) / 0.5)',
           }}
         />
         <motion.span
-          className="font-mono text-[11px] uppercase tracking-eyebrow text-spark mt-3 whitespace-nowrap font-semibold"
+          className="font-mono text-eyebrow uppercase tracking-eyebrow text-brand mt-3 whitespace-nowrap font-semibold"
           animate={{ opacity: [0.7, 1, 0.7] }}
           transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
         >
@@ -103,24 +104,22 @@ export function AskSense() {
         className="container pt-48 md:pt-56 pb-32 md:pb-40 relative z-[5]"
         style={{ y: contentY, scale: contentScale, opacity: contentOpacity }}
       >
-      <div className="font-mono text-[11px] uppercase tracking-eyebrow text-spark">
-        {askSense.eyebrow}
-      </div>
+      <Eyebrow>{askSense.eyebrow}</Eyebrow>
 
-      <h3 className="font-display font-semibold text-[34px] md:text-[52px] leading-[0.98] tracking-tightest mt-3">
+      <h3 className="font-sans font-semibold text-h2 md:text-display-lg leading-[0.98] tracking-tightest mt-3">
         <span className="block text-ink">
           {askSense.headline.line1}{' '}
-          <em className="text-spark italic font-display">{askSense.headline.italic}</em>
+          <em className="text-brand italic font-sans">{askSense.headline.italic}</em>
         </span>
-        <span className="block text-ink3 italic">{askSense.headline.line2}</span>
+        <span className="block text-ink-faint">{askSense.headline.line2}</span>
       </h3>
 
-      <p className="text-ink2 text-[15px] leading-relaxed mt-5 max-w-[560px]">
+      <p className="text-ink-muted text-body-lg leading-relaxed mt-5 max-w-[560px]">
         {askSense.body.split('each::sense').map((part, i, arr) =>
           i < arr.length - 1 ? (
             <span key={i}>
               {part}
-              <code className="!bg-transparent !border-0 !p-0 text-spark">each::sense</code>
+              <code className="!bg-transparent !border-0 !p-0 text-brand">each::sense</code>
             </span>
           ) : (
             <span key={i}>{part}</span>
@@ -133,9 +132,9 @@ export function AskSense() {
           e.preventDefault();
           submit(value);
         }}
-        className="mt-8 bg-surface border border-rule2 rounded-md flex items-stretch overflow-hidden focus-within:border-spark/60 transition-colors"
+        className="mt-8 bg-surface-raised border border-field rounded-md flex items-stretch overflow-hidden focus-within:border-brand/60 transition-colors"
       >
-        <span className="pl-5 pr-3 self-center text-spark font-mono text-[16px]" aria-hidden>
+        <span className="pl-5 pr-3 self-center text-brand font-mono text-body-lg" aria-hidden>
           ›
         </span>
         <input
@@ -145,11 +144,11 @@ export function AskSense() {
           onChange={(e) => setValue(e.target.value)}
           placeholder={placeholder}
           aria-label="Ask the agent"
-          className="flex-1 bg-transparent py-4 pr-4 text-ink placeholder:text-ink3 text-[15px] outline-none"
+          className="flex-1 bg-transparent py-4 pr-4 text-ink placeholder:text-ink-faint text-body-lg outline-none"
         />
         <button
           type="submit"
-          className="px-5 md:px-7 bg-spark/15 text-spark hover:bg-spark hover:text-white transition-colors font-medium text-[14px] flex items-center gap-2 border-l border-rule2"
+          className="px-5 md:px-7 bg-brand/15 text-brand hover:bg-brand hover:text-on-brand transition-colors font-medium text-body flex items-center gap-2 border-l border-field"
         >
           Ask <ArrowRight size={14} />
         </button>
@@ -164,10 +163,10 @@ export function AskSense() {
               type="button"
               onClick={() => handleChip(c)}
               className={[
-                'px-4 py-2 rounded-full text-[13px] border transition-colors',
+                'px-4 py-2 rounded-full text-body-sm border transition-colors',
                 isActive
-                  ? 'bg-spark text-white border-spark'
-                  : 'bg-surface border-rule2 text-ink2 hover:text-ink hover:border-spark/40',
+                  ? 'bg-brand text-on-brand border-brand'
+                  : 'bg-surface-raised border-field text-ink-muted hover:text-ink hover:border-brand/40',
               ].join(' ')}
             >
               {c}
@@ -183,24 +182,22 @@ export function AskSense() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 6 }}
             transition={{ duration: 0.22, ease: 'easeOut' }}
-            className="mt-5 bg-surface border border-rule2 rounded-md p-5"
+            className="mt-5 bg-surface-raised border border-field rounded-md p-5"
           >
             <div className="flex items-center justify-between mb-3">
-              <span className="font-mono text-[11px] uppercase tracking-eyebrow text-spark">
-                * EACH::SENSE → ANSWER
-              </span>
+              <Eyebrow as="span">* EACH::SENSE → ANSWER</Eyebrow>
               <button
                 type="button"
                 onClick={reset}
-                className="font-mono text-[11px] text-ink3 hover:text-ink"
+                className="font-mono text-eyebrow text-ink-faint hover:text-ink"
               >
                 clear ↻
               </button>
             </div>
-            <p className="text-ink text-[15px] leading-relaxed">{answer.text}</p>
+            <p className="text-ink text-body-lg leading-relaxed">{answer.text}</p>
             <a
               href={answer.docHref}
-              className="inline-flex items-center gap-2 mt-4 text-spark text-[13px] font-medium hover:underline underline-offset-4"
+              className="inline-flex items-center gap-2 mt-4 text-brand text-body-sm font-medium hover:underline underline-offset-4"
             >
               {answer.docLabel} <ArrowRight size={14} />
             </a>
@@ -209,7 +206,7 @@ export function AskSense() {
       </AnimatePresence>
 
       {askSense.footnote && (
-        <p className="font-mono text-[11px] text-ink3 mt-6">{askSense.footnote}</p>
+        <p className="font-mono text-eyebrow text-ink-faint mt-6">{askSense.footnote}</p>
       )}
       </motion.div>
     </section>

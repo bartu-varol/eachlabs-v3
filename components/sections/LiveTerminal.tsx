@@ -24,25 +24,25 @@ const PREFIX: Record<LineKind, string> = {
 };
 
 const PREFIX_COLOR: Record<LineKind, string> = {
-  cmd:     'text-spark',
-  ok:      'text-success',
-  fail:    'text-fail',
-  warn:    'text-yellow',
-  info:    'text-ink2',
-  trace:   'text-spark',
-  data:    'text-highlight',
-  comment: 'text-ink3',
+  cmd:     'text-brand',
+  ok:      'text-ok',
+  fail:    'text-danger',
+  warn:    'text-caution',
+  info:    'text-ink-muted',
+  trace:   'text-brand',
+  data:    'text-cobrand',
+  comment: 'text-ink-faint',
 };
 
 const TEXT_COLOR: Record<LineKind, string> = {
   cmd:     'text-ink',
   ok:      'text-ink',
   fail:    'text-ink',
-  warn:    'text-ink2',
-  info:    'text-ink2',
-  trace:   'text-ink2',
+  warn:    'text-ink-muted',
+  info:    'text-ink-muted',
+  trace:   'text-ink-muted',
   data:    'text-ink',
-  comment: 'text-ink3 italic',
+  comment: 'text-ink-faint italic',
 };
 
 /* Per-product mock terminal scripts, each plays a believable production scene. */
@@ -93,7 +93,7 @@ export function LiveTerminal({ slug }: { slug: ProductDef['slug'] }) {
   const stagger = 0.85 / Math.max(1, lines.length); // % of cycle between lines
 
   return (
-    <div className="font-mono text-[12px] md:text-[12.5px] leading-[1.85] text-ink2 w-full">
+    <div className="font-mono text-caption md:text-caption leading-[1.85] text-ink-muted w-full">
       {lines.map((line, i) => {
         const showStart = i * stagger;
         // Times must be strictly increasing.
@@ -127,9 +127,9 @@ export function LiveTerminal({ slug }: { slug: ProductDef['slug'] }) {
 
       {/* Always-on blinking cursor at the end */}
       <div className="flex gap-3 mt-1">
-        <span className="text-spark shrink-0 w-3 select-none">$</span>
+        <span className="text-brand shrink-0 w-3 select-none">$</span>
         <motion.span
-          className="inline-block w-2 h-4 bg-spark"
+          className="inline-block w-2 h-4 bg-brand"
           animate={{ opacity: [1, 0, 1] }}
           transition={{ duration: 1.1, repeat: Infinity, ease: 'easeInOut' }}
           aria-hidden

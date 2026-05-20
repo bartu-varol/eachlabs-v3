@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { createPortal } from 'react-dom';
 import { Volume2, VolumeX } from 'lucide-react';
+import { Eyebrow } from '@/components/ui/Eyebrow';
 
 const IMAGE_RE = /^https?:\/\/\S+\.(png|jpe?g|webp|gif|avif)(\?|$)/i;
 const VIDEO_RE = /^https?:\/\/\S+\.(mp4|webm|mov|m4v)(\?|$)/i;
@@ -25,7 +26,7 @@ function ThumbHover({ url, type }: { url: string; type: 'image' | 'video' }) {
   const overlay = pos ? (
     <div
       style={{ position: 'fixed', left: pos.x, top: pos.y, zIndex: 9999, maxWidth: 480, maxHeight: 480 }}
-      className="pointer-events-none rounded-lg overflow-hidden ring-1 ring-white/20 shadow-[0_20px_50px_-10px_rgba(0,0,0,0.6)] bg-bg"
+      className="pointer-events-none rounded-lg overflow-hidden ring-1 ring-white/20 shadow-[0_20px_50px_-10px_rgba(0,0,0,0.6)] bg-surface"
     >
       {type === 'image' ? (
         /* eslint-disable-next-line @next/next/no-img-element */
@@ -96,12 +97,12 @@ function renderInputValue(value: unknown): ReactNode {
       );
     }
     return (
-      <span className="font-mono text-[12px] text-ink break-words">{`"${value}"`}</span>
+      <span className="font-mono text-caption text-ink break-words">{`"${value}"`}</span>
     );
   }
   if (Array.isArray(value)) {
     if (value.length === 0) {
-      return <span className="font-mono text-[12px] text-ink2">[]</span>;
+      return <span className="font-mono text-caption text-ink-muted">[]</span>;
     }
     return (
       <div className="flex flex-wrap gap-2">
@@ -112,18 +113,18 @@ function renderInputValue(value: unknown): ReactNode {
     );
   }
   if (typeof value === 'boolean' || typeof value === 'number' || value === null) {
-    return <span className="font-mono text-[12px] text-ink">{JSON.stringify(value)}</span>;
+    return <span className="font-mono text-caption text-ink">{JSON.stringify(value)}</span>;
   }
   if (value && typeof value === 'object') {
     const entries = Object.entries(value as Record<string, unknown>);
     if (entries.length === 0) {
-      return <span className="font-mono text-[12px] text-ink2">{'{}'}</span>;
+      return <span className="font-mono text-caption text-ink-muted">{'{}'}</span>;
     }
     return (
-      <div className="space-y-2 border-l border-rule2/50 pl-3">
+      <div className="space-y-2 border-l border-field/50 pl-3">
         {entries.map(([k, v]) => (
           <div key={k} className="flex flex-col gap-1">
-            <span className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3">{k}</span>
+            <Eyebrow as="span" size="sm" tone="ink-faint">{k}</Eyebrow>
             <div>{renderInputValue(v)}</div>
           </div>
         ))}
@@ -131,7 +132,7 @@ function renderInputValue(value: unknown): ReactNode {
     );
   }
   return (
-    <span className="font-mono text-[12px] text-ink break-words">{JSON.stringify(value)}</span>
+    <span className="font-mono text-caption text-ink break-words">{JSON.stringify(value)}</span>
   );
 }
 
@@ -221,7 +222,7 @@ export function HeroPreview({
     <div
       onMouseEnter={allowHover ? () => setHovering(true) : undefined}
       onMouseLeave={allowHover ? () => setHovering(false) : undefined}
-      className={`relative rounded-xl overflow-hidden bg-surface2 ${
+      className={`relative rounded-xl overflow-hidden bg-surface-sunken ${
         fillContainer
           ? 'w-full'
           : fullWidthKinds
@@ -259,10 +260,10 @@ export function HeroPreview({
               className="absolute inset-0 w-full h-full object-cover"
             />
           ) : (
-            <div className="absolute inset-0 bg-gradient-to-br from-surface2 via-surface to-surface2" />
+            <div className="absolute inset-0 bg-gradient-to-br from-surface-sunken via-surface-raised to-surface-sunken" />
           )}
           <div className="absolute inset-x-4 bottom-4 z-10">
-            <div className="rounded-lg bg-bg/85 backdrop-blur-md border border-rule2 px-3 py-2 shadow-[0_8px_24px_-10px_rgb(0,0,0,0.35)]">
+            <div className="rounded-lg bg-surface/85 backdrop-blur-md border border-field px-3 py-2 shadow-[0_8px_24px_-10px_rgb(0,0,0,0.35)]">
               <audio
                 ref={audioRef}
                 src={mediaUrl}
@@ -296,14 +297,14 @@ export function HeroPreview({
               className="absolute inset-0 w-full h-full object-cover"
             />
           ) : (
-            <div className="absolute inset-0 bg-gradient-to-br from-surface2 via-surface to-surface2" />
+            <div className="absolute inset-0 bg-gradient-to-br from-surface-sunken via-surface-raised to-surface-sunken" />
           )}
           <div className="absolute inset-x-4 top-12 bottom-4 z-10 flex">
-            <div className="flex flex-col w-full max-h-full rounded-lg bg-bg/85 backdrop-blur-md border border-rule2 shadow-[0_8px_24px_-10px_rgb(0,0,0,0.35)] overflow-hidden">
-              <div className="px-4 py-2 border-b border-rule2/60 font-mono text-[10px] uppercase tracking-eyebrow text-ink2 shrink-0">
+            <div className="flex flex-col w-full max-h-full rounded-lg bg-surface/85 backdrop-blur-md border border-field shadow-[0_8px_24px_-10px_rgb(0,0,0,0.35)] overflow-hidden">
+              <div className="px-4 py-2 border-b border-field/60 font-mono text-micro uppercase tracking-eyebrow text-ink-muted shrink-0">
                 Example output
               </div>
-              <pre className="font-mono text-[12px] leading-[1.55] text-ink px-4 py-3 whitespace-pre-wrap break-words overflow-auto flex-1">
+              <pre className="font-mono text-caption leading-[1.55] text-ink px-4 py-3 whitespace-pre-wrap break-words overflow-auto flex-1">
                 {typeof outputData === 'string'
                   ? (() => {
                       try {
@@ -329,7 +330,7 @@ export function HeroPreview({
           className="block max-w-full w-auto h-auto"
         />
       ) : (
-        <div className="absolute inset-0 flex items-center justify-center font-mono text-[11px] uppercase tracking-eyebrow text-ink3">
+        <div className="absolute inset-0 flex items-center justify-center font-mono text-eyebrow uppercase tracking-eyebrow text-ink-faint">
           preview unavailable
         </div>
       )}
@@ -340,7 +341,7 @@ export function HeroPreview({
           onClick={() => setPinned((p) => !p)}
           aria-pressed={pinned}
           aria-label="Show example input as JSON"
-          className={`absolute top-3 left-3 z-20 font-mono text-[10px] uppercase tracking-eyebrow px-2.5 py-1 rounded-full bg-bg/85 backdrop-blur text-ink2 hover:text-ink hover:bg-bg transition-opacity duration-150 ${
+          className={`absolute top-3 left-3 z-20 font-mono text-micro uppercase tracking-eyebrow px-2.5 py-1 rounded-full bg-surface/85 backdrop-blur text-ink-muted hover:text-ink hover:bg-surface transition-opacity duration-150 ${
             show ? 'opacity-0 pointer-events-none' : 'opacity-100'
           }`}
         >
@@ -350,7 +351,7 @@ export function HeroPreview({
 
       {inferenceTime != null && (
         <span
-          className={`absolute top-3 right-3 z-20 font-mono text-[10px] uppercase tracking-eyebrow text-ink2 bg-bg/85 backdrop-blur rounded-full px-2.5 py-1 transition-opacity duration-150 ${
+          className={`absolute top-3 right-3 z-20 font-mono text-micro uppercase tracking-eyebrow text-ink-muted bg-surface/85 backdrop-blur rounded-full px-2.5 py-1 transition-opacity duration-150 ${
             show ? 'opacity-0 pointer-events-none' : 'opacity-100'
           }`}
         >
@@ -364,7 +365,7 @@ export function HeroPreview({
           onClick={toggleMute}
           aria-pressed={!muted}
           aria-label={muted ? 'Unmute video' : 'Mute video'}
-          className="absolute bottom-3 right-3 z-30 inline-flex items-center justify-center w-9 h-9 rounded-full bg-bg/90 backdrop-blur text-ink2 hover:text-ink hover:bg-bg transition-colors border border-rule2"
+          className="absolute bottom-3 right-3 z-30 inline-flex items-center justify-center w-9 h-9 rounded-full bg-surface/90 backdrop-blur text-ink-muted hover:text-ink hover:bg-surface transition-colors border border-field"
         >
           {muted ? <VolumeX size={15} /> : <Volume2 size={15} />}
         </button>
@@ -372,26 +373,26 @@ export function HeroPreview({
 
       <div
         aria-hidden={!show || !showInputOverlay}
-        className={`absolute inset-0 z-10 bg-bg/45 backdrop-blur-md transition-opacity duration-200 flex flex-col ${
+        className={`absolute inset-0 z-10 bg-surface/45 backdrop-blur-md transition-opacity duration-200 flex flex-col ${
           show && showInputOverlay ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
       >
         <header className="px-4 py-2.5 flex items-center justify-between shrink-0">
-          <span className="font-mono text-[11px] uppercase tracking-eyebrow text-ink font-medium drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
+          <span className="font-mono text-eyebrow uppercase tracking-eyebrow text-ink font-medium drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
             Example input
           </span>
           {pinned ? (
             <button
               type="button"
               onClick={() => setPinned(false)}
-              className="font-mono text-[10px] uppercase tracking-eyebrow text-ink hover:opacity-80 transition-opacity inline-flex items-center gap-1 drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]"
+              className="font-mono text-micro uppercase tracking-eyebrow text-ink hover:opacity-80 transition-opacity inline-flex items-center gap-1 drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]"
               aria-label="Close input panel"
             >
               <span aria-hidden>×</span>
               <span>close</span>
             </button>
           ) : (
-            <span className="font-mono text-[10px] uppercase tracking-eyebrow text-ink drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
+            <span className="font-mono text-micro uppercase tracking-eyebrow text-ink drop-shadow-[0_1px_2px_rgba(0,0,0,0.6)]">
               hover
             </span>
           )}
@@ -400,7 +401,7 @@ export function HeroPreview({
           const parsedInput = parseInputJson(inputJson);
           if (!parsedInput) {
             return (
-              <pre className="font-mono text-[12.5px] leading-[1.55] text-ink p-4 overflow-auto flex-1 whitespace-pre-wrap break-words">
+              <pre className="font-mono text-caption leading-[1.55] text-ink p-4 overflow-auto flex-1 whitespace-pre-wrap break-words">
                 {inputJson}
               </pre>
             );
@@ -412,7 +413,7 @@ export function HeroPreview({
                   key={key}
                   className="grid grid-cols-[120px_minmax(0,1fr)] gap-3 items-start"
                 >
-                  <dt className="font-mono text-[10px] uppercase tracking-eyebrow text-ink2 pt-1.5 break-words">
+                  <dt className="font-mono text-micro uppercase tracking-eyebrow text-ink-muted pt-1.5 break-words">
                     {key}
                   </dt>
                   <dd className="min-w-0">{renderInputValue(value)}</dd>

@@ -56,7 +56,7 @@ export function ThemeToggle() {
       aria-label={`Theme: ${label}. Click to cycle.`}
       title={`Theme: ${label}`}
       suppressHydrationWarning
-      className="inline-flex items-center justify-center w-10 h-10 border border-rule2 rounded-md text-ink2 hover:text-ink hover:bg-surface transition-colors"
+      className="inline-flex items-center justify-center w-10 h-10 border border-field rounded-md text-ink-muted hover:text-ink hover:bg-surface-raised transition-colors"
     >
       {mounted ? <Icon size={16} strokeWidth={2} /> : <span className="w-4 h-4" />}
     </button>

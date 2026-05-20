@@ -9,6 +9,7 @@ import {
 import { ReadmeSection } from '@/components/explore/ReadmeSection';
 import { FaqSection } from '@/components/explore/FaqSection';
 import { llmFaqsFallback, llmReadmeMarkdown } from '@/lib/catalogFaq';
+import { Eyebrow } from '@/components/ui/Eyebrow';
 
 type Params = { slug: string };
 
@@ -79,33 +80,29 @@ console.log(result.output);
   return (
     <>
       <section className="container py-12 md:py-16">
-      <div className="font-mono text-[11px] uppercase tracking-eyebrow text-ink3 mb-6">
+      <div className="font-mono text-eyebrow uppercase tracking-eyebrow text-ink-faint mb-6">
         <Link
           href="/explore?tab=llms"
-          className="text-ink3 hover:text-ink no-underline"
+          className="text-ink-faint hover:text-ink no-underline"
         >
           ← Explore · LLMs
         </Link>
       </div>
 
-      <header className="flex flex-col gap-4 mb-10 pb-10 border-b border-rule">
+      <header className="flex flex-col gap-4 mb-10 pb-10 border-b border-divider">
         <div className="flex flex-wrap items-center gap-2">
-          <span className="font-mono text-[11px] uppercase tracking-eyebrow font-semibold px-2.5 py-1 rounded-md bg-surface2 text-ink2">
+          <span className="font-mono text-eyebrow uppercase tracking-eyebrow font-semibold px-2.5 py-1 rounded-md bg-surface-sunken text-ink-muted">
             {model.providerName}
           </span>
           {model.familySlug && (
-            <span className="font-mono text-[11px] uppercase tracking-eyebrow text-ink3 px-2.5 py-1 rounded-md border border-rule2">
-              {model.familySlug}
-            </span>
+            <Eyebrow as="span" tone="ink-faint" className="px-2.5 py-1 rounded-md border border-field">{model.familySlug}</Eyebrow>
           )}
-          <span className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3 ml-auto">
-            via eachlabs-llm-router
-          </span>
+          <Eyebrow as="span" size="sm" tone="ink-faint" className="ml-auto">via eachlabs-llm-router</Eyebrow>
         </div>
-        <h1 className="font-display font-semibold text-[clamp(36px,5vw,56px)] leading-[1.05] tracking-[-0.025em] text-ink">
+        <h1 className="font-sans font-semibold text-[clamp(36px,5vw,56px)] leading-[1.05] tracking-[-0.025em] text-ink">
           {model.name}
         </h1>
-        <p className="max-w-2xl text-[15px] leading-[1.6] text-ink2">
+        <p className="max-w-2xl text-body-lg leading-[1.6] text-ink-muted">
           {model.name} is available through the eachlabs LLM Router. The router
           handles authentication, retries, and provider fallback so you can
           target this model with a single API surface, no per-provider SDK
@@ -121,24 +118,24 @@ console.log(result.output);
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-10">
         <div className="flex flex-col gap-8 min-w-0">
           <section>
-            <h2 className="font-display text-[22px] font-semibold tracking-[-0.02em] text-ink mb-4">
+            <h2 className="font-sans text-h3 font-semibold tracking-[-0.02em] text-ink mb-4">
               Call it from cURL
             </h2>
             <CodeBlock code={curlExample} language="sh" filename="request.sh" />
           </section>
 
           <section>
-            <h2 className="font-display text-[22px] font-semibold tracking-[-0.02em] text-ink mb-4">
+            <h2 className="font-sans text-h3 font-semibold tracking-[-0.02em] text-ink mb-4">
               Call it from TypeScript
             </h2>
             <CodeBlock code={tsExample} language="ts" filename="route.ts" />
           </section>
 
           <section>
-            <h2 className="font-display text-[22px] font-semibold tracking-[-0.02em] text-ink mb-4">
+            <h2 className="font-sans text-h3 font-semibold tracking-[-0.02em] text-ink mb-4">
               Why route?
             </h2>
-            <ul className="space-y-2 text-[14.5px] leading-[1.6] text-ink2 list-disc pl-5">
+            <ul className="space-y-2 text-body leading-[1.6] text-ink-muted list-disc pl-5">
               <li>One key, one endpoint, swap models without rotating SDKs.</li>
               <li>
                 Automatic retries and provider failover when {model.providerName}{' '}
@@ -151,24 +148,22 @@ console.log(result.output);
         </div>
 
         <aside className="flex flex-col gap-6 min-w-0">
-          <div className="border border-rule2 rounded-lg p-5">
-            <div className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3 mb-3">
-              More from {model.providerName}
-            </div>
+          <div className="border border-field rounded-lg p-5">
+            <Eyebrow size="sm" tone="ink-faint" className="mb-3">More from {model.providerName}</Eyebrow>
             {related.length === 0 ? (
-              <p className="text-[13px] text-ink3">No siblings.</p>
+              <p className="text-body-sm text-ink-faint">No siblings.</p>
             ) : (
-              <ul className="flex flex-col divide-y divide-rule2">
+              <ul className="flex flex-col divide-y divide-field">
                 {related.map((r) => (
                   <li key={r.routerSlug}>
                     <Link
                       href={`/explore/llms/${r.urlSlug}`}
                       className="block py-2.5 no-underline group"
                     >
-                      <div className="text-[13.5px] font-semibold text-ink group-hover:text-spark transition-colors">
+                      <div className="text-body-sm font-semibold text-ink group-hover:text-brand transition-colors">
                         {r.name}
                       </div>
-                      <div className="font-mono text-[10.5px] text-ink3 truncate">
+                      <div className="font-mono text-micro text-ink-faint truncate">
                         {r.routerSlug}
                       </div>
                     </Link>
@@ -206,12 +201,12 @@ function DetailStat({
   mono?: boolean;
 }) {
   return (
-    <div className="border border-rule2 rounded-md px-4 py-3 min-w-0">
-      <dt className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3 mb-1">
+    <div className="border border-field rounded-md px-4 py-3 min-w-0">
+      <dt className="font-mono text-micro uppercase tracking-eyebrow text-ink-faint mb-1">
         {label}
       </dt>
       <dd
-        className={`text-[13.5px] text-ink truncate ${
+        className={`text-body-sm text-ink truncate ${
           mono ? 'font-mono' : 'font-medium'
         }`}
         title={value}

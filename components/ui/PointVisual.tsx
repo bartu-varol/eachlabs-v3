@@ -12,7 +12,7 @@ function Rings() {
       {[0, 4, 8].map((inset, i) => (
         <motion.span
           key={i}
-          className="absolute rounded-full border border-spark/40"
+          className="absolute rounded-full border border-brand/40"
           style={{ inset: `${inset}px` }}
           animate={{ scale: [1, 1.15, 1], opacity: [0.4, 0.9, 0.4] }}
           transition={{
@@ -30,13 +30,13 @@ function Rings() {
 function Flow() {
   return (
     <svg viewBox="0 0 60 16" className="w-[60px] h-4">
-      <line x1="2" y1="8" x2="58" y2="8" stroke="rgb(var(--c-rule2))" strokeWidth="1" />
+      <line x1="2" y1="8" x2="58" y2="8" stroke="rgb(var(--field))" strokeWidth="1" />
       <motion.circle
-        cy="8" r="2" fill="rgb(var(--c-spark))"
+        cy="8" r="2" fill="rgb(var(--brand))"
         initial={{ cx: 2, opacity: 0 }}
         animate={{ cx: [2, 58, 58], opacity: [0, 1, 0] }}
         transition={{ duration: 2.4, times: [0, 0.7, 1], repeat: Infinity, ease: 'linear' }}
-        style={{ filter: 'drop-shadow(0 0 3px rgb(var(--c-spark) / 0.6))' }}
+        style={{ filter: 'drop-shadow(0 0 3px rgb(var(--brand) / 0.6))' }}
       />
     </svg>
   );
@@ -50,7 +50,7 @@ function Graph() {
       <motion.path
         d={path}
         fill="none"
-        stroke="rgb(var(--c-spark))"
+        stroke="rgb(var(--brand))"
         strokeWidth="1.4"
         strokeLinecap="round"
         initial={{ pathLength: 0 }}
@@ -58,7 +58,7 @@ function Graph() {
         transition={{ duration: 2.6, times: [0, 0.7, 1], repeat: Infinity, ease: 'easeOut' }}
       />
       <motion.circle
-        r="1.8" fill="rgb(var(--c-spark))"
+        r="1.8" fill="rgb(var(--brand))"
         initial={{ cx: 2, cy: 14, opacity: 0 }}
         animate={{
           cx: [2, 12, 22, 32, 42, 52, 58],
@@ -78,7 +78,7 @@ function Grid() {
       {Array.from({ length: 15 }).map((_, i) => (
         <motion.span
           key={i}
-          className="block w-1 h-1 rounded-full bg-spark/40"
+          className="block w-1 h-1 rounded-full bg-brand/40"
           animate={{ opacity: [0.25, 1, 0.25] }}
           transition={{
             duration: 1.6,
@@ -95,30 +95,30 @@ function Grid() {
 function Diff() {
   // Git-style + and - lines that fade in alternately.
   return (
-    <div className="font-mono text-[10px] leading-[1.3] flex flex-col gap-0.5 w-[64px]">
+    <div className="font-mono text-micro leading-[1.3] flex flex-col gap-0.5 w-[64px]">
       <motion.div
-        className="flex items-center gap-1 text-fail"
+        className="flex items-center gap-1 text-danger"
         animate={{ opacity: [0.3, 1, 0.3] }}
         transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
       >
         <span>−</span>
-        <span className="h-px flex-1 bg-fail/50" />
+        <span className="h-px flex-1 bg-danger/50" />
       </motion.div>
       <motion.div
-        className="flex items-center gap-1 text-success"
+        className="flex items-center gap-1 text-ok"
         animate={{ opacity: [0.3, 1, 0.3] }}
         transition={{ duration: 2.4, delay: 0.6, repeat: Infinity, ease: 'easeInOut' }}
       >
         <span>+</span>
-        <span className="h-px flex-1 bg-success/50" />
+        <span className="h-px flex-1 bg-ok/50" />
       </motion.div>
       <motion.div
-        className="flex items-center gap-1 text-success"
+        className="flex items-center gap-1 text-ok"
         animate={{ opacity: [0.3, 1, 0.3] }}
         transition={{ duration: 2.4, delay: 1.2, repeat: Infinity, ease: 'easeInOut' }}
       >
         <span>+</span>
-        <span className="h-px flex-1 bg-success/50" />
+        <span className="h-px flex-1 bg-ok/50" />
       </motion.div>
     </div>
   );
@@ -132,7 +132,7 @@ function Tags() {
       {tags.map((t, i) => (
         <motion.span
           key={t}
-          className="inline-block px-1.5 py-0.5 rounded border border-spark/40 text-spark font-mono text-[8.5px] uppercase tracking-eyebrow"
+          className="inline-block px-1.5 py-0.5 rounded border border-brand/40 text-brand font-mono text-[8.5px] uppercase tracking-eyebrow"
           animate={{ opacity: [0.2, 1, 1, 0.2], scale: [0.85, 1, 1, 0.85] }}
           transition={{
             duration: 3,
@@ -151,16 +151,16 @@ function Tags() {
 function Swap() {
   // Two model names cross-fading in place.
   return (
-    <div className="relative font-mono text-[10px] w-[68px] h-4">
+    <div className="relative font-mono text-micro w-[68px] h-4">
       <motion.span
-        className="absolute inset-0 text-spark text-right whitespace-nowrap overflow-hidden"
+        className="absolute inset-0 text-brand text-right whitespace-nowrap overflow-hidden"
         animate={{ opacity: [1, 1, 0, 0, 1] }}
         transition={{ duration: 3, times: [0, 0.4, 0.5, 0.9, 1], repeat: Infinity }}
       >
         kling-v3
       </motion.span>
       <motion.span
-        className="absolute inset-0 text-spark text-right whitespace-nowrap overflow-hidden"
+        className="absolute inset-0 text-brand text-right whitespace-nowrap overflow-hidden"
         animate={{ opacity: [0, 0, 1, 1, 0] }}
         transition={{ duration: 3, times: [0, 0.4, 0.5, 0.9, 1], repeat: Infinity }}
       >
@@ -174,15 +174,15 @@ function Pulse() {
   return (
     <div className="relative w-9 h-9 flex items-center justify-center">
       <motion.span
-        className="absolute w-3 h-3 rounded-full bg-spark"
+        className="absolute w-3 h-3 rounded-full bg-brand"
         animate={{ scale: [1, 2.4, 1], opacity: [0.6, 0, 0.6] }}
         transition={{ duration: 2, repeat: Infinity, ease: 'easeOut' }}
       />
       <motion.span
-        className="relative w-2 h-2 rounded-full bg-spark"
+        className="relative w-2 h-2 rounded-full bg-brand"
         animate={{ opacity: [1, 0.7, 1] }}
         transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
-        style={{ boxShadow: '0 0 6px rgb(var(--c-spark) / 0.8)' }}
+        style={{ boxShadow: '0 0 6px rgb(var(--brand) / 0.8)' }}
       />
     </div>
   );

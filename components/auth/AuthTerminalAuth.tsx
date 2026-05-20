@@ -35,13 +35,13 @@ const DEFAULT_DEST: Record<Mode, string> = {
 };
 
 const SIGNIN_LINES = [
-  'authenticating identity',
+  'verifying identity',
   'restoring session',
   'welcome back',
 ];
 
 const SIGNUP_LINES = [
-  'authenticating identity',
+  'creating identity',
   'provisioning workspace',
   'minting api key',
   'welcome aboard',
@@ -96,9 +96,9 @@ export function AuthTerminalAuth({ mode, redirectTo }: { mode: Mode; redirectTo?
   const question = mode === 'signup' ? 'choose an identity provider:' : 'continue as:';
 
   return (
-    <div role="listbox" aria-label="Identity providers" className="text-[13.5px] leading-[1.85]">
-      <div className="text-ink2">
-        <span className="text-spark">?</span> {question}
+    <div role="listbox" aria-label="Identity providers" className="text-body-sm leading-[1.85]">
+      <div className="text-ink-muted">
+        <span className="text-brand">?</span> {question}
       </div>
 
       <ul className="mt-2">
@@ -118,28 +118,30 @@ export function AuthTerminalAuth({ mode, redirectTo }: { mode: Mode; redirectTo?
                 className={[
                   'group w-full text-left flex items-center gap-3 px-3 py-2 rounded-sm border transition-colors',
                   isActive
-                    ? 'border-spark/60 bg-spark/[0.06]'
-                    : 'border-transparent hover:border-rule2',
+                    ? 'border-brand/60 bg-brand/[0.06]'
+                    : 'border-transparent hover:border-field',
                   isOther ? 'opacity-40' : '',
                 ].join(' ')}
               >
                 <span
                   aria-hidden
                   className={[
-                    'w-4 inline-block text-[14px]',
-                    isActive ? 'text-spark' : 'text-transparent',
+                    'w-4 inline-block text-body',
+                    isActive ? 'text-brand' : 'text-transparent',
                   ].join(' ')}
                 >
                   ▸
                 </span>
                 <p.Icon className="size-[16px] shrink-0" />
-                <span className={isActive ? 'text-ink' : 'text-ink2 group-hover:text-ink'}>
+                <span className={isActive ? 'text-ink' : 'text-ink-muted group-hover:text-ink'}>
                   {p.label}
                 </span>
-                <span className="text-ink3 ml-2"># {p.note}</span>
+                <span className="text-ink-faint ml-2"># {p.note}</span>
                 {isConfirmed && (
-                  <span className="ml-auto text-spark inline-flex items-center gap-1">
-                    <span className="inline-block animate-pulse">authenticating</span>
+                  <span className="ml-auto text-brand inline-flex items-center gap-1">
+                    <span className="inline-block animate-pulse">
+                      {mode === 'signin' ? 'signing in' : 'signing up'}
+                    </span>
                     <span className="inline-block animate-pulse">…</span>
                   </span>
                 )}
@@ -150,24 +152,24 @@ export function AuthTerminalAuth({ mode, redirectTo }: { mode: Mode; redirectTo?
       </ul>
 
       {confirmedProvider && (
-        <div className="mt-5 font-mono text-[13px] leading-[1.85] text-ink2 animate-panel-in">
+        <div className="mt-5 font-mono text-body-sm leading-[1.85] text-ink-muted animate-panel-in">
           {lines.map((line, i) => {
             if (i > lineIndex) return null;
             const isDone = i < lineIndex;
             return (
               <div key={line} className="animate-panel-in">
-                <span className={isDone ? 'text-success' : 'text-spark animate-pulse'}>
+                <span className={isDone ? 'text-ok' : 'text-brand animate-pulse'}>
                   {isDone ? '✓' : '·'}
                 </span>{' '}
-                <span className={isDone ? 'text-ink' : 'text-ink2'}>{line}</span>
-                {!isDone && <span className="text-ink3"> …</span>}
+                <span className={isDone ? 'text-ink' : 'text-ink-muted'}>{line}</span>
+                {!isDone && <span className="text-ink-faint"> …</span>}
               </div>
             );
           })}
           {lineIndex >= lines.length && (
             <div className="mt-2 animate-panel-in">
-              <span className="text-spark">↗</span>{' '}
-              <span className="text-ink3">redirecting to {destination}</span>
+              <span className="text-brand">↗</span>{' '}
+              <span className="text-ink-faint">redirecting to {destination}</span>
             </div>
           )}
         </div>

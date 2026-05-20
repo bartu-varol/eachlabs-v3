@@ -32,18 +32,18 @@ export function AuthShell({ children, brand }: Props) {
           <div className="w-full max-w-[400px]">{children}</div>
         </div>
 
-        <p className="text-ink3 text-[11px] leading-relaxed text-center max-w-[400px] mx-auto">
+        <p className="text-ink-faint text-eyebrow leading-relaxed text-center max-w-[400px] mx-auto">
           By continuing, you agree to our{' '}
           <Link
             href="/terms-of-service"
-            className="text-ink2 hover:text-ink underline underline-offset-2"
+            className="text-ink-muted hover:text-ink underline underline-offset-2"
           >
             Terms
           </Link>
           {' & '}
           <Link
             href="/privacy-policy"
-            className="text-ink2 hover:text-ink underline underline-offset-2"
+            className="text-ink-muted hover:text-ink underline underline-offset-2"
           >
             Privacy
           </Link>
@@ -52,13 +52,13 @@ export function AuthShell({ children, brand }: Props) {
       </div>
 
       {/* RIGHT, brand column */}
-      <div className="hidden lg:flex relative items-center justify-center px-12 py-10 bg-surface border-l border-rule2 overflow-hidden">
+      <div className="hidden lg:flex relative items-center justify-center px-12 py-10 bg-surface-raised border-l border-field overflow-hidden">
         <div
           aria-hidden
           className="absolute inset-0 pointer-events-none"
           style={{
             background:
-              'radial-gradient(ellipse 55% 45% at 85% 0%, rgb(var(--c-spark) / 0.07), transparent 60%), radial-gradient(ellipse 45% 40% at 8% 100%, rgb(var(--c-highlight) / 0.06), transparent 65%)',
+              'radial-gradient(ellipse 55% 45% at 85% 0%, rgb(var(--brand) / 0.07), transparent 60%), radial-gradient(ellipse 45% 40% at 8% 100%, rgb(var(--cobrand) / 0.06), transparent 65%)',
           }}
         />
         <div className="relative">{brand}</div>

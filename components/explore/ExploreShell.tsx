@@ -15,6 +15,7 @@ import {
 } from '@/lib/catalog';
 import { llmRouterModels, getLlmRouterProviders } from '@/lib/llmRouter';
 import type { WorkflowCategory, WorkflowSummary } from '@/lib/workflows';
+import { Eyebrow } from '@/components/ui/Eyebrow';
 
 type Tab = 'MODELS' | 'WORKFLOWS' | 'TRENDS' | 'LLMS';
 
@@ -241,7 +242,7 @@ export function ExploreShell({
 
       {/* Tabs */}
       <section className="container">
-        <div role="tablist" aria-label="Explore tabs" className="flex items-end gap-6 border-b border-rule">
+        <div role="tablist" aria-label="Explore tabs" className="flex items-end gap-6 border-b border-divider">
           <Tab
             label="Models"
             count={liveModelsCount && liveModelsCount > 0 ? liveModelsCount : allModels.length}
@@ -266,7 +267,7 @@ export function ExploreShell({
             active={tab === 'LLMS'}
             onClick={() => setTab('LLMS')}
           />
-          <span className="ml-auto pb-3 font-mono text-[10px] uppercase tracking-eyebrow text-ink3">
+          <span className="ml-auto pb-3 font-mono text-micro uppercase tracking-eyebrow text-ink-faint">
             * {allProviders.length} providers
           </span>
         </div>
@@ -280,7 +281,7 @@ export function ExploreShell({
           header zone, reappears the moment they scroll up. */}
       <section
         ref={filterBarRef}
-        className={`bg-bg border-b border-rule sticky top-[100px] z-30 backdrop-blur-sm transition-transform duration-300 ease-out ${
+        className={`bg-surface border-b border-divider sticky top-[100px] z-30 backdrop-blur-sm transition-transform duration-300 ease-out ${
           filterHidden ? '-translate-y-[calc(100%_+_100px)]' : 'translate-y-0'
         }`}
       >
@@ -290,13 +291,13 @@ export function ExploreShell({
               {/* Row 1: long search input + provider select on the right. */}
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
                 <div className="relative flex-1">
-                  <Search aria-hidden className="absolute left-3 top-1/2 -translate-y-1/2 text-ink3 w-4 h-4 pointer-events-none" />
+                  <Search aria-hidden className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-faint w-4 h-4 pointer-events-none" />
                   <input
                     type="text"
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder="Search models, vendors, capabilities..."
-                    className="w-full bg-surface border border-rule2 rounded-md pl-10 pr-4 py-2 text-[14px] text-ink placeholder:text-ink3 focus:outline-none focus:border-spark"
+                    className="w-full bg-surface-raised border border-field rounded-md pl-10 pr-4 py-2 text-body text-ink placeholder:text-ink-faint focus:outline-none focus:border-brand"
                   />
                 </div>
                 <MonoSelect
@@ -343,26 +344,22 @@ export function ExploreShell({
             // Workflows tab manages its own filter bar inside <WorkflowsShell />.
             // Keep this row empty so the sticky section keeps a consistent height.
             <div className="py-4">
-              <div className="font-mono text-[11px] uppercase tracking-eyebrow text-ink3">
-                * AI WORKFLOWS · production ready recipes
-              </div>
+              <Eyebrow tone="ink-faint">* AI WORKFLOWS · production ready recipes</Eyebrow>
             </div>
           ) : tab === 'TRENDS' ? (
             <div className="py-4">
-              <div className="font-mono text-[11px] uppercase tracking-eyebrow text-ink3">
-                * TRENDS · what people are remixing right now
-              </div>
+              <Eyebrow tone="ink-faint">* TRENDS · what people are remixing right now</Eyebrow>
             </div>
           ) : (
             <div className="flex flex-col gap-3 py-4 sm:flex-row sm:items-center sm:gap-4">
               <div className="relative flex-1">
-                <Search aria-hidden className="absolute left-3 top-1/2 -translate-y-1/2 text-ink3 w-4 h-4 pointer-events-none" />
+                <Search aria-hidden className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-faint w-4 h-4 pointer-events-none" />
                 <input
                   type="text"
                   value={llmQuery}
                   onChange={(e) => setLlmQuery(e.target.value)}
                   placeholder="Search LLMs..."
-                  className="w-full bg-surface border border-rule2 rounded-md pl-10 pr-4 py-2 text-[14px] text-ink placeholder:text-ink3 focus:outline-none focus:border-spark"
+                  className="w-full bg-surface-raised border border-field rounded-md pl-10 pr-4 py-2 text-body text-ink placeholder:text-ink-faint focus:outline-none focus:border-brand"
                 />
               </div>
               <MonoSelect
@@ -390,12 +387,8 @@ export function ExploreShell({
         {tab === 'MODELS' && (
           <>
             <div className="flex items-center justify-between mb-5">
-              <div className="font-mono text-[11px] uppercase tracking-eyebrow text-ink3">
-                {filteredModels.length} of {liveModelsCount && liveModelsCount > 0 ? liveModelsCount : allModels.length} models
-              </div>
-              <div className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3">
-                sorted by popularity
-              </div>
+              <Eyebrow tone="ink-faint">{filteredModels.length} of {liveModelsCount && liveModelsCount > 0 ? liveModelsCount : allModels.length} models</Eyebrow>
+              <Eyebrow size="sm" tone="ink-faint">sorted by popularity</Eyebrow>
             </div>
             {filteredModels.length === 0 ? (
               <EmptyState message="No models match those filters." />
@@ -411,7 +404,7 @@ export function ExploreShell({
                 <button
                   type="button"
                   onClick={() => setShowAll(true)}
-                  className="inline-flex items-center gap-2 px-5 py-3 border border-rule2 rounded-md text-[13px] font-semibold text-ink hover:bg-surface hover:border-spark/40 transition-colors"
+                  className="inline-flex items-center gap-2 px-5 py-3 border border-field rounded-md text-body-sm font-semibold text-ink hover:bg-surface-raised hover:border-brand/40 transition-colors"
                 >
                   Load all {filteredModels.length} <span aria-hidden>→</span>
                 </button>
@@ -443,12 +436,8 @@ export function ExploreShell({
         {tab === 'LLMS' && (
           <>
             <div className="flex items-center justify-between mb-5">
-              <div className="font-mono text-[11px] uppercase tracking-eyebrow text-ink3">
-                {filteredLlms.length} of {llmAllModels.length} LLMs
-              </div>
-              <div className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3">
-                routed via eachlabs-llm-router
-              </div>
+              <Eyebrow tone="ink-faint">{filteredLlms.length} of {llmAllModels.length} LLMs</Eyebrow>
+              <Eyebrow size="sm" tone="ink-faint">routed via eachlabs-llm-router</Eyebrow>
             </div>
             {filteredLlms.length === 0 ? (
               <EmptyState message="No LLMs match those filters." />
@@ -464,7 +453,7 @@ export function ExploreShell({
                 <button
                   type="button"
                   onClick={() => setLlmShowAll(true)}
-                  className="inline-flex items-center gap-2 px-5 py-3 border border-rule2 rounded-md text-[13px] font-semibold text-ink hover:bg-surface hover:border-spark/40 transition-colors"
+                  className="inline-flex items-center gap-2 px-5 py-3 border border-field rounded-md text-body-sm font-semibold text-ink hover:bg-surface-raised hover:border-brand/40 transition-colors"
                 >
                   Load all {filteredLlms.length} <span aria-hidden>→</span>
                 </button>
@@ -494,20 +483,20 @@ function Tab({
       role="tab"
       aria-selected={active}
       onClick={onClick}
-      className={`relative pb-3 pt-2 text-[15px] font-semibold tracking-[-0.01em] transition-colors ${
-        active ? 'text-ink' : 'text-ink3 hover:text-ink2'
+      className={`relative pb-3 pt-2 text-body-lg font-semibold tracking-[-0.01em] transition-colors ${
+        active ? 'text-ink' : 'text-ink-faint hover:text-ink-muted'
       }`}
     >
       <span className="flex items-center gap-2">
         {label}
-        <span className={`font-mono text-[11px] font-normal ${active ? 'text-ink2' : 'text-ink3'}`}>
+        <span className={`font-mono text-eyebrow font-normal ${active ? 'text-ink-muted' : 'text-ink-faint'}`}>
           {count}
         </span>
       </span>
       <span
         aria-hidden
         className={`absolute left-0 right-0 -bottom-px h-[2px] transition-colors ${
-          active ? 'bg-spark' : 'bg-transparent'
+          active ? 'bg-brand' : 'bg-transparent'
         }`}
       />
     </button>
@@ -516,8 +505,8 @@ function Tab({
 
 function EmptyState({ message }: { message: string }) {
   return (
-    <div className="border border-dashed border-rule2 rounded-md py-20 text-center">
-      <p className="font-mono text-[12px] uppercase tracking-eyebrow text-ink3">{message}</p>
+    <div className="border border-dashed border-field rounded-md py-20 text-center">
+      <p className="font-mono text-caption uppercase tracking-eyebrow text-ink-faint">{message}</p>
     </div>
   );
 }

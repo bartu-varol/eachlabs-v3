@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { Eyebrow } from '@/components/ui/Eyebrow';
 
 const EASE_OUT_EXPO = [0.16, 1, 0.3, 1] as const;
 
@@ -343,13 +344,13 @@ export default function TermsOfServicePage() {
   return (
     <>
       {/* HERO */}
-      <section className="relative border-b border-rule overflow-hidden">
+      <section className="relative border-b border-divider overflow-hidden">
         <div
           aria-hidden
           className="absolute inset-0 pointer-events-none"
           style={{
             background:
-              'radial-gradient(ellipse 60% 50% at 50% 0%, rgb(var(--c-spark) / 0.06), transparent 65%)',
+              'radial-gradient(ellipse 60% 50% at 50% 0%, rgb(var(--brand) / 0.06), transparent 65%)',
           }}
         />
         <div className="container py-16 md:py-24 relative">
@@ -358,13 +359,11 @@ export default function TermsOfServicePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, ease: EASE_OUT_EXPO }}
           >
-            <div className="font-mono text-[11px] uppercase tracking-eyebrow text-spark">
-              * LEGAL
-            </div>
-            <h1 className="font-display font-semibold text-[40px] sm:text-[56px] lg:text-[68px] leading-[0.98] tracking-tightest text-ink mt-6">
+            <Eyebrow>* LEGAL</Eyebrow>
+            <h1 className="font-sans font-semibold text-display sm:text-display-lg lg:text-hero leading-[0.98] tracking-tightest text-ink mt-6">
               Terms of service.
             </h1>
-            <p className="text-ink3 text-[14px] mt-5 font-mono uppercase tracking-eyebrow">
+            <p className="text-ink-faint text-body mt-5 font-mono uppercase tracking-eyebrow">
               Last updated · March 29, 2024 · contact: support@eachlabs.ai
             </p>
           </motion.div>
@@ -376,15 +375,13 @@ export default function TermsOfServicePage() {
         <div className="grid grid-cols-1 lg:grid-cols-[220px_minmax(0,1fr)] gap-10 lg:gap-16 items-start">
           {/* TOC */}
           <aside className="lg:sticky lg:top-24">
-            <div className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3 mb-4">
-              ▸ Sections
-            </div>
+            <Eyebrow size="sm" tone="ink-faint" className="mb-4">▸ Sections</Eyebrow>
             <ul className="flex flex-col gap-2.5">
               {SECTIONS.map((s) => (
                 <li key={s.id}>
                   <Link
                     href={`#${s.id}`}
-                    className="text-[13px] text-ink2 hover:text-spark transition-colors"
+                    className="text-body-sm text-ink-muted hover:text-brand transition-colors"
                   >
                     {s.title}
                   </Link>
@@ -397,7 +394,7 @@ export default function TermsOfServicePage() {
           <article className="flex flex-col gap-12">
             {SECTIONS.map((s) => (
               <section key={s.id} id={s.id} className="scroll-mt-24">
-                <h2 className="font-display font-semibold text-[24px] md:text-[28px] text-ink leading-snug mb-5">
+                <h2 className="font-sans font-semibold text-h3 md:text-h2 text-ink leading-snug mb-5">
                   {s.title}
                 </h2>
                 <div className="flex flex-col gap-4">
@@ -406,7 +403,7 @@ export default function TermsOfServicePage() {
                       return (
                         <h3
                           key={i}
-                          className="font-display font-medium text-[16px] text-ink mt-3"
+                          className="font-sans font-medium text-body-lg text-ink mt-3"
                         >
                           {b.text}
                         </h3>
@@ -416,7 +413,7 @@ export default function TermsOfServicePage() {
                       return (
                         <p
                           key={i}
-                          className="text-ink2 text-[15px] leading-[1.75]"
+                          className="text-ink-muted text-body-lg leading-[1.75]"
                         >
                           {b.text}
                         </p>
@@ -427,9 +424,9 @@ export default function TermsOfServicePage() {
                         {b.items?.map((item) => (
                           <li
                             key={item}
-                            className="text-ink2 text-[14.5px] leading-[1.7] flex gap-3"
+                            className="text-ink-muted text-body leading-[1.7] flex gap-3"
                           >
-                            <span className="text-spark mt-1 shrink-0">·</span>
+                            <span className="text-brand mt-1 shrink-0">·</span>
                             <span>{item}</span>
                           </li>
                         ))}

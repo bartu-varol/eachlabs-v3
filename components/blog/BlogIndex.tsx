@@ -5,6 +5,7 @@ import { useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import type { BlogPostSummary } from '@/lib/blogPost';
+import { Eyebrow } from '@/components/ui/Eyebrow';
 
 function formatDate(iso: string | null): string {
   if (!iso) return '';
@@ -25,7 +26,7 @@ function FeaturedDispatch({ post }: { post: BlogPostSummary }) {
     >
       <Link href={`/blog/${post.slug}`} className="group block">
         {post.featureImage && (
-          <div className="relative overflow-hidden rounded-md border border-rule">
+          <div className="relative overflow-hidden rounded-md border border-divider">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={post.featureImage}
@@ -36,7 +37,7 @@ function FeaturedDispatch({ post }: { post: BlogPostSummary }) {
         )}
 
         <div className="mt-6 max-w-[760px]">
-          <div className="font-mono text-[10.5px] uppercase tracking-eyebrow text-ink3 flex flex-wrap gap-x-2.5 gap-y-1">
+          <div className="font-mono text-micro uppercase tracking-eyebrow text-ink-faint flex flex-wrap gap-x-2.5 gap-y-1">
             <span>{formatDate(post.publishedAt)}</span>
             <span aria-hidden>·</span>
             <span>{category}</span>
@@ -48,12 +49,12 @@ function FeaturedDispatch({ post }: { post: BlogPostSummary }) {
             )}
           </div>
 
-          <h2 className="font-display font-semibold text-[30px] md:text-[44px] leading-[1.05] tracking-tightest mt-4 text-ink group-hover:italic group-hover:text-spark transition-colors">
+          <h2 className="font-sans font-semibold text-h2 md:text-display leading-[1.05] tracking-tightest mt-4 text-ink group-hover:italic group-hover:text-brand transition-colors">
             {post.title}
           </h2>
 
           {post.excerpt && (
-            <p className="text-ink2 text-[15.5px] leading-[1.65] mt-4 line-clamp-3">
+            <p className="text-ink-muted text-body-lg leading-[1.65] mt-4 line-clamp-3">
               {post.excerpt}
             </p>
           )}
@@ -74,7 +75,7 @@ function ArchiveRow({ post, idx }: { post: BlogPostSummary; idx: number }) {
     >
       <Link
         href={`/blog/${post.slug}`}
-        className="group flex flex-col md:grid md:grid-cols-[140px_1fr_220px_auto] md:items-center gap-y-4 md:gap-y-0 md:gap-x-8 py-7 md:py-8 border-t border-rule hover:border-ink/40 transition-colors"
+        className="group flex flex-col md:grid md:grid-cols-[140px_1fr_220px_auto] md:items-center gap-y-4 md:gap-y-0 md:gap-x-8 py-7 md:py-8 border-t border-divider hover:border-ink/40 transition-colors"
       >
         {/* Mobile: thumb on top, full-width 16:9. Desktop: thumb sits in column 3. */}
         {post.featureImage && (
@@ -83,37 +84,37 @@ function ArchiveRow({ post, idx }: { post: BlogPostSummary; idx: number }) {
             src={post.featureImage}
             alt=""
             loading="lazy"
-            className="order-first md:order-3 w-full aspect-[16/9] md:w-[220px] md:h-[140px] md:aspect-auto object-cover rounded-md border border-rule transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+            className="order-first md:order-3 w-full aspect-[16/9] md:w-[220px] md:h-[140px] md:aspect-auto object-cover rounded-md border border-divider transition-transform duration-500 ease-out group-hover:scale-[1.02]"
           />
         )}
         {!post.featureImage && (
           <div className="hidden md:block md:order-3 md:w-[220px] md:h-[140px]" aria-hidden />
         )}
 
-        <div className="md:order-1 font-mono text-[11px] uppercase tracking-eyebrow text-ink3 flex flex-wrap gap-x-2 gap-y-1 md:flex-col md:gap-y-1.5 md:self-start md:pt-1">
+        <div className="md:order-1 font-mono text-eyebrow uppercase tracking-eyebrow text-ink-faint flex flex-wrap gap-x-2 gap-y-1 md:flex-col md:gap-y-1.5 md:self-start md:pt-1">
           <span>{formatDate(post.publishedAt)}</span>
           <span className="md:hidden" aria-hidden>·</span>
           <span>{category}</span>
           {post.readingTime > 0 && (
             <>
               <span className="md:hidden" aria-hidden>·</span>
-              <span className="text-ink3/70">{post.readingTime} min</span>
+              <span className="text-ink-faint/70">{post.readingTime} min</span>
             </>
           )}
         </div>
 
         <div className="md:order-2 min-w-0">
-          <h3 className="font-display font-semibold text-[22px] md:text-[26px] leading-[1.2] tracking-tight text-ink group-hover:italic group-hover:text-spark transition-colors">
+          <h3 className="font-sans font-semibold text-h3 md:text-h3 leading-[1.2] tracking-tight text-ink group-hover:italic group-hover:text-brand transition-colors">
             {post.title}
           </h3>
           {post.excerpt && (
-            <p className="text-ink2 text-[14.5px] leading-[1.65] mt-3 line-clamp-2 max-w-[560px]">
+            <p className="text-ink-muted text-body leading-[1.65] mt-3 line-clamp-2 max-w-[560px]">
               {post.excerpt}
             </p>
           )}
         </div>
 
-        <div className="md:order-4 hidden md:flex items-center text-ink3 group-hover:text-spark transition-colors">
+        <div className="md:order-4 hidden md:flex items-center text-ink-faint group-hover:text-brand transition-colors">
           <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
         </div>
       </Link>
@@ -135,10 +136,10 @@ function FilterChip({
       type="button"
       onClick={onClick}
       className={[
-        'px-3 py-1.5 rounded-full font-mono text-[11px] uppercase tracking-eyebrow border transition-colors',
+        'px-3 py-1.5 rounded-full font-mono text-eyebrow uppercase tracking-eyebrow border transition-colors',
         active
-          ? 'bg-ink text-bg border-ink'
-          : 'bg-transparent border-rule2 text-ink2 hover:text-ink hover:border-ink/40',
+          ? 'bg-ink text-surface border-ink'
+          : 'bg-transparent border-field text-ink-muted hover:text-ink hover:border-ink/40',
       ].join(' ')}
     >
       {children}
@@ -193,17 +194,17 @@ export function BlogIndex({ posts }: Props) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
         >
-          <div className="font-mono text-[11px] uppercase tracking-eyebrow text-ink3 flex items-center gap-2">
-            <span className="text-spark">*</span>
+          <div className="font-mono text-eyebrow uppercase tracking-eyebrow text-ink-faint flex items-center gap-2">
+            <span className="text-brand">*</span>
             <span>Field notes</span>
-            <span aria-hidden className="text-ink3/60">·</span>
+            <span aria-hidden className="text-ink-faint/60">·</span>
             <span>Dispatch {dispatchNumber}</span>
           </div>
-          <h1 className="font-display font-semibold text-[44px] sm:text-[60px] md:text-[80px] leading-[0.98] tracking-tightest mt-6 text-ink max-w-[860px]">
+          <h1 className="font-sans font-semibold text-display sm:text-display-lg md:text-[80px] leading-[0.98] tracking-tightest mt-6 text-ink max-w-[860px]">
             Dispatches from{' '}
-            <span className="text-ink3 italic">the rabbit hole.</span>
+            <span className="text-ink-faint italic">the rabbit hole.</span>
           </h1>
-          <p className="text-ink2 text-[16px] leading-[1.6] max-w-[620px] mt-7">
+          <p className="text-ink-muted text-body-lg leading-[1.6] max-w-[620px] mt-7">
             Deep-dives, customer stories, and changelogs from the team building each::labs. No
             growth hacks. No "10 ways to". Just what we shipped and what we learned.
           </p>
@@ -212,9 +213,7 @@ export function BlogIndex({ posts }: Props) {
 
       {featured && (
         <section className="container">
-          <div className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3 mb-6">
-            * Latest
-          </div>
+          <Eyebrow size="sm" tone="ink-faint" className="mb-6">* Latest</Eyebrow>
           <FeaturedDispatch post={featured} />
         </section>
       )}
@@ -222,10 +221,8 @@ export function BlogIndex({ posts }: Props) {
       <section className="container mt-20 md:mt-24">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-5 pb-3">
           <div>
-            <div className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3">
-              * Archive
-            </div>
-            <div className="font-mono text-[11.5px] text-ink3 mt-2">
+            <Eyebrow size="sm" tone="ink-faint">* Archive</Eyebrow>
+            <div className="font-mono text-eyebrow text-ink-faint mt-2">
               {filtered.length} {filtered.length === 1 ? 'dispatch' : 'dispatches'}
             </div>
           </div>
@@ -251,14 +248,14 @@ export function BlogIndex({ posts }: Props) {
               onChange={(e) => setQuery(e.target.value)}
               placeholder="search…"
               aria-label="Search blog"
-              className="sm:w-52 px-3 py-1.5 bg-transparent border border-rule2 rounded-full text-ink placeholder:text-ink3 font-mono text-[12px] focus:outline-none focus:border-ink/40"
+              className="sm:w-52 px-3 py-1.5 bg-transparent border border-field rounded-full text-ink placeholder:text-ink-faint font-mono text-caption focus:outline-none focus:border-ink/40"
             />
           </div>
         </div>
 
         <div className="mt-2">
           {filtered.length === 0 ? (
-            <div className="py-24 text-center font-mono text-[12px] text-ink3 border-t border-rule">
+            <div className="py-24 text-center font-mono text-caption text-ink-faint border-t border-divider">
               No dispatches match, try a different category or search.
             </div>
           ) : (
@@ -266,7 +263,7 @@ export function BlogIndex({ posts }: Props) {
               {filtered.map((p, i) => (
                 <ArchiveRow key={p.slug} post={p} idx={i} />
               ))}
-              <div className="border-t border-rule" />
+              <div className="border-t border-divider" />
             </div>
           )}
         </div>
@@ -274,13 +271,11 @@ export function BlogIndex({ posts }: Props) {
 
       <section className="container py-24 md:py-28 mt-12">
         <div className="max-w-[560px]">
-          <div className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3 mb-3">
-            * Subscribe
-          </div>
-          <h2 className="font-display font-semibold text-[28px] md:text-[36px] leading-[1.1] tracking-tightest text-ink">
+          <Eyebrow size="sm" tone="ink-faint" className="mb-3">* Subscribe</Eyebrow>
+          <h2 className="font-sans font-semibold text-h2 md:text-h2 leading-[1.1] tracking-tightest text-ink">
             New dispatches, twice a month.
           </h2>
-          <p className="text-ink2 text-[14.5px] mt-4 leading-[1.6]">
+          <p className="text-ink-muted text-body mt-4 leading-[1.6]">
             No spam, no growth hacks, unsubscribe in one click.
           </p>
           <form
@@ -291,11 +286,11 @@ export function BlogIndex({ posts }: Props) {
               type="email"
               required
               placeholder="you@team.com"
-              className="flex-1 px-4 py-3 bg-transparent border border-rule2 rounded-md text-ink placeholder:text-ink3 text-[14px] focus:outline-none focus:border-ink/40"
+              className="flex-1 px-4 py-3 bg-transparent border border-field rounded-md text-ink placeholder:text-ink-faint text-body focus:outline-none focus:border-ink/40"
             />
             <button
               type="submit"
-              className="px-5 py-3 bg-ink text-bg rounded-md text-[14px] font-medium hover:bg-spark transition-colors"
+              className="px-5 py-3 bg-ink text-surface rounded-md text-body font-medium hover:bg-brand transition-colors"
             >
               Subscribe →
             </button>

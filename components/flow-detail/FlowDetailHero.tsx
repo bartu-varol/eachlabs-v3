@@ -30,10 +30,10 @@ export function FlowDetailHero({ flow }: Props) {
   const primaryCategory = flow.categories[0];
 
   return (
-    <section className="container pt-8 pb-10 border-b border-rule">
+    <section className="container pt-8 pb-10 border-b border-divider">
       <nav
         aria-label="Breadcrumb"
-        className="font-mono text-[11px] uppercase tracking-eyebrow text-ink3 flex items-center gap-2 mb-6 flex-wrap"
+        className="font-mono text-eyebrow uppercase tracking-eyebrow text-ink-faint flex items-center gap-2 mb-6 flex-wrap"
       >
         <Link href="/ai-flows" className="hover:text-ink transition-colors">
           AI Flows
@@ -45,7 +45,7 @@ export function FlowDetailHero({ flow }: Props) {
           </>
         )}
         <span aria-hidden>›</span>
-        <span className="text-ink2 normal-case tracking-normal font-sans text-[12px]">
+        <span className="text-ink-muted normal-case tracking-normal font-sans text-caption">
           {flow.slug}
         </span>
       </nav>
@@ -61,26 +61,26 @@ export function FlowDetailHero({ flow }: Props) {
 
         <div className="flex flex-col gap-6">
           <div>
-            <h1 className="font-display text-[clamp(26px,3.2vw,36px)] leading-[1.1] tracking-tightest text-ink">
+            <h1 className="font-sans text-[clamp(26px,3.2vw,36px)] leading-[1.1] tracking-tightest text-ink">
               {flow.name}
             </h1>
 
-            <div className="font-mono text-[11px] uppercase tracking-eyebrow text-ink3 mt-3 flex flex-wrap items-center gap-x-3 gap-y-1">
+            <div className="font-mono text-eyebrow uppercase tracking-eyebrow text-ink-faint mt-3 flex flex-wrap items-center gap-x-3 gap-y-1">
               <span>Flow</span>
-              <span className="text-rule2">·</span>
+              <span className="text-field">·</span>
               <span>
                 {stepCount} step{stepCount === 1 ? '' : 's'}
               </span>
               {primaryCategory && (
                 <>
-                  <span className="text-rule2">·</span>
+                  <span className="text-field">·</span>
                   <span>{primaryCategory}</span>
                 </>
               )}
             </div>
 
             {flow.description && (
-              <p className="text-[14px] text-ink2 leading-[1.55] mt-3 w-full">
+              <p className="text-body text-ink-muted leading-[1.55] mt-3 w-full">
                 {flow.description}
               </p>
             )}
@@ -88,8 +88,8 @@ export function FlowDetailHero({ flow }: Props) {
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
             <Link
-              href="/signup"
-              className="group relative inline-flex w-full items-center justify-center gap-1.5 px-3 py-3 rounded-md bg-spark text-white text-[13px] font-semibold tracking-tight whitespace-nowrap hover:bg-ember transition-colors shadow-[0_10px_30px_-12px_rgb(var(--c-spark)/0.55)] hover:shadow-[0_14px_36px_-10px_rgb(var(--c-spark)/0.75)]"
+              href="/sign-up"
+              className="group relative inline-flex w-full items-center justify-center gap-1.5 px-3 py-3 rounded-md bg-brand text-on-brand text-body-sm font-semibold tracking-tight whitespace-nowrap hover:bg-brand-deep transition-colors shadow-[0_10px_30px_-12px_rgb(var(--brand)/0.55)] hover:shadow-[0_14px_36px_-10px_rgb(var(--brand)/0.75)]"
             >
               <span>Clone &amp; customize</span>
               <span
@@ -99,7 +99,7 @@ export function FlowDetailHero({ flow }: Props) {
                 →
               </span>
             </Link>
-            <Button href="/signup" variant="secondary" fullWidth>
+            <Button href="/sign-up" variant="secondary" fullWidth>
               Run template
             </Button>
             <AskAiPanel modelTitle={flow.name} modelSlug={flow.slug} fullWidth />
@@ -119,8 +119,8 @@ export function FlowDetailHero({ flow }: Props) {
 function Stat({ label, value, mono = false }: { label: string; value: string; mono?: boolean }) {
   return (
     <div>
-      <dt className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3 mb-1">{label}</dt>
-      <dd className={`text-[14px] text-ink ${mono ? 'font-mono tabular-nums' : ''}`}>{value}</dd>
+      <dt className="font-mono text-micro uppercase tracking-eyebrow text-ink-faint mb-1">{label}</dt>
+      <dd className={`text-body text-ink ${mono ? 'font-mono tabular-nums' : ''}`}>{value}</dd>
     </div>
   );
 }

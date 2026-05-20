@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { Eyebrow } from '@/components/ui/Eyebrow';
 
 /* ──────────────────────────────────────────────────────────────────────────
    HeroWidget, "each::labs · LIVE"
@@ -159,37 +160,33 @@ export function HeroWidget() {
       {/* Subtle ambient glow */}
       <div
         aria-hidden
-        className="absolute -inset-6 -z-10 rounded-[24px] bg-gradient-to-tr from-spark/[0.08] via-transparent to-spark/[0.04] blur-2xl"
+        className="absolute -inset-6 -z-10 rounded-[24px] bg-gradient-to-tr from-brand/[0.08] via-transparent to-brand/[0.04] blur-2xl"
       />
 
       {/* "I am AI agent" caption above the card, matching the bottom caption style; routes to llm.txt */}
       <Link
         href="/llm.txt"
-        className="block mb-3 font-mono text-[10px] uppercase tracking-eyebrow text-ink3 hover:text-spark transition-colors text-center lg:text-right"
+        className="block mb-3 font-mono text-micro uppercase tracking-eyebrow text-ink-faint hover:text-brand transition-colors text-center lg:text-right"
       >
-        <span className="inline-block w-1 h-1 rounded-full bg-spark animate-pulse mr-2 align-middle" aria-hidden />
+        <span className="inline-block w-1 h-1 rounded-full bg-brand animate-pulse mr-2 align-middle" aria-hidden />
         I am AI agent · llm.txt →
       </Link>
 
-      <div className="bg-surface border border-rule2 rounded-md overflow-hidden">
+      <div className="bg-surface-raised border border-field rounded-md overflow-hidden">
         {/* Header, orchestration + observability framing */}
-        <div className="flex items-center justify-between px-4 py-3 border-b border-rule2 bg-bg/40">
+        <div className="flex items-center justify-between px-4 py-3 border-b border-field bg-surface/40">
           <div className="flex items-center gap-2">
-            <span className="inline-block w-1.5 h-1.5 rounded-full bg-spark animate-pulse" aria-hidden />
-            <span className="font-mono text-[10px] uppercase tracking-eyebrow text-ink2">
-              ORCHESTRATION + OBSERVABILITY · LIVE
-            </span>
+            <span className="inline-block w-1.5 h-1.5 rounded-full bg-brand animate-pulse" aria-hidden />
+            <Eyebrow as="span" size="sm" tone="ink-muted">ORCHESTRATION + OBSERVABILITY · LIVE</Eyebrow>
           </div>
           <div className="text-right">
-            <div className="font-mono text-[9px] uppercase tracking-eyebrow text-ink3 -mb-0.5">
-              uptime · 24h
-            </div>
+            <Eyebrow size="sm" tone="ink-faint" className="-mb-0.5">uptime · 24h</Eyebrow>
             <motion.span
-              className="font-display text-[18px] md:text-[20px] font-semibold text-success tabular-nums"
+              className="font-sans text-h4 md:text-h4 font-semibold text-ok tabular-nums"
               animate={{ opacity: [1, 0.85, 1] }}
               transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
             >
-              99.99<span className="text-success/70">%</span>
+              99.99<span className="text-ok/70">%</span>
             </motion.span>
           </div>
         </div>
@@ -198,13 +195,13 @@ export function HeroWidget() {
         <OrchestratePane />
 
         {/* ② OBSERVE, dot grid + SVG overlay */}
-        <div className="px-5 md:px-6 pt-4 pb-3 border-t border-rule2">
+        <div className="px-5 md:px-6 pt-4 pb-3 border-t border-field">
           <div className="flex items-center justify-between mb-3">
-            <span className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3">
-              <span className="text-spark">②</span> OBSERVE · 600+ models running
+            <span className="font-mono text-micro uppercase tracking-eyebrow text-ink-faint">
+              <span className="text-brand">②</span> OBSERVE · 600+ models running
             </span>
-            <span className="font-mono text-[10px] text-ink3">
-              healed in <span className="text-spark">&lt;120ms</span>
+            <span className="font-mono text-micro text-ink-faint">
+              healed in <span className="text-brand">&lt;120ms</span>
             </span>
           </div>
 
@@ -230,7 +227,7 @@ export function HeroWidget() {
                   key={`arc-${event?.fail}-${event?.fallback}`}
                   d={arcPath}
                   fill="none"
-                  stroke="rgb(var(--c-spark))"
+                  stroke="rgb(var(--brand))"
                   strokeWidth="0.4"
                   strokeLinecap="round"
                   vectorEffect="non-scaling-stroke"
@@ -242,7 +239,7 @@ export function HeroWidget() {
                       phase === 'healed'   ? 0.4  : 0,
                   }}
                   transition={{ duration: 0.32, ease: 'easeOut' }}
-                  style={{ filter: 'drop-shadow(0 0 4px rgb(var(--c-spark) / 0.7))' }}
+                  style={{ filter: 'drop-shadow(0 0 4px rgb(var(--brand) / 0.7))' }}
                 />
               )}
             </svg>
@@ -258,17 +255,17 @@ export function HeroWidget() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -4 }}
                   transition={{ duration: 0.18 }}
-                  className="absolute inset-0 flex items-center gap-2 font-mono text-[11px]"
+                  className="absolute inset-0 flex items-center gap-2 font-mono text-eyebrow"
                 >
-                  <span className="text-success">✓</span>
-                  <span className="text-ink3 line-through decoration-fail/70">
+                  <span className="text-ok">✓</span>
+                  <span className="text-ink-faint line-through decoration-danger/70">
                     {event.pair.from}
                   </span>
-                  <span className="text-spark">→</span>
+                  <span className="text-brand">→</span>
                   <span className="text-ink">{event.pair.to}</span>
-                  <span className="text-ink3">·</span>
-                  <span className="text-spark tabular-nums">{event.pair.ms}ms</span>
-                  <span className="text-success">· healed</span>
+                  <span className="text-ink-faint">·</span>
+                  <span className="text-brand tabular-nums">{event.pair.ms}ms</span>
+                  <span className="text-ok">· healed</span>
                 </motion.div>
               ) : (
                 <motion.div
@@ -276,9 +273,9 @@ export function HeroWidget() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  className="absolute inset-0 flex items-center gap-2 font-mono text-[11px] text-ink3"
+                  className="absolute inset-0 flex items-center gap-2 font-mono text-eyebrow text-ink-faint"
                 >
-                  <span className="inline-block w-1.5 h-1.5 rounded-full bg-success/70" aria-hidden />
+                  <span className="inline-block w-1.5 h-1.5 rounded-full bg-ok/70" aria-hidden />
                   <span>0 active failures · all models healthy</span>
                 </motion.div>
               )}
@@ -287,9 +284,9 @@ export function HeroWidget() {
         </div>
 
         {/* Bottom strip, error rate that visibly bumps + drops */}
-        <div className="grid grid-cols-2 gap-4 px-5 md:px-6 py-4 border-t border-rule2 bg-bg/30">
+        <div className="grid grid-cols-2 gap-4 px-5 md:px-6 py-4 border-t border-field bg-surface/30">
           <div>
-            <div className="font-mono text-[9.5px] uppercase tracking-eyebrow text-ink3 mb-1 flex items-center gap-2">
+            <div className="font-mono text-micro uppercase tracking-eyebrow text-ink-faint mb-1 flex items-center gap-2">
               <span>error rate · 24h</span>
               <AnimatePresence>
                 {(phase === 'fallback' || phase === 'healed') && (
@@ -299,7 +296,7 @@ export function HeroWidget() {
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: 4 }}
                     transition={{ duration: 0.2 }}
-                    className="text-spark normal-case tracking-normal"
+                    className="text-brand normal-case tracking-normal"
                   >
                     ↓ caught
                   </motion.span>
@@ -309,8 +306,8 @@ export function HeroWidget() {
             <div className="flex items-baseline gap-1.5">
               <motion.span
                 key={`rate-${rateValue}`}
-                className={`font-display text-[28px] md:text-[32px] font-semibold tabular-nums ${
-                  rateRising ? 'text-fail' : 'text-success'
+                className={`font-sans text-h2 md:text-h2 font-semibold tabular-nums ${
+                  rateRising ? 'text-danger' : 'text-ok'
                 }`}
                 initial={{ scale: 0.96 }}
                 animate={{ scale: 1 }}
@@ -319,30 +316,26 @@ export function HeroWidget() {
                 {rateValue.toFixed(2)}
               </motion.span>
               <span
-                className={`font-display text-[18px] ${rateRising ? 'text-fail/70' : 'text-success/70'}`}
+                className={`font-sans text-h4 ${rateRising ? 'text-danger/70' : 'text-ok/70'}`}
               >
                 %
               </span>
             </div>
           </div>
           <div className="text-right">
-            <div className="font-mono text-[9.5px] uppercase tracking-eyebrow text-ink3 mb-1">
-              vs raw SDKs
-            </div>
+            <Eyebrow size="sm" tone="ink-faint" className="mb-1">vs raw SDKs</Eyebrow>
             <div className="flex items-baseline justify-end gap-2">
-              <span className="font-display text-[28px] md:text-[32px] font-semibold text-spark tabular-nums">
+              <span className="font-sans text-h2 md:text-h2 font-semibold text-brand tabular-nums">
                 97×
               </span>
-              <span className="font-mono text-[10px] uppercase tracking-eyebrow text-spark">
-                fewer
-              </span>
+              <Eyebrow as="span" size="sm">fewer</Eyebrow>
             </div>
           </div>
         </div>
       </div>
 
       {/* Caption */}
-      <div className="mt-3 font-mono text-[10px] uppercase tracking-eyebrow text-ink3 text-center lg:text-left">
+      <div className="mt-3 font-mono text-micro uppercase tracking-eyebrow text-ink-faint text-center lg:text-left">
         models break · each::labs catches each one · rate stays at 0.04%
       </div>
     </div>
@@ -393,20 +386,20 @@ function OrchestratePane() {
   return (
     <div className="px-5 md:px-6 pt-4 pb-4">
       <div className="flex items-center justify-between mb-3">
-        <span className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3">
-          <span className="text-spark">①</span> ORCHESTRATE
+        <span className="font-mono text-micro uppercase tracking-eyebrow text-ink-faint">
+          <span className="text-brand">①</span> ORCHESTRATE
         </span>
-        <span className="font-mono text-[10px] text-ink3">
+        <span className="font-mono text-micro text-ink-faint">
           req_8f2a · workflow v3.2
         </span>
       </div>
 
       <div className="relative">
         {/* Static connecting line */}
-        <div className="absolute left-3 right-3 top-1/2 h-px bg-rule2 -translate-y-1/2" />
+        <div className="absolute left-3 right-3 top-1/2 h-px bg-field -translate-y-1/2" />
         {/* Animated spark line that draws as the packet travels */}
         <motion.div
-          className="absolute left-3 top-1/2 h-px bg-spark -translate-y-1/2 origin-left"
+          className="absolute left-3 top-1/2 h-px bg-brand -translate-y-1/2 origin-left"
           style={{ right: 12 }}
           animate={{ scaleX: [0, 0.5, 0.5, 1, 1, 0] }}
           transition={{
@@ -428,7 +421,7 @@ function OrchestratePane() {
         {/* Traveling packet, pauses briefly at the kling position
             so the swap reads as "the failure caused the reroute". */}
         <motion.span
-          className="absolute top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-spark"
+          className="absolute top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-brand"
           initial={{ left: '4%' }}
           animate={{ left: ['4%', '50%', '50%', '96%', '96%', '4%'] }}
           transition={{
@@ -437,7 +430,7 @@ function OrchestratePane() {
             repeat: Infinity,
             ease: 'easeInOut',
           }}
-          style={{ boxShadow: '0 0 6px rgb(var(--c-spark) / 0.6)' }}
+          style={{ boxShadow: '0 0 6px rgb(var(--brand) / 0.6)' }}
         />
       </div>
     </div>
@@ -476,20 +469,20 @@ function NormalPill({ step, index }: { step: string; index: number }) {
 
   return (
     <motion.span
-      className="relative z-10 px-2 py-1 rounded-md bg-bg border font-mono text-[9.5px] md:text-[10px] uppercase tracking-eyebrow whitespace-nowrap"
-      initial={{ borderColor: 'rgb(var(--c-rule2))', color: 'rgb(var(--c-ink3))' }}
+      className="relative z-10 px-2 py-1 rounded-md bg-surface border font-mono text-micro md:text-micro uppercase tracking-eyebrow whitespace-nowrap"
+      initial={{ borderColor: 'rgb(var(--field))', color: 'rgb(var(--ink-faint))' }}
       animate={{
         borderColor: [
-          'rgb(var(--c-rule2))',
-          'rgb(var(--c-spark))',
-          'rgb(var(--c-spark))',
-          'rgb(var(--c-rule2))',
+          'rgb(var(--field))',
+          'rgb(var(--brand))',
+          'rgb(var(--brand))',
+          'rgb(var(--field))',
         ],
         color: [
-          'rgb(var(--c-ink3))',
-          'rgb(var(--c-spark))',
-          'rgb(var(--c-spark))',
-          'rgb(var(--c-ink3))',
+          'rgb(var(--ink-faint))',
+          'rgb(var(--brand))',
+          'rgb(var(--brand))',
+          'rgb(var(--ink-faint))',
         ],
       }}
       transition={{
@@ -514,24 +507,24 @@ function SwappingPill({ phase }: { phase: SwapPhase }) {
   const swapWindow = isFail || showFb;
 
   const borderColor =
-    isFail  ? 'rgb(var(--c-fail))' :
-    showFb  ? 'rgb(var(--c-spark))' :
-              'rgb(var(--c-rule2))';
+    isFail  ? 'rgb(var(--danger))' :
+    showFb  ? 'rgb(var(--brand))' :
+              'rgb(var(--field))';
   const textColor =
-    isFail  ? 'rgb(var(--c-fail))' :
-    showFb  ? 'rgb(var(--c-spark))' :
-              'rgb(var(--c-ink3))';
-  // Tint overlay sits on top of the always-opaque bg-bg base, so the
+    isFail  ? 'rgb(var(--danger))' :
+    showFb  ? 'rgb(var(--brand))' :
+              'rgb(var(--ink-faint))';
+  // Tint overlay sits on top of the always-opaque bg-surface base, so the
   // pipeline rule line never bleeds through the pill.
   const tintColor =
-    isFail  ? 'rgb(var(--c-fail))' :
-    showFb  ? 'rgb(var(--c-spark))' :
+    isFail  ? 'rgb(var(--danger))' :
+    showFb  ? 'rgb(var(--brand))' :
               'rgba(0,0,0,0)';
   const tintOpacity = isFail ? 0.2 : showFb ? 0.12 : 0;
 
   return (
     <motion.span
-      className="relative z-10 px-2 py-1 rounded-md border bg-bg font-mono text-[9.5px] md:text-[10px] uppercase tracking-eyebrow whitespace-nowrap"
+      className="relative z-10 px-2 py-1 rounded-md border bg-surface font-mono text-micro md:text-micro uppercase tracking-eyebrow whitespace-nowrap"
       animate={{
         borderColor,
         color: textColor,
@@ -540,9 +533,9 @@ function SwappingPill({ phase }: { phase: SwapPhase }) {
       transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
       style={{
         boxShadow: showFb
-          ? '0 0 0 1px rgb(var(--c-spark) / 0.45), 0 0 18px rgb(var(--c-spark) / 0.6)'
+          ? '0 0 0 1px rgb(var(--brand) / 0.45), 0 0 18px rgb(var(--brand) / 0.6)'
           : isFail
-            ? '0 0 0 1px rgb(var(--c-fail) / 0.45), 0 0 14px rgb(var(--c-fail) / 0.55)'
+            ? '0 0 0 1px rgb(var(--danger) / 0.45), 0 0 14px rgb(var(--danger) / 0.55)'
             : 'none',
       }}
     >
@@ -550,25 +543,25 @@ function SwappingPill({ phase }: { phase: SwapPhase }) {
       <AnimatePresence mode="wait">
         {swapWindow && (
           <motion.span
-            key={isFail ? 'tag-fail' : 'tag-fb'}
+            key={isFail ? 'tag-danger' : 'tag-fb'}
             initial={{ opacity: 0, y: 6, scale: 0.85, x: '-50%' }}
             animate={{ opacity: 1, y: 0, scale: 1, x: '-50%' }}
             exit={{ opacity: 0, y: -4, scale: 0.9, x: '-50%' }}
             transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute left-1/2 -top-[30px] font-mono text-[9px] uppercase tracking-eyebrow px-2 py-[2px] rounded-sm whitespace-nowrap pointer-events-none flex items-center gap-1"
+            className="absolute left-1/2 -top-[30px] font-mono text-micro uppercase tracking-eyebrow px-2 py-[2px] rounded-sm whitespace-nowrap pointer-events-none flex items-center gap-1"
             style={{
-              color: isFail ? 'rgb(var(--c-fail))' : 'rgb(var(--c-spark))',
+              color: isFail ? 'rgb(var(--danger))' : 'rgb(var(--brand))',
               backgroundColor: isFail
-                ? 'rgb(var(--c-fail) / 0.15)'
-                : 'rgb(var(--c-spark) / 0.18)',
+                ? 'rgb(var(--danger) / 0.15)'
+                : 'rgb(var(--brand) / 0.18)',
               borderWidth: 1,
               borderStyle: 'solid',
               borderColor: isFail
-                ? 'rgb(var(--c-fail) / 0.55)'
-                : 'rgb(var(--c-spark) / 0.6)',
+                ? 'rgb(var(--danger) / 0.55)'
+                : 'rgb(var(--brand) / 0.6)',
               boxShadow: isFail
-                ? '0 0 10px rgb(var(--c-fail) / 0.35)'
-                : '0 0 10px rgb(var(--c-spark) / 0.45)',
+                ? '0 0 10px rgb(var(--danger) / 0.35)'
+                : '0 0 10px rgb(var(--brand) / 0.45)',
             }}
             aria-hidden
           >
@@ -591,13 +584,13 @@ function SwappingPill({ phase }: { phase: SwapPhase }) {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
             className="absolute inset-0 rounded-md border-2 pointer-events-none origin-center"
-            style={{ borderColor: 'rgb(var(--c-spark) / 0.7)' }}
+            style={{ borderColor: 'rgb(var(--brand) / 0.7)' }}
             aria-hidden
           />
         )}
       </AnimatePresence>
 
-      {/* Tint overlay, sits on top of bg-bg so the pipeline line stays hidden */}
+      {/* Tint overlay, sits on top of bg-surface so the pipeline line stays hidden */}
       <motion.span
         aria-hidden
         className="absolute inset-0 rounded-md pointer-events-none"
@@ -644,10 +637,10 @@ function SwappingPill({ phase }: { phase: SwapPhase }) {
 ────────────────────────────────────────────────────────────────────────── */
 function Dot({ state }: { state: 'idle' | 'fail' | 'fallback' | 'healed' }) {
   const cls =
-    state === 'fail'     ? 'bg-fail'
-    : state === 'fallback' ? 'bg-spark'
-    : state === 'healed'   ? 'bg-success'
-    : 'bg-success/35';
+    state === 'fail'     ? 'bg-danger'
+    : state === 'fallback' ? 'bg-brand'
+    : state === 'healed'   ? 'bg-ok'
+    : 'bg-ok/35';
 
   const scale =
     state === 'fail'     ? 1.8
@@ -658,9 +651,9 @@ function Dot({ state }: { state: 'idle' | 'fail' | 'fallback' | 'healed' }) {
   const z = state === 'idle' ? 0 : 5;
 
   const shadow =
-    state === 'fail'     ? '0 0 6px 1px rgb(var(--c-fail) / 0.7)'
-    : state === 'fallback' ? '0 0 9px 2px rgb(var(--c-spark) / 0.8)'
-    : state === 'healed'   ? '0 0 8px 1.5px rgb(var(--c-success) / 0.7)'
+    state === 'fail'     ? '0 0 6px 1px rgb(var(--danger) / 0.7)'
+    : state === 'fallback' ? '0 0 9px 2px rgb(var(--brand) / 0.8)'
+    : state === 'healed'   ? '0 0 8px 1.5px rgb(var(--ok) / 0.7)'
     : 'none';
 
   return (

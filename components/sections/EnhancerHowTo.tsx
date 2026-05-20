@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { Eyebrow } from '@/components/ui/Eyebrow';
 
 /* ──────────────────────────────────────────────────────────────────────────
    EnhancerHowTo, "30 seconds to wire up prompt enhance" section.
@@ -20,23 +21,21 @@ const POLICIES = [
 
 export function EnhancerHowTo() {
   return (
-    <section className="container border-t border-rule py-24 md:py-28">
-      <div className="font-mono text-[11px] uppercase tracking-eyebrow text-spark mb-3">
-        ● HOW TO USE IT · 30 SECONDS
-      </div>
-      <h2 className="font-display font-semibold text-[32px] md:text-[44px] leading-[1.05] tracking-tightest text-ink max-w-[760px]">
+    <section className="container border-t border-divider py-24 md:py-28">
+      <Eyebrow className="mb-3">● HOW TO USE IT · 30 SECONDS</Eyebrow>
+      <h2 className="font-sans font-semibold text-h2 md:text-display leading-[1.05] tracking-tightest text-ink max-w-[760px]">
         One flag. Five policies. Every refusal saved.
       </h2>
-      <p className="text-ink2 text-[15px] leading-[1.65] max-w-[640px] mt-6">
+      <p className="text-ink-muted text-body-lg leading-[1.65] max-w-[640px] mt-6">
         Add <Code>enhance.prompt: true</Code> to any each() call. The enhancer
         watches the policy verdict, rewrites only when it would have failed, and
         stamps the trace so you can audit what was changed.
       </p>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-rule border border-rule rounded-md overflow-hidden mt-12">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-divider border border-divider rounded-md overflow-hidden mt-12">
         {/* Step 1 */}
         <Step n="01" title="Enhance prompt" delay={0}>
-          <p className="text-ink2 text-[13px] leading-[1.6]">
+          <p className="text-ink-muted text-body-sm leading-[1.6]">
             One flag on your existing each() call. No SDK swap, no separate endpoint.
           </p>
           <CodeMini
@@ -54,13 +53,13 @@ export function EnhancerHowTo() {
           <div className="flex flex-col gap-1.5 mt-1">
             <Bullet text="Default off, opt in per call." />
             <Bullet text="Bills only when the enhancer actually fires." />
-            <Bullet text={`Pass <code class="font-mono text-spark">intent_priority: "preserve"</code> to lock the user&rsquo;s meaning.`} />
+            <Bullet text={`Pass <code class="font-mono text-brand">intent_priority: "preserve"</code> to lock the user&rsquo;s meaning.`} />
           </div>
         </Step>
 
         {/* Step 2 */}
         <Step n="02" title="What gets caught" delay={0.1}>
-          <p className="text-ink2 text-[13px] leading-[1.6]">
+          <p className="text-ink-muted text-body-sm leading-[1.6]">
             The enhancer adapts to each provider’s policy table. These are the
             categories it learns to swap automatically.
           </p>
@@ -73,7 +72,7 @@ export function EnhancerHowTo() {
 
         {/* Step 3 */}
         <Step n="03" title="Read the prompt trace" delay={0.2}>
-          <p className="text-ink2 text-[13px] leading-[1.6]">
+          <p className="text-ink-muted text-body-sm leading-[1.6]">
             Every enhanced call carries a <Code>trace.enhancer</Code> block, the
             original, the rewritten, what got rejected, and the recheck verdict.
           </p>
@@ -115,15 +114,13 @@ function Step({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '0px 0px -40px 0px' }}
       transition={{ duration: 0.36, delay }}
-      className="bg-surface p-6 md:p-7 flex flex-col gap-4"
+      className="bg-surface-raised p-6 md:p-7 flex flex-col gap-4"
     >
       <div className="flex items-center gap-3">
-        <span className="font-mono text-[11px] tabular-nums text-spark">{n}</span>
-        <span className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3">
-          STEP
-        </span>
+        <span className="font-mono text-eyebrow tabular-nums text-brand">{n}</span>
+        <Eyebrow as="span" size="sm" tone="ink-faint">STEP</Eyebrow>
       </div>
-      <h3 className="font-display font-semibold text-[20px] text-ink leading-snug">
+      <h3 className="font-sans font-semibold text-h4 text-ink leading-snug">
         {title}
       </h3>
       <div className="flex flex-col gap-3">{children}</div>
@@ -135,7 +132,7 @@ function Step({
 
 function Code({ children }: { children: React.ReactNode }) {
   return (
-    <code className="font-mono text-[12.5px] text-spark bg-bg/60 border border-rule2 rounded px-1 py-[1px]">
+    <code className="font-mono text-caption text-brand bg-surface/60 border border-field rounded px-1 py-[1px]">
       {children}
     </code>
   );
@@ -144,11 +141,11 @@ function Code({ children }: { children: React.ReactNode }) {
 function Bullet({ text }: { text: string }) {
   return (
     <div className="flex items-start gap-2 px-2 py-1">
-      <span className="text-spark mt-[2px]" aria-hidden>
+      <span className="text-brand mt-[2px]" aria-hidden>
         ›
       </span>
       <span
-        className="text-ink2 text-[12.5px] leading-[1.55]"
+        className="text-ink-muted text-caption leading-[1.55]"
         // text may include inline <code>, keep simple by using innerHTML
         dangerouslySetInnerHTML={{ __html: text }}
       />
@@ -158,9 +155,9 @@ function Bullet({ text }: { text: string }) {
 
 function PolicyPill({ title, body }: { title: string; body: string }) {
   return (
-    <div className="flex items-baseline gap-2 px-3 py-2 border border-rule2 rounded-md bg-bg">
-      <span className="font-mono text-[11px] text-spark whitespace-nowrap">{title}</span>
-      <span className="text-ink2 text-[12px] leading-[1.5]">{body}</span>
+    <div className="flex items-baseline gap-2 px-3 py-2 border border-field rounded-md bg-surface">
+      <span className="font-mono text-eyebrow text-brand whitespace-nowrap">{title}</span>
+      <span className="text-ink-muted text-caption leading-[1.5]">{body}</span>
     </div>
   );
 }
@@ -172,7 +169,7 @@ type Line = { tokens: Token[]; indent?: number; highlight?: boolean };
 
 function CodeMini({ lines }: { lines: Line[] }) {
   return (
-    <div className="bg-bg border border-rule2 rounded-md font-mono text-[11.5px] leading-[1.7] overflow-x-auto no-scrollbar">
+    <div className="bg-surface border border-field rounded-md font-mono text-eyebrow leading-[1.7] overflow-x-auto no-scrollbar">
       <div className="px-3 py-3">
         {lines.map((line, i) => (
           <motion.div
@@ -182,10 +179,10 @@ function CodeMini({ lines }: { lines: Line[] }) {
             viewport={{ once: true }}
             transition={{ duration: 0.22, delay: 0.05 * i }}
             className={`flex items-baseline gap-0 whitespace-pre ${
-              line.highlight ? 'bg-spark/[0.06] -mx-3 px-3 rounded-sm' : ''
+              line.highlight ? 'bg-brand/[0.06] -mx-3 px-3 rounded-sm' : ''
             }`}
           >
-            <span className="text-ink3/60 mr-3 select-none tabular-nums w-3 text-right">
+            <span className="text-ink-faint/60 mr-3 select-none tabular-nums w-3 text-right">
               {i + 1}
             </span>
             {line.indent ? <span>{' '.repeat(line.indent)}</span> : null}
@@ -202,9 +199,9 @@ function CodeMini({ lines }: { lines: Line[] }) {
 }
 
 // Token helpers
-const k = (text: string): Token => ({ text, cls: 'text-highlight font-medium' });
-const p = (text: string): Token => ({ text, cls: 'text-ink2' });
-const s = (text: string): Token => ({ text, cls: 'text-spark' });
-const o = (text: string): Token => ({ text, cls: 'text-ink2' });
-const c = (text: string): Token => ({ text, cls: 'text-ink3 italic' });
+const k = (text: string): Token => ({ text, cls: 'text-cobrand font-medium' });
+const p = (text: string): Token => ({ text, cls: 'text-ink-muted' });
+const s = (text: string): Token => ({ text, cls: 'text-brand' });
+const o = (text: string): Token => ({ text, cls: 'text-ink-muted' });
+const c = (text: string): Token => ({ text, cls: 'text-ink-faint italic' });
 const v = (text: string): Token => ({ text, cls: 'text-ink' });

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
+import { Eyebrow } from '@/components/ui/Eyebrow';
 
 /* ──────────────────────────────────────────────────────────────────────────
    WorkflowsDemo, vertical card-stack execution.
@@ -73,27 +74,27 @@ function BranchCard({
   const done = status === 'done';
 
   const border =
-    running ? 'border-spark' : done ? 'border-success/55' : 'border-rule2';
+    running ? 'border-brand' : done ? 'border-ok/55' : 'border-field';
   const tone =
-    running ? 'text-spark' : done ? 'text-success' : 'text-ink3';
+    running ? 'text-brand' : done ? 'text-ok' : 'text-ink-faint';
 
   return (
     <motion.div
       animate={{
         scale: running ? 1.03 : 1,
         boxShadow: running
-          ? '0 0 0 1px rgb(var(--c-spark) / 0.3), 0 0 14px rgb(var(--c-spark) / 0.28)'
+          ? '0 0 0 1px rgb(var(--brand) / 0.3), 0 0 14px rgb(var(--brand) / 0.28)'
           : '0 0 0 0 transparent',
       }}
       transition={{ duration: 0.25 }}
-      className={`relative flex-1 min-w-0 bg-bg/60 border ${border} rounded-md px-3 py-2.5 transition-colors duration-200`}
+      className={`relative flex-1 min-w-0 bg-surface/60 border ${border} rounded-md px-3 py-2.5 transition-colors duration-200`}
     >
-      <div className={`font-mono text-[10px] uppercase tracking-eyebrow ${tone}`}>
+      <div className={`font-mono text-micro uppercase tracking-eyebrow ${tone}`}>
         {label}
       </div>
-      <div className="font-mono text-[11px] text-ink2 mt-1 truncate">{model}</div>
+      <div className="font-mono text-eyebrow text-ink-muted mt-1 truncate">{model}</div>
       <div className="flex items-center justify-between mt-2">
-        <span className="font-mono text-[10px] text-ink3 tabular-nums">
+        <span className="font-mono text-micro text-ink-faint tabular-nums">
           {done || running ? `${(ms / 1000).toFixed(1)}s` : '-'}
         </span>
         <StatusBadge status={status} delay={delay} small />
@@ -104,7 +105,7 @@ function BranchCard({
 
 /* ── Video branch with live kling-v3 → wan-2.7 fallback ──────────────────── */
 
-type VideoSub = 'pending' | 'kling-run' | 'kling-fail' | 'wan-run' | 'wan-done';
+type VideoSub = 'pending' | 'kling-run' | 'kling-danger' | 'wan-run' | 'wan-done';
 
 function FallbackBranchCard({
   status,
@@ -126,7 +127,7 @@ function FallbackBranchCard({
     }
     // status === 'running', start kling, fail mid-run, fall back to wan
     setSub('kling-run');
-    const t1 = setTimeout(() => setSub('kling-fail'), 650);
+    const t1 = setTimeout(() => setSub('kling-danger'), 650);
     const t2 = setTimeout(() => setSub('wan-run'), 1000);
     return () => {
       clearTimeout(t1);
@@ -134,7 +135,7 @@ function FallbackBranchCard({
     };
   }, [status]);
 
-  const failing = sub === 'kling-fail';
+  const failing = sub === 'kling-danger';
   const onFallback = sub === 'wan-run' || sub === 'wan-done';
   const running = sub === 'kling-run' || sub === 'wan-run';
   const done = sub === 'wan-done';
@@ -142,34 +143,34 @@ function FallbackBranchCard({
     sub === 'wan-run' || sub === 'wan-done' ? 'wan-2.7' : 'kling-v3';
 
   const border = failing
-    ? 'border-fail'
+    ? 'border-danger'
     : running
-      ? 'border-spark'
+      ? 'border-brand'
       : done
-        ? 'border-success/55'
-        : 'border-rule2';
+        ? 'border-ok/55'
+        : 'border-field';
   const labelTone = failing
-    ? 'text-fail'
+    ? 'text-danger'
     : running
-      ? 'text-spark'
+      ? 'text-brand'
       : done
-        ? 'text-success'
-        : 'text-ink3';
+        ? 'text-ok'
+        : 'text-ink-faint';
 
   return (
     <motion.div
       animate={{
         scale: running ? 1.03 : 1,
         boxShadow: failing
-          ? '0 0 0 1px rgb(var(--c-fail) / 0.35), 0 0 14px rgb(var(--c-fail) / 0.25)'
+          ? '0 0 0 1px rgb(var(--danger) / 0.35), 0 0 14px rgb(var(--danger) / 0.25)'
           : running
-            ? '0 0 0 1px rgb(var(--c-spark) / 0.3), 0 0 14px rgb(var(--c-spark) / 0.28)'
+            ? '0 0 0 1px rgb(var(--brand) / 0.3), 0 0 14px rgb(var(--brand) / 0.28)'
             : '0 0 0 0 transparent',
       }}
       transition={{ duration: 0.25 }}
-      className={`relative flex-1 min-w-0 bg-bg/60 border ${border} rounded-md px-3 py-2.5 transition-colors duration-200`}
+      className={`relative flex-1 min-w-0 bg-surface/60 border ${border} rounded-md px-3 py-2.5 transition-colors duration-200`}
     >
-      <div className={`font-mono text-[10px] uppercase tracking-eyebrow ${labelTone} flex items-center gap-1.5`}>
+      <div className={`font-mono text-micro uppercase tracking-eyebrow ${labelTone} flex items-center gap-1.5`}>
         <span>video</span>
         <AnimatePresence>
           {onFallback && (
@@ -179,7 +180,7 @@ function FallbackBranchCard({
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.18 }}
-              className="font-mono text-[8.5px] text-success bg-success/15 border border-success/40 px-1.5 py-px rounded-sm normal-case tracking-normal"
+              className="font-mono text-[8.5px] text-ok bg-ok/15 border border-ok/40 px-1.5 py-px rounded-sm normal-case tracking-normal"
             >
               ↳ fallback
             </motion.span>
@@ -196,8 +197,8 @@ function FallbackBranchCard({
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -12, opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className={`absolute inset-0 font-mono text-[11px] truncate ${
-              failing ? 'text-fail line-through' : 'text-ink2'
+            className={`absolute inset-0 font-mono text-eyebrow truncate ${
+              failing ? 'text-danger line-through' : 'text-ink-muted'
             }`}
           >
             {model}
@@ -207,8 +208,8 @@ function FallbackBranchCard({
 
       <div className="flex items-center justify-between mt-2">
         <span
-          className={`font-mono text-[10px] tabular-nums ${
-            failing ? 'text-fail' : 'text-ink3'
+          className={`font-mono text-micro tabular-nums ${
+            failing ? 'text-danger' : 'text-ink-faint'
           }`}
         >
           {failing ? '503 ✗' : done ? '2.6s' : running ? '…' : '-'}
@@ -221,14 +222,14 @@ function FallbackBranchCard({
 
 function FallbackBadge({ sub, delay = 0 }: { sub: VideoSub; delay?: number }) {
   const size = 'w-3 h-3 text-[8px]';
-  if (sub === 'kling-fail') {
+  if (sub === 'kling-danger') {
     return (
       <motion.span
         key="fail"
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.18 }}
-        className={`inline-flex items-center justify-center ${size} rounded-full bg-fail text-bg font-bold`}
+        className={`inline-flex items-center justify-center ${size} rounded-full bg-danger text-surface font-bold`}
         aria-hidden
       >
         ✗
@@ -242,7 +243,7 @@ function FallbackBadge({ sub, delay = 0 }: { sub: VideoSub; delay?: number }) {
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.2, delay }}
-        className={`inline-flex items-center justify-center ${size} rounded-full bg-success text-bg font-bold`}
+        className={`inline-flex items-center justify-center ${size} rounded-full bg-ok text-surface font-bold`}
         aria-hidden
       >
         ✓
@@ -252,14 +253,14 @@ function FallbackBadge({ sub, delay = 0 }: { sub: VideoSub; delay?: number }) {
   if (sub === 'kling-run' || sub === 'wan-run') {
     return (
       <motion.span
-        className={`inline-block ${size} rounded-full border-2 border-spark border-t-transparent`}
+        className={`inline-block ${size} rounded-full border-2 border-brand border-t-transparent`}
         animate={{ rotate: 360 }}
         transition={{ duration: 0.9, repeat: Infinity, ease: 'linear' }}
         aria-hidden
       />
     );
   }
-  return <span className={`inline-block w-1.5 h-1.5 rounded-full bg-rule2`} aria-hidden />;
+  return <span className={`inline-block w-1.5 h-1.5 rounded-full bg-field`} aria-hidden />;
 }
 
 /* ── Status badge, spinner while running, ✓ when done ──────────────────── */
@@ -273,7 +274,7 @@ function StatusBadge({
   delay?: number;
   small?: boolean;
 }) {
-  const size = small ? 'w-3 h-3 text-[8px]' : 'w-4 h-4 text-[9px]';
+  const size = small ? 'w-3 h-3 text-[8px]' : 'w-4 h-4 text-micro';
 
   if (status === 'done') {
     return (
@@ -282,7 +283,7 @@ function StatusBadge({
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.2, delay }}
-        className={`inline-flex items-center justify-center ${size} rounded-full bg-success text-bg font-bold`}
+        className={`inline-flex items-center justify-center ${size} rounded-full bg-ok text-surface font-bold`}
         aria-hidden
       >
         ✓
@@ -292,7 +293,7 @@ function StatusBadge({
   if (status === 'running') {
     return (
       <motion.span
-        className={`inline-block ${size} rounded-full border-2 border-spark border-t-transparent`}
+        className={`inline-block ${size} rounded-full border-2 border-brand border-t-transparent`}
         animate={{ rotate: 360 }}
         transition={{ duration: 0.9, repeat: Infinity, ease: 'linear' }}
         aria-hidden
@@ -301,7 +302,7 @@ function StatusBadge({
   }
   return (
     <span
-      className={`inline-block ${small ? 'w-1.5 h-1.5' : 'w-2 h-2'} rounded-full bg-rule2`}
+      className={`inline-block ${small ? 'w-1.5 h-1.5' : 'w-2 h-2'} rounded-full bg-field`}
       aria-hidden
     />
   );
@@ -327,21 +328,21 @@ function StepRow({
     <motion.div
       animate={{ opacity: dim ? 0.55 : 1 }}
       transition={{ duration: 0.3 }}
-      className="relative flex items-stretch gap-3 px-4 py-3.5 border-b border-rule2 last:border-b-0"
+      className="relative flex items-stretch gap-3 px-4 py-3.5 border-b border-field last:border-b-0"
     >
       {/* Rail dot (left) */}
       <div className="relative flex flex-col items-center w-5 shrink-0 pt-1">
         <motion.span
           className={`relative inline-block w-2.5 h-2.5 rounded-full ${
             status === 'running'
-              ? 'bg-spark'
+              ? 'bg-brand'
               : status === 'done'
-              ? 'bg-success'
-              : 'bg-rule2'
+              ? 'bg-ok'
+              : 'bg-field'
           }`}
           animate={
             status === 'running'
-              ? { boxShadow: ['0 0 0 0 rgb(var(--c-spark)/0.5)', '0 0 0 6px rgb(var(--c-spark)/0)', '0 0 0 0 rgb(var(--c-spark)/0)'] }
+              ? { boxShadow: ['0 0 0 0 rgb(var(--brand)/0.5)', '0 0 0 6px rgb(var(--brand)/0)', '0 0 0 0 rgb(var(--brand)/0)'] }
               : { boxShadow: '0 0 0 0 transparent' }
           }
           transition={
@@ -354,16 +355,14 @@ function StepRow({
         <span
           aria-hidden
           className={`flex-1 w-px mt-1 ${
-            status === 'done' ? 'bg-success/40' : 'bg-rule2'
+            status === 'done' ? 'bg-ok/40' : 'bg-field'
           }`}
         />
       </div>
 
       {/* Body */}
       <div className="flex-1 min-w-0">
-        <div className="font-mono text-[9.5px] uppercase tracking-eyebrow text-ink3 mb-1">
-          step · 0{index + 1}
-        </div>
+        <Eyebrow size="sm" tone="ink-faint" className="mb-1">step · 0{index + 1}</Eyebrow>
         {children}
       </div>
     </motion.div>
@@ -413,28 +412,26 @@ export function WorkflowsDemo() {
       {/* Ambient glow */}
       <div
         aria-hidden
-        className="absolute -inset-6 -z-10 rounded-[24px] bg-gradient-to-tr from-spark/[0.10] via-transparent to-spark/[0.05] blur-2xl"
+        className="absolute -inset-6 -z-10 rounded-[24px] bg-gradient-to-tr from-brand/[0.10] via-transparent to-brand/[0.05] blur-2xl"
       />
 
-      <div className="bg-surface border border-rule2 rounded-md overflow-hidden">
+      <div className="bg-surface-raised border border-field rounded-md overflow-hidden">
         {/* Header */}
-        <div className="flex items-center justify-between px-4 py-3 border-b border-rule2 bg-bg/40">
+        <div className="flex items-center justify-between px-4 py-3 border-b border-field bg-surface/40">
           <div className="flex items-center gap-2">
-            <span className="inline-block w-1.5 h-1.5 rounded-full bg-spark animate-pulse" aria-hidden />
-            <span className="font-mono text-[10px] uppercase tracking-eyebrow text-ink2">
-              WORKFLOW · LIVE
-            </span>
+            <span className="inline-block w-1.5 h-1.5 rounded-full bg-brand animate-pulse" aria-hidden />
+            <Eyebrow as="span" size="sm" tone="ink-muted">WORKFLOW · LIVE</Eyebrow>
           </div>
           <PhaseLabel phase={phase} />
         </div>
 
         {/* Step stack */}
-        <div className="bg-surface/40">
+        <div className="bg-surface-raised/40">
           <StepRow index={0} step="input" phase={phase}>
             <div className="flex items-center justify-between gap-3">
               <div className="min-w-0">
-                <div className="font-mono text-[12px] text-ink truncate">INPUT</div>
-                <div className="font-mono text-[10.5px] text-ink3 mt-0.5 truncate">
+                <div className="font-mono text-caption text-ink truncate">INPUT</div>
+                <div className="font-mono text-micro text-ink-faint mt-0.5 truncate">
                   2 portraits · Person1.png · Person2.png
                 </div>
               </div>
@@ -452,7 +449,7 @@ export function WorkflowsDemo() {
                 ].map((p) => (
                   <span
                     key={p.label}
-                    className="w-11 h-11 rounded-md overflow-hidden bg-bg/60 border border-rule2 shrink-0"
+                    className="w-11 h-11 rounded-md overflow-hidden bg-surface/60 border border-field shrink-0"
                     aria-label={`${p.label}.png`}
                   >
                     {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -474,8 +471,8 @@ export function WorkflowsDemo() {
           <StepRow index={1} step="enhance" phase={phase}>
             <div className="flex items-center justify-between gap-2">
               <div className="min-w-0">
-                <div className="font-mono text-[12px] text-ink truncate">enhance</div>
-                <div className="font-mono text-[10.5px] text-ink3 mt-0.5 truncate">
+                <div className="font-mono text-caption text-ink truncate">enhance</div>
+                <div className="font-mono text-micro text-ink-faint mt-0.5 truncate">
                   gpt-4o · 0.4s · $0.001
                 </div>
               </div>
@@ -485,9 +482,9 @@ export function WorkflowsDemo() {
 
           <StepRow index={2} step="parallel" phase={phase}>
             <div className="flex items-center justify-between gap-2 mb-2.5">
-              <div className="font-mono text-[12px] text-ink flex items-center gap-2">
+              <div className="font-mono text-caption text-ink flex items-center gap-2">
                 <span>⋯ parallel</span>
-                <span className="font-mono text-[10px] text-ink3">3 branches</span>
+                <span className="font-mono text-micro text-ink-faint">3 branches</span>
               </div>
               <StatusBadge status={parallelS} />
             </div>
@@ -516,8 +513,8 @@ export function WorkflowsDemo() {
           <StepRow index={3} step="merge" phase={phase}>
             <div className="flex items-center justify-between gap-2">
               <div className="min-w-0">
-                <div className="font-mono text-[12px] text-ink truncate">merge</div>
-                <div className="font-mono text-[10.5px] text-ink3 mt-0.5 truncate">
+                <div className="font-mono text-caption text-ink truncate">merge</div>
+                <div className="font-mono text-micro text-ink-faint mt-0.5 truncate">
                   compose · 0.2s
                 </div>
               </div>
@@ -528,15 +525,15 @@ export function WorkflowsDemo() {
           <StepRow index={4} step="output" phase={phase}>
             <div className="flex items-center justify-between gap-3">
               <div className="min-w-0">
-                <div className="font-mono text-[12px] text-ink truncate">OUTPUT</div>
-                <div className="font-mono text-[10.5px] text-ink3 mt-0.5 truncate">
+                <div className="font-mono text-caption text-ink truncate">OUTPUT</div>
+                <div className="font-mono text-micro text-ink-faint mt-0.5 truncate">
                   the-last-hold.mp4 · 15s · 720p · 16:9
                 </div>
               </div>
               <div className="flex items-center gap-2 shrink-0 ml-auto">
                 {/* Real flow output: the-last-hold-video preview frame */}
                 <span
-                  className="relative w-[72px] h-11 rounded-md overflow-hidden bg-bg/60 border border-rule2 shrink-0"
+                  className="relative w-[72px] h-11 rounded-md overflow-hidden bg-surface/60 border border-field shrink-0"
                   aria-label="the-last-hold.mp4 preview"
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -549,10 +546,10 @@ export function WorkflowsDemo() {
                     loading="lazy"
                   />
                   <span
-                    className="absolute inset-0 flex items-center justify-center bg-bg/30"
+                    className="absolute inset-0 flex items-center justify-center bg-surface/30"
                     aria-hidden
                   >
-                    <span className="w-4 h-4 rounded-full bg-bg/80 backdrop-blur-sm flex items-center justify-center text-ink text-[8px] leading-none pl-px">
+                    <span className="w-4 h-4 rounded-full bg-surface/80 backdrop-blur-sm flex items-center justify-center text-ink text-[8px] leading-none pl-px">
                       ▶
                     </span>
                   </span>
@@ -568,7 +565,7 @@ export function WorkflowsDemo() {
       </div>
 
       {/* Caption */}
-      <div className="mt-3 font-mono text-[10px] uppercase tracking-eyebrow text-ink3 text-center lg:text-left">
+      <div className="mt-3 font-mono text-micro uppercase tracking-eyebrow text-ink-faint text-center lg:text-left">
         five models · one call · one trace · zero glue code
       </div>
     </div>
@@ -588,9 +585,9 @@ function PhaseLabel({ phase }: { phase: Phase }) {
     : 'done · 6.2s · trace_8f2a';
 
   const tone =
-    phase === 'idle' ? 'text-ink3'
-    : phase === 'done' ? 'text-success'
-    : 'text-spark';
+    phase === 'idle' ? 'text-ink-faint'
+    : phase === 'done' ? 'text-ok'
+    : 'text-brand';
 
   return (
     <AnimatePresence mode="wait">
@@ -600,7 +597,7 @@ function PhaseLabel({ phase }: { phase: Phase }) {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -4 }}
         transition={{ duration: 0.16 }}
-        className={`font-mono text-[10px] uppercase tracking-eyebrow ${tone} flex items-center gap-1.5`}
+        className={`font-mono text-micro uppercase tracking-eyebrow ${tone} flex items-center gap-1.5`}
       >
         {text}
         {(phase === 'input' || phase === 'enhance' || phase === 'merge' || phase === 'output') && (
@@ -617,7 +614,7 @@ function TraceFooter({ phase }: { phase: Phase }) {
   const showTrace = phase === 'done';
 
   return (
-    <div className="relative border-t border-rule2 bg-bg/40 px-4 py-2.5 overflow-hidden">
+    <div className="relative border-t border-field bg-surface/40 px-4 py-2.5 overflow-hidden">
       <AnimatePresence mode="wait">
         <motion.div
           key={showTrace ? 'trace' : 'idle'}
@@ -625,27 +622,27 @@ function TraceFooter({ phase }: { phase: Phase }) {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -4 }}
           transition={{ duration: 0.14 }}
-          className="flex items-center gap-3 font-mono text-[10px]"
+          className="flex items-center gap-3 font-mono text-micro"
         >
           {showTrace ? (
             <>
-              <span className="text-success">✓</span>
-              <span className="text-ink3 uppercase tracking-eyebrow whitespace-nowrap">
+              <span className="text-ok">✓</span>
+              <span className="text-ink-faint uppercase tracking-eyebrow whitespace-nowrap">
                 trace · 5 steps
               </span>
-              <span className="text-ink2 truncate flex-1">
-                enhance · flux-2 · <span className="text-fail line-through">kling-v3</span>{' '}
-                <span className="text-success">↳ wan-2.7</span> · eleven-v3 · compose
+              <span className="text-ink-muted truncate flex-1">
+                enhance · flux-2 · <span className="text-danger line-through">kling-v3</span>{' '}
+                <span className="text-ok">↳ wan-2.7</span> · eleven-v3 · compose
               </span>
-              <span className="text-spark tabular-nums shrink-0">Σ $0.175</span>
+              <span className="text-brand tabular-nums shrink-0">Σ $0.175</span>
             </>
           ) : (
             <>
-              <span className="inline-block w-1 h-1 rounded-full bg-spark animate-pulse" aria-hidden />
-              <span className="text-ink3 uppercase tracking-eyebrow">
+              <span className="inline-block w-1 h-1 rounded-full bg-brand animate-pulse" aria-hidden />
+              <span className="text-ink-faint uppercase tracking-eyebrow">
                 each(&quot;the-last-hold-video&quot;)
               </span>
-              <span className="ml-auto text-ink3 normal-case tracking-normal">
+              <span className="ml-auto text-ink-faint normal-case tracking-normal">
                 5 steps · v3.2 · 1 trace
               </span>
             </>

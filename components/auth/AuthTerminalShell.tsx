@@ -49,16 +49,16 @@ export function AuthTerminalShell({
         transition={{ duration: 0.4, ease: easeOutExpo }}
         style={{ transformOrigin: 'bottom left', pointerEvents: minimized ? 'none' : 'auto' }}
         aria-hidden={minimized}
-        className="fixed inset-0 z-40 flex flex-col bg-bg font-mono text-ink"
+        className="fixed inset-0 z-40 flex flex-col bg-surface font-mono text-ink"
       >
-        <header className="flex items-center gap-4 px-4 sm:px-6 h-11 border-b border-rule2 bg-surface select-none">
+        <header className="flex items-center gap-4 px-4 sm:px-6 h-11 border-b border-field bg-surface-raised select-none">
           <div className="flex items-center gap-2 shrink-0 group/traffic">
             <DotLink href={homeHref} color="red" title="Close · home" />
             <DotLink href={yellow} color="yellow" title="Close · brand mode" />
             <DotButton onClick={() => setMinimized(true)} color="green" title="Minimize" />
           </div>
 
-          <div className="hidden sm:block text-[11px] uppercase tracking-eyebrow text-ink3 shrink-0">
+          <div className="hidden sm:block text-eyebrow uppercase tracking-eyebrow text-ink-faint shrink-0">
             each@labs · zsh
           </div>
 
@@ -68,28 +68,36 @@ export function AuthTerminalShell({
                 key={t.href}
                 href={t.href}
                 className={[
-                  'inline-flex items-center px-3 h-8 self-center rounded-sm text-[12px] transition-colors',
+                  'inline-flex items-center px-3 h-8 self-center rounded-sm text-caption transition-colors',
                   t.active
-                    ? 'bg-bg text-ink border border-rule2 border-b-transparent'
-                    : 'text-ink3 hover:text-ink hover:bg-bg/60',
+                    ? 'bg-surface text-ink border border-field border-b-transparent'
+                    : 'text-ink-faint hover:text-ink hover:bg-surface/60',
                 ].join(' ')}
               >
-                {t.active && <span className="text-spark mr-1.5">▸</span>}
+                {t.active && <span className="text-brand mr-1.5">▸</span>}
                 {t.label}
               </Link>
             ))}
           </nav>
 
-          <div className="ml-auto flex items-center shrink-0 [&_button]:size-7 [&_button_svg]:size-3.5">
+          <div className="ml-auto flex items-center gap-2 shrink-0 [&_button]:size-7 [&_button_svg]:size-3.5">
+            <Link
+              href={yellow}
+              title="Switch to brand mode"
+              className="hidden sm:inline-flex items-center gap-1.5 h-7 px-2.5 rounded-sm font-mono text-micro uppercase tracking-eyebrow text-ink-faint hover:text-ink hover:bg-surface/60 transition-colors"
+            >
+              <span aria-hidden className="size-1.5 rounded-full bg-glow" />
+              Human mode
+            </Link>
             <ThemeToggle />
           </div>
         </header>
 
-        <div className="px-4 sm:px-6 h-8 flex items-center border-b border-rule2 text-[11.5px] text-ink3">
-          <span className="text-success">●</span>
+        <div className="px-4 sm:px-6 h-8 flex items-center border-b border-field text-eyebrow text-ink-faint">
+          <span className="text-ok">●</span>
           <span className="ml-2">
-            <span className="text-ink2">{cwd}</span>
-            <span className="text-spark"> ↗</span>
+            <span className="text-ink-muted">{cwd}</span>
+            <span className="text-brand"> ↗</span>
           </span>
         </div>
 
@@ -97,12 +105,12 @@ export function AuthTerminalShell({
           <div className="w-full max-w-[760px]">{children}</div>
         </main>
 
-        <footer className="flex items-center justify-between gap-4 px-4 sm:px-6 h-8 border-t border-rule2 bg-surface text-[10.5px] uppercase tracking-eyebrow text-ink3 select-none">
+        <footer className="flex items-center justify-between gap-4 px-4 sm:px-6 h-8 border-t border-field bg-surface-raised text-micro uppercase tracking-eyebrow text-ink-faint select-none">
           <span>
-            <span className="text-success">●</span> 99.99% ops
+            <span className="text-ok">●</span> 99.99% ops
           </span>
           <span className="hidden sm:inline">
-            [<span className="text-ink2">↑↓</span>] move · [<span className="text-ink2">↵</span>] confirm
+            [<span className="text-ink-muted">↑↓</span>] move · [<span className="text-ink-muted">↵</span>] confirm
           </span>
           <span>each::labs · 2026</span>
         </footer>
@@ -132,9 +140,9 @@ export function AuthTerminalShell({
 export type DotColor = 'red' | 'yellow' | 'green';
 
 const DOT_COLOR: Record<DotColor, string> = {
-  red: 'bg-fail/80 hover:bg-fail',
-  yellow: 'bg-sun/80 hover:bg-sun',
-  green: 'bg-success/80 hover:bg-success',
+  red: 'bg-danger/80 hover:bg-danger',
+  yellow: 'bg-glow/80 hover:bg-glow',
+  green: 'bg-ok/80 hover:bg-ok',
 };
 
 /* macOS-style hover glyphs. Stay invisible until the traffic-light cluster
@@ -270,16 +278,16 @@ export function MinimizedWindow({
 }) {
   return (
     <div
-      className="rounded-md border border-rule2 bg-surface shadow-[0_18px_40px_-12px_rgb(0_0_0_/_0.45)] overflow-hidden w-[260px] hover:border-spark/60 transition-colors group"
+      className="rounded-md border border-field bg-surface-raised shadow-[0_18px_40px_-12px_rgb(0_0_0_/_0.45)] overflow-hidden w-[260px] hover:border-brand/60 transition-colors group"
       role="dialog"
       aria-label="Minimized terminal"
     >
-      <div className="flex items-center gap-2 px-2.5 py-2 bg-bg border-b border-rule2">
+      <div className="flex items-center gap-2 px-2.5 py-2 bg-surface border-b border-field">
         <Link
           href={homeHref}
           aria-label="Close · home"
           title="Close · home"
-          className="size-2 rounded-full bg-fail/80 hover:bg-fail text-black/55 hover:text-black/80 transition-colors inline-flex items-center justify-center"
+          className="size-2 rounded-full bg-danger/80 hover:bg-danger text-black/55 hover:text-black/80 transition-colors inline-flex items-center justify-center"
         >
           <DotIcon color="red" className="size-1.5" />
         </Link>
@@ -288,7 +296,7 @@ export function MinimizedWindow({
             href={brandHref}
             aria-label="Close · brand mode"
             title="Close · brand mode"
-            className="size-2 rounded-full bg-sun/80 hover:bg-sun text-black/55 hover:text-black/80 transition-colors inline-flex items-center justify-center"
+            className="size-2 rounded-full bg-glow/80 hover:bg-glow text-black/55 hover:text-black/80 transition-colors inline-flex items-center justify-center"
           >
             <DotIcon color="yellow" className="size-1.5" />
           </Link>
@@ -299,7 +307,7 @@ export function MinimizedWindow({
             aria-disabled
             aria-label="Disabled"
             title="Disabled"
-            className="size-2 rounded-full bg-sun/30 text-black/30 cursor-not-allowed inline-flex items-center justify-center"
+            className="size-2 rounded-full bg-glow/30 text-black/30 cursor-not-allowed inline-flex items-center justify-center"
           >
             <DotIcon color="yellow" className="size-1.5" />
           </button>
@@ -309,29 +317,29 @@ export function MinimizedWindow({
           onClick={onRestore}
           aria-label="Restore"
           title="Restore"
-          className="size-2 rounded-full bg-success/80 hover:bg-success text-black/55 hover:text-black/80 transition-colors inline-flex items-center justify-center"
+          className="size-2 rounded-full bg-ok/80 hover:bg-ok text-black/55 hover:text-black/80 transition-colors inline-flex items-center justify-center"
         >
           <DotIcon color="green" className="size-1.5" />
         </button>
-        <span className="ml-1.5 font-mono text-[9px] uppercase tracking-eyebrow text-ink3 truncate flex-1">
+        <span className="ml-1.5 font-mono text-micro uppercase tracking-eyebrow text-ink-faint truncate flex-1">
           {cwd}
         </span>
       </div>
       <button
         type="button"
         onClick={onRestore}
-        className="w-full text-left px-3 py-2.5 font-mono text-[10.5px] leading-[1.75] text-ink2 hover:bg-spark/[0.05] transition-colors"
+        className="w-full text-left px-3 py-2.5 font-mono text-micro leading-[1.75] text-ink-muted hover:bg-brand/[0.05] transition-colors"
       >
         <div className="flex items-center gap-1.5">
           <span aria-hidden className="relative flex size-1.5">
-            <span className="absolute inset-0 rounded-full bg-success/60 animate-ping" />
-            <span className="relative inline-flex size-1.5 rounded-full bg-success" />
+            <span className="absolute inset-0 rounded-full bg-ok/60 animate-ping" />
+            <span className="relative inline-flex size-1.5 rounded-full bg-ok" />
           </span>
-          <span className="text-success uppercase tracking-eyebrow text-[9px]">session active</span>
+          <span className="text-ok uppercase tracking-eyebrow text-micro">session active</span>
         </div>
-        <div className="text-ink3 mt-1.5">$ each auth · running…</div>
-        <div className="text-spark">
-          ▸ click to restore<span aria-hidden className="inline-block w-1.5 h-3 bg-spark/80 ml-1 align-middle animate-pulse" />
+        <div className="text-ink-faint mt-1.5">$ each auth · running…</div>
+        <div className="text-brand">
+          ▸ click to restore<span aria-hidden className="inline-block w-1.5 h-3 bg-brand/80 ml-1 align-middle animate-pulse" />
         </div>
       </button>
     </div>

@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Search, ArrowUp, ArrowDown } from 'lucide-react';
 import { MODEL_PRICES, type Modality } from '@/lib/modelPricing';
+import { Eyebrow } from '@/components/ui/Eyebrow';
 
 const PRESET_BUDGETS = [10, 50, 100, 500, 1000];
 const MODALITIES: Modality[] = ['VIDEO', 'IMAGE', 'AUDIO'];
@@ -19,17 +20,17 @@ type SortKey =
 type SortDir = 'asc' | 'desc';
 
 const TYPE_COLOR: Record<Modality, string> = {
-  VIDEO: 'rgb(var(--c-highlight))',
-  IMAGE: 'rgb(var(--c-success))',
-  AUDIO: 'rgb(var(--c-yellow))',
+  VIDEO: 'rgb(var(--cobrand))',
+  IMAGE: 'rgb(var(--ok))',
+  AUDIO: 'rgb(var(--caution))',
 };
 
 // Keep the section's accent backdrop consistent with §01 above it. Switching
 // tints per modality made the two sections feel like different pages.
 const TYPE_TINT: Record<Modality, string> = {
-  VIDEO: 'rgb(var(--c-spark) / 0.05)',
-  IMAGE: 'rgb(var(--c-spark) / 0.05)',
-  AUDIO: 'rgb(var(--c-spark) / 0.05)',
+  VIDEO: 'rgb(var(--brand) / 0.05)',
+  IMAGE: 'rgb(var(--brand) / 0.05)',
+  AUDIO: 'rgb(var(--brand) / 0.05)',
 };
 
 function formatPrice(p: number): string {
@@ -96,7 +97,7 @@ export function PricingCalculator() {
         : <ArrowDown size={10} />;
 
   return (
-    <section className="relative border-t border-rule overflow-hidden">
+    <section className="relative border-t border-divider overflow-hidden">
       {/* Soft accent backdrop matching active modality */}
       <div
         aria-hidden
@@ -108,13 +109,11 @@ export function PricingCalculator() {
 
       <div className="container py-24 md:py-28 relative">
         {/* Header */}
-        <div className="font-mono text-[11px] uppercase tracking-eyebrow text-spark mb-3">
-          ● MODEL PRICING DETAIL
-        </div>
-        <h2 className="font-display font-semibold text-[34px] md:text-[48px] leading-[1.05] tracking-tightest text-ink max-w-[820px]">
-          Choose a budget. <span className="text-ink3 italic">Check how many times you can run each model.</span>
+        <Eyebrow className="mb-3">● MODEL PRICING DETAIL</Eyebrow>
+        <h2 className="font-sans font-semibold text-h2 md:text-display leading-[1.05] tracking-tightest text-ink max-w-[820px]">
+          Choose a budget. <span className="text-ink-faint italic">Check how many times you can run each model.</span>
         </h2>
-        <p className="text-ink2 text-[14px] leading-[1.6] mt-5 max-w-[640px]">
+        <p className="text-ink-muted text-body leading-[1.6] mt-5 max-w-[640px]">
           Prices are approximate per run; final cost depends on inputs (duration, resolution, mode).
           No markup on inference, provider price is your price.
         </p>
@@ -123,19 +122,19 @@ export function PricingCalculator() {
         <div className="mt-10 grid grid-cols-1 md:grid-cols-[1fr_auto] gap-6 items-start">
           {/* Budget */}
           <div>
-            <label className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3 block mb-3">
+            <label className="font-mono text-micro uppercase tracking-eyebrow text-ink-faint block mb-3">
               YOUR BUDGET (USD)
             </label>
             <div className="flex flex-wrap items-center gap-2">
               <div className="relative">
-                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-ink3 font-mono">$</span>
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-faint font-mono">$</span>
                 <input
                   type="number"
                   min={1}
                   step={1}
                   value={budget}
                   onChange={(e) => setBudget(Math.max(1, parseInt(e.target.value || '1', 10)))}
-                  className="w-32 pl-7 pr-3 py-2 bg-surface border border-rule2 rounded-md text-ink tabular-nums font-mono text-[14px] focus:outline-none focus:border-spark/60"
+                  className="w-32 pl-7 pr-3 py-2 bg-surface-raised border border-field rounded-md text-ink tabular-nums font-mono text-body focus:outline-none focus:border-brand/60"
                 />
               </div>
               {PRESET_BUDGETS.map((p) => (
@@ -144,10 +143,10 @@ export function PricingCalculator() {
                   type="button"
                   onClick={() => setBudget(p)}
                   className={[
-                    'px-3 py-2 rounded-md font-mono text-[12px] border transition-colors',
+                    'px-3 py-2 rounded-md font-mono text-caption border transition-colors',
                     budget === p
-                      ? 'bg-spark text-white border-spark'
-                      : 'bg-surface border-rule2 text-ink2 hover:text-ink hover:border-spark/40',
+                      ? 'bg-brand text-on-brand border-brand'
+                      : 'bg-surface-raised border-field text-ink-muted hover:text-ink hover:border-brand/40',
                   ].join(' ')}
                 >
                   ${p}
@@ -158,7 +157,7 @@ export function PricingCalculator() {
 
           {/* Modality + search */}
           <div>
-            <label className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3 block mb-3">
+            <label className="font-mono text-micro uppercase tracking-eyebrow text-ink-faint block mb-3">
               MODALITY
             </label>
             <div className="flex items-center gap-2">
@@ -170,10 +169,10 @@ export function PricingCalculator() {
                     type="button"
                     onClick={() => setModality(m)}
                     className={[
-                      'px-3.5 py-2 rounded-md font-mono text-[11px] uppercase tracking-eyebrow border transition-colors',
+                      'px-3.5 py-2 rounded-md font-mono text-eyebrow uppercase tracking-eyebrow border transition-colors',
                       active
-                        ? 'bg-spark text-white border-spark'
-                        : 'bg-surface border-rule2 text-ink2 hover:text-ink hover:border-spark/40',
+                        ? 'bg-brand text-on-brand border-brand'
+                        : 'bg-surface-raised border-field text-ink-muted hover:text-ink hover:border-brand/40',
                     ].join(' ')}
                   >
                     {m}
@@ -186,24 +185,24 @@ export function PricingCalculator() {
 
         {/* Search */}
         <div className="mt-6 relative max-w-[420px]">
-          <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-ink3" aria-hidden />
+          <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-faint" aria-hidden />
           <input
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="filter, provider or model name…"
             aria-label="Filter models"
-            className="w-full pl-9 pr-3 py-2 bg-surface border border-rule2 rounded-md text-ink placeholder:text-ink3 font-mono text-[12.5px] focus:outline-none focus:border-spark/60"
+            className="w-full pl-9 pr-3 py-2 bg-surface-raised border border-field rounded-md text-ink placeholder:text-ink-faint font-mono text-caption focus:outline-none focus:border-brand/60"
           />
         </div>
 
         {/* Disclaimer */}
         <p
           role="note"
-          className="mt-6 px-4 py-3 bg-surface border border-rule2 rounded-md font-mono text-[11.5px] leading-[1.55] text-ink2"
+          className="mt-6 px-4 py-3 bg-surface-raised border border-field rounded-md font-mono text-eyebrow leading-[1.55] text-ink-muted"
         >
-          <span className="text-spark">●</span>{' '}
-          <span className="uppercase tracking-eyebrow text-ink3 text-[10px]">Disclaimer</span>{' '}
+          <span className="text-brand">●</span>{' '}
+          <span className="uppercase tracking-eyebrow text-ink-faint text-micro">Disclaimer</span>{' '}
           <span className="ml-1">
             Model prices may vary depending on provider updates, usage type, and prompt requirements.
             What the provider charges is what you pay, we don&rsquo;t mark up inference.
@@ -211,9 +210,9 @@ export function PricingCalculator() {
         </p>
 
         {/* Table */}
-        <div className="mt-8 bg-surface border border-rule2 rounded-md overflow-hidden">
+        <div className="mt-8 bg-surface-raised border border-field rounded-md overflow-hidden">
           {/* Header row */}
-          <div className="grid grid-cols-[1fr_2fr_70px_60px_70px_100px_100px_90px] gap-3 md:gap-4 px-4 md:px-5 py-3 border-b border-rule2 bg-bg/40 font-mono text-[10px] uppercase tracking-eyebrow text-ink3">
+          <div className="grid grid-cols-[1fr_2fr_70px_60px_70px_100px_100px_90px] gap-3 md:gap-4 px-4 md:px-5 py-3 border-b border-field bg-surface/40 font-mono text-micro uppercase tracking-eyebrow text-ink-faint">
             <button
               type="button"
               onClick={() => toggleSort('provider')}
@@ -283,7 +282,7 @@ export function PricingCalculator() {
           {/* Rows */}
           <div className="max-h-[640px] overflow-y-auto no-scrollbar">
             {filtered.length === 0 ? (
-              <div className="p-10 text-center font-mono text-[12px] text-ink3">
+              <div className="p-10 text-center font-mono text-caption text-ink-faint">
                 No models match, try a different filter or modality.
               </div>
             ) : (
@@ -296,19 +295,19 @@ export function PricingCalculator() {
                     initial={{ opacity: 0, y: 4 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.22, delay: Math.min(i * 0.012, 0.18) }}
-                    className="grid grid-cols-[1fr_2fr_70px_60px_70px_100px_100px_90px] gap-3 md:gap-4 px-4 md:px-5 py-3 border-b border-rule/60 last:border-b-0 hover:bg-bg/40 font-mono text-[12.5px] items-center"
+                    className="grid grid-cols-[1fr_2fr_70px_60px_70px_100px_100px_90px] gap-3 md:gap-4 px-4 md:px-5 py-3 border-b border-divider/60 last:border-b-0 hover:bg-surface/40 font-mono text-caption items-center"
                   >
-                    <span className="text-ink2 truncate">{m.provider}</span>
+                    <span className="text-ink-muted truncate">{m.provider}</span>
                     <span className="text-ink truncate">{m.model}</span>
-                    <span className="text-ink3">{m.quality}</span>
-                    <span className="text-ink3">{m.type}</span>
-                    <span className="text-ink3">{m.duration}</span>
-                    <span className="text-right tabular-nums text-ink3">
+                    <span className="text-ink-faint">{m.quality}</span>
+                    <span className="text-ink-faint">{m.type}</span>
+                    <span className="text-ink-faint">{m.duration}</span>
+                    <span className="text-right tabular-nums text-ink-faint">
                       {formatPrice(m.price)}
                     </span>
                     <span className="text-right tabular-nums font-semibold" style={{ color: accent }}>
                       {formatPrice(m.price)}
-                      <span className="ml-1.5 text-spark">=</span>
+                      <span className="ml-1.5 text-brand">=</span>
                     </span>
                     <span className="text-right tabular-nums text-ink font-semibold">
                       {formatRuns(runs)}
@@ -320,7 +319,7 @@ export function PricingCalculator() {
           </div>
         </div>
 
-        <p className="mt-4 font-mono text-[10px] text-ink3 text-center">
+        <p className="mt-4 font-mono text-micro text-ink-faint text-center">
           {filtered.length} of {MODEL_PRICES.filter((p) => p.modality === modality).length} {modality.toLowerCase()} models · sorted by {sortKey} ({sortDir})
         </p>
       </div>

@@ -3,21 +3,14 @@
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import type { VisualKey } from '@/lib/problems';
+import { Eyebrow } from '@/components/ui/Eyebrow';
 
 /* ──────────────────────────────────────────────────────────────────────────
    Common shell + primitives
 ────────────────────────────────────────────────────────────────────────── */
 
 const SHELL =
-  'bg-bg border border-rule2 rounded-md min-h-[300px] p-5 md:p-6 flex flex-col justify-center overflow-hidden relative';
-
-function Eyebrow({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3">
-      {children}
-    </div>
-  );
-}
+  'bg-surface border border-field rounded-md min-h-[300px] p-5 md:p-6 flex flex-col justify-center overflow-hidden relative';
 
 function StatusPill({
   text,
@@ -29,14 +22,14 @@ function StatusPill({
   pulse?: boolean;
 }) {
   const cls = {
-    ok:    'border-success/60 text-success bg-success/10',
-    fail:  'border-fail/60 text-fail bg-fail/10',
-    warn:  'border-yellow/60 text-yellow bg-yellow/10',
-    muted: 'border-rule2 text-ink3 bg-bg',
+    ok:    'border-ok/60 text-ok bg-ok/10',
+    fail:  'border-danger/60 text-danger bg-danger/10',
+    warn:  'border-caution/60 text-caution bg-caution/10',
+    muted: 'border-field text-ink-faint bg-surface',
   }[tone];
   return (
     <span
-      className={`inline-flex items-center font-mono text-[10px] uppercase tracking-eyebrow px-2 py-0.5 border rounded-md whitespace-nowrap ${cls} ${
+      className={`inline-flex items-center font-mono text-micro uppercase tracking-eyebrow px-2 py-0.5 border rounded-md whitespace-nowrap ${cls} ${
         pulse ? 'animate-pulse' : ''
       }`}
     >
@@ -48,7 +41,7 @@ function StatusPill({
 function Cursor() {
   return (
     <motion.span
-      className="inline-block w-1.5 h-3 bg-spark align-middle ml-0.5"
+      className="inline-block w-1.5 h-3 bg-brand align-middle ml-0.5"
       animate={{ opacity: [1, 0, 1] }}
       transition={{ duration: 1.0, repeat: Infinity }}
       aria-hidden
@@ -63,9 +56,9 @@ function Cursor() {
 function FallbackVisual() {
   return (
     <div className={SHELL}>
-      <Eyebrow>POST /v1/run · request flow</Eyebrow>
+      <Eyebrow size="sm" tone="ink-faint">POST /v1/run · request flow</Eyebrow>
 
-      <div className="mt-4 flex flex-col gap-3 font-mono text-[12px]">
+      <div className="mt-4 flex flex-col gap-3 font-mono text-caption">
         {/* Primary endpoint */}
         <Endpoint
           name="kling-v3-12v"
@@ -81,7 +74,7 @@ function FallbackVisual() {
 
         {/* Down arrow */}
         <motion.div
-          className="self-start ml-3 text-spark text-[14px] -my-1"
+          className="self-start ml-3 text-brand text-body -my-1"
           animate={{ opacity: [0, 0, 1, 1, 0] }}
           transition={{ duration: 4, times: [0, 0.4, 0.5, 0.85, 1], repeat: Infinity }}
         >
@@ -102,7 +95,7 @@ function FallbackVisual() {
         />
       </div>
 
-      <div className="mt-4 font-mono text-[10px] text-ink3">
+      <div className="mt-4 font-mono text-micro text-ink-faint">
         <Cursor /> recovered in 124ms · user latency unchanged
       </div>
     </div>
@@ -126,14 +119,14 @@ function Endpoint({
 
   const codeKeyframes = statuses.map((s) => s.code);
   const toneColors = statuses.map((s) =>
-    s.tone === 'ok' ? 'rgb(var(--c-success))'
-    : s.tone === 'fail' ? 'rgb(var(--c-fail))'
-    : 'rgb(var(--c-ink3))'
+    s.tone === 'ok' ? 'rgb(var(--ok))'
+    : s.tone === 'fail' ? 'rgb(var(--danger))'
+    : 'rgb(var(--ink-faint))'
   );
 
   return (
-    <div className="flex items-center gap-3 px-3 py-2.5 bg-surface border border-rule2 rounded-md">
-      <span className="text-ink3 text-[10px] uppercase tracking-eyebrow w-16 shrink-0">{role}</span>
+    <div className="flex items-center gap-3 px-3 py-2.5 bg-surface-raised border border-field rounded-md">
+      <span className="text-ink-faint text-micro uppercase tracking-eyebrow w-16 shrink-0">{role}</span>
       <span className="text-ink flex-1 truncate">{name}</span>
 
       {/* Packet trail */}
@@ -141,7 +134,7 @@ function Endpoint({
         {[0, 1, 2].map((i) => (
           <motion.span
             key={i}
-            className="absolute top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-spark"
+            className="absolute top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-brand"
             initial={{ left: '0%', opacity: 0 }}
             animate={{
               left: ['0%', '100%'],
@@ -157,7 +150,7 @@ function Endpoint({
 
       {/* Status badge */}
       <motion.span
-        className="inline-flex items-center font-mono text-[10px] uppercase tracking-eyebrow px-2 py-0.5 border rounded-md whitespace-nowrap"
+        className="inline-flex items-center font-mono text-micro uppercase tracking-eyebrow px-2 py-0.5 border rounded-md whitespace-nowrap"
         animate={{ color: toneColors, borderColor: toneColors }}
         transition={{ duration: 4, times: [0, 0.4, 0.65, 1], repeat: Infinity }}
       >
@@ -226,8 +219,8 @@ function LatencyVisual() {
   return (
     <div className={SHELL}>
       <div className="flex items-center justify-between">
-        <Eyebrow>p95 / 30s window</Eyebrow>
-        <span className="font-mono text-[10px] text-spark">threshold: 800ms</span>
+        <Eyebrow size="sm" tone="ink-faint">p95 / 30s window</Eyebrow>
+        <span className="font-mono text-micro text-brand">threshold: 800ms</span>
       </div>
 
       {/* Provider A */}
@@ -249,7 +242,7 @@ function LatencyVisual() {
         secondary
       />
 
-      <div className="font-mono text-[10px] text-ink3 mt-3">
+      <div className="font-mono text-micro text-ink-faint mt-3">
         <Cursor /> auto-spilled at 18:42:11
       </div>
     </div>
@@ -272,12 +265,12 @@ function Histogram({
   secondary?: boolean;
 }) {
   const colors = breachKeyframes.map((b) =>
-    b ? 'rgb(var(--c-fail))' : 'rgb(var(--c-success))',
+    b ? 'rgb(var(--danger))' : 'rgb(var(--ok))',
   );
   return (
     <div className="mt-4">
-      <div className="flex items-center justify-between mb-1.5 font-mono text-[10px]">
-        <span className="text-ink2">{label}</span>
+      <div className="flex items-center justify-between mb-1.5 font-mono text-micro">
+        <span className="text-ink-muted">{label}</span>
         <motion.span
           className="text-ink"
           animate={{ color: colors }}
@@ -301,7 +294,7 @@ function Histogram({
       <div className="relative h-12 flex items-end gap-1">
         {/* threshold line */}
         <span
-          className="absolute left-0 right-0 border-t border-dashed border-spark/40"
+          className="absolute left-0 right-0 border-t border-dashed border-brand/40"
           style={{ top: `${100 - threshold}%` }}
         />
         {bars.map((h, i) => (
@@ -313,7 +306,7 @@ function Histogram({
             animate={{
               height: `${h}%`,
               backgroundColor: secondary
-                ? colors.map(() => 'rgb(var(--c-success))')
+                ? colors.map(() => 'rgb(var(--ok))')
                 : colors,
               opacity: secondary
                 ? [0.2, 0.2, 1, 1]
@@ -339,9 +332,9 @@ function ABVisual() {
   return (
     <div className={SHELL}>
       <div className="flex items-center justify-between">
-        <Eyebrow>experiment: kling-v3-vs-v2</Eyebrow>
+        <Eyebrow size="sm" tone="ink-faint">experiment: kling-v3-vs-v2</Eyebrow>
         <motion.span
-          className="font-mono text-[10px] text-success"
+          className="font-mono text-micro text-ok"
           initial={{ opacity: 0 }}
           animate={{ opacity: [0, 0, 1, 1] }}
           transition={{ duration: 3, times: [0, 0.6, 0.7, 1], repeat: Infinity, repeatDelay: 1 }}
@@ -350,7 +343,7 @@ function ABVisual() {
         </motion.span>
       </div>
 
-      <div className="mt-5 grid grid-cols-2 gap-6 font-mono text-[12px]">
+      <div className="mt-5 grid grid-cols-2 gap-6 font-mono text-caption">
         <ABColumn label="kling-v3" calls={5238} quality={91} winner />
         <ABColumn label="kling-v2" calls={5219} quality={82} />
       </div>
@@ -372,10 +365,10 @@ function ABColumn({
   return (
     <div className="flex flex-col gap-2">
       <div className="flex items-center justify-between">
-        <span className={winner ? 'text-spark' : 'text-ink2'}>{label}</span>
+        <span className={winner ? 'text-brand' : 'text-ink-muted'}>{label}</span>
         {winner && (
           <motion.span
-            className="text-success text-[14px] leading-none"
+            className="text-ok text-body leading-none"
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 1.2 }}
@@ -386,22 +379,22 @@ function ABColumn({
         )}
       </div>
       {/* Calls counter */}
-      <div className="text-[16px] text-ink tabular-nums">
+      <div className="text-body-lg text-ink tabular-nums">
         <Counter to={calls} duration={1.4} />
-        <span className="text-ink3 text-[10px] ml-1">calls</span>
+        <span className="text-ink-faint text-micro ml-1">calls</span>
       </div>
       {/* Quality bar */}
-      <div className="h-2 bg-surface2 rounded-full overflow-hidden">
+      <div className="h-2 bg-surface-sunken rounded-full overflow-hidden">
         <motion.div
-          className={`h-full ${winner ? 'bg-spark' : 'bg-ink2/40'} rounded-full`}
+          className={`h-full ${winner ? 'bg-brand' : 'bg-ink-muted/40'} rounded-full`}
           initial={{ width: '0%' }}
           animate={{ width: `${quality}%` }}
           transition={{ duration: 1.2, delay: winner ? 0.1 : 0.3, ease: [0.16, 1, 0.3, 1] }}
         />
       </div>
-      <div className="flex items-baseline justify-between text-[10px]">
-        <span className="text-ink3">quality</span>
-        <span className={winner ? 'text-spark' : 'text-ink2'}>{quality}%</span>
+      <div className="flex items-baseline justify-between text-micro">
+        <span className="text-ink-faint">quality</span>
+        <span className={winner ? 'text-brand' : 'text-ink-muted'}>{quality}%</span>
       </div>
     </div>
   );
@@ -435,10 +428,10 @@ function AttributionVisual() {
   ];
   return (
     <div className={SHELL}>
-      <Eyebrow>attributes · runtime tagging</Eyebrow>
+      <Eyebrow size="sm" tone="ink-faint">attributes · runtime tagging</Eyebrow>
 
-      <div className="mt-4 font-mono text-[12px] leading-[1.85]">
-        <div className="text-ink3">{'{'}</div>
+      <div className="mt-4 font-mono text-caption leading-[1.85]">
+        <div className="text-ink-faint">{'{'}</div>
         {lines.map((line) => (
           <motion.div
             key={line.key}
@@ -447,17 +440,17 @@ function AttributionVisual() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: line.baseDelay, duration: 0.35, ease: 'easeOut' }}
           >
-            <span className="text-ink2">{`"${line.key}"`}</span>
-            <span className="text-ink3">:</span>
-            <span className="text-spark">{line.value}</span>
-            <span className="text-ink3">,</span>
+            <span className="text-ink-muted">{`"${line.key}"`}</span>
+            <span className="text-ink-faint">:</span>
+            <span className="text-brand">{line.value}</span>
+            <span className="text-ink-faint">,</span>
           </motion.div>
         ))}
-        <div className="text-ink3">{'}'}</div>
+        <div className="text-ink-faint">{'}'}</div>
       </div>
 
       <motion.div
-        className="mt-4 font-mono text-[10px] text-success flex items-center gap-1.5"
+        className="mt-4 font-mono text-micro text-ok flex items-center gap-1.5"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.7 }}
@@ -480,20 +473,20 @@ function SlicingVisual() {
   ];
   return (
     <div className={SHELL}>
-      <Eyebrow>cost_by("tier") · 24h</Eyebrow>
+      <Eyebrow size="sm" tone="ink-faint">cost_by("tier") · 24h</Eyebrow>
 
-      <div className="mt-3 font-mono text-[11px]">
-        <div className="text-ink2">
-          <span className="text-spark">SELECT</span> tier, $/call, calls
+      <div className="mt-3 font-mono text-eyebrow">
+        <div className="text-ink-muted">
+          <span className="text-brand">SELECT</span> tier, $/call, calls
         </div>
-        <div className="text-ink2">
-          <span className="text-spark">FROM</span> traces <span className="text-ink3">--</span> n=4.3M
+        <div className="text-ink-muted">
+          <span className="text-brand">FROM</span> traces <span className="text-ink-faint">--</span> n=4.3M
         </div>
       </div>
 
-      <div className="mt-3 border-t border-rule2 pt-3 flex flex-col gap-2 font-mono text-[11px]">
+      <div className="mt-3 border-t border-field pt-3 flex flex-col gap-2 font-mono text-eyebrow">
         {/* Header */}
-        <div className="grid grid-cols-[60px_1fr_60px_50px] gap-3 text-ink3 uppercase tracking-eyebrow text-[9px]">
+        <div className="grid grid-cols-[60px_1fr_60px_50px] gap-3 text-ink-faint uppercase tracking-eyebrow text-micro">
           <span>tier</span>
           <span>distribution</span>
           <span className="text-right">$/call</span>
@@ -508,21 +501,21 @@ function SlicingVisual() {
             transition={{ duration: 0.35, delay: 0.3 + i * 0.18 }}
           >
             <span className="text-ink">{r.tier}</span>
-            <div className="h-3 bg-surface2 rounded-sm overflow-hidden">
+            <div className="h-3 bg-surface-sunken rounded-sm overflow-hidden">
               <motion.div
-                className="h-full bg-spark/80 rounded-sm"
+                className="h-full bg-brand/80 rounded-sm"
                 initial={{ width: 0 }}
                 animate={{ width: `${r.width}%` }}
                 transition={{ duration: 1.0, delay: 0.4 + i * 0.18, ease: [0.16, 1, 0.3, 1] }}
               />
             </div>
-            <span className="text-spark text-right">{r.cost}</span>
-            <span className="text-ink3 text-right">{r.calls}</span>
+            <span className="text-brand text-right">{r.cost}</span>
+            <span className="text-ink-faint text-right">{r.calls}</span>
           </motion.div>
         ))}
       </div>
 
-      <div className="mt-3 font-mono text-[10px] text-ink3">
+      <div className="mt-3 font-mono text-micro text-ink-faint">
         <Cursor /> screenshot → slack
       </div>
     </div>
@@ -542,16 +535,16 @@ function PipelineVisual() {
   ];
   return (
     <div className={SHELL}>
-      <Eyebrow>workflow("product-vibez") · run</Eyebrow>
+      <Eyebrow size="sm" tone="ink-faint">workflow("product-vibez") · run</Eyebrow>
 
-      <div className="mt-5 space-y-2 font-mono text-[11px]">
+      <div className="mt-5 space-y-2 font-mono text-eyebrow">
         {steps.map((s, i) => (
           <PipelineStep key={s.name} idx={i + 1} step={s} />
         ))}
       </div>
 
-      <div className="mt-3 font-mono text-[10px] text-ink3 flex items-center gap-2">
-        <span className="text-success">✓</span> total: 7.4s · resumed from cache · no double-bill
+      <div className="mt-3 font-mono text-micro text-ink-faint flex items-center gap-2">
+        <span className="text-ok">✓</span> total: 7.4s · resumed from cache · no double-bill
       </div>
     </div>
   );
@@ -567,21 +560,21 @@ function PipelineStep({
   const baseDelay = (idx - 1) * 0.5;
   const colors = step.failsAt
     ? [
-        'rgb(var(--c-rule2))',     // pending
-        'rgb(var(--c-fail))',      // fail
-        'rgb(var(--c-yellow))',    // retry
-        'rgb(var(--c-success))',   // ok
+        'rgb(var(--field))',     // pending
+        'rgb(var(--danger))',      // fail
+        'rgb(var(--caution))',    // retry
+        'rgb(var(--ok))',   // ok
       ]
     : [
-        'rgb(var(--c-rule2))',
-        'rgb(var(--c-success))',
-        'rgb(var(--c-success))',
-        'rgb(var(--c-success))',
+        'rgb(var(--field))',
+        'rgb(var(--ok))',
+        'rgb(var(--ok))',
+        'rgb(var(--ok))',
       ];
   return (
     <motion.div
-      className="flex items-center gap-3 px-3 py-2 bg-surface border rounded-md"
-      initial={{ borderColor: 'rgb(var(--c-rule2))' }}
+      className="flex items-center gap-3 px-3 py-2 bg-surface-raised border rounded-md"
+      initial={{ borderColor: 'rgb(var(--field))' }}
       animate={{ borderColor: colors }}
       transition={{ duration: 4, times: [0, baseDelay / 4, (baseDelay + 0.5) / 4, 1], repeat: Infinity }}
     >
@@ -605,8 +598,8 @@ function PipelineStep({
         )}
       </motion.span>
       <span className="text-ink flex-1">{step.name}</span>
-      <span className="text-ink3 hidden sm:inline">{step.model}</span>
-      <span className="text-ink2 tabular-nums w-14 text-right">{step.time}</span>
+      <span className="text-ink-faint hidden sm:inline">{step.model}</span>
+      <span className="text-ink-muted tabular-nums w-14 text-right">{step.time}</span>
     </motion.div>
   );
 }
@@ -640,18 +633,18 @@ function SwapVisual() {
 
   return (
     <div className={SHELL}>
-      <Eyebrow>each("…", input)</Eyebrow>
+      <Eyebrow size="sm" tone="ink-faint">each("…", input)</Eyebrow>
 
-      <div className="mt-5 bg-surface border border-rule2 rounded-md px-4 py-4 font-mono text-[14px]">
+      <div className="mt-5 bg-surface-raised border border-field rounded-md px-4 py-4 font-mono text-body">
         <div className="flex items-center gap-1.5 flex-wrap">
-          <span className="text-ink3">each(</span>
+          <span className="text-ink-faint">each(</span>
           {/* mode="wait" guarantees the old name is fully gone before the
               new one renders, so the two never overlap on screen. */}
           <span className="relative inline-block min-w-[160px] h-[22px] overflow-hidden">
             <AnimatePresence mode="wait" initial={false}>
               <motion.span
                 key={active.name}
-                className="absolute inset-0 text-spark whitespace-nowrap"
+                className="absolute inset-0 text-brand whitespace-nowrap"
                 initial={{ opacity: 0, y: 6 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -6 }}
@@ -661,8 +654,8 @@ function SwapVisual() {
               </motion.span>
             </AnimatePresence>
           </span>
-          <span className="text-ink3">, input</span>
-          <span className="text-ink3">)</span>
+          <span className="text-ink-faint">, input</span>
+          <span className="text-ink-faint">)</span>
         </div>
       </div>
 
@@ -673,10 +666,10 @@ function SwapVisual() {
           return (
             <div
               key={i}
-              className={`px-2 py-1.5 rounded-md border text-[10px] uppercase tracking-eyebrow text-center transition-colors duration-200 ${
+              className={`px-2 py-1.5 rounded-md border text-micro uppercase tracking-eyebrow text-center transition-colors duration-200 ${
                 isActive
-                  ? 'border-spark text-spark'
-                  : 'border-rule2 text-ink3'
+                  ? 'border-brand text-brand'
+                  : 'border-field text-ink-faint'
               }`}
             >
               {m.tag}
@@ -685,7 +678,7 @@ function SwapVisual() {
         })}
       </div>
 
-      <div className="mt-4 font-mono text-[10px] text-ink3 text-center">
+      <div className="mt-4 font-mono text-micro text-ink-faint text-center">
         600+ models · 4 modalities · same call signature
       </div>
     </div>
@@ -705,16 +698,16 @@ function RollbackVisual() {
 
   return (
     <div className={SHELL}>
-      <Eyebrow>$ workflow log · product-vibez</Eyebrow>
+      <Eyebrow size="sm" tone="ink-faint">$ workflow log · product-vibez</Eyebrow>
 
-      <div className="mt-4 font-mono text-[11.5px] flex flex-col gap-3">
+      <div className="mt-4 font-mono text-eyebrow flex flex-col gap-3">
         {commits.map((c, i) => (
           <CommitRow key={c.v} commit={c} idx={i} />
         ))}
       </div>
 
       <motion.div
-        className="mt-4 font-mono text-[11px] flex items-center gap-2 text-success"
+        className="mt-4 font-mono text-eyebrow flex items-center gap-2 text-ok"
         animate={{ opacity: [0, 0, 1, 1] }}
         transition={{ duration: 4, times: [0, 0.5, 0.65, 1], repeat: Infinity }}
       >
@@ -732,22 +725,22 @@ function CommitRow({
   idx: number;
 }) {
   const dotColor = commit.tone === 'fail'
-    ? 'rgb(var(--c-fail))'
+    ? 'rgb(var(--danger))'
     : commit.tone === 'ok'
-      ? 'rgb(var(--c-success))'
-      : 'rgb(var(--c-ink3))';
+      ? 'rgb(var(--ok))'
+      : 'rgb(var(--ink-faint))';
 
   return (
     <div className="flex items-start gap-3">
       {/* Track + dot */}
       <div className="relative w-3 flex flex-col items-center">
-        {idx !== 0 && <span className="absolute -top-3 bottom-1/2 w-px bg-rule2 left-1/2" />}
-        {idx !== 2 && <span className="absolute top-1/2 -bottom-3 w-px bg-rule2 left-1/2" />}
+        {idx !== 0 && <span className="absolute -top-3 bottom-1/2 w-px bg-field left-1/2" />}
+        {idx !== 2 && <span className="absolute top-1/2 -bottom-3 w-px bg-field left-1/2" />}
         <span
           className="w-2.5 h-2.5 rounded-full border-2 mt-1.5"
           style={{
             borderColor: dotColor,
-            backgroundColor: 'rgb(var(--c-bg))',
+            backgroundColor: 'rgb(var(--surface-raised))',
           }}
         />
       </div>
@@ -756,21 +749,21 @@ function CommitRow({
       <div className="flex-1 flex items-baseline gap-2 flex-wrap">
         <span className="text-ink font-semibold tabular-nums">{commit.v}</span>
         <motion.span
-          className="font-mono text-[9px] uppercase tracking-eyebrow px-1.5 py-0.5 border rounded"
+          className="font-mono text-micro uppercase tracking-eyebrow px-1.5 py-0.5 border rounded"
           animate={{
             opacity: commit.headAt.map((on) => (on ? 1 : 0)),
             borderColor: commit.tone === 'fail'
-              ? 'rgb(var(--c-fail))'
-              : 'rgb(var(--c-spark))',
+              ? 'rgb(var(--danger))'
+              : 'rgb(var(--brand))',
             color: commit.tone === 'fail'
-              ? 'rgb(var(--c-fail))'
-              : 'rgb(var(--c-spark))',
+              ? 'rgb(var(--danger))'
+              : 'rgb(var(--brand))',
           }}
           transition={{ duration: 4, times: [0, 0.4, 0.6, 1], repeat: Infinity }}
         >
           HEAD
         </motion.span>
-        <span className="text-ink2">{commit.msg}</span>
+        <span className="text-ink-muted">{commit.msg}</span>
       </div>
     </div>
   );

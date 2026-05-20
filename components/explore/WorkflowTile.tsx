@@ -32,9 +32,9 @@ export function WorkflowTile({ workflow }: { workflow: WorkflowSummary }) {
         el.style.setProperty('--mx', `${e.clientX - r.left}px`);
         el.style.setProperty('--my', `${e.clientY - r.top}px`);
       }}
-      className="ec-card group relative block aspect-[4/5] rounded-lg overflow-hidden bg-surface no-underline"
+      className="ec-card group relative block aspect-[4/5] rounded-lg overflow-hidden bg-surface-raised no-underline"
     >
-      <div className="ec-card-media absolute inset-0 bg-gradient-to-br from-surface2 via-surface to-surface2">
+      <div className="ec-card-media absolute inset-0 bg-gradient-to-br from-surface-sunken via-surface-raised to-surface-sunken">
         {workflow.thumbnail && !isVideo && (
           // eslint-disable-next-line @next/next/no-img-element
           <img
@@ -63,22 +63,22 @@ export function WorkflowTile({ workflow }: { workflow: WorkflowSummary }) {
       <div className="ec-card-scrim absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/85 via-black/45 to-transparent pointer-events-none z-[1]" />
 
       {!isTrending && (
-        <span className="absolute top-3 left-3 z-10 max-w-[60%] truncate font-mono text-[10.5px] uppercase tracking-eyebrow font-semibold px-2.5 py-1 rounded-md backdrop-blur-md bg-white/90 text-zinc-900 shadow-sm">
+        <span className="absolute top-3 left-3 z-10 max-w-[60%] truncate font-mono text-micro uppercase tracking-eyebrow font-semibold px-2.5 py-1 rounded-md backdrop-blur-md bg-white/90 text-zinc-900 shadow-sm">
           Workflow
         </span>
       )}
 
       {isTrending && (
-        <span className="absolute top-3 right-3 z-10 inline-flex items-center gap-1 font-mono text-[10.5px] uppercase tracking-eyebrow font-semibold px-2.5 py-1 rounded-md bg-spark text-white shadow-sm">
+        <span className="absolute top-3 right-3 z-10 inline-flex items-center gap-1 font-mono text-micro uppercase tracking-eyebrow font-semibold px-2.5 py-1 rounded-md bg-brand text-on-brand shadow-sm">
           ↗ trending
         </span>
       )}
 
       <div className="absolute inset-x-0 bottom-0 z-10 p-4 md:p-5 text-white">
-        <div className="font-display font-semibold text-[19px] md:text-[21px] leading-[1.1] tracking-[-0.02em] line-clamp-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.4)]">
+        <div className="font-sans font-semibold text-h4 md:text-h4 leading-[1.1] tracking-[-0.02em] line-clamp-2 drop-shadow-[0_1px_2px_rgba(0,0,0,0.4)]">
           {workflow.name}
         </div>
-        <div className="mt-1.5 flex items-center justify-between gap-2 font-mono text-[10.5px] uppercase tracking-eyebrow text-white/80">
+        <div className="mt-1.5 flex items-center justify-between gap-2 font-mono text-micro uppercase tracking-eyebrow text-white/80">
           <span className="truncate">{categories.join(' · ') || 'workflow'}</span>
           {displayedRuns > 0 && (
             <span className="shrink-0">
@@ -87,7 +87,7 @@ export function WorkflowTile({ workflow }: { workflow: WorkflowSummary }) {
           )}
         </div>
         {workflow.description && (
-          <div className="ec-card-reveal mt-2.5 text-[12px] text-white/85 leading-[1.5] line-clamp-3">
+          <div className="ec-card-reveal mt-2.5 text-caption text-white/85 leading-[1.5] line-clamp-3">
             {workflow.description}
           </div>
         )}
@@ -99,6 +99,6 @@ export function WorkflowTile({ workflow }: { workflow: WorkflowSummary }) {
 /** Skeleton placeholder, matches the 4:5 aspect of the real card. */
 export function WorkflowTileSkeleton() {
   return (
-    <div className="aspect-[4/5] rounded-lg bg-surface2 ec-skeleton ring-1 ring-rule2/60" />
+    <div className="aspect-[4/5] rounded-lg bg-surface-sunken ec-skeleton ring-1 ring-field/60" />
   );
 }

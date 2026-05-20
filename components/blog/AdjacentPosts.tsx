@@ -21,7 +21,7 @@ export function AdjacentPosts({ previous, next }: Props) {
   return (
     <nav
       aria-label="More posts"
-      className="mt-20 pt-10 border-t border-rule grid grid-cols-1 md:grid-cols-2 gap-4"
+      className="mt-20 pt-10 border-t border-divider grid grid-cols-1 md:grid-cols-2 gap-4"
     >
       {previous ? (
         <PostLink direction="prev" post={previous} />
@@ -49,13 +49,13 @@ function PostLink({
     <Link
       href={`/blog/${post.slug}`}
       className={[
-        'group block rounded-md border border-rule2 bg-surface p-5 transition-colors hover:border-ink/30',
+        'group block rounded-md border border-field bg-surface-raised p-5 transition-colors hover:border-ink/30',
         isPrev ? 'md:text-left' : 'md:text-right',
       ].join(' ')}
     >
       <div
         className={[
-          'flex items-center gap-1.5 font-mono text-[10.5px] uppercase tracking-eyebrow text-ink3',
+          'flex items-center gap-1.5 font-mono text-micro uppercase tracking-eyebrow text-ink-faint',
           isPrev ? '' : 'md:justify-end',
         ].join(' ')}
       >
@@ -76,7 +76,7 @@ function PostLink({
             src={post.featureImage}
             alt=""
             className={[
-              'w-20 h-20 sm:w-24 sm:h-24 rounded-md object-cover border border-rule2 flex-shrink-0',
+              'w-20 h-20 sm:w-24 sm:h-24 rounded-md object-cover border border-field flex-shrink-0',
               isPrev ? '' : 'order-2',
             ].join(' ')}
             loading="lazy"
@@ -103,7 +103,7 @@ function CardBody({
     <>
       <h3
         className={[
-          'font-display font-semibold text-[16px] sm:text-[18px] leading-[1.25] tracking-tight text-ink group-hover:text-spark transition-colors line-clamp-3',
+          'font-sans font-semibold text-body-lg sm:text-h4 leading-[1.25] tracking-tight text-ink group-hover:text-brand transition-colors line-clamp-3',
           alignRight ? 'md:text-right' : '',
         ].join(' ')}
       >
@@ -111,7 +111,7 @@ function CardBody({
       </h3>
       <div
         className={[
-          'mt-2 font-mono text-[10px] uppercase tracking-eyebrow text-ink3 flex flex-wrap gap-x-2 gap-y-1',
+          'mt-2 font-mono text-micro uppercase tracking-eyebrow text-ink-faint flex flex-wrap gap-x-2 gap-y-1',
           alignRight ? 'md:justify-end' : '',
         ].join(' ')}
       >

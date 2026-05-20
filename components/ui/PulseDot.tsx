@@ -5,7 +5,7 @@ type Props = { className?: string; color?: 'success' | 'bg' };
  * black-on-orange variant in the ticker.
  */
 export function PulseDot({ className = '', color = 'success' }: Props) {
-  const fill = color === 'success' ? 'bg-success' : 'bg-bg';
+  const fill = color === 'success' ? 'bg-ok' : 'bg-surface';
   return (
     <span
       aria-hidden

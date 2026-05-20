@@ -11,19 +11,19 @@ const MOTD = [
 export function SignupTerminal() {
   return (
     <AuthTerminalShell
-      cwd="~/each-auth/signup"
-      brandHref="/signup?ui=brand"
+      cwd="~/each-auth/sign-up"
+      brandHref="/sign-up?ui=brand"
       tabs={[
-        { label: 'signin', href: '/signin?ui=terminal' },
-        { label: 'signup', href: '/signup?ui=terminal', active: true },
+        { label: 'Sign in', href: '/sign-in?ui=terminal' },
+        { label: 'Sign up', href: '/sign-up?ui=terminal', active: true },
       ]}
     >
-      <pre className="font-mono text-[13.5px] leading-[1.85] text-ink2 whitespace-pre-wrap">
+      <pre className="font-mono text-body-sm leading-[1.85] text-ink-muted whitespace-pre-wrap">
 {`$ each auth signup --new
 `}
-        <span className="text-success">✓</span>{' checking availability'}<span className="text-ink3">............</span> <span className="text-success">ok</span>
+        <span className="text-ok">✓</span>{' checking availability'}<span className="text-ink-faint">............</span> <span className="text-ok">ok</span>
 {'\n'}
-        <span className="text-success">✓</span>{' provisioning workspace'}<span className="text-ink3">..........</span> <span className="text-success">ok</span>
+        <span className="text-ok">✓</span>{' provisioning workspace'}<span className="text-ink-faint">..........</span> <span className="text-ok">ok</span>
 {'\n'}
       </pre>
 
@@ -31,15 +31,15 @@ export function SignupTerminal() {
         <AuthTerminalAuth mode="signup" redirectTo="/onboarding?theme=terminal" />
       </div>
 
-      <div className="mt-10 border-t border-rule2 pt-5">
-        <div className="text-[11px] uppercase tracking-eyebrow text-ink3">
+      <div className="mt-10 border-t border-field pt-5">
+        <div className="text-eyebrow uppercase tracking-eyebrow text-ink-faint">
           ──── tail -f motd ─────────────────────────────────────────
         </div>
-        <ul className="mt-3 font-mono text-[12.5px] leading-[1.9] text-ink2 space-y-0.5">
+        <ul className="mt-3 font-mono text-caption leading-[1.9] text-ink-muted space-y-0.5">
           {MOTD.map((m) => (
             <li key={m.ts}>
-              <span className="text-ink3">[{m.ts}]</span>{' '}
-              <span className={m.tone === 'spark' ? 'text-spark' : m.tone === 'success' ? 'text-success' : 'text-ink2'}>
+              <span className="text-ink-faint">[{m.ts}]</span>{' '}
+              <span className={m.tone === 'spark' ? 'text-brand' : m.tone === 'success' ? 'text-ok' : 'text-ink-muted'}>
                 {m.text}
               </span>
             </li>
@@ -47,9 +47,9 @@ export function SignupTerminal() {
         </ul>
       </div>
 
-      <p className="mt-10 text-[12.5px] text-ink3 font-mono">
+      <p className="mt-10 text-caption text-ink-faint font-mono">
         already have a key?{' '}
-        <Link href="/signin?ui=terminal" className="text-spark hover:underline underline-offset-4">
+        <Link href="/sign-in?ui=terminal" className="text-brand hover:underline underline-offset-4">
           $ each auth login →
         </Link>
       </p>

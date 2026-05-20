@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { CatalogFamily } from '@/lib/catalog';
+import { Eyebrow } from '@/components/ui/Eyebrow';
 
 type Props = {
   providerSlug: string;
@@ -24,12 +25,8 @@ export function ProviderSidebar({
   return (
     <aside className="lg:sticky lg:top-[120px] lg:self-start space-y-1">
       <div className="flex items-center justify-between mb-3">
-        <span className="font-mono text-[11px] uppercase tracking-eyebrow text-spark">
-          * FAMILIES
-        </span>
-        <span className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3">
-          {families.length}
-        </span>
+        <Eyebrow as="span">* FAMILIES</Eyebrow>
+        <Eyebrow as="span" size="sm" tone="ink-faint">{families.length}</Eyebrow>
       </div>
 
       <FamilyRow
@@ -76,18 +73,18 @@ function FamilyRow({
       aria-current={active ? 'page' : undefined}
       className={`flex items-center justify-between rounded-md border px-3 py-2 no-underline transition-colors ${
         active
-          ? 'border-spark bg-spark/8'
-          : 'border-rule2/60 hover:border-rule2 bg-surface/50'
+          ? 'border-brand bg-brand/8'
+          : 'border-field/60 hover:border-field bg-surface-raised/50'
       }`}
     >
       <span
-        className={`text-[13px] ${active ? 'text-ink' : 'text-ink2 hover:text-ink'} ${
+        className={`text-body-sm ${active ? 'text-ink' : 'text-ink-muted hover:text-ink'} ${
           primary ? 'font-semibold' : ''
         }`}
       >
         {label}
       </span>
-      <span className={`font-mono text-[10.5px] ${active ? 'text-spark' : 'text-ink3'}`}>
+      <span className={`font-mono text-micro ${active ? 'text-brand' : 'text-ink-faint'}`}>
         {count}
       </span>
     </Link>

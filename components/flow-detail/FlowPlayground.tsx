@@ -1,4 +1,5 @@
 import type { FlowDetail, FlowInputProperty } from '@/lib/flowDetail';
+import { Eyebrow } from '@/components/ui/Eyebrow';
 
 type Props = { flow: FlowDetail };
 
@@ -33,25 +34,21 @@ export function FlowPlayground({ flow }: Props) {
   if (entries.length === 0) return null;
 
   return (
-    <section className="border border-rule2 rounded-md overflow-hidden">
-      <header className="px-5 py-3 border-b border-rule2 bg-surface/40 flex items-baseline justify-between">
-        <span className="font-mono text-[11px] uppercase tracking-eyebrow text-ink2">
-          Playground · what you can change
-        </span>
-        <span className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3">
-          {entries.length} input{entries.length === 1 ? '' : 's'}
-        </span>
+    <section className="border border-field rounded-md overflow-hidden">
+      <header className="px-5 py-3 border-b border-field bg-surface-raised/40 flex items-baseline justify-between">
+        <Eyebrow as="span" tone="ink-muted">Playground · what you can change</Eyebrow>
+        <Eyebrow as="span" size="sm" tone="ink-faint">{entries.length} input{entries.length === 1 ? '' : 's'}</Eyebrow>
       </header>
 
-      <div className="px-5 py-4 border-b border-rule2/60 bg-bg/40">
-        <p className="text-[13px] text-ink2 leading-[1.55]">
+      <div className="px-5 py-4 border-b border-field/60 bg-surface/40">
+        <p className="text-body-sm text-ink-muted leading-[1.55]">
           Clone this template into your workspace, then tweak any of the inputs below, or rewrite
           the step prompts, to spin up your own variation. The pipeline stays the same; the
           creative output is yours.
         </p>
       </div>
 
-      <ul className="divide-y divide-rule2">
+      <ul className="divide-y divide-field">
         {entries.map(([name, schema]) => (
           <li key={name} className="px-5 py-4">
             <InputRow name={name} schema={schema as FlowInputProperty} />
@@ -59,11 +56,9 @@ export function FlowPlayground({ flow }: Props) {
         ))}
       </ul>
 
-      <footer className="px-5 py-4 border-t border-rule2 bg-surface/30">
-        <div className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3 mb-2">
-          Ideas for your remix
-        </div>
-        <ul className="text-[13px] text-ink2 space-y-1.5 leading-[1.55]">
+      <footer className="px-5 py-4 border-t border-field bg-surface-raised/30">
+        <Eyebrow size="sm" tone="ink-faint" className="mb-2">Ideas for your remix</Eyebrow>
+        <ul className="text-body-sm text-ink-muted space-y-1.5 leading-[1.55]">
           <li>· Swap the input media to retell the story with different subjects.</li>
           <li>
             · Edit the prompt inside <span className="font-mono text-ink">{stepModels[0] ?? 'step1'}</span>{' '}
@@ -87,31 +82,27 @@ function InputRow({ name, schema }: { name: string; schema: FlowInputProperty })
     <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto] gap-x-6 gap-y-2 items-baseline">
       <div>
         <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-          <span className="text-[14px] font-medium text-ink">{name}</span>
+          <span className="text-body font-medium text-ink">{name}</span>
           {schema.required && (
-            <span className="font-mono text-[10px] uppercase tracking-eyebrow text-fail">
+            <span className="font-mono text-micro uppercase tracking-eyebrow text-danger">
               required
             </span>
           )}
           {schema.accept_multiple_files && (
-            <span className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3">
-              multi
-            </span>
+            <Eyebrow as="span" size="sm" tone="ink-faint">multi</Eyebrow>
           )}
         </div>
         {schema.description && (
-          <p className="text-[13px] text-ink2 leading-[1.5] mt-1">{schema.description}</p>
+          <p className="text-body-sm text-ink-muted leading-[1.5] mt-1">{schema.description}</p>
         )}
         {preview && (
-          <div className="font-mono text-[11px] text-ink3 mt-1.5 break-all">
-            default · <span className="text-ink2">{preview}</span>
+          <div className="font-mono text-eyebrow text-ink-faint mt-1.5 break-all">
+            default · <span className="text-ink-muted">{preview}</span>
           </div>
         )}
       </div>
       <div className="text-right shrink-0">
-        <span className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3">
-          {typeLabel}
-        </span>
+        <Eyebrow as="span" size="sm" tone="ink-faint">{typeLabel}</Eyebrow>
       </div>
     </div>
   );

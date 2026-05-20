@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Check } from 'lucide-react';
+import { Eyebrow } from '@/components/ui/Eyebrow';
 
 type Stack =
   | 'just-exploring'
@@ -64,14 +65,12 @@ export default function ContactPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
           >
-            <div className="font-mono text-[11px] uppercase tracking-eyebrow text-spark">
-              * TALK TO AN ENGINEER
-            </div>
-            <h1 className="font-display font-semibold text-[44px] sm:text-[60px] lg:text-[68px] leading-[0.98] tracking-tightest mt-6 text-ink">
+            <Eyebrow>* TALK TO AN ENGINEER</Eyebrow>
+            <h1 className="font-sans font-semibold text-display sm:text-display-lg lg:text-hero leading-[0.98] tracking-tightest mt-6 text-ink">
               Talk to a real engineer.
-              <span className="block text-ink3 italic">No sales pitch, no scripted demos.</span>
+              <span className="block text-ink-faint italic">No sales pitch, no scripted demos.</span>
             </h1>
-            <p className="text-ink2 text-[16px] leading-[1.6] max-w-[520px] mt-7">
+            <p className="text-ink-muted text-body-lg leading-[1.6] max-w-[520px] mt-7">
               Pricing questions, integration help, weird production edge cases, all of it goes
               straight to the team that built each::labs. We answer within one business day.
             </p>
@@ -82,13 +81,11 @@ export default function ContactPage() {
               <Expectation label="WHAT" body="Concrete answers with code, traces, or pricing maths. We don't pitch." />
             </ul>
 
-            <div className="mt-10 pt-8 border-t border-rule">
-              <div className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3 mb-2">
-                OR EMAIL US DIRECTLY
-              </div>
+            <div className="mt-10 pt-8 border-t border-divider">
+              <Eyebrow size="sm" tone="ink-faint" className="mb-2">OR EMAIL US DIRECTLY</Eyebrow>
               <a
                 href="mailto:support@eachlabs.ai"
-                className="text-spark text-[16px] font-medium hover:underline underline-offset-4 inline-flex items-center gap-2"
+                className="text-brand text-body-lg font-medium hover:underline underline-offset-4 inline-flex items-center gap-2"
               >
                 support@eachlabs.ai <ArrowRight size={16} />
               </a>
@@ -107,7 +104,7 @@ export default function ContactPage() {
             ) : (
               <form
                 onSubmit={onSubmit}
-                className="bg-surface border border-rule2 rounded-md p-6 md:p-8 flex flex-col gap-5"
+                className="bg-surface-raised border border-field rounded-md p-6 md:p-8 flex flex-col gap-5"
               >
                 <Field
                   label="Your name"
@@ -132,7 +129,7 @@ export default function ContactPage() {
                 />
 
                 <div className="flex flex-col gap-2">
-                  <label className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3">
+                  <label className="font-mono text-micro uppercase tracking-eyebrow text-ink-faint">
                     Where are you in the stack?
                   </label>
                   <div className="grid grid-cols-2 gap-2">
@@ -142,10 +139,10 @@ export default function ContactPage() {
                         type="button"
                         onClick={() => update('stack', opt.value)}
                         className={[
-                          'px-3 py-2.5 rounded-md text-[13px] border transition-colors text-left',
+                          'px-3 py-2.5 rounded-md text-body-sm border transition-colors text-left',
                           data.stack === opt.value
-                            ? 'bg-spark text-white border-spark'
-                            : 'bg-bg border-rule2 text-ink2 hover:text-ink hover:border-spark/40',
+                            ? 'bg-brand text-on-brand border-brand'
+                            : 'bg-surface border-field text-ink-muted hover:text-ink hover:border-brand/40',
                         ].join(' ')}
                       >
                         {opt.label}
@@ -155,9 +152,9 @@ export default function ContactPage() {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <label className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3">
+                  <label className="font-mono text-micro uppercase tracking-eyebrow text-ink-faint">
                     What do you want to talk about?
-                    <span className="text-fail ml-1" aria-hidden>*</span>
+                    <span className="text-danger ml-1" aria-hidden>*</span>
                   </label>
                   <textarea
                     required
@@ -165,26 +162,26 @@ export default function ContactPage() {
                     onChange={(e) => update('message', e.target.value)}
                     placeholder="My consumer app sees ~12% refusal rates from kling, and I want to know how the enhancer handles celebrity tokens…"
                     rows={5}
-                    className="bg-bg border border-rule2 rounded-md px-3 py-2.5 text-[14px] text-ink placeholder:text-ink3 outline-none focus:border-spark/60 transition-colors resize-none"
+                    className="bg-surface border border-field rounded-md px-3 py-2.5 text-body text-ink placeholder:text-ink-faint outline-none focus:border-brand/60 transition-colors resize-none"
                   />
                 </div>
 
                 <button
                   type="submit"
                   disabled={status === 'submitting'}
-                  className="bg-spark text-white hover:bg-ember disabled:opacity-60 disabled:cursor-not-allowed transition-colors rounded-md px-5 py-3 text-[14px] font-medium inline-flex items-center justify-center gap-2"
+                  className="bg-brand text-on-brand hover:bg-brand-deep disabled:opacity-60 disabled:cursor-not-allowed transition-colors rounded-md px-5 py-3 text-body font-medium inline-flex items-center justify-center gap-2"
                 >
                   {status === 'submitting' ? 'Sending…' : 'Send to engineering'}
                   {status !== 'submitting' && <ArrowRight size={14} />}
                 </button>
 
                 {status === 'error' && (
-                  <p className="font-mono text-[11px] text-fail">
+                  <p className="font-mono text-eyebrow text-danger">
                     Could not send. Try emailing support@eachlabs.ai directly.
                   </p>
                 )}
 
-                <p className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3 leading-relaxed">
+                <p className="font-mono text-micro uppercase tracking-eyebrow text-ink-faint leading-relaxed">
                   No SDR will call. No drip campaign. We use your email only to reply.
                 </p>
               </form>
@@ -199,10 +196,8 @@ export default function ContactPage() {
 function Expectation({ label, body }: { label: string; body: string }) {
   return (
     <li className="flex items-start gap-4">
-      <span className="font-mono text-[10px] uppercase tracking-eyebrow text-spark mt-1 w-12 shrink-0">
-        {label}
-      </span>
-      <span className="text-ink2 text-[14.5px] leading-[1.6]">{body}</span>
+      <Eyebrow as="span" size="sm" className="mt-1 w-12 shrink-0">{label}</Eyebrow>
+      <span className="text-ink-muted text-body leading-[1.6]">{body}</span>
     </li>
   );
 }
@@ -224,10 +219,10 @@ function Field({
 }) {
   return (
     <div className="flex flex-col gap-2">
-      <label className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3">
+      <label className="font-mono text-micro uppercase tracking-eyebrow text-ink-faint">
         {label}
         {required && (
-          <span className="text-fail ml-1" aria-hidden>*</span>
+          <span className="text-danger ml-1" aria-hidden>*</span>
         )}
       </label>
       <input
@@ -236,7 +231,7 @@ function Field({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="bg-bg border border-rule2 rounded-md px-3 py-2.5 text-[14px] text-ink placeholder:text-ink3 outline-none focus:border-spark/60 transition-colors"
+        className="bg-surface border border-field rounded-md px-3 py-2.5 text-body text-ink placeholder:text-ink-faint outline-none focus:border-brand/60 transition-colors"
       />
     </div>
   );
@@ -248,15 +243,15 @@ function SuccessCard() {
       initial={{ opacity: 0, scale: 0.98 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.3 }}
-      className="bg-surface border border-spark/30 rounded-md p-8 flex flex-col items-center text-center"
+      className="bg-surface-raised border border-brand/30 rounded-md p-8 flex flex-col items-center text-center"
     >
-      <div className="w-12 h-12 rounded-full bg-spark/15 flex items-center justify-center mb-5">
-        <Check className="text-spark" size={22} />
+      <div className="w-12 h-12 rounded-full bg-brand/15 flex items-center justify-center mb-5">
+        <Check className="text-brand" size={22} />
       </div>
-      <h2 className="font-display font-semibold text-[24px] text-ink leading-tight">
+      <h2 className="font-sans font-semibold text-h3 text-ink leading-tight">
         Sent to engineering.
       </h2>
-      <p className="text-ink2 text-[14.5px] leading-[1.6] mt-3 max-w-[360px]">
+      <p className="text-ink-muted text-body leading-[1.6] mt-3 max-w-[360px]">
         We read every message. Expect a reply within one business day, direct from the team
         building each::labs.
       </p>

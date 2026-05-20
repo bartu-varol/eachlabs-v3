@@ -2,85 +2,111 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Light mode (default), palette extracted from new-web-demo.vercel.app */
+/* Landing-page token set. Names are intentionally distinct from shadcn/eachlabs-web
+   tokens (background/foreground/primary/…) so the two systems can coexist
+   when the design ports into the each::labs main repo. Values stay in this
+   demo's brand palette: warm cream surface + spark-orange brand. */
 :root {
-  --c-bg: 245 242 235;
-  --c-surface: 239 235 226;
-  --c-surface2: 232 227 215;
-  --c-ink: 14 13 10;
-  --c-ink2: 58 56 50;
-  --c-ink3: 118 114 106;
-  --c-rule: 221 214 198;
-  --c-rule2: 200 194 181;
-  --c-spark: 255 60 21;
-  --c-ember: 214 51 16;
-  --c-sun: 251 144 0;
-  --c-highlight: 80 70 230;
-  --c-yellow: 201 138 0;
-  --c-success: 91 143 58;
-  --c-fail: 239 68 68;
+  /* Surfaces */
+  --surface:         245 242 235;  /* page bg */
+  --surface-raised:  239 235 226;  /* card / popover */
+  --surface-sunken:  232 227 215;  /* code, input, depressed area */
 
-  --tk-str: 214 51 16;
-  --tk-key: 118 114 106;
+  /* Text */
+  --ink:        14 13 10;
+  --ink-muted:  58 56 50;
+  --ink-faint:  118 114 106;
+
+  /* Lines & focus */
+  --divider:     221 214 198;
+  --field:       200 194 181;
+  --focus-ring:  255 60 21;
+
+  /* Brand */
+  --brand:       255 60 21;
+  --on-brand:    255 255 255;
+  --brand-deep:  214 51 16;
+  --cobrand:     80 70 230;
+  --on-cobrand:  255 255 255;
+  --glow:        251 144 0;
+  --on-glow:     14 13 10;
+
+  /* States */
+  --ok:           91 143 58;
+  --on-ok:        255 255 255;
+  --caution:      201 138 0;
+  --on-caution:   14 13 10;
+  --danger:       239 68 68;
+  --on-danger:    255 255 255;
+
+  /* Code tokens (syntax highlighting) */
+  --tk-str:  214 51 16;
+  --tk-key:  118 114 106;
   --tk-prop: 118 114 106;
 }
 
 /* System dark, applies only when user has NOT explicitly chosen */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
-    --c-bg: 0 0 0;
-    --c-surface: 10 10 10;
-    --c-surface2: 20 20 20;
-    --c-ink: 245 240 230;
-    --c-ink2: 168 163 154;
-    --c-ink3: 110 106 99;
-    --c-rule: 31 31 31;
-    --c-rule2: 42 42 42;
-    --c-yellow: 255 197 52;
-    --c-success: 34 197 94;
+    --surface:        0 0 0;
+    --surface-raised: 10 10 10;
+    --surface-sunken: 20 20 20;
 
-    --tk-str: 255 145 102;
-    --tk-key: 168 163 154;
+    --ink:        245 240 230;
+    --ink-muted:  168 163 154;
+    --ink-faint:  110 106 99;
+
+    --divider: 31 31 31;
+    --field:   42 42 42;
+
+    --ok:      34 197 94;
+    --caution: 255 197 52;
+
+    --tk-str:  255 145 102;
+    --tk-key:  168 163 154;
     --tk-prop: 168 163 154;
   }
 }
 
 /* Explicit user choice via toggle, wins over system */
 :root[data-theme="dark"] {
-  --c-bg: 0 0 0;
-  --c-surface: 10 10 10;
-  --c-surface2: 20 20 20;
-  --c-ink: 245 240 230;
-  --c-ink2: 168 163 154;
-  --c-ink3: 110 106 99;
-  --c-rule: 31 31 31;
-  --c-rule2: 42 42 42;
-  --c-yellow: 255 197 52;
-  --c-success: 34 197 94;
+  --surface:        0 0 0;
+  --surface-raised: 10 10 10;
+  --surface-sunken: 20 20 20;
 
-  --tk-str: 255 145 102;
-  --tk-key: 168 163 154;
+  --ink:        245 240 230;
+  --ink-muted:  168 163 154;
+  --ink-faint:  110 106 99;
+
+  --divider: 31 31 31;
+  --field:   42 42 42;
+
+  --ok:      34 197 94;
+  --caution: 255 197 52;
+
+  --tk-str:  255 145 102;
+  --tk-key:  168 163 154;
   --tk-prop: 168 163 154;
 }
 
 html {
-  background: rgb(var(--c-bg));
-  color: rgb(var(--c-ink));
+  background: rgb(var(--surface));
+  color: rgb(var(--ink));
   color-scheme: light dark;
   scroll-behavior: smooth;
 }
 
 body {
-  background-color: rgb(var(--c-bg));
+  background-color: rgb(var(--surface));
   /* Three soft radial pockets, spark top-left, spark mid-right, highlight bottom-center.
-     Same mesh on both modes; the underlying --c-bg gives the right tone per theme. */
+     Same mesh on both modes; the underlying --surface gives the right tone per theme. */
   background-image:
-    radial-gradient(ellipse 70% 50% at 12% -8%,  rgb(var(--c-spark)     / 0.055), transparent 60%),
-    radial-gradient(ellipse 55% 35% at 88% 38%,  rgb(var(--c-spark)     / 0.035), transparent 65%),
-    radial-gradient(ellipse 50% 40% at 50% 102%, rgb(var(--c-highlight) / 0.045), transparent 65%);
+    radial-gradient(ellipse 70% 50% at 12% -8%,  rgb(var(--brand)     / 0.055), transparent 60%),
+    radial-gradient(ellipse 55% 35% at 88% 38%,  rgb(var(--brand)     / 0.035), transparent 65%),
+    radial-gradient(ellipse 50% 40% at 50% 102%, rgb(var(--cobrand) / 0.045), transparent 65%);
   background-attachment: fixed;
   background-repeat: no-repeat;
-  color: rgb(var(--c-ink));
+  color: rgb(var(--ink));
   font-feature-settings: 'ss01', 'cv01', 'cv02';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -95,22 +121,22 @@ body {
 @media (prefers-color-scheme: light) {
   :root:not([data-theme]) body {
     background-image:
-      radial-gradient(ellipse 70% 50% at 12% -8%,  rgb(var(--c-spark)     / 0.04), transparent 65%),
-      radial-gradient(ellipse 55% 35% at 88% 38%,  rgb(var(--c-spark)     / 0.025), transparent 70%),
-      radial-gradient(ellipse 50% 40% at 50% 102%, rgb(var(--c-highlight) / 0.035), transparent 70%);
+      radial-gradient(ellipse 70% 50% at 12% -8%,  rgb(var(--brand)     / 0.04), transparent 65%),
+      radial-gradient(ellipse 55% 35% at 88% 38%,  rgb(var(--brand)     / 0.025), transparent 70%),
+      radial-gradient(ellipse 50% 40% at 50% 102%, rgb(var(--cobrand) / 0.035), transparent 70%);
   }
 }
 
 :root[data-theme="light"] body {
   background-image:
-    radial-gradient(ellipse 70% 50% at 12% -8%,  rgb(var(--c-spark)     / 0.04), transparent 65%),
-    radial-gradient(ellipse 55% 35% at 88% 38%,  rgb(var(--c-spark)     / 0.025), transparent 70%),
-    radial-gradient(ellipse 50% 40% at 50% 102%, rgb(var(--c-highlight) / 0.035), transparent 70%);
+    radial-gradient(ellipse 70% 50% at 12% -8%,  rgb(var(--brand)     / 0.04), transparent 65%),
+    radial-gradient(ellipse 55% 35% at 88% 38%,  rgb(var(--brand)     / 0.025), transparent 70%),
+    radial-gradient(ellipse 50% 40% at 50% 102%, rgb(var(--cobrand) / 0.035), transparent 70%);
 }
 
 ::selection {
-  background: rgb(var(--c-spark));
-  color: rgb(var(--c-bg));
+  background: rgb(var(--brand));
+  color: rgb(var(--surface));
 }
 
 /* Brand-mark SVGs use #060228 ink on transparent. invert + hue-rotate(180deg)
@@ -128,7 +154,7 @@ body {
   .italic-spark {
     font-style: italic;
     text-decoration: underline;
-    text-decoration-color: rgb(var(--c-spark));
+    text-decoration-color: rgb(var(--brand));
     text-decoration-thickness: 4px;
     text-underline-offset: 8px;
   }
@@ -136,7 +162,7 @@ body {
   /* Hero H1 underline, used on "AI apps" without italics */
   .hero-underline {
     text-decoration: underline;
-    text-decoration-color: rgb(var(--c-spark));
+    text-decoration-color: rgb(var(--brand));
     text-decoration-thickness: 5px;
     text-underline-offset: 10px;
   }
@@ -183,12 +209,12 @@ body {
 /* Inline code (e.g. each.run() in body copy) */
 code {
   font-family: var(--font-jetbrains-mono), ui-monospace, monospace;
-  background: rgb(var(--c-surface2));
-  border: 1px solid rgb(var(--c-rule2));
+  background: rgb(var(--surface-sunken));
+  border: 1px solid rgb(var(--field));
   padding: 0 0.3rem;
   border-radius: 4px;
   font-size: 0.9em;
-  color: rgb(var(--c-ink));
+  color: rgb(var(--ink));
 }
 
 /* Reset inline pill styling when <code> is a child of <pre> — block-level
@@ -204,26 +230,26 @@ pre code {
 /* Code-snippet panel inside the widget, uses different shell */
 pre.snippet,
 pre.snippet code {
-  background: rgb(var(--c-bg));
+  background: rgb(var(--surface));
   border: 0;
   padding: 0;
   border-radius: 0;
   font-size: 13px;
-  color: rgb(var(--c-ink));
+  color: rgb(var(--ink));
   line-height: 1.55;
 }
 
 pre.snippet .tk-key   { color: rgb(var(--tk-key)); }
 pre.snippet .tk-str   { color: rgb(var(--tk-str)); }
-pre.snippet .tk-fn    { color: rgb(var(--c-ink)); }
+pre.snippet .tk-fn    { color: rgb(var(--ink)); }
 pre.snippet .tk-num   { color: rgb(var(--tk-str)); }
-pre.snippet .tk-cmt   { color: rgb(var(--c-ink3)); font-style: italic; }
-pre.snippet .tk-punct { color: rgb(var(--c-ink3)); }
+pre.snippet .tk-cmt   { color: rgb(var(--ink-faint)); font-style: italic; }
+pre.snippet .tk-punct { color: rgb(var(--ink-faint)); }
 pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
 
 /* Focus rings */
 :where(a, button, input):focus-visible {
-  outline: 2px solid rgb(var(--c-spark));
+  outline: 2px solid rgb(var(--brand));
   outline-offset: 3px;
   border-radius: 4px;
 }
@@ -238,13 +264,13 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
 .model-readme-prose {
   font-size: 14px;
   line-height: 1.65;
-  color: rgb(var(--c-ink2));
+  color: rgb(var(--ink-muted));
 }
 .model-readme-prose h1,
 .model-readme-prose h2,
 .model-readme-prose h3 {
   font-family: var(--font-inter), system-ui, sans-serif;
-  color: rgb(var(--c-ink));
+  color: rgb(var(--ink));
   letter-spacing: -0.01em;
   margin-top: 1.25rem;
   margin-bottom: 0.5rem;
@@ -252,7 +278,7 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
 .model-readme-prose h2 { font-size: 16px; font-weight: 600; }
 .model-readme-prose h3 { font-size: 14px; font-weight: 600; }
 .model-readme-prose p { margin: 0.5rem 0; }
-.model-readme-prose strong { color: rgb(var(--c-ink)); font-weight: 600; }
+.model-readme-prose strong { color: rgb(var(--ink)); font-weight: 600; }
 .model-readme-prose ul, .model-readme-prose ol {
   margin: 0.5rem 0;
   padding-left: 1.2rem;
@@ -261,15 +287,15 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
 .model-readme-prose ol { list-style: decimal; }
 .model-readme-prose li { margin: 0.2rem 0; }
 .model-readme-prose code {
-  background: rgb(var(--c-surface2));
-  border: 1px solid rgb(var(--c-rule2));
+  background: rgb(var(--surface-sunken));
+  border: 1px solid rgb(var(--field));
   padding: 0 0.3rem;
   border-radius: 4px;
   font-size: 0.88em;
 }
 .model-readme-prose pre {
-  background: rgb(var(--c-surface));
-  border: 1px solid rgb(var(--c-rule2));
+  background: rgb(var(--surface-raised));
+  border: 1px solid rgb(var(--field));
   border-radius: 8px;
   padding: 0.9rem 1rem;
   overflow-x: auto;
@@ -278,9 +304,9 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
   line-height: 1.6;
 }
 .model-readme-prose a {
-  color: rgb(var(--c-ink));
+  color: rgb(var(--ink));
   text-decoration: underline;
-  text-decoration-color: rgb(var(--c-spark));
+  text-decoration-color: rgb(var(--brand));
   text-underline-offset: 3px;
 }
 
@@ -288,14 +314,14 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
 .catalog-readme-prose {
   font-size: 16px;
   line-height: 1.72;
-  color: rgb(var(--c-ink2));
+  color: rgb(var(--ink-muted));
 }
 
 /* Lede, first paragraph reads larger to draw the eye in. */
 .catalog-readme-prose > p:first-child {
   font-size: 19px;
   line-height: 1.55;
-  color: rgb(var(--c-ink));
+  color: rgb(var(--ink));
   letter-spacing: -0.005em;
   margin-bottom: 1.5rem;
 }
@@ -304,7 +330,7 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
 .catalog-readme-prose h3,
 .catalog-readme-prose h4 {
   font-family: var(--font-inter), system-ui, sans-serif;
-  color: rgb(var(--c-ink));
+  color: rgb(var(--ink));
   letter-spacing: -0.018em;
   font-weight: 600;
 }
@@ -314,7 +340,7 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
   margin-top: 2.75rem;
   margin-bottom: 0.85rem;
   padding-top: 1.5rem;
-  border-top: 1px solid rgb(var(--c-rule));
+  border-top: 1px solid rgb(var(--divider));
 }
 .catalog-readme-prose h2:first-child { border-top: 0; padding-top: 0; margin-top: 0; }
 .catalog-readme-prose h3 {
@@ -330,7 +356,7 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
   margin-bottom: 0.4rem;
 }
 .catalog-readme-prose p { margin: 0.8rem 0; }
-.catalog-readme-prose strong { color: rgb(var(--c-ink)); font-weight: 600; }
+.catalog-readme-prose strong { color: rgb(var(--ink)); font-weight: 600; }
 
 .catalog-readme-prose ul, .catalog-readme-prose ol {
   margin: 1rem 0;
@@ -350,22 +376,22 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
   width: 6px;
   height: 6px;
   border-radius: 2px;
-  background: rgb(var(--c-spark));
+  background: rgb(var(--brand));
 }
 .catalog-readme-prose ol { list-style: decimal; }
 .catalog-readme-prose ol > li { margin: 0.45rem 0; padding-left: 0.4rem; }
-.catalog-readme-prose ol > li::marker { color: rgb(var(--c-spark)); font-weight: 600; }
+.catalog-readme-prose ol > li::marker { color: rgb(var(--brand)); font-weight: 600; }
 
 .catalog-readme-prose code {
-  background: rgb(var(--c-surface2));
-  border: 1px solid rgb(var(--c-rule2));
+  background: rgb(var(--surface-sunken));
+  border: 1px solid rgb(var(--field));
   padding: 0 0.3rem;
   border-radius: 4px;
   font-size: 0.88em;
 }
 .catalog-readme-prose pre {
-  background: rgb(var(--c-surface));
-  border: 1px solid rgb(var(--c-rule2));
+  background: rgb(var(--surface-raised));
+  border: 1px solid rgb(var(--field));
   border-radius: 8px;
   padding: 1.05rem 1.15rem;
   overflow-x: auto;
@@ -374,19 +400,19 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
   line-height: 1.65;
 }
 .catalog-readme-prose a {
-  color: rgb(var(--c-ink));
+  color: rgb(var(--ink));
   text-decoration: underline;
-  text-decoration-color: rgb(var(--c-spark));
+  text-decoration-color: rgb(var(--brand));
   text-decoration-thickness: 1.5px;
   text-underline-offset: 3px;
 }
 .catalog-readme-prose a:hover {
-  color: rgb(var(--c-spark));
+  color: rgb(var(--brand));
 }
 
 /* FAQ answer body, DB stores HTML, mostly <p>. Match readme typography. */
 .catalog-faq-answer p { margin: 0.5rem 0; }
-.catalog-faq-answer strong { color: rgb(var(--c-ink)); font-weight: 600; }
+.catalog-faq-answer strong { color: rgb(var(--ink)); font-weight: 600; }
 .catalog-faq-answer ul, .catalog-faq-answer ol {
   margin: 0.5rem 0;
   padding-left: 1.2rem;
@@ -394,9 +420,9 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
 .catalog-faq-answer ul { list-style: disc; }
 .catalog-faq-answer ol { list-style: decimal; }
 .catalog-faq-answer a {
-  color: rgb(var(--c-ink));
+  color: rgb(var(--ink));
   text-decoration: underline;
-  text-decoration-color: rgb(var(--c-spark));
+  text-decoration-color: rgb(var(--brand));
   text-underline-offset: 3px;
 }
 
@@ -406,13 +432,13 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
 .blog-prose {
   font-size: 17px;
   line-height: 1.78;
-  color: rgb(var(--c-ink2));
+  color: rgb(var(--ink-muted));
   letter-spacing: -0.003em;
 }
 .blog-prose > p:first-of-type {
   font-size: 20px;
   line-height: 1.55;
-  color: rgb(var(--c-ink));
+  color: rgb(var(--ink));
   letter-spacing: -0.008em;
   margin-bottom: 1.75rem;
 }
@@ -420,7 +446,7 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
 .blog-prose h3,
 .blog-prose h4 {
   font-family: var(--font-inter), system-ui, sans-serif;
-  color: rgb(var(--c-ink));
+  color: rgb(var(--ink));
   letter-spacing: -0.02em;
   font-weight: 600;
   scroll-margin-top: 7.5rem;
@@ -445,7 +471,7 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
   margin-bottom: 0.45rem;
 }
 .blog-prose p { margin: 1.15rem 0; }
-.blog-prose strong { color: rgb(var(--c-ink)); font-weight: 600; }
+.blog-prose strong { color: rgb(var(--ink)); font-weight: 600; }
 .blog-prose em { font-style: italic; }
 .blog-prose ul, .blog-prose ol {
   margin: 1.25rem 0;
@@ -465,31 +491,31 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
   width: 5px;
   height: 5px;
   border-radius: 1px;
-  background: rgb(var(--c-spark));
+  background: rgb(var(--brand));
 }
 .blog-prose ol { list-style: decimal; padding-left: 1.45rem; }
 .blog-prose ol > li { margin: 0.55rem 0; padding-left: 0.35rem; }
-.blog-prose ol > li::marker { color: rgb(var(--c-ink3)); font-weight: 500; }
+.blog-prose ol > li::marker { color: rgb(var(--ink-faint)); font-weight: 500; }
 .blog-prose li > ul,
 .blog-prose li > ol { margin: 0.4rem 0; }
 .blog-prose a {
-  color: rgb(var(--c-ink));
+  color: rgb(var(--ink));
   text-decoration: underline;
-  text-decoration-color: rgb(var(--c-spark) / 0.45);
+  text-decoration-color: rgb(var(--brand) / 0.45);
   text-decoration-thickness: 1px;
   text-underline-offset: 4px;
   transition: text-decoration-color 0.15s ease, color 0.15s ease;
 }
 .blog-prose a:hover {
-  color: rgb(var(--c-spark));
-  text-decoration-color: rgb(var(--c-spark));
+  color: rgb(var(--brand));
+  text-decoration-color: rgb(var(--brand));
 }
 .blog-prose blockquote {
   position: relative;
   border: none;
   padding: 0.5rem 0 0.5rem 2.25rem;
   margin: 2.25rem 0;
-  color: rgb(var(--c-ink));
+  color: rgb(var(--ink));
   font-style: italic;
   font-size: 1.15rem;
   line-height: 1.6;
@@ -504,7 +530,7 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
   font-style: normal;
   font-size: 2.75rem;
   line-height: 1;
-  color: rgb(var(--c-spark));
+  color: rgb(var(--brand));
 }
 .blog-prose blockquote p { margin: 0.4rem 0; }
 
@@ -519,19 +545,19 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
   line-height: 0.92;
   padding: 0.35rem 0.75rem 0 0;
   margin: 0.1rem 0.1rem 0 -0.1rem;
-  color: rgb(var(--c-ink));
+  color: rgb(var(--ink));
   letter-spacing: -0.03em;
 }
 .blog-prose code {
-  background: rgb(var(--c-surface2));
+  background: rgb(var(--surface-sunken));
   padding: 0.1rem 0.4rem;
   border-radius: 4px;
   font-size: 0.86em;
-  color: rgb(var(--c-ink));
+  color: rgb(var(--ink));
 }
 .blog-prose pre {
-  background: rgb(var(--c-surface));
-  border: 1px solid rgb(var(--c-rule2));
+  background: rgb(var(--surface-raised));
+  border: 1px solid rgb(var(--field));
   border-radius: 8px;
   padding: 1.05rem 1.15rem;
   overflow-x: auto;
@@ -542,7 +568,7 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
 .blog-prose pre code { background: transparent; border: none; padding: 0; font-size: inherit; }
 .blog-prose hr {
   border: none;
-  border-top: 1px solid rgb(var(--c-rule));
+  border-top: 1px solid rgb(var(--divider));
   margin: 2.75rem auto;
   width: 4rem;
 }
@@ -555,7 +581,7 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
   border-radius: 8px;
 }
 .blog-prose figcaption {
-  color: rgb(var(--c-ink3));
+  color: rgb(var(--ink-faint));
   font-size: 12.5px;
   line-height: 1.55;
   text-align: center;
@@ -574,21 +600,21 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
 }
 .blog-prose th,
 .blog-prose td {
-  border-bottom: 1px solid rgb(var(--c-rule2));
+  border-bottom: 1px solid rgb(var(--field));
   padding: 0.7rem 0.85rem;
   text-align: left;
   vertical-align: top;
 }
 .blog-prose th {
-  color: rgb(var(--c-ink));
+  color: rgb(var(--ink));
   font-weight: 600;
   border-bottom-width: 1.5px;
-  border-bottom-color: rgb(var(--c-rule));
+  border-bottom-color: rgb(var(--divider));
 }
-.blog-prose tbody tr:hover td { background: rgb(var(--c-surface) / 0.4); }
+.blog-prose tbody tr:hover td { background: rgb(var(--surface-raised) / 0.4); }
 .blog-prose .kg-bookmark-card {
   display: block;
-  border: 1px solid rgb(var(--c-rule2));
+  border: 1px solid rgb(var(--field));
   border-radius: 8px;
   padding: 1rem 1.2rem;
   margin: 1.75rem 0;
@@ -603,7 +629,7 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
   border-radius: 10px;
   overflow: hidden;
   background: rgb(0 0 0);
-  border: 1px solid rgb(var(--c-rule2));
+  border: 1px solid rgb(var(--field));
   position: relative;
 }
 .blog-prose .kg-video-card .kg-video-container {
@@ -633,8 +659,8 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
   margin: 2rem 0;
   padding: 1rem 1.1rem;
   border-radius: 10px;
-  border: 1px solid rgb(var(--c-rule2));
-  background: rgb(var(--c-surface) / 0.5);
+  border: 1px solid rgb(var(--field));
+  background: rgb(var(--surface-raised) / 0.5);
   display: block;
 }
 .blog-prose .kg-audio-card audio {
@@ -672,7 +698,7 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
   width: 100%;
   aspect-ratio: 16 / 9;
   height: auto;
-  border: 1px solid rgb(var(--c-rule2));
+  border: 1px solid rgb(var(--field));
   border-radius: 10px;
   background: rgb(0 0 0);
 }
@@ -683,7 +709,7 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
   width: 100%;
   aspect-ratio: 16 / 9;
   height: auto;
-  border: 1px solid rgb(var(--c-rule2));
+  border: 1px solid rgb(var(--field));
   border-radius: 10px;
   margin: 2rem 0;
 }
@@ -741,7 +767,7 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
   cursor: pointer;
   /* Always-on accent glow, cards "float" off the page even at rest, so the
      grid feels alive without any hover. */
-  box-shadow: 0 4px 18px -8px color-mix(in srgb, var(--ec-accent, rgb(var(--c-ink))) 22%, transparent);
+  box-shadow: 0 4px 18px -8px color-mix(in srgb, var(--ec-accent, rgb(var(--ink))) 22%, transparent);
   transition:
     transform 320ms cubic-bezier(0.16, 1, 0.3, 1),
     box-shadow 320ms cubic-bezier(0.16, 1, 0.3, 1);
@@ -753,7 +779,7 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  border: 1px solid color-mix(in srgb, var(--ec-accent, rgb(var(--c-rule2))) 40%, transparent);
+  border: 1px solid color-mix(in srgb, var(--ec-accent, rgb(var(--field))) 40%, transparent);
   transition:
     border-color 280ms ease-out,
     inset 280ms ease-out,
@@ -764,7 +790,7 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
 .ec-card:hover::before {
   inset: -2px;
   border-width: 2px;
-  border-color: var(--ec-accent, rgb(var(--c-spark)));
+  border-color: var(--ec-accent, rgb(var(--brand)));
 }
 
 /* Subtle cursor-tracked spotlight, a small soft glow follows the pointer
@@ -777,7 +803,7 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
   border-radius: inherit;
   background: radial-gradient(
     160px circle at var(--mx, 50%) var(--my, 50%),
-    color-mix(in srgb, var(--ec-accent, rgb(var(--c-spark))) 28%, transparent),
+    color-mix(in srgb, var(--ec-accent, rgb(var(--brand))) 28%, transparent),
     transparent 65%
   );
   opacity: 0;
@@ -793,7 +819,7 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
 .ec-card:hover {
   transform: translateY(-6px) scale(1.015);
   box-shadow:
-    0 20px 44px -12px color-mix(in srgb, var(--ec-accent, rgb(var(--c-ink))) 45%, transparent),
+    0 20px 44px -12px color-mix(in srgb, var(--ec-accent, rgb(var(--ink))) 45%, transparent),
     0 8px 20px -8px rgba(0, 0, 0, 0.25);
 }
 

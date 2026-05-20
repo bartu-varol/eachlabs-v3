@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { WorkflowTile } from './WorkflowTile';
 import { fetchWorkflowsServer } from '@/lib/workflows';
+import { Eyebrow } from '@/components/ui/Eyebrow';
 
 /**
  * Featured workflows strip, pulls top 6 trending flows from the live API.
@@ -18,23 +19,21 @@ export async function TemplatesStrip() {
   if (featured.length === 0) return null;
 
   return (
-    <section className="container border-t border-rule py-16 md:py-20">
+    <section className="container border-t border-divider py-16 md:py-20">
       <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
         <div className="max-w-[640px]">
-          <div className="font-mono text-[11px] uppercase tracking-eyebrow text-spark mb-3">
-            * TRENDING · WORKFLOW TEMPLATES
-          </div>
-          <h2 className="font-display font-semibold text-[32px] md:text-[44px] leading-[1.0] tracking-tightest text-ink">
+          <Eyebrow className="mb-3">* TRENDING · WORKFLOW TEMPLATES</Eyebrow>
+          <h2 className="font-sans font-semibold text-h2 md:text-display leading-[1.0] tracking-tightest text-ink">
             Six recipes that skip the wiring.
           </h2>
-          <p className="text-[14px] md:text-[15px] text-ink2 leading-[1.55] mt-3">
+          <p className="text-body md:text-body-lg text-ink-muted leading-[1.55] mt-3">
             Pre-wired multi-model templates running in production right now.
             Fork into your account and override anything.
           </p>
         </div>
         <Link
           href="/explore/workflows"
-          className="self-start md:self-end inline-flex items-center gap-2 px-5 py-3 border border-rule2 rounded-md text-[13px] font-semibold text-ink hover:bg-surface hover:border-spark/40 transition-colors no-underline"
+          className="self-start md:self-end inline-flex items-center gap-2 px-5 py-3 border border-field rounded-md text-body-sm font-semibold text-ink hover:bg-surface-raised hover:border-brand/40 transition-colors no-underline"
         >
           All templates <span aria-hidden>→</span>
         </Link>

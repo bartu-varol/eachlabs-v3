@@ -3,6 +3,7 @@
 import { memo, useCallback, useEffect, useMemo, useRef, useState, type MouseEvent } from 'react';
 import { motion } from 'framer-motion';
 import type { ModelDetail } from '@/lib/modelDetail';
+import { Eyebrow } from '@/components/ui/Eyebrow';
 
 /**
  * "What this model is good at" card shown in the right aside below pricing.
@@ -134,25 +135,23 @@ const StrengthRow = memo(function StrengthRow({
         onMouseLeave={handleLeave}
         className={`group block rounded-md border px-2.5 py-1.5 transition-all duration-200 ${
           emphasized
-            ? 'border-spark bg-spark/[0.08] shadow-[0_0_18px_-8px_rgb(var(--c-spark)/0.5)]'
-            : 'border-rule2 hover:border-spark/60 hover:bg-surface'
+            ? 'border-brand bg-brand/[0.08] shadow-[0_0_18px_-8px_rgb(var(--brand)/0.5)]'
+            : 'border-field hover:border-brand/60 hover:bg-surface-raised'
         }`}
       >
         <div className="flex items-baseline gap-2.5">
-          <span className="font-mono text-[10px] uppercase tracking-eyebrow text-spark tabular-nums shrink-0">
-            {String(idx + 1).padStart(2, '0')}
-          </span>
+          <Eyebrow as="span" size="sm" className="tabular-nums shrink-0">{String(idx + 1).padStart(2, '0')}</Eyebrow>
           <span
-            className={`text-[13px] font-medium leading-tight truncate flex-1 transition-colors ${
-              emphasized ? 'text-spark' : 'text-ink'
+            className={`text-body-sm font-medium leading-tight truncate flex-1 transition-colors ${
+              emphasized ? 'text-brand' : 'text-ink'
             }`}
           >
             {strength.title}
           </span>
           <span
             aria-hidden
-            className={`font-mono text-[11px] shrink-0 transition-colors ${
-              emphasized ? 'text-spark' : 'text-ink3 group-hover:text-spark'
+            className={`font-mono text-eyebrow shrink-0 transition-colors ${
+              emphasized ? 'text-brand' : 'text-ink-faint group-hover:text-brand'
             }`}
           >
             &rarr;
@@ -169,8 +168,8 @@ const StrengthRow = memo(function StrengthRow({
             initial={false}
             animate={{ opacity: emphasized ? 1 : 0.85 }}
             transition={OPACITY_TRANSITION}
-            className={`text-[11.5px] leading-snug transition-colors ${
-              emphasized ? 'text-ink' : 'text-ink3'
+            className={`text-eyebrow leading-snug transition-colors ${
+              emphasized ? 'text-ink' : 'text-ink-faint'
             }`}
           >
             {strength.body}
@@ -262,15 +261,11 @@ export function ModelStrengths({ model }: { model: ModelDetail }) {
     <div
       id={STRENGTHS_CARD_ID}
       onMouseLeave={handleCardLeave}
-      className="border border-rule2 rounded-md p-4 bg-surface/40"
+      className="border border-field rounded-md p-4 bg-surface-raised/40"
     >
       <div className="flex items-baseline justify-between gap-3 mb-3">
-        <span className="font-mono text-[11px] uppercase tracking-eyebrow text-ink2">
-          What it&rsquo;s good at
-        </span>
-        <span className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3">
-          tap to see
-        </span>
+        <Eyebrow as="span" tone="ink-muted">What it&rsquo;s good at</Eyebrow>
+        <Eyebrow as="span" size="sm" tone="ink-faint">tap to see</Eyebrow>
       </div>
       <ol className="space-y-1.5">
         {strengths.map((s, i) => (

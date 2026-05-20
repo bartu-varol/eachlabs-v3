@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Check } from 'lucide-react';
+import { Eyebrow } from '@/components/ui/Eyebrow';
 
 type CompanySize =
   | '1-10'
@@ -93,14 +94,12 @@ export default function ContactSalesPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
           >
-            <div className="font-mono text-[11px] uppercase tracking-eyebrow text-spark">
-              * CONTACT SALES
-            </div>
-            <h1 className="font-display font-semibold text-[44px] sm:text-[60px] lg:text-[68px] leading-[0.98] tracking-tightest mt-6 text-ink">
+            <Eyebrow>* CONTACT SALES</Eyebrow>
+            <h1 className="font-sans font-semibold text-display sm:text-display-lg lg:text-hero leading-[0.98] tracking-tightest mt-6 text-ink">
               Custom plan.
-              <span className="block text-ink3 italic">No quick-call funnel.</span>
+              <span className="block text-ink-faint italic">No quick-call funnel.</span>
             </h1>
-            <p className="text-ink2 text-[16px] leading-[1.6] max-w-[520px] mt-7">
+            <p className="text-ink-muted text-body-lg leading-[1.6] max-w-[520px] mt-7">
               For teams shipping AI in production at scale. Tell us your traffic, your
               compliance posture, and what you actually need on a custom plan. We come back
               with numbers, not a calendar invite.
@@ -112,13 +111,11 @@ export default function ContactSalesPage() {
               <Note label="WHEN" body="Typical timeline: kickoff to production in three weeks." />
             </ul>
 
-            <div className="mt-10 pt-8 border-t border-rule">
-              <div className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3 mb-2">
-                OR EMAIL THE SALES TEAM
-              </div>
+            <div className="mt-10 pt-8 border-t border-divider">
+              <Eyebrow size="sm" tone="ink-faint" className="mb-2">OR EMAIL THE SALES TEAM</Eyebrow>
               <a
                 href="mailto:support@eachlabs.ai?subject=Sales%20inquiry"
-                className="text-spark text-[16px] font-medium hover:underline underline-offset-4 inline-flex items-center gap-2"
+                className="text-brand text-body-lg font-medium hover:underline underline-offset-4 inline-flex items-center gap-2"
               >
                 support@eachlabs.ai <ArrowRight size={16} />
               </a>
@@ -137,7 +134,7 @@ export default function ContactSalesPage() {
             ) : (
               <form
                 onSubmit={onSubmit}
-                className="bg-surface border border-rule2 rounded-md p-6 md:p-8 flex flex-col gap-5"
+                className="bg-surface-raised border border-field rounded-md p-6 md:p-8 flex flex-col gap-5"
               >
                 <Field
                   label="Your name"
@@ -163,7 +160,7 @@ export default function ContactSalesPage() {
                 />
 
                 <div className="flex flex-col gap-2">
-                  <label className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3">
+                  <label className="font-mono text-micro uppercase tracking-eyebrow text-ink-faint">
                     Company size
                   </label>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
@@ -175,10 +172,10 @@ export default function ContactSalesPage() {
                           type="button"
                           onClick={() => update('companySize', opt.value)}
                           className={[
-                            'px-3 py-2 rounded-md text-[13px] border transition-colors text-center font-medium',
+                            'px-3 py-2 rounded-md text-body-sm border transition-colors text-center font-medium',
                             isActive
-                              ? 'bg-spark text-white border-spark'
-                              : 'bg-bg border-rule2 text-ink2 hover:text-ink hover:border-spark/40',
+                              ? 'bg-brand text-on-brand border-brand'
+                              : 'bg-surface border-field text-ink-muted hover:text-ink hover:border-brand/40',
                           ].join(' ')}
                         >
                           {opt.label}
@@ -196,7 +193,7 @@ export default function ContactSalesPage() {
                 />
 
                 <div className="flex flex-col gap-2">
-                  <label className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3">
+                  <label className="font-mono text-micro uppercase tracking-eyebrow text-ink-faint">
                     What do you want to talk about?
                   </label>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -210,16 +207,16 @@ export default function ContactSalesPage() {
                           className={[
                             'px-3 py-2.5 rounded-md text-left border transition-colors',
                             isActive
-                              ? 'bg-spark text-white border-spark'
-                              : 'bg-bg border-rule2 text-ink2 hover:text-ink hover:border-spark/40',
+                              ? 'bg-brand text-on-brand border-brand'
+                              : 'bg-surface border-field text-ink-muted hover:text-ink hover:border-brand/40',
                           ].join(' ')}
                         >
-                          <div className="text-[13px] font-medium leading-tight">
+                          <div className="text-body-sm font-medium leading-tight">
                             {opt.label}
                           </div>
                           <div
-                            className={`text-[11px] mt-0.5 ${
-                              isActive ? 'text-white/80' : 'text-ink3'
+                            className={`text-eyebrow mt-0.5 ${
+                              isActive ? 'text-on-brand/80' : 'text-ink-faint'
                             }`}
                           >
                             {opt.sub}
@@ -231,9 +228,9 @@ export default function ContactSalesPage() {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <label className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3">
+                  <label className="font-mono text-micro uppercase tracking-eyebrow text-ink-faint">
                     Anything else we should know?
-                    <span className="text-fail ml-1" aria-hidden>*</span>
+                    <span className="text-danger ml-1" aria-hidden>*</span>
                   </label>
                   <textarea
                     required
@@ -241,26 +238,26 @@ export default function ContactSalesPage() {
                     onChange={(e) => update('message', e.target.value)}
                     placeholder="Your stack, your timeline, your compliance constraints, your favorite model. Anything we should bring to the first call."
                     rows={5}
-                    className="bg-bg border border-rule2 rounded-md px-3 py-2.5 text-[14px] text-ink placeholder:text-ink3 outline-none focus:border-spark/60 transition-colors resize-none"
+                    className="bg-surface border border-field rounded-md px-3 py-2.5 text-body text-ink placeholder:text-ink-faint outline-none focus:border-brand/60 transition-colors resize-none"
                   />
                 </div>
 
                 <button
                   type="submit"
                   disabled={status === 'submitting'}
-                  className="bg-spark text-white hover:bg-ember disabled:opacity-60 disabled:cursor-not-allowed transition-colors rounded-md px-5 py-3 text-[14px] font-medium inline-flex items-center justify-center gap-2"
+                  className="bg-brand text-on-brand hover:bg-brand-deep disabled:opacity-60 disabled:cursor-not-allowed transition-colors rounded-md px-5 py-3 text-body font-medium inline-flex items-center justify-center gap-2"
                 >
                   {status === 'submitting' ? 'Sending…' : 'Send to sales'}
                   {status !== 'submitting' && <ArrowRight size={14} />}
                 </button>
 
                 {status === 'error' && (
-                  <p className="font-mono text-[11px] text-fail">
+                  <p className="font-mono text-eyebrow text-danger">
                     Could not send. Try emailing support@eachlabs.ai directly.
                   </p>
                 )}
 
-                <p className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3 leading-relaxed">
+                <p className="font-mono text-micro uppercase tracking-eyebrow text-ink-faint leading-relaxed">
                   No drip campaign. No "circle back next week." One reply, with the numbers
                   attached.
                 </p>
@@ -276,10 +273,8 @@ export default function ContactSalesPage() {
 function Note({ label, body }: { label: string; body: string }) {
   return (
     <li className="flex items-start gap-4">
-      <span className="font-mono text-[10px] uppercase tracking-eyebrow text-spark mt-1 w-14 shrink-0">
-        {label}
-      </span>
-      <span className="text-ink2 text-[14.5px] leading-[1.6]">{body}</span>
+      <Eyebrow as="span" size="sm" className="mt-1 w-14 shrink-0">{label}</Eyebrow>
+      <span className="text-ink-muted text-body leading-[1.6]">{body}</span>
     </li>
   );
 }
@@ -301,10 +296,10 @@ function Field({
 }) {
   return (
     <div className="flex flex-col gap-2">
-      <label className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3">
+      <label className="font-mono text-micro uppercase tracking-eyebrow text-ink-faint">
         {label}
         {required && (
-          <span className="text-fail ml-1" aria-hidden>*</span>
+          <span className="text-danger ml-1" aria-hidden>*</span>
         )}
       </label>
       <input
@@ -313,7 +308,7 @@ function Field({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="bg-bg border border-rule2 rounded-md px-3 py-2.5 text-[14px] text-ink placeholder:text-ink3 outline-none focus:border-spark/60 transition-colors"
+        className="bg-surface border border-field rounded-md px-3 py-2.5 text-body text-ink placeholder:text-ink-faint outline-none focus:border-brand/60 transition-colors"
       />
     </div>
   );
@@ -325,15 +320,15 @@ function SuccessCard() {
       initial={{ opacity: 0, scale: 0.98 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.3 }}
-      className="bg-surface border border-spark/30 rounded-md p-8 flex flex-col items-center text-center"
+      className="bg-surface-raised border border-brand/30 rounded-md p-8 flex flex-col items-center text-center"
     >
-      <div className="w-12 h-12 rounded-full bg-spark/15 flex items-center justify-center mb-5">
-        <Check className="text-spark" size={22} />
+      <div className="w-12 h-12 rounded-full bg-brand/15 flex items-center justify-center mb-5">
+        <Check className="text-brand" size={22} />
       </div>
-      <h2 className="font-display font-semibold text-[24px] text-ink leading-tight">
+      <h2 className="font-sans font-semibold text-h3 text-ink leading-tight">
         Sent to sales.
       </h2>
-      <p className="text-ink2 text-[14.5px] leading-[1.6] mt-3 max-w-[380px]">
+      <p className="text-ink-muted text-body leading-[1.6] mt-3 max-w-[380px]">
         Your email client should be opening with the message pre-filled. Hit send and we'll
         reply within one business day with concrete numbers.
       </p>

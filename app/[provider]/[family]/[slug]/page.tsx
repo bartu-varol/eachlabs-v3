@@ -84,10 +84,10 @@ export default async function ModelDetailPage({
             <ModelStrengths model={model} />
             <Link
               href="https://docs.eachlabs.ai/introduction"
-              className="flex items-center justify-between gap-2 px-5 py-4 border border-rule2 rounded-md text-[13px] text-ink hover:border-ink/40 hover:bg-surface/30 transition-colors"
+              className="flex items-center justify-between gap-2 px-5 py-4 border border-field rounded-md text-body-sm text-ink hover:border-ink/40 hover:bg-surface-raised/30 transition-colors"
             >
               <span>Get an API key</span>
-              <span aria-hidden className="text-ink3">→</span>
+              <span aria-hidden className="text-ink-faint">→</span>
             </Link>
           </aside>
         </div>

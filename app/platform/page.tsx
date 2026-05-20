@@ -3,7 +3,10 @@
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
 import { RabbitButton } from '@/components/ui/RabbitButton';
+import { StatTile, StatGrid } from '@/components/ui/StatTile';
+import { PageHero } from '@/components/ui/PageHero';
 import { PlatformBento } from '@/components/sections/PlatformBento';
+import { Eyebrow } from '@/components/ui/Eyebrow';
 
 const STATS = [
   { value: '600+',   label: 'models behind one API' },
@@ -38,54 +41,37 @@ const PRINCIPLES = [
 export default function PlatformPage() {
   return (
     <>
-      {/* Hero */}
-      <section className="container py-20 md:py-28">
-        <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-        >
-          <div className="font-mono text-[11px] uppercase tracking-eyebrow text-spark">
-            * PLATFORM
-          </div>
-          <h1 className="font-display font-semibold text-[44px] sm:text-[60px] md:text-[80px] leading-[0.98] tracking-tightest mt-6 text-ink max-w-[900px]">
-            One control plane for every AI call you ship.
-          </h1>
-          <p className="text-ink2 text-[16px] leading-[1.55] max-w-[640px] mt-7">
+      <PageHero
+        eyebrow="* PLATFORM"
+        headline="One control plane for every AI call you ship."
+        description={
+          <>
             Modular products, two layers.{' '}
             <strong className="text-ink font-semibold">Run</strong> orchestrates the calls, router,
             workflows, enhancer.{' '}
             <strong className="text-ink font-semibold">Observe</strong> tells you what happened:
             attributes, A/B, trace.
-          </p>
-
-          {/* Stats strip */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-rule mt-12 border border-rule rounded-md overflow-hidden">
-            {STATS.map((s) => (
-              <div key={s.label} className="bg-surface px-5 py-6">
-                <div className="font-display font-semibold text-[26px] md:text-[32px] text-spark tabular-nums leading-none">
-                  {s.value}
-                </div>
-                <div className="text-ink3 text-[12px] mt-2">{s.label}</div>
-              </div>
-            ))}
-          </div>
-        </motion.div>
-      </section>
+          </>
+        }
+      >
+        <StatGrid columns={4} className="mt-12">
+          {STATS.map((s) => (
+            <StatTile key={s.label} value={s.value} label={s.label} size="lg" labelStyle="eyebrow" />
+          ))}
+        </StatGrid>
+      </PageHero>
 
       {/* Bento grid of all products */}
       <PlatformBento />
 
       {/* Principles */}
-      <section className="container border-t border-rule py-24 md:py-28">
-        <div className="font-mono text-[11px] uppercase tracking-eyebrow text-spark mb-3">
-          * PRINCIPLES
-        </div>
-        <h2 className="font-display font-semibold text-[34px] md:text-[48px] leading-[1] tracking-tightest text-ink">
+      <section className="container border-t border-divider py-24 md:py-28">
+        <Eyebrow className="mb-3">* PRINCIPLES</Eyebrow>
+        <h2 className="font-sans font-semibold text-h2 md:text-display leading-[1] tracking-tightest text-ink">
           How the platform thinks.
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-rule border border-rule rounded-md overflow-hidden mt-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-divider border border-divider rounded-md overflow-hidden mt-10">
           {PRINCIPLES.map((p, i) => (
             <motion.div
               key={p.n}
@@ -93,30 +79,30 @@ export default function PlatformPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '0px 0px -40px 0px' }}
               transition={{ duration: 0.35, delay: i * 0.06 }}
-              className="bg-surface p-7"
+              className="bg-surface-raised p-7"
             >
-              <div className="font-mono text-[11px] tabular-nums text-spark mb-3">{p.n}</div>
-              <h3 className="font-display font-semibold text-[20px] text-ink leading-tight mb-3">
+              <div className="font-mono text-eyebrow tabular-nums text-brand mb-3">{p.n}</div>
+              <h3 className="font-sans font-semibold text-h4 text-ink leading-tight mb-3">
                 {p.title}
               </h3>
-              <p className="text-ink2 text-[14px] leading-[1.65]">{p.body}</p>
+              <p className="text-ink-muted text-body leading-[1.65]">{p.body}</p>
             </motion.div>
           ))}
         </div>
       </section>
 
       {/* CTA */}
-      <section className="container border-t border-rule py-24 md:py-32">
+      <section className="container border-t border-divider py-24 md:py-32">
         <div className="max-w-[680px] mx-auto text-center">
-          <h2 className="font-display font-semibold text-[36px] md:text-[52px] leading-[1] tracking-tightest text-ink">
-            One platform. Modular products. <span className="text-ink3 italic">Free to start.</span>
+          <h2 className="font-sans font-semibold text-h2 md:text-display-lg leading-[1] tracking-tightest text-ink">
+            One platform. Modular products. <span className="text-ink-faint italic">Free to start.</span>
           </h2>
-          <p className="text-ink2 text-[15px] mt-6">
+          <p className="text-ink-muted text-body-lg mt-6">
             API key in 60 seconds. Free plan covers your first 10K traces. Subscribe only when
             retention or A/B starts paying off.
           </p>
           <div className="flex flex-wrap gap-3 justify-center mt-10">
-            <RabbitButton href="/signup" />
+            <RabbitButton href="/sign-up" />
             <Button href="/pricing" variant="secondary">See pricing</Button>
           </div>
         </div>

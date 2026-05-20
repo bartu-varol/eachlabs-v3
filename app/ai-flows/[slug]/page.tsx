@@ -11,6 +11,7 @@ import { FlowRelated } from '@/components/flow-detail/FlowRelated';
 import { FlowReadme, type FlowReadmeData } from '@/components/flow-detail/FlowReadme';
 import { buildExampleInputJson } from '@/lib/flowDetail';
 import { MODEL_PRICES } from '@/lib/modelPricing';
+import { Eyebrow } from '@/components/ui/Eyebrow';
 
 /** Fixed price for the template. Tries to sum each step's catalog price; if
  *  no step resolves, falls back to a deterministic mock derived from the
@@ -194,31 +195,27 @@ export default async function FlowDetailPage({
           </div>
 
           <aside className="space-y-4 lg:sticky lg:top-28 lg:self-start">
-            <div className="border border-rule2 rounded-md p-5 bg-surface/40">
+            <div className="border border-field rounded-md p-5 bg-surface-raised/40">
               <div className="flex items-baseline justify-between gap-3 mb-3">
-                <span className="font-mono text-[11px] uppercase tracking-eyebrow text-ink2">
-                  Estimated price
-                </span>
-                <span className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3">
-                  per run
-                </span>
+                <Eyebrow as="span" tone="ink-muted">Estimated price</Eyebrow>
+                <Eyebrow as="span" size="sm" tone="ink-faint">per run</Eyebrow>
               </div>
-              <div className="font-display text-[32px] text-ink mb-2 tabular-nums leading-none">
+              <div className="font-sans text-h2 text-ink mb-2 tabular-nums leading-none">
                 {fixedPrice.headline}
               </div>
-              <p className="text-[13px] text-ink2 leading-[1.55]">
+              <p className="text-body-sm text-ink-muted leading-[1.55]">
                 Fixed price for this template as-is. Clone the flow and the price moves with whatever
                 models you swap in,every step bills at its own model price, nothing on top.
               </p>
-              <p className="text-[11.5px] text-ink3 italic leading-[1.5] mt-3">
+              <p className="text-eyebrow text-ink-faint italic leading-[1.5] mt-3">
                 * Real cost can still shift with your inputs (duration, resolution, mode).
               </p>
-              <dl className="grid grid-cols-2 gap-y-2 gap-x-4 text-[12px] mt-4 border-t border-rule2 pt-4">
-                <dt className="font-mono text-ink3 uppercase tracking-eyebrow text-[10px]">
+              <dl className="grid grid-cols-2 gap-y-2 gap-x-4 text-caption mt-4 border-t border-field pt-4">
+                <dt className="font-mono text-ink-faint uppercase tracking-eyebrow text-micro">
                   Steps
                 </dt>
                 <dd className="font-mono text-ink text-right tabular-nums">{stepCount}</dd>
-                <dt className="font-mono text-ink3 uppercase tracking-eyebrow text-[10px]">
+                <dt className="font-mono text-ink-faint uppercase tracking-eyebrow text-micro">
                   Inputs
                 </dt>
                 <dd className="font-mono text-ink text-right tabular-nums">{inputCount}</dd>
@@ -227,10 +224,10 @@ export default async function FlowDetailPage({
 
             <Link
               href="https://docs.eachlabs.ai/workflows/overview"
-              className="flex items-center justify-between gap-2 px-5 py-4 border border-rule2 rounded-md text-[13px] text-ink hover:border-ink/40 hover:bg-surface/30 transition-colors"
+              className="flex items-center justify-between gap-2 px-5 py-4 border border-field rounded-md text-body-sm text-ink hover:border-ink/40 hover:bg-surface-raised/30 transition-colors"
             >
               <span>Flow docs &amp; API</span>
-              <span aria-hidden className="text-ink3">→</span>
+              <span aria-hidden className="text-ink-faint">→</span>
             </Link>
           </aside>
         </div>

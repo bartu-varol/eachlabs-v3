@@ -15,6 +15,7 @@ import { FilterableModelGrid } from '@/components/explore/FilterableModelGrid';
 import { ReadmeSection } from '@/components/explore/ReadmeSection';
 import { FaqSection } from '@/components/explore/FaqSection';
 import { AiAssistantMenu } from '@/components/model-detail/AiAssistantMenu';
+import { Eyebrow } from '@/components/ui/Eyebrow';
 
 type RouteParams = { provider: string; family: string };
 
@@ -63,7 +64,7 @@ export default async function FamilyPage({
         <div className="flex items-center justify-between gap-4 mb-6">
           <Link
             href="/explore"
-            className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-eyebrow text-ink3 hover:text-ink no-underline"
+            className="inline-flex items-center gap-2 font-mono text-eyebrow uppercase tracking-eyebrow text-ink-faint hover:text-ink no-underline"
           >
             <span aria-hidden>←</span> The catalog
           </Link>
@@ -75,34 +76,34 @@ export default async function FamilyPage({
         </div>
         <div key={`${provider.slug}/${family.slug}`} className="flex flex-col flex-1">
           <div
-            className="ec-anim ec-anim-left font-mono text-[11px] uppercase tracking-eyebrow text-spark"
+            className="ec-anim ec-anim-left font-mono text-eyebrow uppercase tracking-eyebrow text-brand"
             style={{ ['--ec-delay' as string]: 0 }}
           >
-            * FAMILY · <Link href={`/${provider.slug}`} className="text-spark hover:text-ember no-underline">{provider.slug}</Link>/{family.slug}
+            * FAMILY · <Link href={`/${provider.slug}`} className="text-brand hover:text-brand-deep no-underline">{provider.slug}</Link>/{family.slug}
           </div>
           <h1
-            className="ec-anim ec-anim-scale font-display font-semibold text-[40px] md:text-[60px] leading-[1.0] tracking-tightest text-ink mt-4 line-clamp-1"
+            className="ec-anim ec-anim-scale font-sans font-semibold text-display md:text-display-lg leading-[1.0] tracking-tightest text-ink mt-4 line-clamp-1"
             style={{ ['--ec-delay' as string]: 80 }}
           >
             {family.name}
           </h1>
           <p
-            className="ec-anim ec-anim-right text-[15px] md:text-[16px] text-ink2 leading-[1.55] max-w-[720px] mt-5 line-clamp-2 min-h-[3.2em]"
+            className="ec-anim ec-anim-right text-body-lg md:text-body-lg text-ink-muted leading-[1.55] max-w-[720px] mt-5 line-clamp-2 min-h-[3.2em]"
             style={{ ['--ec-delay' as string]: 180 }}
           >
             {family.description ?? ' '}
           </p>
           <div
-            className="ec-anim ec-anim-up flex flex-wrap items-center gap-x-6 gap-y-2 mt-auto pt-7 font-mono text-[11px] uppercase tracking-eyebrow text-ink3"
+            className="ec-anim ec-anim-up flex flex-wrap items-center gap-x-6 gap-y-2 mt-auto pt-7 font-mono text-eyebrow uppercase tracking-eyebrow text-ink-faint"
             style={{ ['--ec-delay' as string]: 280 }}
           >
             <span><strong className="text-ink">{variants.length}</strong> variants</span>
-            <span>part of <Link href={`/${provider.slug}`} className="text-ink hover:text-spark no-underline">{provider.name}</Link></span>
+            <span>part of <Link href={`/${provider.slug}`} className="text-ink hover:text-brand no-underline">{provider.name}</Link></span>
           </div>
         </div>
       </section>
 
-      <section className="container border-t border-rule py-10 md:py-14">
+      <section className="container border-t border-divider py-10 md:py-14">
         <div className="grid grid-cols-1 lg:grid-cols-[280px_minmax(0,1fr)] gap-8 lg:gap-10">
           <ProviderSidebar
             providerSlug={provider.slug}
@@ -131,17 +132,15 @@ export default async function FamilyPage({
           />
         </div>
       ) : (
-        <section className="container border-t border-rule py-12 md:py-16">
+        <section className="container border-t border-divider py-12 md:py-16">
           <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-10">
             <div>
-              <div className="font-mono text-[11px] uppercase tracking-eyebrow text-spark mb-3">
-                * WHY {family.name.toUpperCase()}
-              </div>
-              <h2 className="font-display font-semibold text-[28px] md:text-[36px] leading-[1.05] tracking-tightest text-ink">
+              <Eyebrow className="mb-3">* WHY {family.name.toUpperCase()}</Eyebrow>
+              <h2 className="font-sans font-semibold text-h2 md:text-h2 leading-[1.05] tracking-tightest text-ink">
                 One family. Many shapes.
               </h2>
             </div>
-            <div className="text-[14px] md:text-[15px] text-ink2 leading-[1.65] space-y-4">
+            <div className="text-body md:text-body-lg text-ink-muted leading-[1.65] space-y-4">
               <p>
                 Every variant in the <strong className="text-ink">{family.name}</strong> family
                 shares the same input contract and the same call signature. Switch from{' '}

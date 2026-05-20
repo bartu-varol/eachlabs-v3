@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { Eyebrow } from '@/components/ui/Eyebrow';
 
 /* ──────────────────────────────────────────────────────────────────────────
    RouterDemo, the 5-second story for /router.
@@ -82,17 +83,15 @@ export function RouterDemo() {
       {/* Ambient glow */}
       <div
         aria-hidden
-        className="absolute -inset-6 -z-10 rounded-[24px] bg-gradient-to-tr from-spark/[0.10] via-transparent to-spark/[0.05] blur-2xl"
+        className="absolute -inset-6 -z-10 rounded-[24px] bg-gradient-to-tr from-brand/[0.10] via-transparent to-brand/[0.05] blur-2xl"
       />
 
-      <div className="bg-surface border border-rule2 rounded-md overflow-hidden">
+      <div className="bg-surface-raised border border-field rounded-md overflow-hidden">
         {/* Header */}
-        <div className="flex items-center justify-between px-4 py-3 border-b border-rule2 bg-bg/40">
+        <div className="flex items-center justify-between px-4 py-3 border-b border-field bg-surface/40">
           <div className="flex items-center gap-2">
-            <span className="inline-block w-1.5 h-1.5 rounded-full bg-spark animate-pulse" aria-hidden />
-            <span className="font-mono text-[10px] uppercase tracking-eyebrow text-ink2">
-              ROUTER · LIVE
-            </span>
+            <span className="inline-block w-1.5 h-1.5 rounded-full bg-brand animate-pulse" aria-hidden />
+            <Eyebrow as="span" size="sm" tone="ink-muted">ROUTER · LIVE</Eyebrow>
           </div>
           <PhaseLabel phase={phase} />
         </div>
@@ -108,7 +107,7 @@ export function RouterDemo() {
         <DecisionStrip phase={phase} />
 
         {/* Bottom strip, outcome counters */}
-        <div className="grid grid-cols-3 gap-px bg-rule2 border-t border-rule2">
+        <div className="grid grid-cols-3 gap-px bg-field border-t border-field">
           <Counter
             label="failover"
             value={
@@ -136,7 +135,7 @@ export function RouterDemo() {
       </div>
 
       {/* Caption */}
-      <div className="mt-3 font-mono text-[10px] uppercase tracking-eyebrow text-ink3 text-center lg:text-left">
+      <div className="mt-3 font-mono text-micro uppercase tracking-eyebrow text-ink-faint text-center lg:text-left">
         primary degrades · router spills in &lt;120ms · users never see it
       </div>
     </div>
@@ -157,10 +156,10 @@ function PhaseLabel({ phase }: { phase: Phase }) {
 
   const tone =
     phase === 'steady'
-      ? 'text-success'
+      ? 'text-ok'
       : phase === 'degrade'
-      ? 'text-fail'
-      : 'text-spark';
+      ? 'text-danger'
+      : 'text-brand';
 
   return (
     <AnimatePresence mode="wait">
@@ -170,7 +169,7 @@ function PhaseLabel({ phase }: { phase: Phase }) {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -4 }}
         transition={{ duration: 0.18 }}
-        className={`font-mono text-[10px] uppercase tracking-eyebrow ${tone}`}
+        className={`font-mono text-micro uppercase tracking-eyebrow ${tone}`}
       >
         {text}
       </motion.span>
@@ -221,31 +220,29 @@ function LaneRow({
 
   return (
     <motion.div
-      className="relative bg-bg border border-rule2 rounded-md px-3 py-2.5"
+      className="relative bg-surface border border-field rounded-md px-3 py-2.5"
       animate={{
         borderColor:
           serving
-            ? 'rgb(var(--c-spark) / 0.55)'
+            ? 'rgb(var(--brand) / 0.55)'
             : statusTone === 'fail'
-            ? 'rgb(var(--c-fail) / 0.55)'
-            : 'rgb(var(--c-rule2))',
+            ? 'rgb(var(--danger) / 0.55)'
+            : 'rgb(var(--field))',
         boxShadow:
           serving
-            ? '0 0 0 1px rgb(var(--c-spark) / 0.18)'
+            ? '0 0 0 1px rgb(var(--brand) / 0.18)'
             : '0 0 0 0 transparent',
       }}
       transition={{ duration: 0.25 }}
     >
       <div className="flex items-center gap-3">
         {/* Role tag */}
-        <span className="font-mono text-[9px] uppercase tracking-eyebrow text-ink3 w-12 shrink-0">
-          {isPrimary ? 'primary' : `f.b ${idx}`}
-        </span>
+        <Eyebrow as="span" size="sm" tone="ink-faint" className="w-12 shrink-0">{isPrimary ? 'primary' : `f.b ${idx}`}</Eyebrow>
 
         {/* Name */}
         <span
-          className={`font-mono text-[12px] flex-shrink-0 ${
-            statusTone === 'fail' ? 'text-fail' : 'text-ink'
+          className={`font-mono text-caption flex-shrink-0 ${
+            statusTone === 'fail' ? 'text-danger' : 'text-ink'
           }`}
         >
           {lane.name}
@@ -261,12 +258,12 @@ function LaneRow({
           key={`${lane.id}-${p95}`}
           initial={{ opacity: 0, y: 3 }}
           animate={{ opacity: 1, y: 0 }}
-          className={`font-mono text-[10px] tabular-nums w-14 text-right ${
+          className={`font-mono text-micro tabular-nums w-14 text-right ${
             isPrimary && phase === 'degrade'
-              ? 'text-fail'
+              ? 'text-danger'
               : isPrimary && phase === 'decide'
-              ? 'text-fail'
-              : 'text-ink2'
+              ? 'text-danger'
+              : 'text-ink-muted'
           }`}
         >
           {p95}ms
@@ -277,17 +274,17 @@ function LaneRow({
       </div>
 
       {/* Latency bar */}
-      <div className="mt-2 h-1 bg-surface2 rounded-full overflow-hidden">
+      <div className="mt-2 h-1 bg-surface-sunken rounded-full overflow-hidden">
         <motion.div
           className="h-full rounded-full"
           animate={{
             width: `${fill}%`,
             backgroundColor:
               isPrimary && (phase === 'degrade' || phase === 'decide')
-                ? 'rgb(var(--c-fail))'
+                ? 'rgb(var(--danger))'
                 : serving
-                ? 'rgb(var(--c-spark))'
-                : 'rgb(var(--c-success) / 0.6)',
+                ? 'rgb(var(--brand))'
+                : 'rgb(var(--ok) / 0.6)',
           }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         />
@@ -300,10 +297,10 @@ function LaneRow({
 
 function StatusBadge({ tone }: { tone: 'ok' | 'fail' | 'standby' | 'serving' }) {
   const cfg = {
-    ok:       { text: 'ok',       cls: 'border-success/55 text-success bg-success/8' },
-    fail:     { text: 'breach',   cls: 'border-fail/60 text-fail bg-fail/10' },
-    standby:  { text: 'standby',  cls: 'border-rule2 text-ink3 bg-bg' },
-    serving:  { text: 'serving',  cls: 'border-spark/55 text-spark bg-spark/10' },
+    ok:       { text: 'ok',       cls: 'border-ok/55 text-ok bg-ok/8' },
+    fail:     { text: 'breach',   cls: 'border-danger/60 text-danger bg-danger/10' },
+    standby:  { text: 'standby',  cls: 'border-field text-ink-faint bg-surface' },
+    serving:  { text: 'serving',  cls: 'border-brand/55 text-brand bg-brand/10' },
   }[tone];
   return (
     <motion.span
@@ -311,7 +308,7 @@ function StatusBadge({ tone }: { tone: 'ok' | 'fail' | 'standby' | 'serving' }) 
       initial={{ opacity: 0, scale: 0.92 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.18 }}
-      className={`inline-flex items-center font-mono text-[9px] uppercase tracking-eyebrow px-1.5 py-0.5 border rounded whitespace-nowrap w-[58px] justify-center ${cfg.cls}`}
+      className={`inline-flex items-center font-mono text-micro uppercase tracking-eyebrow px-1.5 py-0.5 border rounded whitespace-nowrap w-[58px] justify-center ${cfg.cls}`}
     >
       {cfg.text}
     </motion.span>
@@ -323,11 +320,11 @@ function StatusBadge({ tone }: { tone: 'ok' | 'fail' | 'standby' | 'serving' }) 
 function PacketStream({ serving, laneIdx }: { serving: boolean; laneIdx: number }) {
   return (
     <>
-      <span className="absolute left-0 right-0 top-1/2 h-px bg-rule2 -translate-y-1/2" aria-hidden />
+      <span className="absolute left-0 right-0 top-1/2 h-px bg-field -translate-y-1/2" aria-hidden />
       {[0, 1, 2].map((i) => (
         <motion.span
           key={i}
-          className="absolute top-1/2 -translate-y-1/2 w-1 h-1 rounded-full bg-spark"
+          className="absolute top-1/2 -translate-y-1/2 w-1 h-1 rounded-full bg-brand"
           initial={{ left: '0%', opacity: 0 }}
           animate={{
             left: ['0%', '100%'],
@@ -347,7 +344,7 @@ function PacketStream({ serving, laneIdx }: { serving: boolean; laneIdx: number 
               ease: 'easeInOut',
             },
           }}
-          style={{ boxShadow: '0 0 4px rgb(var(--c-spark) / 0.7)' }}
+          style={{ boxShadow: '0 0 4px rgb(var(--brand) / 0.7)' }}
         />
       ))}
     </>
@@ -359,7 +356,7 @@ function PacketStream({ serving, laneIdx }: { serving: boolean; laneIdx: number 
 function DecisionStrip({ phase }: { phase: Phase }) {
   // Single keyed child per phase, mode="wait" gives a clean cross-fade with no overlap.
   return (
-    <div className="relative h-[58px] border-t border-rule2 bg-bg/40 overflow-hidden">
+    <div className="relative h-[58px] border-t border-field bg-surface/40 overflow-hidden">
       <AnimatePresence mode="wait">
         <motion.div
           key={phase}
@@ -371,9 +368,7 @@ function DecisionStrip({ phase }: { phase: Phase }) {
         >
           {phase === 'decide' ? (
             <div className="h-full flex items-center gap-3">
-              <span className="font-mono text-[10px] uppercase tracking-eyebrow text-spark whitespace-nowrap">
-                ◐ scoring
-              </span>
+              <Eyebrow as="span" size="sm" className="whitespace-nowrap">◐ scoring</Eyebrow>
               <div className="flex-1 flex flex-col gap-1">
                 {LANES.map((l) => (
                   <ScoreRow
@@ -386,20 +381,20 @@ function DecisionStrip({ phase }: { phase: Phase }) {
               </div>
             </div>
           ) : phase === 'spill' ? (
-            <div className="h-full flex items-center gap-3 font-mono text-[11px]">
-              <span className="text-success">✓</span>
-              <span className="text-ink3 line-through decoration-fail/70">
+            <div className="h-full flex items-center gap-3 font-mono text-eyebrow">
+              <span className="text-ok">✓</span>
+              <span className="text-ink-faint line-through decoration-danger/70">
                 kling-v3-12v
               </span>
-              <span className="text-spark">→</span>
+              <span className="text-brand">→</span>
               <span className="text-ink">wan-2.7</span>
-              <span className="text-ink3 hidden sm:inline">·</span>
-              <span className="text-ink2 hidden sm:inline">trace.router_decision</span>
-              <span className="ml-auto text-ink3 hidden sm:inline">sticky cohort</span>
+              <span className="text-ink-faint hidden sm:inline">·</span>
+              <span className="text-ink-muted hidden sm:inline">trace.router_decision</span>
+              <span className="ml-auto text-ink-faint hidden sm:inline">sticky cohort</span>
             </div>
           ) : (
-            <div className="h-full flex items-center font-mono text-[10px] uppercase tracking-eyebrow text-ink3 gap-2">
-              <span className="inline-block w-1 h-1 rounded-full bg-success animate-pulse" aria-hidden />
+            <div className="h-full flex items-center font-mono text-micro uppercase tracking-eyebrow text-ink-faint gap-2">
+              <span className="inline-block w-1 h-1 rounded-full bg-ok animate-pulse" aria-hidden />
               watching · latency · errors · quality drift
             </div>
           )}
@@ -419,19 +414,19 @@ function ScoreRow({
   winner: boolean;
 }) {
   return (
-    <div className="flex items-center gap-2 font-mono text-[9.5px]">
-      <span className={`w-[88px] truncate ${winner ? 'text-spark' : 'text-ink3'}`}>
+    <div className="flex items-center gap-2 font-mono text-micro">
+      <span className={`w-[88px] truncate ${winner ? 'text-brand' : 'text-ink-faint'}`}>
         {name}
       </span>
-      <div className="flex-1 h-1 bg-surface2 rounded-full overflow-hidden">
+      <div className="flex-1 h-1 bg-surface-sunken rounded-full overflow-hidden">
         <motion.div
-          className={`h-full rounded-full ${winner ? 'bg-spark' : score < 0.5 ? 'bg-fail/70' : 'bg-ink2/50'}`}
+          className={`h-full rounded-full ${winner ? 'bg-brand' : score < 0.5 ? 'bg-danger/70' : 'bg-ink-muted/50'}`}
           initial={{ width: 0 }}
           animate={{ width: `${score * 100}%` }}
           transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
         />
       </div>
-      <span className={`tabular-nums w-8 text-right ${winner ? 'text-spark' : 'text-ink3'}`}>
+      <span className={`tabular-nums w-8 text-right ${winner ? 'text-brand' : 'text-ink-faint'}`}>
         {score.toFixed(2)}
       </span>
     </div>
@@ -450,16 +445,14 @@ function Counter({
   tone: 'spark' | 'success' | 'fail' | 'muted';
 }) {
   const cls = {
-    spark:   'text-spark',
-    success: 'text-success',
-    fail:    'text-fail',
-    muted:   'text-ink3',
+    spark:   'text-brand',
+    success: 'text-ok',
+    fail:    'text-danger',
+    muted:   'text-ink-faint',
   }[tone];
   return (
-    <div className="bg-surface px-3 py-3">
-      <div className="font-mono text-[9px] uppercase tracking-eyebrow text-ink3 mb-1">
-        {label}
-      </div>
+    <div className="bg-surface-raised px-3 py-3">
+      <Eyebrow size="sm" tone="ink-faint" className="mb-1">{label}</Eyebrow>
       <AnimatePresence mode="wait">
         <motion.div
           key={value}
@@ -467,7 +460,7 @@ function Counter({
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -3 }}
           transition={{ duration: 0.18 }}
-          className={`font-display text-[15px] md:text-[16px] font-semibold tabular-nums ${cls}`}
+          className={`font-sans text-body-lg md:text-body-lg font-semibold tabular-nums ${cls}`}
         >
           {value}
         </motion.div>

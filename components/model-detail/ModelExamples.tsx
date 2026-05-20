@@ -5,6 +5,7 @@ import type { ModelDetail } from '@/lib/modelDetail';
 import { buildPayload, payloadToJson } from '@/lib/sampleInput';
 import { extractMediaUrl, pickExample } from '@/lib/modelOutput';
 import { HeroPreview } from './HeroPreview';
+import { Eyebrow } from '@/components/ui/Eyebrow';
 
 /**
  * Examples gallery, wrappers carry id="example-N" so the Strengths card on
@@ -211,14 +212,10 @@ export function ModelExamples({ model }: { model: ModelDetail }) {
   if (cards.length === 0) return null;
 
   return (
-    <section className="border border-rule2 rounded-md overflow-hidden">
-      <header className="px-5 py-3 border-b border-rule2 bg-surface/40 flex items-baseline justify-between gap-4 flex-wrap">
-        <span className="font-mono text-[11px] uppercase tracking-eyebrow text-ink2">
-          Examples
-        </span>
-        <span className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3">
-          {cards.length} sample runs · hover for input
-        </span>
+    <section className="border border-field rounded-md overflow-hidden">
+      <header className="px-5 py-3 border-b border-field bg-surface-raised/40 flex items-baseline justify-between gap-4 flex-wrap">
+        <Eyebrow as="span" tone="ink-muted">Examples</Eyebrow>
+        <Eyebrow as="span" size="sm" tone="ink-faint">{cards.length} sample runs · hover for input</Eyebrow>
       </header>
       <div
         style={{

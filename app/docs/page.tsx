@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { CodeBlock } from '@/components/ui/CodeBlock';
+import { Eyebrow } from '@/components/ui/Eyebrow';
 
 const QUICKSTART_CODE = `# 1. Install the SDK
 npm install @eachlabs/sdk
@@ -77,30 +78,26 @@ export default function DocsPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
         >
-          <div className="font-mono text-[11px] uppercase tracking-eyebrow text-spark">
-            * DOCS
-          </div>
-          <h1 className="font-display font-semibold text-[44px] sm:text-[60px] md:text-[76px] leading-[0.98] tracking-tightest mt-6 text-ink max-w-[860px]">
-            Read the docs. <span className="text-ink3 italic">Ship the same day.</span>
+          <Eyebrow>* DOCS</Eyebrow>
+          <h1 className="font-sans font-semibold text-display sm:text-display-lg md:text-[76px] leading-[0.98] tracking-tightest mt-6 text-ink max-w-[860px]">
+            Read the docs. <span className="text-ink-faint italic">Ship the same day.</span>
           </h1>
-          <p className="text-ink2 text-[16px] leading-[1.55] max-w-[640px] mt-7">
+          <p className="text-ink-muted text-body-lg leading-[1.55] max-w-[640px] mt-7">
             Quickstart, API reference, SDKs, and 40+ end-to-end recipes.
           </p>
         </motion.div>
       </section>
 
       {/* Quickstart */}
-      <section className="relative border-t border-rule overflow-hidden">
+      <section className="relative border-t border-divider overflow-hidden">
         <div
           aria-hidden
           className="absolute inset-0 pointer-events-none"
-          style={{ background: 'radial-gradient(ellipse 50% 60% at 0% 0%, rgb(var(--c-spark) / 0.05), transparent 65%)' }}
+          style={{ background: 'radial-gradient(ellipse 50% 60% at 0% 0%, rgb(var(--brand) / 0.05), transparent 65%)' }}
         />
         <div className="container py-20 md:py-24 relative">
-          <div className="font-mono text-[11px] uppercase tracking-eyebrow text-spark mb-3">
-            ● QUICKSTART
-          </div>
-          <h2 className="font-display font-semibold text-[28px] md:text-[36px] leading-[1.1] tracking-tightest text-ink">
+          <Eyebrow className="mb-3">● QUICKSTART</Eyebrow>
+          <h2 className="font-sans font-semibold text-h2 md:text-h2 leading-[1.1] tracking-tightest text-ink">
             From zero to first call in 3 minutes.
           </h2>
           <div className="mt-8">
@@ -115,10 +112,8 @@ export default function DocsPage() {
 
       {/* Sections */}
       {SECTIONS.map((s, i) => (
-        <section key={s.eyebrow} className="container border-t border-rule py-20 md:py-24">
-          <div className="font-mono text-[11px] uppercase tracking-eyebrow text-spark mb-6">
-            {s.eyebrow}
-          </div>
+        <section key={s.eyebrow} className="container border-t border-divider py-20 md:py-24">
+          <Eyebrow className="mb-6">{s.eyebrow}</Eyebrow>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
             {s.items.map((it, j) => (
               <motion.div
@@ -130,15 +125,15 @@ export default function DocsPage() {
               >
                 <Link
                   href={it.href}
-                  className="group flex items-center justify-between gap-4 bg-surface border border-rule2 rounded-md p-5 hover:border-spark/40 transition-colors"
+                  className="group flex items-center justify-between gap-4 bg-surface-raised border border-field rounded-md p-5 hover:border-brand/40 transition-colors"
                 >
                   <div className="min-w-0">
-                    <div className="font-display font-semibold text-[16px] text-ink leading-tight truncate">
+                    <div className="font-sans font-semibold text-body-lg text-ink leading-tight truncate">
                       {it.title}
                     </div>
-                    <div className="text-ink3 text-[13px] mt-1.5 leading-tight">{it.body}</div>
+                    <div className="text-ink-faint text-body-sm mt-1.5 leading-tight">{it.body}</div>
                   </div>
-                  <ArrowRight size={16} className="text-ink3 group-hover:text-spark shrink-0" />
+                  <ArrowRight size={16} className="text-ink-faint group-hover:text-brand shrink-0" />
                 </Link>
               </motion.div>
             ))}
@@ -147,10 +142,10 @@ export default function DocsPage() {
       ))}
 
       {/* CTA */}
-      <section className="container border-t border-rule py-24 md:py-32">
+      <section className="container border-t border-divider py-24 md:py-32">
         <div className="max-w-[680px] mx-auto text-center">
-          <h2 className="font-display font-semibold text-[34px] md:text-[48px] leading-[1.05] tracking-tightest text-ink">
-            Stuck? <span className="text-ink3 italic">4,200 devs are in our Discord.</span>
+          <h2 className="font-sans font-semibold text-h2 md:text-display leading-[1.05] tracking-tightest text-ink">
+            Stuck? <span className="text-ink-faint italic">4,200 devs are in our Discord.</span>
           </h2>
           <div className="flex flex-wrap gap-3 justify-center mt-8">
             <Button href="https://discord.gg/eachlabs" variant="primary">Open Discord →</Button>

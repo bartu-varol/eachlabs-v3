@@ -104,13 +104,13 @@ export function AiAssistantMenu({ modelSlug, llmsUrl, modelName, downloadName }:
         onClick={() => setOpen((o) => !o)}
         aria-haspopup="menu"
         aria-expanded={open}
-        className="inline-flex items-center gap-2 px-3.5 py-2 rounded-md text-[13px] font-medium border border-rule2 bg-bg text-ink hover:bg-surface transition-colors"
+        className="inline-flex items-center gap-2 px-3.5 py-2 rounded-md text-body-sm font-medium border border-field bg-surface text-ink hover:bg-surface-raised transition-colors"
       >
-        <Sparkles size={14} className="text-spark" />
+        <Sparkles size={14} className="text-brand" />
         <span>AI Assistant</span>
         <ChevronDown
           size={14}
-          className={`text-ink3 transition-transform ${open ? 'rotate-180' : ''}`}
+          className={`text-ink-faint transition-transform ${open ? 'rotate-180' : ''}`}
         />
       </button>
 
@@ -118,9 +118,9 @@ export function AiAssistantMenu({ modelSlug, llmsUrl, modelName, downloadName }:
         <div
           role="menu"
           aria-label={modelName ? `AI Assistant for ${modelName}` : 'AI Assistant'}
-          className="absolute right-0 top-full mt-2 w-60 z-30 rounded-md border border-rule2 bg-bg shadow-[0_12px_32px_-12px_rgba(0,0,0,0.35)] overflow-hidden animate-panel-in"
+          className="absolute right-0 top-full mt-2 w-60 z-30 rounded-md border border-field bg-surface shadow-[0_12px_32px_-12px_rgba(0,0,0,0.35)] overflow-hidden animate-panel-in"
         >
-          <div className="px-3 py-2 font-mono text-[10px] uppercase tracking-eyebrow text-ink3 border-b border-rule2/60">
+          <div className="px-3 py-2 font-mono text-micro uppercase tracking-eyebrow text-ink-faint border-b border-field/60">
             AI Integration Help
           </div>
           <MenuItem icon={copied ? Check : Copy} onClick={handleCopy} highlight={copied}>
@@ -132,7 +132,7 @@ export function AiAssistantMenu({ modelSlug, llmsUrl, modelName, downloadName }:
           <MenuItem icon={ExternalLink} onClick={handleOpen}>
             Open llms.txt
           </MenuItem>
-          <div className="border-t border-rule2/60" />
+          <div className="border-t border-field/60" />
           <MenuItem icon={MessageSquare} onClick={handleClaude}>
             Build with Claude
           </MenuItem>
@@ -161,9 +161,9 @@ function MenuItem({
       type="button"
       role="menuitem"
       onClick={onClick}
-      className="w-full flex items-center gap-2.5 px-3 py-2 text-[13px] text-ink hover:bg-surface transition-colors text-left"
+      className="w-full flex items-center gap-2.5 px-3 py-2 text-body-sm text-ink hover:bg-surface-raised transition-colors text-left"
     >
-      <Icon size={14} className={highlight ? 'text-success' : 'text-ink2'} />
+      <Icon size={14} className={highlight ? 'text-ok' : 'text-ink-muted'} />
       <span>{children}</span>
     </button>
   );

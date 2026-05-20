@@ -5,6 +5,7 @@ import { Search } from 'lucide-react';
 import { Pill } from '@/components/ui/Pill';
 import { ModelTile } from './ModelTile';
 import type { CatalogModel } from '@/lib/catalog';
+import { Eyebrow } from '@/components/ui/Eyebrow';
 
 type Props = {
   models: CatalogModel[];
@@ -86,13 +87,13 @@ export function FilterableModelGrid({ models, eyebrow, searchPlaceholder = 'Sear
         style={{ ['--ec-delay' as string]: 320 }}
       >
         <div className="relative flex-1 max-w-[420px] shrink-0">
-          <Search aria-hidden className="absolute left-3 top-1/2 -translate-y-1/2 text-ink3 w-4 h-4 pointer-events-none" />
+          <Search aria-hidden className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-faint w-4 h-4 pointer-events-none" />
           <input
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder={searchPlaceholder}
-            className="w-full bg-surface border border-rule2 rounded-md pl-10 pr-4 py-2 text-[14px] text-ink placeholder:text-ink3 focus:outline-none focus:border-spark"
+            className="w-full bg-surface-raised border border-field rounded-md pl-10 pr-4 py-2 text-body text-ink placeholder:text-ink-faint focus:outline-none focus:border-brand"
           />
         </div>
 
@@ -118,15 +119,13 @@ export function FilterableModelGrid({ models, eyebrow, searchPlaceholder = 'Sear
         className="ec-anim ec-anim-up flex items-baseline justify-between mb-5"
         style={{ ['--ec-delay' as string]: 380 }}
       >
-        <div className="font-mono text-[11px] uppercase tracking-eyebrow text-ink2">{eyebrow}</div>
-        <span className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3">
-          {filtered.length} of {models.length}
-        </span>
+        <div className="font-mono text-eyebrow uppercase tracking-eyebrow text-ink-muted">{eyebrow}</div>
+        <Eyebrow as="span" size="sm" tone="ink-faint">{filtered.length} of {models.length}</Eyebrow>
       </div>
 
       {filtered.length === 0 ? (
-        <div className="border border-dashed border-rule2 rounded-md py-16 text-center">
-          <p className="font-mono text-[12px] uppercase tracking-eyebrow text-ink3">
+        <div className="border border-dashed border-field rounded-md py-16 text-center">
+          <p className="font-mono text-caption uppercase tracking-eyebrow text-ink-faint">
             No models match those filters.
           </p>
         </div>

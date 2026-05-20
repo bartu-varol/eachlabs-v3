@@ -11,19 +11,19 @@ const LASTSEEN = [
 export function SigninTerminal() {
   return (
     <AuthTerminalShell
-      cwd="~/each-auth/login"
-      brandHref="/signin?ui=brand"
+      cwd="~/each-auth/sign-in"
+      brandHref="/sign-in?ui=brand"
       tabs={[
-        { label: 'signin', href: '/signin?ui=terminal', active: true },
-        { label: 'signup', href: '/signup?ui=terminal' },
+        { label: 'Sign in', href: '/sign-in?ui=terminal', active: true },
+        { label: 'Sign up', href: '/sign-up?ui=terminal' },
       ]}
     >
-      <pre className="font-mono text-[13.5px] leading-[1.85] text-ink2 whitespace-pre-wrap">
+      <pre className="font-mono text-body-sm leading-[1.85] text-ink-muted whitespace-pre-wrap">
 {`$ each auth login
 `}
-        <span className="text-success">✓</span>{' resolving identity provider'}<span className="text-ink3">......</span> <span className="text-success">ok</span>
+        <span className="text-ok">✓</span>{' resolving identity provider'}<span className="text-ink-faint">......</span> <span className="text-ok">ok</span>
 {'\n'}
-        <span className="text-success">✓</span>{' restoring last session'}<span className="text-ink3">...........</span> <span className="text-sun">stale</span>
+        <span className="text-ok">✓</span>{' restoring last session'}<span className="text-ink-faint">...........</span> <span className="text-glow">stale</span>
 {'\n'}
       </pre>
 
@@ -31,15 +31,15 @@ export function SigninTerminal() {
         <AuthTerminalAuth mode="signin" />
       </div>
 
-      <div className="mt-10 border-t border-rule2 pt-5">
-        <div className="text-[11px] uppercase tracking-eyebrow text-ink3">
+      <div className="mt-10 border-t border-field pt-5">
+        <div className="text-eyebrow uppercase tracking-eyebrow text-ink-faint">
           ──── last seen ───────────────────────────────────────────
         </div>
-        <ul className="mt-3 font-mono text-[12.5px] leading-[1.9] text-ink2 space-y-0.5">
+        <ul className="mt-3 font-mono text-caption leading-[1.9] text-ink-muted space-y-0.5">
           {LASTSEEN.map((m) => (
             <li key={m.ts}>
-              <span className="text-ink3">[{m.ts}]</span>{' '}
-              <span className={m.tone === 'spark' ? 'text-spark' : m.tone === 'sun' ? 'text-sun' : 'text-ink2'}>
+              <span className="text-ink-faint">[{m.ts}]</span>{' '}
+              <span className={m.tone === 'spark' ? 'text-brand' : m.tone === 'sun' ? 'text-glow' : 'text-ink-muted'}>
                 {m.text}
               </span>
             </li>
@@ -47,9 +47,9 @@ export function SigninTerminal() {
         </ul>
       </div>
 
-      <p className="mt-10 text-[12.5px] text-ink3 font-mono">
+      <p className="mt-10 text-caption text-ink-faint font-mono">
         new here?{' '}
-        <Link href="/signup?ui=terminal" className="text-spark hover:underline underline-offset-4">
+        <Link href="/sign-up?ui=terminal" className="text-brand hover:underline underline-offset-4">
           $ each auth signup --new →
         </Link>
       </p>

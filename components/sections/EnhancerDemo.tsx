@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import { Eyebrow } from '@/components/ui/Eyebrow';
 
 /* ──────────────────────────────────────────────────────────────────────────
    EnhancerDemo, the 5-second story for /enhancer.
@@ -100,21 +101,17 @@ export function EnhancerDemo() {
       {/* Ambient glow */}
       <div
         aria-hidden
-        className="absolute -inset-6 -z-10 rounded-[24px] bg-gradient-to-tr from-spark/[0.10] via-transparent to-spark/[0.05] blur-2xl"
+        className="absolute -inset-6 -z-10 rounded-[24px] bg-gradient-to-tr from-brand/[0.10] via-transparent to-brand/[0.05] blur-2xl"
       />
 
-      <div className="bg-surface border border-rule2 rounded-md overflow-hidden">
+      <div className="bg-surface-raised border border-field rounded-md overflow-hidden">
         {/* Header, note the COMING SOON badge */}
-        <div className="flex items-center justify-between px-4 py-3 border-b border-rule2 bg-bg/40">
+        <div className="flex items-center justify-between px-4 py-3 border-b border-field bg-surface/40">
           <div className="flex items-center gap-2">
-            <span className="inline-block w-1.5 h-1.5 rounded-full bg-spark animate-pulse" aria-hidden />
-            <span className="font-mono text-[10px] uppercase tracking-eyebrow text-ink2">
-              ENHANCER · PREVIEW
-            </span>
+            <span className="inline-block w-1.5 h-1.5 rounded-full bg-brand animate-pulse" aria-hidden />
+            <Eyebrow as="span" size="sm" tone="ink-muted">ENHANCER · PREVIEW</Eyebrow>
           </div>
-          <span className="font-mono text-[9px] uppercase tracking-eyebrow text-spark border border-spark/40 rounded px-1.5 py-0.5 bg-spark/[0.04]">
-            COMING Q1 2026
-          </span>
+          <Eyebrow as="span" size="sm" className="border border-brand/40 rounded px-1.5 py-0.5 bg-brand/[0.04]">COMING Q1 2026</Eyebrow>
         </div>
 
         {/* Original prompt */}
@@ -159,7 +156,7 @@ export function EnhancerDemo() {
       </div>
 
       {/* Caption */}
-      <div className="mt-3 font-mono text-[10px] uppercase tracking-eyebrow text-ink3 text-center lg:text-left">
+      <div className="mt-3 font-mono text-micro uppercase tracking-eyebrow text-ink-faint text-center lg:text-left">
         the user never sees the refusal · you keep the paid session
       </div>
     </div>
@@ -177,8 +174,8 @@ function Label({
 }) {
   return (
     <div
-      className={`font-mono text-[9.5px] uppercase tracking-eyebrow mb-1.5 ${
-        tone === 'spark' ? 'text-spark' : 'text-ink3'
+      className={`font-mono text-micro uppercase tracking-eyebrow mb-1.5 ${
+        tone === 'spark' ? 'text-brand' : 'text-ink-faint'
       }`}
     >
       {children}
@@ -196,18 +193,18 @@ function PromptBox({ phase, variant }: { phase: Phase; variant: 'original' | 're
 
     return (
       <div
-        className={`bg-bg border border-rule2 rounded-md px-3 py-2.5 font-mono text-[12px] leading-[1.55] transition-colors duration-300 ${
-          dimmed ? 'text-ink3' : 'text-ink'
+        className={`bg-surface border border-field rounded-md px-3 py-2.5 font-mono text-caption leading-[1.55] transition-colors duration-300 ${
+          dimmed ? 'text-ink-faint' : 'text-ink'
         }`}
       >
         <span>{ORIGINAL.prefix}</span>
         <motion.span
           animate={{
             color: struck
-              ? 'rgb(var(--c-fail))'
-              : 'rgb(var(--c-ink))',
+              ? 'rgb(var(--danger))'
+              : 'rgb(var(--ink))',
             textDecorationColor: struck
-              ? 'rgb(var(--c-fail))'
+              ? 'rgb(var(--danger))'
               : 'transparent',
           }}
           transition={{ duration: 0.25 }}
@@ -228,7 +225,7 @@ function PromptBox({ phase, variant }: { phase: Phase; variant: 'original' | 're
   const visible = phase === 'rewrite' || phase === 'recheck' || phase === 'approved' || phase === 'ship';
 
   return (
-    <div className="bg-bg border border-spark/40 rounded-md px-3 py-2.5 font-mono text-[12px] leading-[1.55] text-ink">
+    <div className="bg-surface border border-brand/40 rounded-md px-3 py-2.5 font-mono text-caption leading-[1.55] text-ink">
       <motion.span
         initial={{ opacity: 0 }}
         animate={{ opacity: visible ? 1 : 0 }}
@@ -237,16 +234,16 @@ function PromptBox({ phase, variant }: { phase: Phase; variant: 'original' | 're
         {REWRITTEN.prefix}
       </motion.span>
       <motion.span
-        initial={{ opacity: 0, backgroundColor: 'rgb(var(--c-spark) / 0)' }}
+        initial={{ opacity: 0, backgroundColor: 'rgb(var(--brand) / 0)' }}
         animate={{
           opacity: visible ? 1 : 0,
-          backgroundColor: visible ? 'rgb(var(--c-spark) / 0.16)' : 'rgb(var(--c-spark) / 0)',
+          backgroundColor: visible ? 'rgb(var(--brand) / 0.16)' : 'rgb(var(--brand) / 0)',
         }}
         transition={{
           opacity: { duration: 0.25, delay: visible ? 0.25 : 0 },
           backgroundColor: { duration: 0.25, delay: visible ? 0.45 : 0 },
         }}
-        className="px-1 rounded font-semibold text-spark"
+        className="px-1 rounded font-semibold text-brand"
       >
         {REWRITTEN.swap}
       </motion.span>
@@ -285,15 +282,15 @@ function CheckLine({
 
   const cfg =
     state === 'running'
-      ? { text: 'running content-policy check…', tone: 'text-ink2', dot: 'bg-spark animate-pulse' }
+      ? { text: 'running content-policy check…', tone: 'text-ink-muted', dot: 'bg-brand animate-pulse' }
       : state === 'rejected'
-      ? { text: `✗ rejected · ${REJECT_REASON}`, tone: 'text-fail', dot: 'bg-fail' }
+      ? { text: `✗ rejected · ${REJECT_REASON}`, tone: 'text-danger', dot: 'bg-danger' }
       : state === 'approved'
-      ? { text: '✓ approved · output shipped', tone: 'text-success', dot: 'bg-success' }
-      : { text: 'pending', tone: 'text-ink3', dot: 'bg-rule2' };
+      ? { text: '✓ approved · output shipped', tone: 'text-ok', dot: 'bg-ok' }
+      : { text: 'pending', tone: 'text-ink-faint', dot: 'bg-field' };
 
   return (
-    <div className="px-4 md:px-5 py-2 border-t border-rule2 bg-bg/30">
+    <div className="px-4 md:px-5 py-2 border-t border-field bg-surface/30">
       <AnimatePresence mode="wait">
         <motion.div
           key={`${variant}-${state}`}
@@ -301,17 +298,17 @@ function CheckLine({
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: 3 }}
           transition={{ duration: 0.15 }}
-          className={`flex items-center gap-2 font-mono text-[10.5px] ${cfg.tone}`}
+          className={`flex items-center gap-2 font-mono text-micro ${cfg.tone}`}
         >
           <span className={`inline-block w-1.5 h-1.5 rounded-full ${cfg.dot}`} aria-hidden />
           <span>{cfg.text}</span>
           {state === 'rejected' && (
-            <span className="ml-auto font-mono text-[9px] uppercase tracking-eyebrow text-fail border border-fail/55 bg-fail/10 rounded px-1.5 py-[1px]">
+            <span className="ml-auto font-mono text-micro uppercase tracking-eyebrow text-danger border border-danger/55 bg-danger/10 rounded px-1.5 py-[1px]">
               REFUSAL
             </span>
           )}
           {state === 'approved' && (
-            <span className="ml-auto font-mono text-[9px] uppercase tracking-eyebrow text-success border border-success/55 bg-success/10 rounded px-1.5 py-[1px]">
+            <span className="ml-auto font-mono text-micro uppercase tracking-eyebrow text-ok border border-ok/55 bg-ok/10 rounded px-1.5 py-[1px]">
               SHIPPED
             </span>
           )}
@@ -325,7 +322,7 @@ function CheckLine({
 
 function PromptArrow({ phase }: { phase: Phase }) {
   return (
-    <div className="flex items-center gap-2 mb-2 mt-1 font-mono text-[10px] uppercase tracking-eyebrow text-spark">
+    <div className="flex items-center gap-2 mb-2 mt-1 font-mono text-micro uppercase tracking-eyebrow text-brand">
       <motion.span
         animate={{ y: [0, 2, 0] }}
         transition={{ duration: 0.9, repeat: Infinity }}
@@ -334,8 +331,8 @@ function PromptArrow({ phase }: { phase: Phase }) {
         ↓
       </motion.span>
       <span>enhancer.prompt</span>
-      <span className="text-ink3 normal-case tracking-normal">·</span>
-      <span className="text-ink3 normal-case tracking-normal tabular-nums">{PROMPT_MS}ms</span>
+      <span className="text-ink-faint normal-case tracking-normal">·</span>
+      <span className="text-ink-faint normal-case tracking-normal tabular-nums">{PROMPT_MS}ms</span>
     </div>
   );
 }
@@ -346,11 +343,9 @@ function ValueChain({ phase }: { phase: Phase }) {
   const shipped = phase === 'ship';
 
   return (
-    <div className="border-t border-rule2 bg-bg/40 px-4 md:px-5 py-3">
-      <div className="font-mono text-[9px] uppercase tracking-eyebrow text-ink3 mb-2">
-        value chain
-      </div>
-      <div className="flex items-center gap-2 font-mono text-[10.5px]">
+    <div className="border-t border-field bg-surface/40 px-4 md:px-5 py-3">
+      <Eyebrow size="sm" tone="ink-faint" className="mb-2">value chain</Eyebrow>
+      <div className="flex items-center gap-2 font-mono text-micro">
         <ChainNode label="user" sub="got output" lit={shipped} delay={0} />
         <Arrow lit={shipped} delay={0.15} />
         <ChainNode label="your app" sub="billed user" lit={shipped} delay={0.3} />
@@ -375,18 +370,18 @@ function ChainNode({
   return (
     <motion.div
       animate={{
-        borderColor: lit ? 'rgb(var(--c-spark) / 0.55)' : 'rgb(var(--c-rule2))',
+        borderColor: lit ? 'rgb(var(--brand) / 0.55)' : 'rgb(var(--field))',
       }}
       transition={{ duration: 0.2, delay }}
-      className="flex flex-col items-center gap-0.5 px-2 py-1 border rounded-md bg-bg flex-1 min-w-0"
+      className="flex flex-col items-center gap-0.5 px-2 py-1 border rounded-md bg-surface flex-1 min-w-0"
     >
-      <span className={`text-[10.5px] truncate ${lit ? 'text-spark' : 'text-ink2'}`}>
+      <span className={`text-micro truncate ${lit ? 'text-brand' : 'text-ink-muted'}`}>
         {label}
       </span>
       <motion.span
-        animate={{ opacity: lit ? 1 : 0.5, color: lit ? 'rgb(var(--c-success))' : 'rgb(var(--c-ink3))' }}
+        animate={{ opacity: lit ? 1 : 0.5, color: lit ? 'rgb(var(--ok))' : 'rgb(var(--ink-faint))' }}
         transition={{ duration: 0.2, delay }}
-        className="text-[9px] flex items-center gap-1 whitespace-nowrap"
+        className="text-micro flex items-center gap-1 whitespace-nowrap"
       >
         {lit && <span aria-hidden>✓</span>}
         <span>{sub}</span>
@@ -398,9 +393,9 @@ function ChainNode({
 function Arrow({ lit, delay }: { lit: boolean; delay: number }) {
   return (
     <motion.span
-      className="text-[14px] shrink-0"
+      className="text-body shrink-0"
       animate={{
-        color: lit ? 'rgb(var(--c-spark))' : 'rgb(var(--c-rule2))',
+        color: lit ? 'rgb(var(--brand))' : 'rgb(var(--field))',
         opacity: lit ? 1 : 0.4,
       }}
       transition={{ duration: 0.2, delay }}

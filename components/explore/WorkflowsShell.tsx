@@ -11,6 +11,7 @@ import {
   type WorkflowCategory,
   type WorkflowSummary,
 } from '@/lib/workflows';
+import { Eyebrow } from '@/components/ui/Eyebrow';
 
 const PAGE_LIMIT = 60;
 const PREFETCH_ROOT_MARGIN = '600px'; // start next page ~600px before reaching sentinel
@@ -160,13 +161,13 @@ export function WorkflowsShell({
       {/* Filter bar */}
       <div className="flex flex-col gap-3 mb-6 lg:flex-row lg:items-center lg:gap-4">
         <div className="relative flex-1 max-w-[460px] shrink-0">
-          <Search aria-hidden className="absolute left-3 top-1/2 -translate-y-1/2 text-ink3 w-4 h-4 pointer-events-none" />
+          <Search aria-hidden className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-faint w-4 h-4 pointer-events-none" />
           <input
             type="text"
             value={rawQuery}
             onChange={(e) => setRawQuery(e.target.value)}
             placeholder="Search workflows..."
-            className="w-full bg-surface border border-rule2 rounded-md pl-10 pr-4 py-2 text-[14px] text-ink placeholder:text-ink3 focus:outline-none focus:border-spark"
+            className="w-full bg-surface-raised border border-field rounded-md pl-10 pr-4 py-2 text-body text-ink placeholder:text-ink-faint focus:outline-none focus:border-brand"
           />
         </div>
 
@@ -195,15 +196,13 @@ export function WorkflowsShell({
           ]}
         />
 
-        <span className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3 lg:ml-auto">
-          {isTrends
+        <Eyebrow as="span" size="sm" tone="ink-faint" className="lg:ml-auto">{isTrends
             ? total
               ? `${total} trends`
               : ''
             : workflows.length
               ? `${workflows.length}${hasMore ? '+' : ''} workflows`
-              : ''}
-        </span>
+              : ''}</Eyebrow>
       </div>
 
       {/* Grid */}
@@ -226,8 +225,8 @@ export function WorkflowsShell({
       </div>
 
       {!reloading && workflows.length === 0 && (
-        <div className="border border-dashed border-rule2 rounded-md py-16 text-center mt-6">
-          <p className="font-mono text-[12px] uppercase tracking-eyebrow text-ink3">
+        <div className="border border-dashed border-field rounded-md py-16 text-center mt-6">
+          <p className="font-mono text-caption uppercase tracking-eyebrow text-ink-faint">
             No {isTrends ? 'trends' : 'workflows'} match those filters.
           </p>
         </div>
@@ -237,7 +236,7 @@ export function WorkflowsShell({
       {hasMore && <div ref={sentinelRef} className="h-px w-full mt-10" aria-hidden />}
 
       {!hasMore && workflows.length > 0 && (
-        <div className="mt-10 text-center font-mono text-[10px] uppercase tracking-eyebrow text-ink3">
+        <div className="mt-10 text-center font-mono text-micro uppercase tracking-eyebrow text-ink-faint">
           end of catalog · {workflows.length} {isTrends ? 'trends' : 'workflows'}
         </div>
       )}

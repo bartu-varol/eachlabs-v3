@@ -60,7 +60,7 @@ export default async function ProviderPage({
         <div className="flex items-center justify-between gap-4 mb-6">
           <Link
             href="/explore"
-            className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-eyebrow text-ink3 hover:text-ink no-underline"
+            className="inline-flex items-center gap-2 font-mono text-eyebrow uppercase tracking-eyebrow text-ink-faint hover:text-ink no-underline"
           >
             <span aria-hidden>←</span> The catalog
           </Link>
@@ -72,25 +72,25 @@ export default async function ProviderPage({
         </div>
         <div key={provider.slug} className="flex flex-col flex-1">
           <div
-            className="ec-anim ec-anim-left font-mono text-[11px] uppercase tracking-eyebrow text-spark"
+            className="ec-anim ec-anim-left font-mono text-eyebrow uppercase tracking-eyebrow text-brand"
             style={{ ['--ec-delay' as string]: 0 }}
           >
             * PROVIDER · {provider.slug}
           </div>
           <h1
-            className="ec-anim ec-anim-scale font-display font-semibold text-[40px] md:text-[60px] leading-[1.0] tracking-tightest text-ink mt-4 line-clamp-1"
+            className="ec-anim ec-anim-scale font-sans font-semibold text-display md:text-display-lg leading-[1.0] tracking-tightest text-ink mt-4 line-clamp-1"
             style={{ ['--ec-delay' as string]: 80 }}
           >
             {provider.name}
           </h1>
           <p
-            className="ec-anim ec-anim-right text-[15px] md:text-[16px] text-ink2 leading-[1.55] max-w-[720px] mt-5 line-clamp-2 min-h-[3.2em]"
+            className="ec-anim ec-anim-right text-body-lg md:text-body-lg text-ink-muted leading-[1.55] max-w-[720px] mt-5 line-clamp-2 min-h-[3.2em]"
             style={{ ['--ec-delay' as string]: 180 }}
           >
             {provider.description ?? ' '}
           </p>
           <div
-            className="ec-anim ec-anim-up flex flex-wrap items-center gap-x-6 gap-y-2 mt-auto pt-7 font-mono text-[11px] uppercase tracking-eyebrow text-ink3"
+            className="ec-anim ec-anim-up flex flex-wrap items-center gap-x-6 gap-y-2 mt-auto pt-7 font-mono text-eyebrow uppercase tracking-eyebrow text-ink-faint"
             style={{ ['--ec-delay' as string]: 280 }}
           >
             <span><strong className="text-ink">{models.length}</strong> models</span>
@@ -99,7 +99,7 @@ export default async function ProviderPage({
         </div>
       </section>
 
-      <section className="container border-t border-rule py-10 md:py-14">
+      <section className="container border-t border-divider py-10 md:py-14">
         <div className="grid grid-cols-1 lg:grid-cols-[280px_minmax(0,1fr)] gap-8 lg:gap-10">
           <ProviderSidebar
             providerSlug={provider.slug}

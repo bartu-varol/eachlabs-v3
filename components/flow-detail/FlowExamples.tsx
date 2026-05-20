@@ -2,6 +2,7 @@
 
 import type { FlowDetail } from '@/lib/flowDetail';
 import { HeroPreview } from '@/components/model-detail/HeroPreview';
+import { Eyebrow } from '@/components/ui/Eyebrow';
 
 /**
  * Examples gallery shown above the Template · pipeline card on the flow detail
@@ -41,14 +42,10 @@ export function FlowExamples({ flow, inputJson }: Props) {
   };
 
   return (
-    <section className="border border-rule2 rounded-md overflow-hidden">
-      <header className="px-5 py-3 border-b border-rule2 bg-surface/40 flex items-baseline justify-between gap-4 flex-wrap">
-        <span className="font-mono text-[11px] uppercase tracking-eyebrow text-ink2">
-          Examples
-        </span>
-        <span className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3">
-          {MOCK_SLOT_COUNT} sample runs · hover for input
-        </span>
+    <section className="border border-field rounded-md overflow-hidden">
+      <header className="px-5 py-3 border-b border-field bg-surface-raised/40 flex items-baseline justify-between gap-4 flex-wrap">
+        <Eyebrow as="span" tone="ink-muted">Examples</Eyebrow>
+        <Eyebrow as="span" size="sm" tone="ink-faint">{MOCK_SLOT_COUNT} sample runs · hover for input</Eyebrow>
       </header>
       <div className="p-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
         {Array.from({ length: MOCK_SLOT_COUNT }).map((_, i) => (

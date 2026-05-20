@@ -4,8 +4,11 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
 import { RabbitButton } from '@/components/ui/RabbitButton';
+import { PageHero } from '@/components/ui/PageHero';
+import { StatTile, StatGrid } from '@/components/ui/StatTile';
 import { CustomerCard } from '@/components/sections/CustomerCard';
 import { customerStories } from '@/lib/content';
+import { Eyebrow } from '@/components/ui/Eyebrow';
 
 export default function CustomersPage() {
   const c = customerStories;
@@ -17,53 +20,41 @@ export default function CustomersPage() {
   return (
     <>
       {/* ─── Hero ───────────────────────────────────────────────────────── */}
-      <section className="container py-20 md:py-28">
-        <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-        >
-          <div className="font-mono text-[11px] uppercase tracking-eyebrow text-spark">
-            * {c.eyebrow.replace('* ', '')}
-          </div>
-          <h1 className="font-display font-semibold text-[44px] sm:text-[60px] md:text-[80px] leading-[0.98] tracking-tightest mt-6 text-ink max-w-[920px]">
+      <PageHero
+        eyebrow={c.eyebrow}
+        headline={
+          <>
             <span className="block">{c.headline.line1}</span>
-            <span className="block text-ink3 italic">{c.headline.line2}</span>
-          </h1>
-          <p className="text-ink2 text-[16px] leading-[1.55] max-w-[640px] mt-7">{c.body}</p>
-
-          {/* Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-rule mt-12 border border-rule rounded-md overflow-hidden">
-            {[
-              { v: '10+',    l: 'production teams quoted' },
-              { v: '1M+',    l: 'downloads powered by us' },
-              { v: '600+',   l: 'models · one API' },
-              { v: '24/7',   l: 'engineer support' },
-            ].map((s) => (
-              <div key={s.l} className="bg-surface px-5 py-6">
-                <div className="font-display font-semibold text-[24px] md:text-[28px] text-spark tabular-nums leading-none">
-                  {s.v}
-                </div>
-                <div className="text-ink3 text-[12px] mt-2">{s.l}</div>
-              </div>
-            ))}
-          </div>
-        </motion.div>
-      </section>
+            <span className="block text-ink-faint italic">{c.headline.line2}</span>
+          </>
+        }
+        description={c.body}
+      >
+        <StatGrid columns={4} className="mt-12">
+          {[
+            { v: '10+',  l: 'production teams quoted' },
+            { v: '1M+',  l: 'downloads powered by us' },
+            { v: '600+', l: 'models · one API'        },
+            { v: '24/7', l: 'engineer support'        },
+          ].map((s) => (
+            <StatTile key={s.l} value={s.v} label={s.l} size="lg" labelStyle="eyebrow" />
+          ))}
+        </StatGrid>
+      </PageHero>
 
       {/* ─── Company marquee ────────────────────────────────────────────── */}
       <section
         aria-label="Featured customers"
-        className="border-t border-b border-rule py-8 md:py-10 overflow-hidden relative"
+        className="border-t border-b border-divider py-8 md:py-10 overflow-hidden relative"
       >
-        <div className="absolute inset-y-0 left-0 w-24 md:w-40 bg-gradient-to-r from-[rgb(var(--c-bg))] to-transparent z-10 pointer-events-none" />
-        <div className="absolute inset-y-0 right-0 w-24 md:w-40 bg-gradient-to-l from-[rgb(var(--c-bg))] to-transparent z-10 pointer-events-none" />
+        <div className="absolute inset-y-0 left-0 w-24 md:w-40 bg-gradient-to-r from-[rgb(var(--surface-raised))] to-transparent z-10 pointer-events-none" />
+        <div className="absolute inset-y-0 right-0 w-24 md:w-40 bg-gradient-to-l from-[rgb(var(--surface-raised))] to-transparent z-10 pointer-events-none" />
 
         <div className="flex items-center gap-12 md:gap-16 w-max animate-marquee" style={{ willChange: 'transform' }}>
           {marqueeRow.map((logo, i) => (
             <span
               key={`${logo.alt}-${i}`}
-              className="inline-flex h-10 md:h-12 w-32 md:w-40 items-center justify-center text-ink3 hover:text-ink transition-colors shrink-0"
+              className="inline-flex h-10 md:h-12 w-32 md:w-40 items-center justify-center text-ink-faint hover:text-ink transition-colors shrink-0"
               aria-label={logo.alt}
             >
               <Image
@@ -81,27 +72,25 @@ export default function CustomersPage() {
       </section>
 
       {/* ─── Testimonials grid ──────────────────────────────────────────── */}
-      <section className="relative border-t border-rule overflow-hidden">
+      <section className="relative border-t border-divider overflow-hidden">
         <div
           aria-hidden
           className="absolute inset-0 pointer-events-none"
           style={{
             background:
-              'radial-gradient(ellipse 60% 50% at 0% 0%, rgb(var(--c-spark) / 0.05), transparent 65%), radial-gradient(ellipse 60% 50% at 100% 100%, rgb(var(--c-highlight) / 0.05), transparent 65%)',
+              'radial-gradient(ellipse 60% 50% at 0% 0%, rgb(var(--brand) / 0.05), transparent 65%), radial-gradient(ellipse 60% 50% at 100% 100%, rgb(var(--cobrand) / 0.05), transparent 65%)',
           }}
         />
         <div className="container py-20 md:py-24 relative">
           <div className="flex items-baseline justify-between gap-6 flex-wrap mb-10">
             <div>
-              <div className="font-mono text-[11px] uppercase tracking-eyebrow text-spark mb-3">
-                ● IN THEIR WORDS
-              </div>
-              <h2 className="font-display font-semibold text-[28px] md:text-[36px] leading-[1.1] tracking-tightest text-ink">
+              <Eyebrow className="mb-3">● IN THEIR WORDS</Eyebrow>
+              <h2 className="font-sans font-semibold text-h2 md:text-h2 leading-[1.1] tracking-tightest text-ink">
                 Ten quotes.{' '}
-                <span className="text-ink3 italic">Verbatim from the teams shipping on each::labs.</span>
+                <span className="text-ink-faint italic">Verbatim from the teams shipping on each::labs.</span>
               </h2>
             </div>
-            <span className="font-mono text-[11px] text-ink3 uppercase tracking-eyebrow">
+            <span className="font-mono text-eyebrow text-ink-faint uppercase tracking-eyebrow">
               {c.caseStudies.length} stories
             </span>
           </div>
@@ -124,26 +113,24 @@ export default function CustomersPage() {
       </section>
 
       {/* ─── Bottom CTA ─────────────────────────────────────────────────── */}
-      <section className="relative border-t border-rule overflow-hidden">
+      <section className="relative border-t border-divider overflow-hidden">
         <div
           aria-hidden
           className="absolute inset-0 pointer-events-none"
           style={{
             background:
-              'radial-gradient(ellipse 50% 80% at 50% 100%, rgb(var(--c-spark) / 0.08), transparent 60%)',
+              'radial-gradient(ellipse 50% 80% at 50% 100%, rgb(var(--brand) / 0.08), transparent 60%)',
           }}
         />
         <div className="container py-24 md:py-32 relative">
           <div className="max-w-[680px] mx-auto text-center">
-            <div className="font-mono text-[11px] uppercase tracking-eyebrow text-spark mb-4">
-              {c.ctaCard.eyebrow}
-            </div>
-            <h2 className="font-display font-semibold text-[34px] md:text-[48px] leading-[1.05] tracking-tightest text-ink">
+            <Eyebrow className="mb-4">{c.ctaCard.eyebrow}</Eyebrow>
+            <h2 className="font-sans font-semibold text-h2 md:text-display leading-[1.05] tracking-tightest text-ink">
               {c.ctaCard.headline}
             </h2>
-            <p className="text-ink2 text-[15px] mt-6">{c.ctaCard.body}</p>
+            <p className="text-ink-muted text-body-lg mt-6">{c.ctaCard.body}</p>
             <div className="flex flex-wrap gap-3 justify-center mt-8">
-              <RabbitButton href="/signup" />
+              <RabbitButton href="/sign-up" />
               <Button href="/contact" variant="secondary">
                 Talk to an engineer
               </Button>

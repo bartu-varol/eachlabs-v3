@@ -7,16 +7,17 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowRight, ArrowUpRight, Shield, Zap, Users, BarChart3, Lock, CalendarCheck } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { customerStories, enterprise } from '@/lib/content';
+import { Eyebrow } from '@/components/ui/Eyebrow';
 
 const EASE_OUT_EXPO = [0.16, 1, 0.3, 1] as const;
 
 const ACCENT_VAR: Record<string, string> = {
-  spark:     'rgb(var(--c-spark))',
-  highlight: 'rgb(var(--c-highlight))',
-  success:   'rgb(var(--c-success))',
-  sun:       'rgb(var(--c-sun))',
-  ember:     'rgb(var(--c-ember))',
-  yellow:    'rgb(var(--c-yellow))',
+  spark:     'rgb(var(--brand))',
+  highlight: 'rgb(var(--cobrand))',
+  success:   'rgb(var(--ok))',
+  sun:       'rgb(var(--glow))',
+  ember:     'rgb(var(--brand-deep))',
+  yellow:    'rgb(var(--caution))',
 };
 
 const FEATURE_ICON: Record<string, typeof Shield> = {
@@ -34,13 +35,13 @@ const FEATURE_ICON: Record<string, typeof Shield> = {
 function EnterpriseHero() {
   const { hero } = enterprise;
   return (
-    <section className="relative border-b border-rule overflow-hidden">
+    <section className="relative border-b border-divider overflow-hidden">
       <div
         aria-hidden
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            'radial-gradient(ellipse 60% 50% at 50% 0%, rgb(var(--c-spark) / 0.08), transparent 65%)',
+            'radial-gradient(ellipse 60% 50% at 50% 0%, rgb(var(--brand) / 0.08), transparent 65%)',
         }}
       />
       <div className="container py-20 md:py-28 relative">
@@ -51,16 +52,14 @@ function EnterpriseHero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, ease: EASE_OUT_EXPO }}
           >
-            <div className="font-mono text-[11px] uppercase tracking-eyebrow text-spark">
-              {hero.pill}
-            </div>
+            <Eyebrow>{hero.pill}</Eyebrow>
 
-            <h1 className="font-display font-semibold text-[44px] sm:text-[60px] lg:text-[72px] leading-[0.98] tracking-tightest text-ink mt-7">
+            <h1 className="font-sans font-semibold text-display sm:text-display-lg lg:text-hero leading-[0.98] tracking-tightest text-ink mt-7">
               <span className="block">{hero.headline.line1}</span>
-              <span className="block text-ink3 italic">{hero.headline.line2Emph}</span>
+              <span className="block text-ink-faint italic">{hero.headline.line2Emph}</span>
             </h1>
 
-            <p className="text-ink2 text-[16px] leading-[1.6] max-w-[560px] mt-7">
+            <p className="text-ink-muted text-body-lg leading-[1.6] max-w-[560px] mt-7">
               <span className="text-ink">{hero.body}</span>
               {hero.bodyLead}
             </p>
@@ -85,19 +84,19 @@ function EnterpriseHero() {
         </div>
 
         {/* Stats grid, full width below the split */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-rule mt-14 border border-rule rounded-md overflow-hidden">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-divider mt-14 border border-divider rounded-md overflow-hidden">
           {hero.stats.map((s) => (
-            <div key={s.label} className="bg-surface px-5 py-6">
-              <div className="font-display font-semibold text-[26px] md:text-[32px] text-spark tabular-nums leading-none break-words">
+            <div key={s.label} className="bg-surface-raised px-5 py-6">
+              <div className="font-sans font-semibold text-h3 md:text-h2 text-brand tabular-nums leading-none break-words">
                 {s.value}
               </div>
-              <div className="text-ink text-[12.5px] mt-3">{s.label}</div>
-              <div className="text-ink3 text-[11px] mt-1">{s.sub}</div>
+              <div className="text-ink text-caption mt-3">{s.label}</div>
+              <div className="text-ink-faint text-eyebrow mt-1">{s.sub}</div>
             </div>
           ))}
         </div>
 
-        <p className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3 mt-6">
+        <p className="font-mono text-micro uppercase tracking-eyebrow text-ink-faint mt-6">
           {hero.subtext}
         </p>
       </div>
@@ -132,19 +131,19 @@ const LINE_PREFIX: Record<LineKind, string> = {
 };
 
 const LINE_PREFIX_COLOR: Record<LineKind, string> = {
-  cmd:     'text-spark',
-  ok:      'text-success',
-  fail:    'text-fail',
-  trace:   'text-spark',
-  comment: 'text-ink3',
+  cmd:     'text-brand',
+  ok:      'text-ok',
+  fail:    'text-danger',
+  trace:   'text-brand',
+  comment: 'text-ink-faint',
 };
 
 const LINE_TEXT_COLOR: Record<LineKind, string> = {
   cmd:     'text-ink',
   ok:      'text-ink',
   fail:    'text-ink',
-  trace:   'text-ink2',
-  comment: 'text-ink3 italic',
+  trace:   'text-ink-muted',
+  comment: 'text-ink-faint italic',
 };
 
 const LOG_LINES: { kind: LineKind; text: string }[] = [
@@ -177,7 +176,7 @@ function LiveTail() {
   const lines = LOG_LINES;
   const stagger = 0.85 / Math.max(1, lines.length);
   return (
-    <div className="font-mono text-[11.5px] leading-[1.7] w-full">
+    <div className="font-mono text-eyebrow leading-[1.7] w-full">
       {lines.map((line, i) => {
         const showStart = i * stagger;
         const t0 = Math.max(0, showStart);
@@ -213,9 +212,9 @@ function LiveTail() {
       })}
       {/* Blinking cursor */}
       <div className="flex gap-3 mt-1">
-        <span className="text-spark shrink-0 w-3 select-none">$</span>
+        <span className="text-brand shrink-0 w-3 select-none">$</span>
         <motion.span
-          className="inline-block w-2 h-3.5 bg-spark"
+          className="inline-block w-2 h-3.5 bg-brand"
           animate={{ opacity: [1, 0, 1] }}
           transition={{ duration: 1.1, repeat: Infinity, ease: 'easeInOut' }}
           aria-hidden
@@ -239,68 +238,64 @@ function LiveOpsConsole() {
   };
 
   return (
-    <div className="bg-bg border border-rule2 rounded-md overflow-hidden shadow-[0_8px_24px_-12px_rgba(0,0,0,0.6)]">
+    <div className="bg-surface border border-field rounded-md overflow-hidden shadow-[0_8px_24px_-12px_rgba(0,0,0,0.6)]">
       {/* Header */}
-      <div className="flex items-center justify-between px-5 py-3 border-b border-rule2 bg-surface/50">
+      <div className="flex items-center justify-between px-5 py-3 border-b border-field bg-surface-raised/50">
         <div className="flex items-center gap-3">
           <span className="flex gap-1.5" aria-hidden>
-            <span className="w-2.5 h-2.5 rounded-full bg-fail/55" />
-            <span className="w-2.5 h-2.5 rounded-full bg-yellow/55" />
-            <span className="w-2.5 h-2.5 rounded-full bg-success/55" />
+            <span className="w-2.5 h-2.5 rounded-full bg-danger/55" />
+            <span className="w-2.5 h-2.5 rounded-full bg-caution/55" />
+            <span className="w-2.5 h-2.5 rounded-full bg-ok/55" />
           </span>
-          <span className="inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-eyebrow text-ink2">
-            <span className="inline-block w-1.5 h-1.5 rounded-full bg-spark animate-pulse" aria-hidden />
+          <span className="inline-flex items-center gap-2 font-mono text-micro uppercase tracking-eyebrow text-ink-muted">
+            <span className="inline-block w-1.5 h-1.5 rounded-full bg-brand animate-pulse" aria-hidden />
             <span>
-              <span className="text-ink3">each::</span>router · prod
+              <span className="text-ink-faint">each::</span>router · prod
             </span>
           </span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="font-mono text-[12px] tabular-nums text-ink" suppressHydrationWarning>
+          <span className="font-mono text-caption tabular-nums text-ink" suppressHydrationWarning>
             {total.toLocaleString('en-US')}
           </span>
-          <span className="font-mono text-[10px] uppercase tracking-eyebrow text-spark">
-            rps · live
-          </span>
+          <Eyebrow as="span" size="sm">rps · live</Eyebrow>
         </div>
       </div>
 
       {/* Provider rows */}
       <div className="px-5 md:px-6 py-5 md:py-6 flex flex-col gap-3.5">
-        <div className="font-mono text-[9.5px] uppercase tracking-eyebrow text-ink3">
-          ▸ providers
-        </div>
+        <Eyebrow size="sm" tone="ink-faint">▸ providers</Eyebrow>
         {PROVIDERS.map((p) => {
           const value = providerValues[p.id];
           const pct = Math.min(100, Math.round((value / p.max) * 100));
           const isStandby = p.status === 'standby';
           return (
             <div key={p.id} className="flex items-center gap-3">
-              <span className="font-mono text-[11px] text-ink2 w-20 shrink-0">{p.id}</span>
+              <span className="font-mono text-eyebrow text-ink-muted w-20 shrink-0">{p.id}</span>
               {/* RPS bar */}
-              <div className="flex-1 relative h-1.5 bg-surface rounded-sm overflow-hidden">
+              <div className="flex-1 relative h-1.5 bg-surface-raised rounded-sm overflow-hidden">
                 <motion.span
                   className={`absolute inset-y-0 left-0 rounded-sm ${
-                    isStandby ? 'bg-ink3/40' : 'bg-spark/80'
+                    isStandby ? 'bg-ink-faint/40' : 'bg-brand/80'
                   }`}
                   animate={{ width: `${pct}%` }}
                   transition={{ duration: 0.4, ease: 'easeOut' }}
                 />
               </div>
               <span
-                className="font-mono text-[11px] tabular-nums text-ink w-14 text-right"
+                className="font-mono text-eyebrow tabular-nums text-ink w-14 text-right"
                 suppressHydrationWarning
               >
                 {value}
               </span>
               <span
-                className={`font-mono text-[9px] inline-flex items-center gap-1 w-16 shrink-0 ${
-                  isStandby ? 'text-ink3' : 'text-success'
+                className={`font-mono text-micro inline-flex items-center gap-1 w-16 shrink-0 ${
+                  isStandby ? 'text-ink-faint' : 'text-ok'
                 }`}
               >
                 <motion.span
                   className={`inline-block w-1.5 h-1.5 rounded-full ${
-                    isStandby ? 'bg-ink3' : 'bg-success'
+                    isStandby ? 'bg-ink-faint' : 'bg-ok'
                   }`}
                   animate={{ opacity: [1, 0.4, 1] }}
                   transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
@@ -313,18 +308,16 @@ function LiveOpsConsole() {
       </div>
 
       {/* Streaming log tail, workflows LiveTerminal pattern (text-only) */}
-      <div className="px-5 md:px-6 py-4 border-t border-rule2 bg-surface/30">
-        <div className="font-mono text-[9.5px] uppercase tracking-eyebrow text-ink3 mb-3">
-          ▸ live tail
-        </div>
+      <div className="px-5 md:px-6 py-4 border-t border-field bg-surface-raised/30">
+        <Eyebrow size="sm" tone="ink-faint" className="mb-3">▸ live tail</Eyebrow>
         <LiveTail />
       </div>
 
       {/* Footer */}
-      <div className="flex items-center justify-between px-5 py-2.5 border-t border-rule2 bg-surface/30 font-mono text-[10px] text-ink3 uppercase tracking-eyebrow">
+      <div className="flex items-center justify-between px-5 py-2.5 border-t border-field bg-surface-raised/30 font-mono text-micro text-ink-faint uppercase tracking-eyebrow">
         <span>600+ models · one API · zero retention by default</span>
         <span className="hidden sm:inline">
-          powered by <span className="text-ink2">each::router</span>
+          powered by <span className="text-ink-muted">each::router</span>
         </span>
       </div>
     </div>
@@ -344,19 +337,17 @@ function WhyEnterprise() {
         viewport={{ once: true, margin: '0px 0px -80px 0px' }}
         transition={{ duration: 0.4, ease: EASE_OUT_EXPO }}
       >
-        <div className="font-mono text-[11px] uppercase tracking-eyebrow text-spark mb-3">
-          {w.eyebrow}
-        </div>
-        <h2 className="font-display font-semibold text-[34px] md:text-[56px] leading-[1.02] tracking-tightest text-ink max-w-[820px]">
+        <Eyebrow className="mb-3">{w.eyebrow}</Eyebrow>
+        <h2 className="font-sans font-semibold text-h2 md:text-display-lg leading-[1.02] tracking-tightest text-ink max-w-[820px]">
           <span className="block">{w.headline.line1}</span>
-          <span className="block text-ink3 italic">{w.headline.line2}</span>
+          <span className="block text-ink-faint italic">{w.headline.line2}</span>
         </h2>
-        <p className="text-ink2 text-[15px] leading-[1.65] max-w-[680px] mt-7">
+        <p className="text-ink-muted text-body-lg leading-[1.65] max-w-[680px] mt-7">
           {w.body}
         </p>
       </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-rule border border-rule rounded-md overflow-hidden mt-12">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-divider border border-divider rounded-md overflow-hidden mt-12">
         {w.pillars.map((p, i) => (
           <motion.div
             key={p.title}
@@ -364,18 +355,16 @@ function WhyEnterprise() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '0px 0px -40px 0px' }}
             transition={{ duration: 0.34, delay: i * 0.06, ease: EASE_OUT_EXPO }}
-            className="bg-surface p-7 md:p-8"
+            className="bg-surface-raised p-7 md:p-8"
           >
             <div className="flex items-center gap-2 mb-4">
-              <span className="inline-block w-1.5 h-1.5 rounded-full bg-spark animate-pulse" aria-hidden />
-              <span className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3">
-                {String(i + 1).padStart(2, '0')}
-              </span>
+              <span className="inline-block w-1.5 h-1.5 rounded-full bg-brand animate-pulse" aria-hidden />
+              <Eyebrow as="span" size="sm" tone="ink-faint">{String(i + 1).padStart(2, '0')}</Eyebrow>
             </div>
-            <h3 className="font-display font-semibold text-[20px] md:text-[22px] text-ink leading-snug mb-3">
+            <h3 className="font-sans font-semibold text-h4 md:text-h3 text-ink leading-snug mb-3">
               {p.title}
             </h3>
-            <p className="text-ink2 text-[14px] leading-[1.65]">{p.body}</p>
+            <p className="text-ink-muted text-body leading-[1.65]">{p.body}</p>
           </motion.div>
         ))}
       </div>
@@ -391,13 +380,13 @@ function SocialProof() {
   const logos = customerStories.caseStudies.map((cs) => ({ ...cs.logo, role: cs.role }));
   const marqueeRow = [...logos, ...logos, ...logos];
   return (
-    <section className="relative border-t border-rule overflow-hidden">
+    <section className="relative border-t border-divider overflow-hidden">
       <div
         aria-hidden
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            'radial-gradient(ellipse 70% 50% at 50% 50%, rgb(var(--c-spark) / 0.06), transparent 70%)',
+            'radial-gradient(ellipse 70% 50% at 50% 50%, rgb(var(--brand) / 0.06), transparent 70%)',
         }}
       />
       <div className="container pt-20 md:pt-24 relative">
@@ -408,31 +397,27 @@ function SocialProof() {
           transition={{ duration: 0.4, ease: EASE_OUT_EXPO }}
           className="text-center max-w-[820px] mx-auto"
         >
-          <div className="font-mono text-[11px] uppercase tracking-eyebrow text-spark mb-6">
-            {sp.eyebrow}
-          </div>
-          <div className="font-display font-semibold text-[64px] md:text-[96px] leading-[0.9] tracking-tightest text-spark">
+          <Eyebrow className="mb-6">{sp.eyebrow}</Eyebrow>
+          <div className="font-sans font-semibold text-hero md:text-[96px] leading-[0.9] tracking-tightest text-brand">
             {sp.metric}
           </div>
-          <div className="font-mono text-[11px] uppercase tracking-eyebrow text-ink3 mt-4">
-            {sp.metricLabel}
-          </div>
-          <p className="text-ink2 text-[15px] leading-[1.65] mt-7">
+          <Eyebrow tone="ink-faint" className="mt-4">{sp.metricLabel}</Eyebrow>
+          <p className="text-ink-muted text-body-lg leading-[1.65] mt-7">
             {sp.body}
           </p>
         </motion.div>
       </div>
 
       {/* Customer logos row — full-width marquee */}
-      <div className="mt-14 border-t border-rule py-8 md:py-10 overflow-hidden relative">
-        <div className="absolute inset-y-0 left-0 w-24 md:w-40 bg-gradient-to-r from-[rgb(var(--c-bg))] to-transparent z-10 pointer-events-none" />
-        <div className="absolute inset-y-0 right-0 w-24 md:w-40 bg-gradient-to-l from-[rgb(var(--c-bg))] to-transparent z-10 pointer-events-none" />
+      <div className="mt-14 border-t border-divider py-8 md:py-10 overflow-hidden relative">
+        <div className="absolute inset-y-0 left-0 w-24 md:w-40 bg-gradient-to-r from-[rgb(var(--surface-raised))] to-transparent z-10 pointer-events-none" />
+        <div className="absolute inset-y-0 right-0 w-24 md:w-40 bg-gradient-to-l from-[rgb(var(--surface-raised))] to-transparent z-10 pointer-events-none" />
 
         <div className="flex items-center gap-12 md:gap-16 w-max animate-marquee" style={{ willChange: 'transform' }}>
           {marqueeRow.map((logo, i) => (
             <span
               key={`${logo.alt}-${i}`}
-              className="inline-flex h-10 md:h-12 w-32 md:w-40 items-center justify-center text-ink3 hover:text-ink transition-colors shrink-0"
+              className="inline-flex h-10 md:h-12 w-32 md:w-40 items-center justify-center text-ink-faint hover:text-ink transition-colors shrink-0"
               aria-label={logo.alt}
             >
               <Image
@@ -458,23 +443,21 @@ function SocialProof() {
 function EnterpriseFeatures() {
   const { features } = enterprise;
   return (
-    <section className="container border-t border-rule py-24 md:py-32">
+    <section className="container border-t border-divider py-24 md:py-32">
       <motion.div
         initial={{ opacity: 0, y: 8 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '0px 0px -80px 0px' }}
         transition={{ duration: 0.4, ease: EASE_OUT_EXPO }}
       >
-        <div className="font-mono text-[11px] uppercase tracking-eyebrow text-spark mb-3">
-          {features.eyebrow}
-        </div>
-        <h2 className="font-display font-semibold text-[34px] md:text-[52px] leading-[1.04] tracking-tightest text-ink max-w-[860px]">
+        <Eyebrow className="mb-3">{features.eyebrow}</Eyebrow>
+        <h2 className="font-sans font-semibold text-h2 md:text-display-lg leading-[1.04] tracking-tightest text-ink max-w-[860px]">
           <span className="block">{features.headline.line1}</span>
-          <span className="block text-ink3 italic">{features.headline.line2}</span>
+          <span className="block text-ink-faint italic">{features.headline.line2}</span>
         </h2>
       </motion.div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-rule border border-rule rounded-md overflow-hidden mt-12">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-divider border border-divider rounded-md overflow-hidden mt-12">
         {features.tiles.map((t, i) => {
           const Icon = FEATURE_ICON[t.title] ?? Shield;
           const accent = ACCENT_VAR[t.accent];
@@ -485,7 +468,7 @@ function EnterpriseFeatures() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '0px 0px -40px 0px' }}
               transition={{ duration: 0.34, delay: i * 0.05, ease: EASE_OUT_EXPO }}
-              className="bg-surface p-7 md:p-8 flex flex-col"
+              className="bg-surface-raised p-7 md:p-8 flex flex-col"
             >
               <div
                 className="w-10 h-10 rounded-md flex items-center justify-center mb-5"
@@ -496,10 +479,10 @@ function EnterpriseFeatures() {
               >
                 <Icon size={18} style={{ color: accent }} aria-hidden />
               </div>
-              <h3 className="font-display font-semibold text-[19px] md:text-[20px] text-ink leading-snug mb-3">
+              <h3 className="font-sans font-semibold text-h4 md:text-h4 text-ink leading-snug mb-3">
                 {t.title}
               </h3>
-              <p className="text-ink2 text-[13.5px] leading-[1.65]">{t.body}</p>
+              <p className="text-ink-muted text-body-sm leading-[1.65]">{t.body}</p>
             </motion.div>
           );
         })}
@@ -514,26 +497,24 @@ function EnterpriseFeatures() {
 function Procurement() {
   const { procurement } = enterprise;
   return (
-    <section className="container border-t border-rule py-24 md:py-32">
+    <section className="container border-t border-divider py-24 md:py-32">
       <motion.div
         initial={{ opacity: 0, y: 8 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '0px 0px -80px 0px' }}
         transition={{ duration: 0.4, ease: EASE_OUT_EXPO }}
       >
-        <div className="font-mono text-[11px] uppercase tracking-eyebrow text-spark mb-3">
-          {procurement.eyebrow}
-        </div>
-        <h2 className="font-display font-semibold text-[34px] md:text-[52px] leading-[1.04] tracking-tightest text-ink max-w-[820px]">
+        <Eyebrow className="mb-3">{procurement.eyebrow}</Eyebrow>
+        <h2 className="font-sans font-semibold text-h2 md:text-display-lg leading-[1.04] tracking-tightest text-ink max-w-[820px]">
           <span className="block">{procurement.headline.line1}</span>
-          <span className="block text-ink3 italic">{procurement.headline.line2}</span>
+          <span className="block text-ink-faint italic">{procurement.headline.line2}</span>
         </h2>
-        <p className="text-ink2 text-[15px] leading-[1.65] max-w-[680px] mt-6">
+        <p className="text-ink-muted text-body-lg leading-[1.65] max-w-[680px] mt-6">
           {procurement.body}
         </p>
       </motion.div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-rule border border-rule rounded-md overflow-hidden mt-12">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-divider border border-divider rounded-md overflow-hidden mt-12">
         {procurement.assets.map((a, i) => (
           <motion.div
             key={a.title}
@@ -541,15 +522,15 @@ function Procurement() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '0px 0px -40px 0px' }}
             transition={{ duration: 0.34, delay: i * 0.04, ease: EASE_OUT_EXPO }}
-            className="bg-surface p-6 md:p-7 flex flex-col"
+            className="bg-surface-raised p-6 md:p-7 flex flex-col"
           >
-            <h3 className="font-display font-semibold text-[18px] text-ink leading-snug mb-2">
+            <h3 className="font-sans font-semibold text-h4 text-ink leading-snug mb-2">
               {a.title}
             </h3>
-            <p className="text-ink3 text-[13px] leading-[1.55] flex-1">{a.sub}</p>
+            <p className="text-ink-faint text-body-sm leading-[1.55] flex-1">{a.sub}</p>
             <Link
               href="/contact"
-              className="mt-5 inline-flex items-center gap-1.5 text-spark text-[13px] font-medium hover:underline underline-offset-4"
+              className="mt-5 inline-flex items-center gap-1.5 text-brand text-body-sm font-medium hover:underline underline-offset-4"
             >
               Request via engineering <ArrowRight size={13} />
             </Link>
@@ -557,7 +538,7 @@ function Procurement() {
         ))}
       </div>
 
-      <p className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3 mt-8">
+      <p className="font-mono text-micro uppercase tracking-eyebrow text-ink-faint mt-8">
         {procurement.note}
       </p>
     </section>
@@ -573,7 +554,7 @@ function EnterpriseFAQ() {
   const active = faq.items[activeIdx];
 
   return (
-    <section className="relative border-t border-rule py-24 md:py-32 overflow-hidden">
+    <section className="relative border-t border-divider py-24 md:py-32 overflow-hidden">
       {/* Floating orbs */}
       <div aria-hidden className="absolute inset-0 pointer-events-none">
         {[
@@ -592,8 +573,8 @@ function EnterpriseFAQ() {
               transform: 'translate(-50%, -50%)',
               background:
                 orb.tone === 'spark'
-                  ? 'rgb(var(--c-spark) / 0.05)'
-                  : 'rgb(var(--c-highlight) / 0.05)',
+                  ? 'rgb(var(--brand) / 0.05)'
+                  : 'rgb(var(--cobrand) / 0.05)',
             }}
             animate={{ y: [0, -16, 0], opacity: [0.7, 1, 0.7] }}
             transition={{
@@ -614,14 +595,12 @@ function EnterpriseFAQ() {
           viewport={{ once: true, margin: '0px 0px -80px 0px' }}
           transition={{ duration: 0.4, ease: 'easeOut' }}
         >
-          <div className="font-mono text-[11px] uppercase tracking-eyebrow text-spark mb-6">
-            {faq.eyebrow}
-          </div>
+          <Eyebrow className="mb-6">{faq.eyebrow}</Eyebrow>
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-            <h2 className="font-display font-semibold text-5xl md:text-7xl tracking-tightest text-ink leading-none">
+            <h2 className="font-sans font-semibold text-5xl md:text-7xl tracking-tightest text-ink leading-none">
               {faq.headline}
             </h2>
-            <p className="italic text-ink3 text-[15px] md:max-w-[320px]">
+            <p className="italic text-ink-faint text-body-lg md:max-w-[320px]">
               {faq.italic}
             </p>
           </div>
@@ -692,21 +671,21 @@ function EnterpriseQuestionRow({
       {isActive && (
         <motion.span
           layoutId="enterprise-faq-active"
-          className="absolute inset-0 bg-surface border border-spark/30 rounded-md"
+          className="absolute inset-0 bg-surface-raised border border-brand/30 rounded-md"
           transition={{ type: 'spring', stiffness: 380, damping: 32 }}
         />
       )}
       <div className="relative flex items-center gap-4 px-4 py-3.5">
         <span
-          className={`font-mono text-[11px] tabular-nums w-6 shrink-0 transition-colors ${
-            isActive ? 'text-spark' : 'text-ink3 group-hover:text-ink2'
+          className={`font-mono text-eyebrow tabular-nums w-6 shrink-0 transition-colors ${
+            isActive ? 'text-brand' : 'text-ink-faint group-hover:text-ink-muted'
           }`}
         >
           {String(index + 1).padStart(2, '0')}
         </span>
         <span
-          className={`flex-1 text-[14.5px] leading-snug transition-colors ${
-            isActive ? 'text-ink' : 'text-ink2 group-hover:text-ink'
+          className={`flex-1 text-body leading-snug transition-colors ${
+            isActive ? 'text-ink' : 'text-ink-muted group-hover:text-ink'
           }`}
         >
           {q}
@@ -716,7 +695,7 @@ function EnterpriseQuestionRow({
           animate={{
             opacity: isActive ? 1 : 0,
             x: isActive ? 0 : -4,
-            color: isActive ? 'rgb(var(--c-spark))' : 'rgb(var(--c-ink3))',
+            color: isActive ? 'rgb(var(--brand))' : 'rgb(var(--ink-faint))',
           }}
           transition={{ duration: 0.2 }}
         >
@@ -749,12 +728,12 @@ function EnterpriseAnswerPanel({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -8 }}
       transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-      className="relative bg-surface border border-rule2 rounded-md p-7 md:p-9 overflow-hidden"
+      className="relative bg-surface-raised border border-field rounded-md p-7 md:p-9 overflow-hidden"
     >
       {/* Ambient glow */}
       <motion.div
         aria-hidden
-        className="absolute -top-20 -right-20 w-56 h-56 rounded-full bg-spark/10 blur-3xl pointer-events-none"
+        className="absolute -top-20 -right-20 w-56 h-56 rounded-full bg-brand/10 blur-3xl pointer-events-none"
         initial={{ opacity: 0, scale: 0.6 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.6 }}
@@ -763,17 +742,17 @@ function EnterpriseAnswerPanel({
       {/* Header */}
       <div className="flex items-baseline justify-between mb-6 relative">
         <motion.div
-          className="font-mono text-[11px] uppercase tracking-eyebrow text-ink3 tabular-nums"
+          className="font-mono text-eyebrow uppercase tracking-eyebrow text-ink-faint tabular-nums"
           initial={{ opacity: 0, y: 4 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0.08 }}
         >
           {String(index + 1).padStart(2, '0')}{' '}
-          <span className="text-ink3/60">/</span>{' '}
-          <span className="text-ink3/60">{String(total).padStart(2, '0')}</span>
+          <span className="text-ink-faint/60">/</span>{' '}
+          <span className="text-ink-faint/60">{String(total).padStart(2, '0')}</span>
         </motion.div>
         <motion.div
-          className="font-mono text-[10px] uppercase tracking-eyebrow text-spark"
+          className="font-mono text-micro uppercase tracking-eyebrow text-brand"
           initial={{ opacity: 0, y: 4 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: 0.14 }}
@@ -787,14 +766,14 @@ function EnterpriseAnswerPanel({
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.36, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
-        className="font-display font-semibold text-[24px] md:text-[30px] leading-[1.15] tracking-tightest text-ink"
+        className="font-sans font-semibold text-h3 md:text-h2 leading-[1.15] tracking-tightest text-ink"
       >
         {q}
       </motion.h3>
 
       {/* Spark divider */}
       <motion.div
-        className="h-px bg-spark/40 my-5 origin-left"
+        className="h-px bg-brand/40 my-5 origin-left"
         initial={{ scaleX: 0 }}
         animate={{ scaleX: 1 }}
         transition={{ duration: 0.5, delay: 0.34, ease: [0.16, 1, 0.3, 1] }}
@@ -805,7 +784,7 @@ function EnterpriseAnswerPanel({
         initial={{ opacity: 0, y: 6 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.34, delay: 0.42 }}
-        className="text-ink2 text-[15px] leading-[1.7] max-w-[640px]"
+        className="text-ink-muted text-body-lg leading-[1.7] max-w-[640px]"
       >
         {a}
       </motion.div>
@@ -819,25 +798,23 @@ function EnterpriseAnswerPanel({
 function FinalCta() {
   const { finalCta } = enterprise;
   return (
-    <section className="relative border-t border-rule py-24 md:py-32 overflow-hidden">
+    <section className="relative border-t border-divider py-24 md:py-32 overflow-hidden">
       <div
         aria-hidden
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            'radial-gradient(ellipse 60% 60% at 50% 50%, rgb(var(--c-spark) / 0.10), transparent 65%)',
+            'radial-gradient(ellipse 60% 60% at 50% 50%, rgb(var(--brand) / 0.10), transparent 65%)',
         }}
       />
       <div className="container relative">
         <div className="max-w-[760px] mx-auto text-center">
-          <div className="font-mono text-[11px] uppercase tracking-eyebrow text-spark mb-5">
-            {finalCta.eyebrow}
-          </div>
-          <h2 className="font-display font-semibold text-[40px] md:text-[60px] leading-[1.02] tracking-tightest text-ink">
+          <Eyebrow className="mb-5">{finalCta.eyebrow}</Eyebrow>
+          <h2 className="font-sans font-semibold text-display md:text-display-lg leading-[1.02] tracking-tightest text-ink">
             <span className="block">{finalCta.headline.line1}</span>
-            <span className="block text-ink3 italic">{finalCta.headline.line2}</span>
+            <span className="block text-ink-faint italic">{finalCta.headline.line2}</span>
           </h2>
-          <p className="text-ink2 text-[15px] leading-[1.65] mt-7 max-w-[600px] mx-auto">
+          <p className="text-ink-muted text-body-lg leading-[1.65] mt-7 max-w-[600px] mx-auto">
             {finalCta.body}
           </p>
           <div className="flex flex-wrap gap-3 justify-center mt-9">

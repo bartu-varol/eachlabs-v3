@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { Eyebrow } from '@/components/ui/Eyebrow';
 
 export type TocItem = { id: string; text: string; level: 2 | 3 };
 
@@ -33,10 +34,8 @@ export function ArticleToC({ items }: Props) {
   if (items.length === 0) return null;
 
   return (
-    <nav aria-label="On this page" className="border border-rule2 rounded-md p-5 bg-surface/40">
-      <div className="font-mono text-[10.5px] uppercase tracking-eyebrow text-ink3 mb-4">
-        On this page
-      </div>
+    <nav aria-label="On this page" className="border border-field rounded-md p-5 bg-surface-raised/40">
+      <Eyebrow size="sm" tone="ink-faint" className="mb-4">On this page</Eyebrow>
       <ol className="space-y-1.5">
         {items.map((item) => {
           const isActive = item.id === active;
@@ -45,11 +44,11 @@ export function ArticleToC({ items }: Props) {
               <a
                 href={`#${item.id}`}
                 className={[
-                  'block py-1 text-[13px] leading-snug border-l-2 pl-3 -ml-px transition-colors',
+                  'block py-1 text-body-sm leading-snug border-l-2 pl-3 -ml-px transition-colors',
                   isActive
-                    ? 'border-spark text-ink'
-                    : 'border-transparent text-ink3 hover:text-ink hover:border-rule2',
-                  item.level === 3 ? 'text-[12.5px] text-ink3/80' : '',
+                    ? 'border-brand text-ink'
+                    : 'border-transparent text-ink-faint hover:text-ink hover:border-field',
+                  item.level === 3 ? 'text-caption text-ink-faint/80' : '',
                 ].join(' ')}
               >
                 {item.text}

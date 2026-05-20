@@ -63,11 +63,11 @@ function ColonPair() {
       style={{ gap: '0.18em' }}
     >
       <span
-        className="block bg-spark"
+        className="block bg-brand"
         style={{ width: '0.22em', height: '0.22em' }}
       />
       <span
-        className="block bg-spark"
+        className="block bg-brand"
         style={{ width: '0.22em', height: '0.22em' }}
       />
     </span>

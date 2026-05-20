@@ -4,8 +4,7 @@ import { usePathname } from 'next/navigation';
 import type { ReactNode } from 'react';
 
 const HIDE_ON = [
-  '/signin',  '/signup',
-  '/signin4', '/signup4',
+  '/sign-in', '/sign-up',
   '/onboarding',
 ];
 

@@ -16,14 +16,14 @@ export function MobileMenu({ open, onClose }: Props) {
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 bg-bg flex flex-col">
-      <div className="flex items-center justify-between px-6 h-16 border-b border-rule">
+    <div className="fixed inset-0 z-50 bg-surface flex flex-col">
+      <div className="flex items-center justify-between px-6 h-16 border-b border-divider">
         <Wordmark />
         <button
           type="button"
           onClick={onClose}
           aria-label="Close menu"
-          className="font-mono text-[12px] uppercase tracking-eyebrow text-ink2 hover:text-ink"
+          className="font-mono text-caption uppercase tracking-eyebrow text-ink-muted hover:text-ink"
         >
           CLOSE ✕
         </button>
@@ -37,7 +37,7 @@ export function MobileMenu({ open, onClose }: Props) {
                 key={item.label}
                 href={item.href}
                 onClick={onClose}
-                className="text-[24px] font-display py-3 border-b border-rule text-ink"
+                className="text-h3 font-sans py-3 border-b border-divider text-ink"
               >
                 {item.label}
               </Link>
@@ -51,15 +51,15 @@ export function MobileMenu({ open, onClose }: Props) {
           const menu = megaMenus[item.menu];
 
           return (
-            <div key={item.label} className="border-b border-rule">
+            <div key={item.label} className="border-b border-divider">
               <button
                 type="button"
                 onClick={() => setExpanded(isOpen ? null : item.menu)}
                 aria-expanded={isOpen}
-                className="w-full text-left text-[24px] font-display py-3 flex items-center justify-between text-ink"
+                className="w-full text-left text-h3 font-sans py-3 flex items-center justify-between text-ink"
               >
                 <span>{item.label}</span>
-                <span className="font-mono text-[14px] text-ink3">{isOpen ? '−' : '+'}</span>
+                <span className="font-mono text-body text-ink-faint">{isOpen ? '−' : '+'}</span>
               </button>
               {isOpen && (
                 <div className="pb-4 pl-4 flex flex-col gap-3">
@@ -69,7 +69,7 @@ export function MobileMenu({ open, onClose }: Props) {
                           key={sub.title}
                           href={sub.href}
                           onClick={onClose}
-                          className="text-[15px] text-ink2 hover:text-ink"
+                          className="text-body-lg text-ink-muted hover:text-ink"
                         >
                           {sub.title}
                         </Link>
@@ -80,11 +80,11 @@ export function MobileMenu({ open, onClose }: Props) {
                             key={col.eyebrow + sub.title}
                             href={sub.href}
                             onClick={onClose}
-                            className="text-[15px] text-ink2 hover:text-ink"
+                            className="text-body-lg text-ink-muted hover:text-ink"
                           >
                             {sub.title.startsWith('each::') ? (
                               <>
-                                <span className="text-ink3">each::</span>
+                                <span className="text-ink-faint">each::</span>
                                 {sub.title.slice(6)}
                               </>
                             ) : (
@@ -100,8 +100,8 @@ export function MobileMenu({ open, onClose }: Props) {
         })}
         <div className="mt-6 flex gap-3">
           <Link
-            href="/signup"
-            className="flex-1 inline-flex items-center justify-center px-5 py-3 rounded-md bg-spark text-white text-[14px] font-medium"
+            href="/sign-up"
+            className="flex-1 inline-flex items-center justify-center px-5 py-3 rounded-md bg-brand text-on-brand text-body font-medium"
           >
             Follow the white rabbit
           </Link>
@@ -109,7 +109,7 @@ export function MobileMenu({ open, onClose }: Props) {
             href="https://docs.eachlabs.ai/introduction"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex-1 inline-flex items-center justify-center px-5 py-3 rounded-md border border-rule2 text-ink text-[14px] font-medium"
+            className="flex-1 inline-flex items-center justify-center px-5 py-3 rounded-md border border-field text-ink text-body font-medium"
           >
             Docs
           </Link>

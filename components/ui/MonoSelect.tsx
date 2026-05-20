@@ -59,16 +59,16 @@ export function MonoSelect({
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-label={ariaLabel ?? label}
-        className="group inline-flex items-center gap-2 bg-surface border border-rule2 rounded-md px-3 py-2 font-mono text-[12px] uppercase tracking-eyebrow text-ink2 hover:border-spark/40 focus:outline-none focus:border-spark transition-colors"
+        className="group inline-flex items-center gap-2 bg-surface-raised border border-field rounded-md px-3 py-2 font-mono text-caption uppercase tracking-eyebrow text-ink-muted hover:border-brand/40 focus:outline-none focus:border-brand transition-colors"
       >
-        <span className="text-spark">*</span>
-        <span className="text-ink3">{label}</span>
+        <span className="text-brand">*</span>
+        <span className="text-ink-faint">{label}</span>
         <span className="text-ink truncate max-w-[180px]">
           {active?.label ?? '—'}
         </span>
         <ChevronDown
           size={12}
-          className={`text-ink3 transition-transform ${open ? 'rotate-180' : ''}`}
+          className={`text-ink-faint transition-transform ${open ? 'rotate-180' : ''}`}
           aria-hidden
         />
       </button>
@@ -77,11 +77,11 @@ export function MonoSelect({
         <div
           role="listbox"
           tabIndex={-1}
-          className={`absolute top-full mt-2 min-w-[240px] bg-surface border border-rule2 rounded-md shadow-[0_8px_24px_-12px_rgb(0_0_0_/_0.35)] z-40 p-1 max-h-[60vh] overflow-y-auto animate-panel-in ${
+          className={`absolute top-full mt-2 min-w-[240px] bg-surface-raised border border-field rounded-md shadow-[0_8px_24px_-12px_rgb(0_0_0_/_0.35)] z-40 p-1 max-h-[60vh] overflow-y-auto animate-panel-in ${
             align === 'end' ? 'right-0' : 'left-0'
           }`}
         >
-          <div className="px-3 py-2 font-mono text-[10px] uppercase tracking-eyebrow text-ink3 border-b border-rule2 flex items-center justify-between">
+          <div className="px-3 py-2 font-mono text-micro uppercase tracking-eyebrow text-ink-faint border-b border-field flex items-center justify-between">
             <span>● {label}</span>
             <span>{options.length}</span>
           </div>
@@ -98,15 +98,15 @@ export function MonoSelect({
                       onChange(opt.value);
                       setOpen(false);
                     }}
-                    className={`w-full text-left flex items-center gap-2 px-3 py-2 rounded-sm font-mono text-[12.5px] transition-colors ${
+                    className={`w-full text-left flex items-center gap-2 px-3 py-2 rounded-sm font-mono text-caption transition-colors ${
                       isActive
-                        ? 'text-ink bg-bg'
-                        : 'text-ink2 hover:bg-bg hover:text-ink'
+                        ? 'text-ink bg-surface'
+                        : 'text-ink-muted hover:bg-surface hover:text-ink'
                     }`}
                   >
                     <span
-                      className={`w-3 inline-flex justify-center text-[12px] ${
-                        isActive ? 'text-spark' : 'text-transparent'
+                      className={`w-3 inline-flex justify-center text-caption ${
+                        isActive ? 'text-brand' : 'text-transparent'
                       }`}
                       aria-hidden
                     >
@@ -114,7 +114,7 @@ export function MonoSelect({
                     </span>
                     <span className="flex-1 truncate">{opt.label}</span>
                     {opt.hint !== undefined && (
-                      <span className="text-[11px] text-ink3 tabular-nums">
+                      <span className="text-eyebrow text-ink-faint tabular-nums">
                         {opt.hint}
                       </span>
                     )}

@@ -6,7 +6,7 @@ export function Ticker() {
   const sequence = [...ticker, ...ticker];
 
   return (
-    <div className="ticker bg-spark text-white h-9 overflow-hidden flex items-center sticky top-0 z-50">
+    <div className="ticker bg-brand text-on-brand h-9 overflow-hidden flex items-center sticky top-0 z-50">
       <div className="ticker-track flex whitespace-nowrap will-change-transform animate-marquee">
         {sequence.map((item, i) => {
           const isFirst = i === 0;
@@ -14,7 +14,7 @@ export function Ticker() {
           return (
             <span
               key={i}
-              className="font-mono text-[11px] uppercase tracking-eyebrow font-medium flex items-center gap-3 px-6"
+              className="font-mono text-eyebrow uppercase tracking-eyebrow font-medium flex items-center gap-3 px-6"
             >
               {isFirst && (
                 <span className="inline-flex items-center mr-2">

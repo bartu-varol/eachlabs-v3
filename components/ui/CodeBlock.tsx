@@ -24,10 +24,10 @@ function highlight(code: string): ReactNode {
     if (idx > lastIdx) out.push(code.slice(lastIdx, idx));
     const t = m[0];
     let cls = '';
-    if (t.startsWith('//') || t.startsWith('#')) cls = 'text-ink3 italic';
-    else if (t.startsWith('"') || t.startsWith("'") || t.startsWith('`')) cls = 'text-spark';
-    else if (/^\d/.test(t)) cls = 'text-spark';
-    else cls = 'text-highlight font-medium';
+    if (t.startsWith('//') || t.startsWith('#')) cls = 'text-ink-faint italic';
+    else if (t.startsWith('"') || t.startsWith("'") || t.startsWith('`')) cls = 'text-brand';
+    else if (/^\d/.test(t)) cls = 'text-brand';
+    else cls = 'text-cobrand font-medium';
     out.push(
       <span key={key++} className={cls}>
         {t}
@@ -63,33 +63,33 @@ export function CodeBlock({ code, language = 'ts', filename, hideLineNumbers }: 
   const lines = code.split('\n');
 
   return (
-    <div className="bg-bg border border-rule2 rounded-md overflow-hidden font-mono">
+    <div className="bg-surface border border-field rounded-md overflow-hidden font-mono">
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-2.5 border-b border-rule2 bg-surface/40">
+      <div className="flex items-center justify-between px-4 py-2.5 border-b border-field bg-surface-raised/40">
         <div className="flex items-center gap-3 min-w-0">
           <div className="flex gap-1.5 shrink-0" aria-hidden>
-            <span className="w-2.5 h-2.5 rounded-full bg-fail/55" />
-            <span className="w-2.5 h-2.5 rounded-full bg-yellow/55" />
-            <span className="w-2.5 h-2.5 rounded-full bg-success/55" />
+            <span className="w-2.5 h-2.5 rounded-full bg-danger/55" />
+            <span className="w-2.5 h-2.5 rounded-full bg-caution/55" />
+            <span className="w-2.5 h-2.5 rounded-full bg-ok/55" />
           </div>
           {filename && (
-            <span className="text-[11px] text-ink2 truncate">{filename}</span>
+            <span className="text-eyebrow text-ink-muted truncate">{filename}</span>
           )}
         </div>
         <div className="flex items-center gap-3 shrink-0">
-          <span className="text-[10px] uppercase tracking-eyebrow text-ink3">
+          <span className="text-micro uppercase tracking-eyebrow text-ink-faint">
             {language}
           </span>
           <button
             type="button"
             onClick={handleCopy}
             aria-label={copied ? 'Copied' : 'Copy code'}
-            className="inline-flex items-center gap-1.5 px-2 py-1 rounded text-[10px] uppercase tracking-eyebrow text-ink3 hover:text-ink hover:bg-bg/60 transition-colors"
+            className="inline-flex items-center gap-1.5 px-2 py-1 rounded text-micro uppercase tracking-eyebrow text-ink-faint hover:text-ink hover:bg-surface/60 transition-colors"
           >
             {copied ? (
               <>
-                <Check size={12} className="text-success" />
-                <span className="text-success">copied</span>
+                <Check size={12} className="text-ok" />
+                <span className="text-ok">copied</span>
               </>
             ) : (
               <>
@@ -103,11 +103,11 @@ export function CodeBlock({ code, language = 'ts', filename, hideLineNumbers }: 
 
       {/* Code body */}
       <div className="overflow-x-auto no-scrollbar">
-        <div className="flex text-[12.5px] leading-[1.7]">
+        <div className="flex text-caption leading-[1.7]">
           {!hideLineNumbers && (
             <div
               aria-hidden
-              className="select-none text-ink3/70 text-right py-4 pl-4 pr-3 border-r border-rule2/50 tabular-nums"
+              className="select-none text-ink-faint/70 text-right py-4 pl-4 pr-3 border-r border-field/50 tabular-nums"
             >
               {lines.map((_, i) => (
                 <div key={i}>{i + 1}</div>

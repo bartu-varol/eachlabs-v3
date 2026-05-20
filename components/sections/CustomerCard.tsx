@@ -3,13 +3,14 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import type { CaseStudy, HeadlineToken } from '@/lib/content';
+import { Eyebrow } from '@/components/ui/Eyebrow';
 
 function Headline({ tokens }: { tokens: HeadlineToken[] }) {
   return (
-    <h3 className="text-ink font-display font-medium text-[20px] leading-[1.25] tracking-tight">
+    <h3 className="text-ink font-sans font-medium text-h4 leading-[1.25] tracking-tight">
       {tokens.map((t, i) =>
         t.kind === 'spark' ? (
-          <span key={i} className="text-spark">{t.text}</span>
+          <span key={i} className="text-brand">{t.text}</span>
         ) : (
           <span key={i}>{t.text}</span>
         ),
@@ -27,7 +28,7 @@ function Portrait({ cs }: { cs: CaseStudy }) {
     // both are square-cropped via object-cover. SVGs aren't optimized by
     // next/image, but they're already client-cached after first paint.
     return (
-      <span className="relative w-20 h-20 rounded-full overflow-hidden flex-shrink-0 ring-1 ring-rule2 bg-surface2">
+      <span className="relative w-20 h-20 rounded-full overflow-hidden flex-shrink-0 ring-1 ring-field bg-surface-sunken">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={photo}
@@ -43,7 +44,7 @@ function Portrait({ cs }: { cs: CaseStudy }) {
   return (
     <span
       className={[
-        'w-20 h-20 rounded-full flex items-center justify-center text-[22px] font-medium tracking-wide flex-shrink-0',
+        'w-20 h-20 rounded-full flex items-center justify-center text-h3 font-medium tracking-wide flex-shrink-0',
         cs.avatar.bg,
         cs.avatar.text,
       ].join(' ')}
@@ -61,7 +62,7 @@ function CompanyMark({ cs }: { cs: CaseStudy }) {
   // a uniform box reads more consistent than per-logo height overrides.
   return (
     <span
-      className="inline-flex h-10 w-32 items-center justify-start text-ink3"
+      className="inline-flex h-10 w-32 items-center justify-start text-ink-faint"
       aria-label={logo.alt}
     >
       <Image
@@ -92,24 +93,22 @@ export function CustomerCard({ cs, variant = 'grid' }: Props) {
   return (
     <article
       className={[
-        'bg-surface border border-rule2 rounded-md p-6 flex flex-col hover:border-spark/40 hover:bg-surface2 transition-colors duration-200',
+        'bg-surface-raised border border-field rounded-md p-6 flex flex-col hover:border-brand/40 hover:bg-surface-sunken transition-colors duration-200',
         isMarquee ? 'w-[320px] sm:w-[360px] md:w-[400px] shrink-0' : 'h-full',
       ].join(' ')}
     >
-      <div className="font-mono text-[10px] uppercase tracking-eyebrow text-ink3 mb-4">
-        {cs.industry}
-      </div>
+      <Eyebrow size="sm" tone="ink-faint" className="mb-4">{cs.industry}</Eyebrow>
 
       <Headline tokens={cs.headline} />
 
-      <p className="text-ink2 italic text-[14px] leading-[1.65] mt-4 flex-1">
+      <p className="text-ink-muted italic text-body leading-[1.65] mt-4 flex-1">
         {`“${cs.quote}”`}
       </p>
 
-      <div className="border-t border-rule pt-5 mt-6 flex items-center gap-5">
+      <div className="border-t border-divider pt-5 mt-6 flex items-center gap-5">
         <Portrait cs={cs} />
         <div className="min-w-0 flex flex-col gap-2">
-          <span className="text-ink text-[15px] font-medium truncate">{cs.name}</span>
+          <span className="text-ink text-body-lg font-medium truncate">{cs.name}</span>
           <CompanyMark cs={cs} />
         </div>
       </div>

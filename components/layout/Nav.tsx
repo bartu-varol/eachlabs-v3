@@ -19,7 +19,7 @@ export function Nav() {
     <>
       <nav
         onMouseLeave={() => setOpenMenu(null)}
-        className="bg-bg/80 backdrop-blur-md border-b border-rule sticky top-9 z-40"
+        className="bg-surface/80 backdrop-blur-md border-b border-divider sticky top-9 z-40"
       >
         <div className="container relative">
           <div className="flex items-center justify-between h-16 gap-8">
@@ -38,7 +38,7 @@ export function Nav() {
                       <Link
                         href={item.href}
                         onMouseEnter={() => setOpenMenu(null)}
-                        className="font-medium text-[14px] text-ink2 hover:text-ink transition-colors"
+                        className="font-medium text-body text-ink-muted hover:text-ink transition-colors"
                       >
                         {item.label}
                       </Link>
@@ -50,12 +50,12 @@ export function Nav() {
                 // Hover opens the full-width dropdown; click navigates if href is set.
                 const TriggerLabel = (
                   <span
-                    className={`font-medium text-[14px] flex items-center gap-1 transition-colors ${
-                      isOpen ? 'text-spark' : 'text-ink2 hover:text-ink'
+                    className={`font-medium text-body flex items-center gap-1 transition-colors ${
+                      isOpen ? 'text-brand' : 'text-ink-muted hover:text-ink'
                     }`}
                   >
                     {item.label}
-                    <span className="text-[10px] mt-0.5">▾</span>
+                    <span className="text-micro mt-0.5">▾</span>
                   </span>
                 );
                 return (
@@ -79,15 +79,15 @@ export function Nav() {
 
             {/* Right cluster (desktop) */}
             <div className="hidden lg:flex items-center gap-4 shrink-0">
-              <span className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-eyebrow text-ink3">
+              <span className="inline-flex items-center gap-2 font-mono text-eyebrow uppercase tracking-eyebrow text-ink-faint">
                 <PulseDot />
                 <span>
-                  <span className="text-spark">*</span> 99.99% · 284K req/24h
+                  <span className="text-brand">*</span> 99.99% · 284K req/24h
                 </span>
               </span>
               <Link
-                href="/signin"
-                className="inline-flex items-center justify-center px-4 py-1.5 border border-rule2 rounded-md text-[14px] font-medium text-ink hover:bg-surface transition-colors"
+                href="/sign-in"
+                className="inline-flex items-center justify-center px-4 py-1.5 border border-field rounded-md text-body font-medium text-ink hover:bg-surface-raised transition-colors"
               >
                 Sign in
               </Link>
@@ -101,7 +101,7 @@ export function Nav() {
                 type="button"
                 onClick={() => setMobileOpen(true)}
                 aria-label="Open menu"
-                className="inline-flex items-center justify-center w-10 h-10 border border-rule2 rounded-md"
+                className="inline-flex items-center justify-center w-10 h-10 border border-field rounded-md"
               >
                 <span className="block w-4 h-0.5 bg-ink relative before:absolute before:left-0 before:-top-1.5 before:w-4 before:h-0.5 before:bg-ink after:absolute after:left-0 after:top-1.5 after:w-4 after:h-0.5 after:bg-ink" />
               </button>

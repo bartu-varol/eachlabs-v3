@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { providers } from '@/lib/catalog';
 import { llmRouterModels } from '@/lib/llmRouter';
+import { Eyebrow } from '@/components/ui/Eyebrow';
 
 export type TabHeroTab = 'MODELS' | 'WORKFLOWS' | 'TRENDS' | 'LLMS';
 
@@ -18,7 +19,7 @@ export function TabHero({ tab, workflowCount, trendsCount, onSwitchTab }: Props)
   if (tab === 'WORKFLOWS') {
     return (
       <Frame eyebrow="* WORKFLOW TEMPLATES" title="Pre-wired recipes." subtitle="Fork. Ship. Iterate.">
-        <p className="text-[15px] md:text-[16px] text-ink2 leading-[1.55] max-w-[680px] mt-6">
+        <p className="text-body-lg md:text-body-lg text-ink-muted leading-[1.55] max-w-[680px] mt-6">
           Every template wires multiple models behind a single call. Fallbacks tuned, prices pinned,
           observability on.
           {workflowCount && workflowCount > 0 ? (
@@ -40,7 +41,7 @@ export function TabHero({ tab, workflowCount, trendsCount, onSwitchTab }: Props)
   if (tab === 'TRENDS') {
     return (
       <Frame eyebrow="* TRENDS" title="What people are remixing." subtitle="Right now.">
-        <p className="text-[15px] md:text-[16px] text-ink2 leading-[1.55] max-w-[680px] mt-6">
+        <p className="text-body-lg md:text-body-lg text-ink-muted leading-[1.55] max-w-[680px] mt-6">
           The recipes others are forking, remixing, and shipping this week.
           {trendsCount && trendsCount > 0 ? (
             <>
@@ -61,9 +62,9 @@ export function TabHero({ tab, workflowCount, trendsCount, onSwitchTab }: Props)
   if (tab === 'LLMS') {
     return (
       <Frame eyebrow="* LLM ROUTER" title="Every LLM," subtitle="one signature.">
-        <p className="text-[15px] md:text-[16px] text-ink2 leading-[1.55] max-w-[680px] mt-6">
+        <p className="text-body-lg md:text-body-lg text-ink-muted leading-[1.55] max-w-[680px] mt-6">
           <strong className="text-ink">{llmRouterModels.length}</strong> chat models from frontier
-          providers, served through <code className="font-mono text-spark">eachlabs-llm-router</code>.
+          providers, served through <code className="font-mono text-brand">eachlabs-llm-router</code>.
           Failover, retries, and one bill, no per-provider keys.
         </p>
         <Ctas
@@ -81,9 +82,9 @@ export function TabHero({ tab, workflowCount, trendsCount, onSwitchTab }: Props)
       title="Every model worth shipping."
       subtitle="Plus the recipes that wire them up."
     >
-      <p className="text-[15px] md:text-[16px] text-ink2 leading-[1.55] max-w-[680px] mt-6">
+      <p className="text-body-lg md:text-body-lg text-ink-muted leading-[1.55] max-w-[680px] mt-6">
         600+ models from {providers.length} providers, image, video, audio, text, all behind one{' '}
-        <code className="font-mono text-spark">each()</code>.
+        <code className="font-mono text-brand">each()</code>.
         {workflowCount && workflowCount > 0 ? (
           <>
             {' '}Plus <strong className="text-ink">{workflowCount}+</strong> pre-wired workflow
@@ -114,10 +115,10 @@ function Frame({
 }) {
   return (
     <section className="container py-14 md:py-20">
-      <div className="font-mono text-[11px] uppercase tracking-eyebrow text-spark">{eyebrow}</div>
-      <h1 className="font-display font-semibold text-[44px] md:text-[80px] leading-[0.95] tracking-tightest text-ink mt-4 max-w-[820px]">
+      <Eyebrow>{eyebrow}</Eyebrow>
+      <h1 className="font-sans font-semibold text-display md:text-[80px] leading-[0.95] tracking-tightest text-ink mt-4 max-w-[820px]">
         {title}
-        <span className="block text-ink3 italic">{subtitle}</span>
+        <span className="block text-ink-faint">{subtitle}</span>
       </h1>
       {children}
     </section>
@@ -138,8 +139,8 @@ function Ctas({ primary, secondary }: { primary: CtaSpec; secondary: CtaSpec }) 
 function CtaButton({ spec, variant }: { spec: CtaSpec; variant: 'primary' | 'secondary' }) {
   const classes =
     variant === 'primary'
-      ? 'inline-flex items-center gap-2 px-5 py-3 bg-spark text-white rounded-md text-[13px] font-semibold no-underline hover:bg-ember transition-colors'
-      : 'inline-flex items-center gap-2 px-5 py-3 border border-rule2 rounded-md text-[13px] font-semibold text-ink no-underline hover:bg-surface hover:border-spark/40 transition-colors';
+      ? 'inline-flex items-center gap-2 px-5 py-3 bg-brand text-on-brand rounded-md text-body-sm font-semibold no-underline hover:bg-brand-deep transition-colors'
+      : 'inline-flex items-center gap-2 px-5 py-3 border border-field rounded-md text-body-sm font-semibold text-ink no-underline hover:bg-surface-raised hover:border-brand/40 transition-colors';
   if ('href' in spec && spec.href) {
     return (
       <Link href={spec.href} className={classes}>

@@ -111,7 +111,7 @@ const result = await each({
     ],
     ctaTitle: 'Build the pipeline once. Ship it from anywhere.',
     ctaBody: 'Workflows are free on every plan. Versioning, rollback, and visual editor are unlimited.',
-    ctaPrimary:   { label: 'Follow the white rabbit',         href: '/signup' },
+    ctaPrimary:   { label: 'Follow the white rabbit',         href: '/sign-up' },
     ctaSecondary: { label: 'See the workflow editor', href: '/docs' },
   },
   router: {
@@ -169,7 +169,7 @@ const result = await each({
     ],
     ctaTitle: 'Stop writing retry loops. Start routing.',
     ctaBody: 'Router is included on every plan. Quality aware mode + custom fallback chains on Pro and up.',
-    ctaPrimary:   { label: 'Follow the white rabbit',     href: '/signup' },
+    ctaPrimary:   { label: 'Follow the white rabbit',     href: '/sign-up' },
     ctaSecondary: { label: 'See router docs',  href: '/docs' },
   },
   enhancer: {
@@ -228,7 +228,7 @@ const result = await each({
     ],
     ctaTitle: 'Stop debugging prompts. Start shipping reliable outputs.',
     ctaBody: 'Enhancer is free on every plan; schema-aware enhancement + per team learning on Pro and up.',
-    ctaPrimary:   { label: 'Follow the white rabbit',         href: '/signup' },
+    ctaPrimary:   { label: 'Follow the white rabbit',         href: '/sign-up' },
     ctaSecondary: { label: 'See enhancer docs',    href: '/docs' },
   },
   sense: {
@@ -293,7 +293,7 @@ const response = await client.chat.completions.create({
     ],
     ctaTitle: 'Stop picking models. Ship the request.',
     ctaBody: 'OpenAI compatible drop in. Free tier covers your first 1,000 sense calls; usage based after that.',
-    ctaPrimary:   { label: 'Get the base URL',   href: '/signup' },
+    ctaPrimary:   { label: 'Get the base URL',   href: '/sign-up' },
     ctaSecondary: { label: 'See sense docs',     href: 'https://docs.eachlabs.ai/introduction' },
   },
 };

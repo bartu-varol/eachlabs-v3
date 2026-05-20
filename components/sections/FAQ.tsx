@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 import { FaqShowcase, type FaqItem } from '@/components/ui/FaqShowcase';
 
 const InlineLink = ({ href, children }: { href: string; children: ReactNode }) => (
-  <Link href={href} className="text-spark hover:underline underline-offset-4">
+  <Link href={href} className="text-brand hover:underline underline-offset-4">
     {children}
   </Link>
 );
@@ -104,7 +104,7 @@ export function FAQ() {
           Still have a question?{' '}
           <a
             href="mailto:support@eachlabs.ai"
-            className="text-spark hover:underline underline-offset-4 not-italic"
+            className="text-brand hover:underline underline-offset-4 not-italic"
           >
             Ask an engineer →
           </a>
