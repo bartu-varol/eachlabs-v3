@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { ExploreShell } from '@/components/explore/ExploreShell';
 import { TemplatesStrip } from '@/components/explore/TemplatesStrip';
 import { ReadmeSection } from '@/components/explore/ReadmeSection';
@@ -18,17 +19,19 @@ export default async function ExplorePage() {
 
   return (
     <>
-      <ExploreShell
-        initialTab="MODELS"
-        initialWorkflows={d.initialWorkflows}
-        initialWorkflowOffset={d.initialWorkflowOffset}
-        initialWorkflowTotal={d.initialWorkflowTotal}
-        initialWorkflowCategories={d.initialCategories}
-        initialTrends={d.initialTrends}
-        initialTrendsOffset={d.initialTrendsOffset}
-        initialTrendsTotal={d.initialTrendsTotal}
-        liveModelsCount={d.liveModelsTotal}
-      />
+      <Suspense fallback={null}>
+        <ExploreShell
+          initialTab="MODELS"
+          initialWorkflows={d.initialWorkflows}
+          initialWorkflowOffset={d.initialWorkflowOffset}
+          initialWorkflowTotal={d.initialWorkflowTotal}
+          initialWorkflowCategories={d.initialCategories}
+          initialTrends={d.initialTrends}
+          initialTrendsOffset={d.initialTrendsOffset}
+          initialTrendsTotal={d.initialTrendsTotal}
+          liveModelsCount={d.liveModelsTotal}
+        />
+      </Suspense>
       <TemplatesStrip />
       <ReadmeSection
         markdown={exploreReadmeMd}

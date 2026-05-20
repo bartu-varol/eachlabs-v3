@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import {
@@ -110,11 +111,13 @@ export default async function ProviderPage({
             activeFamily={null}
           />
           <div key={provider.slug} className="min-w-0">
-            <FilterableModelGrid
-              models={models}
-              eyebrow={`* EVERY ${provider.name.toUpperCase()} MODEL`}
-              searchPlaceholder={`Search ${provider.name} models...`}
-            />
+            <Suspense fallback={null}>
+              <FilterableModelGrid
+                models={models}
+                eyebrow={`* EVERY ${provider.name.toUpperCase()} MODEL`}
+                searchPlaceholder={`Search ${provider.name} models...`}
+              />
+            </Suspense>
           </div>
         </div>
       </section>

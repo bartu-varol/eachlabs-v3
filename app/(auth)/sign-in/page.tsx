@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import { cookies } from 'next/headers';
 import { AuthDevModeProvider } from '@/components/auth/AuthDevModeContext';
 import { DevModeCookieSync } from '@/components/auth/DevModeCookieSync';
@@ -34,7 +35,9 @@ export default async function SigninPage({
 
   return (
     <AuthDevModeProvider>
-      <DevModeCookieSync variant={variant} cleanQuery={isVariant(urlUi)} />
+      <Suspense fallback={null}>
+        <DevModeCookieSync variant={variant} cleanQuery={isVariant(urlUi)} />
+      </Suspense>
       <SigninBrand />
       {variant === 'terminal' && <SigninTerminal />}
     </AuthDevModeProvider>

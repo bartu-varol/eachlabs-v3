@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import {
@@ -113,11 +114,13 @@ export default async function FamilyPage({
             activeFamily={family.slug}
           />
           <div key={family.slug} className="min-w-0">
-            <FilterableModelGrid
-              models={variants}
-              eyebrow={`* ${family.name.toUpperCase()} VARIANTS`}
-              searchPlaceholder={`Search ${family.name} variants...`}
-            />
+            <Suspense fallback={null}>
+              <FilterableModelGrid
+                models={variants}
+                eyebrow={`* ${family.name.toUpperCase()} VARIANTS`}
+                searchPlaceholder={`Search ${family.name} variants...`}
+              />
+            </Suspense>
           </div>
         </div>
       </section>
