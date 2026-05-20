@@ -304,9 +304,8 @@ export function PlatformBento() {
         }}
       />
 
-      <div className="container py-24 md:py-28 relative">
+      <div className="container py-20 md:py-24 relative">
         <SectionHeader
-          eyebrow="● THE PLATFORM"
           size="md"
           headline={<>Modular products. Two layers. <span className="text-ink-faint">One control plane.</span></>}
           description="Each tile is a real product, used in production today. Click any of them to see how it works on its own, or how it pairs with the rest."

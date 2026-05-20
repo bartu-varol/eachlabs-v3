@@ -366,7 +366,7 @@ export async function getModelDetail(
     family: {
       id: m.family?.id ?? 0,
       slug: m.family?.slug ?? 'eachlabs',
-      name: m.family?.name ?? 'eachlabs',
+      name: m.family?.name ?? 'each::labs',
       description: null,
       thumbnailUrl: null,
     },

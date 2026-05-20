@@ -124,8 +124,7 @@ export default function BrandPage() {
           transition={{ duration: 0.4, ease: EASE_OUT_EXPO }}
           className="max-w-[860px] mt-8"
         >
-          <Eyebrow>* BRAND · PRESS KIT</Eyebrow>
-          <h1 className="font-sans font-semibold text-display sm:text-display-lg lg:text-[80px] leading-[0.98] tracking-tightest mt-6 text-ink">
+          <h1 className="font-sans font-semibold text-display sm:text-display-lg lg:text-[80px] leading-[0.98] tracking-tightest text-ink">
             Use it well, use it wrong,<br className="hidden sm:block" /> just don’t squish it.
           </h1>
           <p className="text-ink-muted text-body-lg leading-[1.6] max-w-[640px] mt-7">
@@ -153,7 +152,6 @@ export default function BrandPage() {
       {/* 2. WORDMARK */}
       <BrandSection
         id="wordmark"
-        eyebrow="● WORDMARK"
         title="The full mark."
         body="The primary lockup. Use it whenever you have the room. Always on a flat ink or cream surface; never on Spark, never on a photo."
       >
@@ -166,7 +164,6 @@ export default function BrandPage() {
 
       {/* 3. ICON */}
       <BrandSection
-        eyebrow="● ICON"
         title="The double colon."
         body={'The :: mark for compact use, favicons, app icons, social avatars, embed badges. Same flat treatment as the wordmark.'}
       >
@@ -179,7 +176,6 @@ export default function BrandPage() {
 
       {/* 4. PRODUCT MARKS · router · trace · sense · workflows */}
       <BrandSection
-        eyebrow="● PRODUCT MARKS"
         title="Each product gets its own mark."
         body="Router, trace, sense and workflows ship alongside the platform wordmark when the named product is the subject. Same construction, same colon cadence, same two surfaces."
       >
@@ -192,7 +188,6 @@ export default function BrandPage() {
 
       {/* 5. DO / DON'T */}
       <BrandSection
-        eyebrow="● USAGE · DON’T"
         title="Six ways to ruin the mark."
         body="Most of these are obvious. We list them because someone, somewhere, has already tried."
       >
@@ -204,14 +199,13 @@ export default function BrandPage() {
       </BrandSection>
 
       {/* 6. COLORS */}
-      <section id="colors" className="container border-t border-divider py-20 md:py-24">
+      <section id="colors" className="container border-t border-divider py-16 md:py-20">
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '0px 0px -80px 0px' }}
           transition={{ duration: 0.4, ease: EASE_OUT_EXPO }}
         >
-          <Eyebrow className="mb-3">● COLOR · PALETTE</Eyebrow>
           <h2 className="font-sans font-semibold text-h2 md:text-display leading-[1.05] tracking-tightest text-ink">
             Spark is the hero. Everything else gets out of the way.
           </h2>
@@ -228,14 +222,13 @@ export default function BrandPage() {
       </section>
 
       {/* 7. TYPOGRAPHY */}
-      <section className="container border-t border-divider py-20 md:py-24">
+      <section className="container border-t border-divider py-16 md:py-20">
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '0px 0px -80px 0px' }}
           transition={{ duration: 0.4, ease: EASE_OUT_EXPO }}
         >
-          <Eyebrow className="mb-3">● TYPE · INTER</Eyebrow>
           <h2 className="font-sans font-semibold text-h2 md:text-display leading-[1.05] tracking-tightest text-ink">
             One face. Four weights. That’s it.
           </h2>
@@ -261,7 +254,6 @@ export default function BrandPage() {
 
           <div className="border-t border-divider mt-10 pt-10 grid grid-cols-1 md:grid-cols-3 gap-10">
             <div>
-              <Eyebrow size="sm" tone="ink-faint" className="mb-4">Weights</Eyebrow>
               <ul className="flex flex-col gap-3">
                 {[
                   { weight: 'Bold',     value: 700 },
@@ -281,7 +273,6 @@ export default function BrandPage() {
             </div>
 
             <div>
-              <Eyebrow size="sm" tone="ink-faint" className="mb-4">Sample</Eyebrow>
               <p className="text-ink text-h4 leading-[1.55]">
                 The quick brown fox jumps over the lazy dog.
               </p>
@@ -293,7 +284,6 @@ export default function BrandPage() {
             </div>
 
             <div>
-              <Eyebrow size="sm" tone="ink-faint" className="mb-4">In product</Eyebrow>
               <ul className="flex flex-col gap-3 text-body-sm leading-[1.6]">
                 <li className="text-ink-muted">
                   Display · <span className="text-ink font-semibold">font-sans semibold</span> · tracking-tightest
@@ -318,26 +308,23 @@ export default function BrandPage() {
 
 function BrandSection({
   id,
-  eyebrow,
   title,
   body,
   children,
 }: {
   id?: string;
-  eyebrow: string;
   title: string;
   body: string;
   children: React.ReactNode;
 }) {
   return (
-    <section id={id} className="container border-t border-divider py-20 md:py-24">
+    <section id={id} className="container border-t border-divider py-16 md:py-20">
       <motion.div
         initial={{ opacity: 0, y: 8 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '0px 0px -80px 0px' }}
         transition={{ duration: 0.4, ease: EASE_OUT_EXPO }}
       >
-        <Eyebrow className="mb-3">{eyebrow}</Eyebrow>
         <h2 className="font-sans font-semibold text-h2 md:text-h2 leading-[1.05] tracking-tightest text-ink max-w-[680px]">
           {title}
         </h2>
@@ -399,7 +386,7 @@ function ProductMarkRow({ product }: { product: ProductMark }) {
         <div className="font-sans font-semibold text-h4 text-ink mt-2 leading-tight">
           {product.name}
         </div>
-        <div className="text-ink-faint italic text-caption leading-snug mt-1.5">
+        <div className="text-ink-faint text-caption leading-snug mt-1.5">
           {product.tagline}
         </div>
       </div>

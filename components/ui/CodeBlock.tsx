@@ -24,7 +24,7 @@ function highlight(code: string): ReactNode {
     if (idx > lastIdx) out.push(code.slice(lastIdx, idx));
     const t = m[0];
     let cls = '';
-    if (t.startsWith('//') || t.startsWith('#')) cls = 'text-ink-faint italic';
+    if (t.startsWith('//') || t.startsWith('#')) cls = 'text-ink-faint';
     else if (t.startsWith('"') || t.startsWith("'") || t.startsWith('`')) cls = 'text-brand';
     else if (/^\d/.test(t)) cls = 'text-brand';
     else cls = 'text-cobrand font-medium';

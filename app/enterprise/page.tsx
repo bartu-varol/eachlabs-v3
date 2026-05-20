@@ -3,11 +3,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { ReactNode, useEffect, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
-import { ArrowRight, ArrowUpRight, Shield, Zap, Users, BarChart3, Lock, CalendarCheck } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { ArrowRight, Shield, Zap, Users, BarChart3, Lock, CalendarCheck } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { customerStories, enterprise } from '@/lib/content';
 import { Eyebrow } from '@/components/ui/Eyebrow';
+import { FaqShowcase } from '@/components/ui/FaqShowcase';
 
 const EASE_OUT_EXPO = [0.16, 1, 0.3, 1] as const;
 
@@ -44,7 +45,7 @@ function EnterpriseHero() {
             'radial-gradient(ellipse 60% 50% at 50% 0%, rgb(var(--brand) / 0.08), transparent 65%)',
         }}
       />
-      <div className="container py-20 md:py-28 relative">
+      <div className="container py-16 md:py-24 relative">
         <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] gap-10 lg:gap-14 items-center">
           {/* LEFT, copy */}
           <motion.div
@@ -52,11 +53,9 @@ function EnterpriseHero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, ease: EASE_OUT_EXPO }}
           >
-            <Eyebrow>{hero.pill}</Eyebrow>
-
-            <h1 className="font-sans font-semibold text-display sm:text-display-lg lg:text-hero leading-[0.98] tracking-tightest text-ink mt-7">
+            <h1 className="font-sans font-semibold text-display sm:text-display-lg lg:text-hero leading-[0.98] tracking-tightest text-ink">
               <span className="block">{hero.headline.line1}</span>
-              <span className="block text-ink-faint italic">{hero.headline.line2Emph}</span>
+              <span className="block text-ink-faint">{hero.headline.line2Emph}</span>
             </h1>
 
             <p className="text-ink-muted text-body-lg leading-[1.6] max-w-[560px] mt-7">
@@ -143,7 +142,7 @@ const LINE_TEXT_COLOR: Record<LineKind, string> = {
   ok:      'text-ink',
   fail:    'text-ink',
   trace:   'text-ink-muted',
-  comment: 'text-ink-faint italic',
+  comment: 'text-ink-faint',
 };
 
 const LOG_LINES: { kind: LineKind; text: string }[] = [
@@ -330,17 +329,16 @@ function LiveOpsConsole() {
 function WhyEnterprise() {
   const { whyEnterprise: w } = enterprise;
   return (
-    <section className="container py-24 md:py-32">
+    <section className="container py-20 md:py-28">
       <motion.div
         initial={{ opacity: 0, y: 8 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '0px 0px -80px 0px' }}
         transition={{ duration: 0.4, ease: EASE_OUT_EXPO }}
       >
-        <Eyebrow className="mb-3">{w.eyebrow}</Eyebrow>
         <h2 className="font-sans font-semibold text-h2 md:text-display-lg leading-[1.02] tracking-tightest text-ink max-w-[820px]">
           <span className="block">{w.headline.line1}</span>
-          <span className="block text-ink-faint italic">{w.headline.line2}</span>
+          <span className="block text-ink-faint">{w.headline.line2}</span>
         </h2>
         <p className="text-ink-muted text-body-lg leading-[1.65] max-w-[680px] mt-7">
           {w.body}
@@ -397,7 +395,6 @@ function SocialProof() {
           transition={{ duration: 0.4, ease: EASE_OUT_EXPO }}
           className="text-center max-w-[820px] mx-auto"
         >
-          <Eyebrow className="mb-6">{sp.eyebrow}</Eyebrow>
           <div className="font-sans font-semibold text-hero md:text-[96px] leading-[0.9] tracking-tightest text-brand">
             {sp.metric}
           </div>
@@ -443,17 +440,16 @@ function SocialProof() {
 function EnterpriseFeatures() {
   const { features } = enterprise;
   return (
-    <section className="container border-t border-divider py-24 md:py-32">
+    <section className="container border-t border-divider py-20 md:py-28">
       <motion.div
         initial={{ opacity: 0, y: 8 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '0px 0px -80px 0px' }}
         transition={{ duration: 0.4, ease: EASE_OUT_EXPO }}
       >
-        <Eyebrow className="mb-3">{features.eyebrow}</Eyebrow>
         <h2 className="font-sans font-semibold text-h2 md:text-display-lg leading-[1.04] tracking-tightest text-ink max-w-[860px]">
           <span className="block">{features.headline.line1}</span>
-          <span className="block text-ink-faint italic">{features.headline.line2}</span>
+          <span className="block text-ink-faint">{features.headline.line2}</span>
         </h2>
       </motion.div>
 
@@ -497,17 +493,16 @@ function EnterpriseFeatures() {
 function Procurement() {
   const { procurement } = enterprise;
   return (
-    <section className="container border-t border-divider py-24 md:py-32">
+    <section className="container border-t border-divider py-20 md:py-28">
       <motion.div
         initial={{ opacity: 0, y: 8 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: '0px 0px -80px 0px' }}
         transition={{ duration: 0.4, ease: EASE_OUT_EXPO }}
       >
-        <Eyebrow className="mb-3">{procurement.eyebrow}</Eyebrow>
         <h2 className="font-sans font-semibold text-h2 md:text-display-lg leading-[1.04] tracking-tightest text-ink max-w-[820px]">
           <span className="block">{procurement.headline.line1}</span>
-          <span className="block text-ink-faint italic">{procurement.headline.line2}</span>
+          <span className="block text-ink-faint">{procurement.headline.line2}</span>
         </h2>
         <p className="text-ink-muted text-body-lg leading-[1.65] max-w-[680px] mt-6">
           {procurement.body}
@@ -546,249 +541,17 @@ function Procurement() {
 }
 
 /* ─────────────────────────────────────────────────────────────────────
-   7. FAQ, homepage style (floating orbs + split layout).
+   7. FAQ, shared homepage component for design + animation parity.
    ─────────────────────────────────────────────────────────────────── */
 function EnterpriseFAQ() {
   const { faq } = enterprise;
-  const [activeIdx, setActiveIdx] = useState(0);
-  const active = faq.items[activeIdx];
-
   return (
-    <section className="relative border-t border-divider py-24 md:py-32 overflow-hidden">
-      {/* Floating orbs */}
-      <div aria-hidden className="absolute inset-0 pointer-events-none">
-        {[
-          { size: 280, x: '12%', y: '18%', delay: 0,   dur: 8,  tone: 'spark' },
-          { size: 220, x: '78%', y: '32%', delay: 1.2, dur: 9,  tone: 'highlight' },
-          { size: 320, x: '42%', y: '70%', delay: 2.4, dur: 10, tone: 'spark' },
-        ].map((orb, i) => (
-          <motion.div
-            key={i}
-            className="absolute rounded-full blur-3xl"
-            style={{
-              width: orb.size,
-              height: orb.size,
-              left: orb.x,
-              top: orb.y,
-              transform: 'translate(-50%, -50%)',
-              background:
-                orb.tone === 'spark'
-                  ? 'rgb(var(--brand) / 0.05)'
-                  : 'rgb(var(--cobrand) / 0.05)',
-            }}
-            animate={{ y: [0, -16, 0], opacity: [0.7, 1, 0.7] }}
-            transition={{
-              duration: orb.dur,
-              delay: orb.delay,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }}
-          />
-        ))}
-      </div>
-
-      <div className="container relative">
-        {/* Header, matches homepage FAQ */}
-        <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '0px 0px -80px 0px' }}
-          transition={{ duration: 0.4, ease: 'easeOut' }}
-        >
-          <Eyebrow className="mb-6">{faq.eyebrow}</Eyebrow>
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-            <h2 className="font-sans font-semibold text-5xl md:text-7xl tracking-tightest text-ink leading-none">
-              {faq.headline}
-            </h2>
-            <p className="italic text-ink-faint text-body-lg md:max-w-[320px]">
-              {faq.italic}
-            </p>
-          </div>
-        </motion.div>
-
-        {/* Split layout matches homepage FAQ, pill rows + animated answer card */}
-        <div className="mt-12 grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] gap-6 lg:gap-8">
-          {/* Left, question list */}
-          <div className="flex flex-col gap-1 lg:sticky lg:top-32 self-start">
-            {faq.items.map((item, i) => (
-              <EnterpriseQuestionRow
-                key={i}
-                tag={item.tag}
-                q={item.q}
-                index={i}
-                isActive={i === activeIdx}
-                onSelect={() => setActiveIdx(i)}
-              />
-            ))}
-          </div>
-
-          {/* Right, answer panel */}
-          <div className="min-h-[260px]">
-            <AnimatePresence mode="wait">
-              <EnterpriseAnswerPanel
-                key={activeIdx}
-                tag={active.tag}
-                q={active.q}
-                a={active.a}
-                index={activeIdx}
-                total={faq.items.length}
-              />
-            </AnimatePresence>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* Enterprise FAQ row, mirrors homepage FAQ's QuestionRow with shared
-   layoutId pill on the active item so the highlight slides between rows. */
-function EnterpriseQuestionRow({
-  tag,
-  q,
-  index,
-  isActive,
-  onSelect,
-}: {
-  tag: string;
-  q: string;
-  index: number;
-  isActive: boolean;
-  onSelect: () => void;
-}) {
-  return (
-    <motion.button
-      type="button"
-      onClick={onSelect}
-      onMouseEnter={onSelect}
-      aria-current={isActive}
-      initial={{ opacity: 0, x: -6 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true, margin: '0px 0px -40px 0px' }}
-      transition={{ duration: 0.32, delay: index * 0.04, ease: 'easeOut' }}
-      className="relative w-full text-left rounded-md group"
-    >
-      {isActive && (
-        <motion.span
-          layoutId="enterprise-faq-active"
-          className="absolute inset-0 bg-surface-raised border border-brand/30 rounded-md"
-          transition={{ type: 'spring', stiffness: 380, damping: 32 }}
-        />
-      )}
-      <div className="relative flex items-center gap-4 px-4 py-3.5">
-        <span
-          className={`font-mono text-eyebrow tabular-nums w-6 shrink-0 transition-colors ${
-            isActive ? 'text-brand' : 'text-ink-faint group-hover:text-ink-muted'
-          }`}
-        >
-          {String(index + 1).padStart(2, '0')}
-        </span>
-        <span
-          className={`flex-1 text-body leading-snug transition-colors ${
-            isActive ? 'text-ink' : 'text-ink-muted group-hover:text-ink'
-          }`}
-        >
-          {q}
-        </span>
-        <motion.span
-          className="shrink-0"
-          animate={{
-            opacity: isActive ? 1 : 0,
-            x: isActive ? 0 : -4,
-            color: isActive ? 'rgb(var(--brand))' : 'rgb(var(--ink-faint))',
-          }}
-          transition={{ duration: 0.2 }}
-        >
-          <ArrowUpRight size={14} />
-        </motion.span>
-      </div>
-    </motion.button>
-  );
-}
-
-/* Enterprise FAQ answer card, mirrors homepage FAQ's AnswerPanel:
-   counter + tag header, big question, spark divider, fade-in body. */
-function EnterpriseAnswerPanel({
-  tag,
-  q,
-  a,
-  index,
-  total,
-}: {
-  tag: string;
-  q: string;
-  a: string;
-  index: number;
-  total: number;
-}) {
-  return (
-    <motion.div
-      key={index}
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -8 }}
-      transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-      className="relative bg-surface-raised border border-field rounded-md p-7 md:p-9 overflow-hidden"
-    >
-      {/* Ambient glow */}
-      <motion.div
-        aria-hidden
-        className="absolute -top-20 -right-20 w-56 h-56 rounded-full bg-brand/10 blur-3xl pointer-events-none"
-        initial={{ opacity: 0, scale: 0.6 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.6 }}
-      />
-
-      {/* Header */}
-      <div className="flex items-baseline justify-between mb-6 relative">
-        <motion.div
-          className="font-mono text-eyebrow uppercase tracking-eyebrow text-ink-faint tabular-nums"
-          initial={{ opacity: 0, y: 4 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, delay: 0.08 }}
-        >
-          {String(index + 1).padStart(2, '0')}{' '}
-          <span className="text-ink-faint/60">/</span>{' '}
-          <span className="text-ink-faint/60">{String(total).padStart(2, '0')}</span>
-        </motion.div>
-        <motion.div
-          className="font-mono text-micro uppercase tracking-eyebrow text-brand"
-          initial={{ opacity: 0, y: 4 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, delay: 0.14 }}
-        >
-          {tag}
-        </motion.div>
-      </div>
-
-      {/* Question */}
-      <motion.h3
-        initial={{ opacity: 0, y: 8 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.36, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
-        className="font-sans font-semibold text-h3 md:text-h2 leading-[1.15] tracking-tightest text-ink"
-      >
-        {q}
-      </motion.h3>
-
-      {/* Spark divider */}
-      <motion.div
-        className="h-px bg-brand/40 my-5 origin-left"
-        initial={{ scaleX: 0 }}
-        animate={{ scaleX: 1 }}
-        transition={{ duration: 0.5, delay: 0.34, ease: [0.16, 1, 0.3, 1] }}
-      />
-
-      {/* Answer */}
-      <motion.div
-        initial={{ opacity: 0, y: 6 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.34, delay: 0.42 }}
-        className="text-ink-muted text-body-lg leading-[1.7] max-w-[640px]"
-      >
-        {a}
-      </motion.div>
-    </motion.div>
+    <FaqShowcase
+      items={faq.items}
+      eyebrow={faq.eyebrow}
+      heading={faq.headline}
+      subtitle={faq.italic}
+    />
   );
 }
 
@@ -798,7 +561,7 @@ function EnterpriseAnswerPanel({
 function FinalCta() {
   const { finalCta } = enterprise;
   return (
-    <section className="relative border-t border-divider py-24 md:py-32 overflow-hidden">
+    <section className="relative border-t border-divider py-20 md:py-28 overflow-hidden">
       <div
         aria-hidden
         className="absolute inset-0 pointer-events-none"
@@ -809,10 +572,9 @@ function FinalCta() {
       />
       <div className="container relative">
         <div className="max-w-[760px] mx-auto text-center">
-          <Eyebrow className="mb-5">{finalCta.eyebrow}</Eyebrow>
           <h2 className="font-sans font-semibold text-display md:text-display-lg leading-[1.02] tracking-tightest text-ink">
             <span className="block">{finalCta.headline.line1}</span>
-            <span className="block text-ink-faint italic">{finalCta.headline.line2}</span>
+            <span className="block text-ink-faint">{finalCta.headline.line2}</span>
           </h2>
           <p className="text-ink-muted text-body-lg leading-[1.65] mt-7 max-w-[600px] mx-auto">
             {finalCta.body}

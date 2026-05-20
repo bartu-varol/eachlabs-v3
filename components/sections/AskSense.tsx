@@ -104,12 +104,10 @@ export function AskSense() {
         className="container pt-48 md:pt-56 pb-32 md:pb-40 relative z-[5]"
         style={{ y: contentY, scale: contentScale, opacity: contentOpacity }}
       >
-      <Eyebrow>{askSense.eyebrow}</Eyebrow>
-
-      <h3 className="font-sans font-semibold text-h2 md:text-display-lg leading-[0.98] tracking-tightest mt-3">
+      <h3 className="font-sans font-semibold text-h2 md:text-display-lg leading-[0.98] tracking-tightest">
         <span className="block text-ink">
           {askSense.headline.line1}{' '}
-          <em className="text-brand italic font-sans">{askSense.headline.italic}</em>
+          <span className="text-brand font-sans">{askSense.headline.italic}</span>
         </span>
         <span className="block text-ink-faint">{askSense.headline.line2}</span>
       </h3>

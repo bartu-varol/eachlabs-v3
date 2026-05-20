@@ -24,7 +24,7 @@ export function SignupBrandPanel() {
               <Check className="size-4 text-brand mt-[3px] shrink-0" strokeWidth={2.5} />
               <div>
                 <div className="text-ink text-body font-medium leading-tight">{p.label}</div>
-                <div className="text-ink-faint italic text-caption mt-0.5">{p.sub}</div>
+                <div className="text-ink-faint text-caption mt-0.5">{p.sub}</div>
               </div>
             </li>
           ))}
@@ -55,8 +55,8 @@ export function SignupBrandPanel() {
         </div>
       </div>
 
-      <p className="font-sans italic text-h4 text-ink-muted leading-snug max-w-[380px]">
-        We do the <span className="hero-underline not-italic text-ink font-semibold">boring parts.</span>
+      <p className="font-sans text-h4 text-ink-muted leading-snug max-w-[380px]">
+        We do the <span className="hero-underline text-ink font-semibold">boring parts.</span>
         <br />
         You ship the product.
       </p>
@@ -86,7 +86,7 @@ export function SigninBrandPanel() {
                 {s.v}
               </div>
               <div className="text-ink text-eyebrow mt-2 font-medium leading-tight">{s.k}</div>
-              <div className="text-ink-faint italic text-micro mt-0.5">{s.sub}</div>
+              <div className="text-ink-faint text-micro mt-0.5">{s.sub}</div>
             </div>
           ))}
         </div>
@@ -97,13 +97,13 @@ export function SigninBrandPanel() {
         <div className="mt-2 text-ink text-body font-medium">
           each::router 1.4, quality-aware spill
         </div>
-        <div className="text-ink-faint italic text-caption mt-1">
+        <div className="text-ink-faint text-caption mt-1">
           We now route around quality degradations, not just failures.
         </div>
       </div>
 
-      <p className="font-sans italic text-h4 text-ink-muted leading-snug max-w-[380px]">
-        <span className="hero-underline not-italic text-ink font-semibold">The chaos</span>{' '}
+      <p className="font-sans text-h4 text-ink-muted leading-snug max-w-[380px]">
+        <span className="hero-underline text-ink font-semibold">The chaos</span>{' '}
         missed you.
       </p>
     </div>

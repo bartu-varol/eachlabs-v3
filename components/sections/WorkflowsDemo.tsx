@@ -139,8 +139,8 @@ function FallbackBranchCard({
   const onFallback = sub === 'wan-run' || sub === 'wan-done';
   const running = sub === 'kling-run' || sub === 'wan-run';
   const done = sub === 'wan-done';
-  const model: 'kling-v3' | 'wan-2.7' =
-    sub === 'wan-run' || sub === 'wan-done' ? 'wan-2.7' : 'kling-v3';
+  const model: 'veo-3.1' | 'wan-2.7' =
+    sub === 'wan-run' || sub === 'wan-done' ? 'wan-2.7' : 'veo-3.1';
 
   const border = failing
     ? 'border-danger'
@@ -631,7 +631,7 @@ function TraceFooter({ phase }: { phase: Phase }) {
                 trace · 5 steps
               </span>
               <span className="text-ink-muted truncate flex-1">
-                enhance · flux-2 · <span className="text-danger line-through">kling-v3</span>{' '}
+                enhance · flux-2 · <span className="text-danger line-through">veo-3.1</span>{' '}
                 <span className="text-ok">↳ wan-2.7</span> · eleven-v3 · compose
               </span>
               <span className="text-brand tabular-nums shrink-0">Σ $0.175</span>

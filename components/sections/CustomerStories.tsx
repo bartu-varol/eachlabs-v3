@@ -11,7 +11,7 @@ export function CustomerStories() {
   const loop = [...c.caseStudies, ...c.caseStudies];
 
   return (
-    <section className="border-t border-divider py-24 md:py-32 overflow-hidden">
+    <section className="border-t border-divider py-20 md:py-28 overflow-hidden">
       <motion.div
         className="container"
         initial={{ opacity: 0, y: 8 }}
@@ -20,7 +20,6 @@ export function CustomerStories() {
         transition={{ duration: 0.4, ease: 'easeOut' }}
       >
         <SectionHeader
-          eyebrow={c.eyebrow}
           headline={c.headline.line1}
           headlineSub={c.headline.line2}
           description={c.body}

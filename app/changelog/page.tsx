@@ -60,10 +60,9 @@ export default async function ChangelogPage() {
   const entries = real.length > 0 ? real : MOCK_ENTRIES;
 
   return (
-    <section className="container py-20 md:py-24">
+    <section className="container py-16 md:py-20">
       <div className="max-w-3xl mx-auto">
-        <Eyebrow>* Changelog</Eyebrow>
-        <h1 className="font-sans font-semibold text-display sm:text-display-lg md:text-hero leading-[1.02] tracking-tightest mt-4 text-ink">
+        <h1 className="font-sans font-semibold text-display sm:text-display-lg md:text-hero leading-[1.02] tracking-tightest text-ink">
           What we shipped.
         </h1>
         <p className="text-body-lg leading-[1.6] text-ink-muted max-w-[560px] mt-6">

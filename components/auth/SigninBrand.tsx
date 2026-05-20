@@ -18,7 +18,7 @@ export function SigninBrand() {
           The <span className="hero-underline">pipeline</span>
         </span>
         <span className="block">
-          <em className="text-brand">kept running.</em>
+          <span className="text-brand">kept running.</span>
         </span>
       </h1>
 

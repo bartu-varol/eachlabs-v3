@@ -23,8 +23,7 @@ export function WorkflowsAnatomy() {
             'radial-gradient(ellipse 60% 60% at 50% 0%, rgb(var(--brand) / 0.05), transparent 65%)',
         }}
       />
-      <div className="container py-24 md:py-28 relative">
-        <Eyebrow className="mb-3">● ANATOMY OF A WORKFLOW</Eyebrow>
+      <div className="container py-20 md:py-24 relative">
         <h2 className="font-sans font-semibold text-h2 md:text-display leading-[1.05] tracking-tightest text-ink max-w-[760px]">
           A graph. An execution. A version.
         </h2>

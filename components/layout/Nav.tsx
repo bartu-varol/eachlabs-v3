@@ -85,6 +85,16 @@ export function Nav() {
                   <span className="text-brand">*</span> 99.99% · 284K req/24h
                 </span>
               </span>
+              <a
+                href="/llms.txt"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 font-mono text-eyebrow uppercase tracking-eyebrow text-ink-faint hover:text-ink transition-colors"
+                aria-label="llms.txt for AI agents"
+              >
+                <span className="text-brand">●</span>
+                <span>I am AI agent · llms.txt</span>
+              </a>
               <Link
                 href="/sign-in"
                 className="inline-flex items-center justify-center px-4 py-1.5 border border-field rounded-md text-body font-medium text-ink hover:bg-surface-raised transition-colors"

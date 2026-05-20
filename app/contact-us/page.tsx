@@ -68,7 +68,7 @@ export default function ContactUsPage() {
 
   return (
     <>
-      <section className="container py-20 md:py-28">
+      <section className="container py-16 md:py-24">
         <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,520px)] gap-12 lg:gap-20 items-start">
           {/* LEFT, playful copy */}
           <motion.div
@@ -76,11 +76,10 @@ export default function ContactUsPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
           >
-            <Eyebrow>* CONTACT US</Eyebrow>
-            <h1 className="font-sans font-semibold text-display sm:text-display-lg lg:text-hero leading-[0.98] tracking-tightest mt-6 text-ink">
+            <h1 className="font-sans font-semibold text-display sm:text-display-lg lg:text-hero leading-[0.98] tracking-tightest text-ink">
               Got a problem?
-              <span className="block text-ink-faint italic">Got a weird question?</span>
-              <span className="block text-brand italic">Both?</span>
+              <span className="block text-ink-faint">Got a weird question?</span>
+              <span className="block text-brand">Both?</span>
             </h1>
             <p className="text-ink-muted text-body-lg leading-[1.6] max-w-[520px] mt-7">
               This is the catch-all form. Bugs, feature wishes, partnership requests, weird
@@ -95,7 +94,6 @@ export default function ContactUsPage() {
             </ul>
 
             <div className="mt-10 pt-8 border-t border-divider">
-              <Eyebrow size="sm" tone="ink-faint" className="mb-2">OR JUST EMAIL US LIKE IT'S 2008</Eyebrow>
               <a
                 href="mailto:support@eachlabs.ai"
                 className="text-brand text-body-lg font-medium hover:underline underline-offset-4 inline-flex items-center gap-2"

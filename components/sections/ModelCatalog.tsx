@@ -52,7 +52,7 @@ export function ModelCatalog() {
   return (
     <section
       id="catalog"
-      className="container border-t border-divider py-24 md:py-32"
+      className="container border-t border-divider py-20 md:py-28"
     >
       {/* Header */}
       <motion.div
@@ -64,9 +64,8 @@ export function ModelCatalog() {
       >
         <div className="max-w-[680px]">
           <SectionHeader
-            eyebrow="* THE CATALOG · 600+ MODELS"
-            headline="Every model worth shipping."
-            headlineSub="A few of the loud ones."
+            headline="Pick a model. Ship today."
+            headlineSub="The popular ones are a fine place to start."
           />
         </div>
         <Link

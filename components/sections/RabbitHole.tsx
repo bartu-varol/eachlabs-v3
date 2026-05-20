@@ -65,7 +65,7 @@ function Vortex() {
 
 export function RabbitHole() {
   return (
-    <section className="border-t border-divider py-28 md:py-36 relative overflow-hidden">
+    <section className="border-t border-divider py-24 md:py-32 relative overflow-hidden">
       {/* Vortex behind everything */}
       <Vortex />
 
@@ -87,7 +87,6 @@ export function RabbitHole() {
           transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
         >
           <SectionHeader
-            eyebrow={rabbitHole.eyebrow}
             headline={rabbitHole.headline.line1}
             headlineSub={rabbitHole.headline.line2}
           />
@@ -113,7 +112,7 @@ export function RabbitHole() {
               <h3 className="font-sans font-semibold text-2xl mt-4 text-ink">
                 {card.title}
               </h3>
-              <div className="text-ink-muted italic text-body mt-1">{card.subline}</div>
+              <div className="text-ink-muted text-body mt-1">{card.subline}</div>
               <p className="text-ink-muted text-body leading-relaxed mt-4">{card.body}</p>
               <div className="mt-auto pt-6">
                 {card.cta.style === 'primary' ? (

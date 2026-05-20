@@ -60,7 +60,7 @@ export function StatTile({
       )}
 
       {sub && (
-        <div className="text-ink-faint text-micro italic mt-0.5">{sub}</div>
+        <div className="text-ink-faint text-micro mt-0.5">{sub}</div>
       )}
     </div>
   );

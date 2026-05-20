@@ -20,8 +20,8 @@ export function Footer() {
   return (
     <footer className="border-t border-divider pt-12 pb-8 bg-surface">
       <div className="container">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-[1.4fr_1fr_1fr_1fr_1fr_1fr] gap-8">
-          <div className="flex flex-col gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-[1.2fr_repeat(6,minmax(0,1fr))] gap-8">
+          <div className="col-span-2 sm:col-span-3 md:col-span-1 flex flex-col gap-3">
             <Wordmark />
             <p className="text-body text-ink-muted max-w-[280px] leading-[1.5]">
               {footer.tagline}
@@ -41,7 +41,7 @@ export function Footer() {
                         href={link.href}
                         target={isExternal ? '_blank' : undefined}
                         rel={isExternal ? 'noopener noreferrer' : undefined}
-                        className="text-body text-ink-muted hover:text-ink transition-colors"
+                        className="text-body-sm text-ink-muted hover:text-ink transition-colors"
                       >
                         <FooterLink label={link.label} />
                       </Link>
@@ -53,8 +53,19 @@ export function Footer() {
           ))}
         </div>
 
-        <div className="border-t border-divider mt-12 pt-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
-          <span className="font-mono text-eyebrow text-ink-faint">{footer.copyright}</span>
+        <div className="border-t border-divider mt-12 pt-6 flex flex-col md:flex-row md:flex-wrap justify-between items-start md:items-center gap-3">
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+            <span className="font-mono text-eyebrow text-ink-faint">{footer.copyright}</span>
+            {footer.legal.map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                className="font-mono text-eyebrow text-ink-faint hover:text-ink transition-colors"
+              >
+                {l.label}
+              </Link>
+            ))}
+          </div>
 
           {/* AI agent pointer — quiet by default, AI crawlers still see it
               because it's plain DOM with a discoverable label + .txt href. */}

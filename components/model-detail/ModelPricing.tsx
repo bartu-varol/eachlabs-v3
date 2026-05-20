@@ -50,10 +50,10 @@ export function ModelPricing({ model }: Props) {
           ))}
         </ul>
       ) : (
-        <p className="text-body-sm text-ink-faint italic">Pricing details available in the dashboard.</p>
+        <p className="text-body-sm text-ink-faint">Pricing details available in the dashboard.</p>
       )}
 
-      <p className="text-eyebrow text-ink-faint italic leading-[1.5] mt-4 pt-3 border-t border-field/60">
+      <p className="text-eyebrow text-ink-faint leading-[1.5] mt-4 pt-3 border-t border-field/60">
         * This is the estimated price based on this prompt. Real cost depends on
         your inputs (duration, resolution, mode).
       </p>

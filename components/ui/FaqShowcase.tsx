@@ -175,7 +175,7 @@ export function FaqShowcase({
   const active = items[activeIdx] ?? items[0];
 
   return (
-    <section className="relative border-t border-divider py-24 md:py-32 overflow-hidden">
+    <section className="relative border-t border-divider py-20 md:py-28 overflow-hidden">
       {ambient && (
         <div aria-hidden className="absolute inset-0 pointer-events-none">
           {[
@@ -222,7 +222,7 @@ export function FaqShowcase({
               {heading}
             </h2>
             {subtitle && (
-              <p className="italic text-ink-faint text-body-lg md:max-w-[280px]">
+              <p className="text-ink-faint text-body-lg md:max-w-[280px]">
                 {subtitle}
               </p>
             )}
@@ -260,7 +260,7 @@ export function FaqShowcase({
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: 0.2 }}
-            className="italic text-ink-faint text-body text-center mt-14"
+            className="text-ink-faint text-body text-center mt-14"
           >
             {footer}
           </motion.div>

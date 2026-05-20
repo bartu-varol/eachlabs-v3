@@ -39,7 +39,6 @@ export function SenseShowcase() {
           className="max-w-[820px] mt-8"
         >
           <div className="flex flex-wrap items-center gap-3">
-            <Eyebrow>* {product.eyebrow}</Eyebrow>
             <LiveNowPill />
             <OpenAIPill />
           </div>
@@ -86,8 +85,7 @@ export function SenseShowcase() {
               'radial-gradient(ellipse 50% 60% at 0% 30%, rgb(var(--brand) / 0.05), transparent 60%)',
           }}
         />
-        <div className="container py-24 md:py-28 relative">
-          <Eyebrow className="mb-3">● WHAT IT DOES</Eyebrow>
+        <div className="container py-20 md:py-24 relative">
           <h2 className="font-sans font-semibold text-h2 md:text-display leading-[1.05] tracking-tightest text-ink max-w-[760px]">
             {product.whatTitle}
           </h2>
@@ -104,8 +102,7 @@ export function SenseShowcase() {
       </section>
 
       {/* 5. DROP-IN, OpenAI-compatible code example + agent-framework pills */}
-      <section className="container border-t border-divider py-24 md:py-28">
-        <Eyebrow className="mb-3">● DROP-IN · OPENAI-COMPATIBLE</Eyebrow>
+      <section className="container border-t border-divider py-20 md:py-24">
         <h2 className="font-sans font-semibold text-h2 md:text-display leading-[1.05] tracking-tightest text-ink max-w-[760px]">
           Change the base URL. Keep the SDK.
         </h2>
@@ -145,8 +142,7 @@ export function SenseShowcase() {
       </section>
 
       {/* 6. WHEN TO REACH FOR IT */}
-      <section className="container border-t border-divider py-24 md:py-28">
-        <Eyebrow className="mb-3">● WHEN YOU’D REACH FOR IT</Eyebrow>
+      <section className="container border-t border-divider py-20 md:py-24">
         <h2 className="font-sans font-semibold text-h2 md:text-h2 leading-[1.1] tracking-tightest text-ink max-w-[680px]">
           {product.whenTitle}
         </h2>
@@ -157,11 +153,10 @@ export function SenseShowcase() {
         </div>
       </section>
 
-      {/* 7. PAIRS WELL WITH */}
-      <section className="container border-t border-divider py-20 md:py-24">
-        <Eyebrow className="mb-3">● PAIRS WELL WITH</Eyebrow>
+      {/* 7. EXPLORE THE REST */}
+      <section className="container border-t border-divider py-16 md:py-20">
         <h2 className="font-sans font-semibold text-h3 md:text-h2 leading-[1.15] tracking-tight text-ink mb-8">
-          Other products you’ll use alongside this.
+          Explore the rest of each::labs.
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
           {product.pairsWith.map((pw) => (
@@ -184,7 +179,7 @@ export function SenseShowcase() {
       </section>
 
       {/* 8. CTA */}
-      <section className="container border-t border-divider py-24 md:py-32">
+      <section className="container border-t border-divider py-20 md:py-28">
         <div className="max-w-[680px] mx-auto text-center">
           <div className="inline-flex items-center mb-5 gap-2">
             <LiveNowPill />

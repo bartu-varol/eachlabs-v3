@@ -321,7 +321,7 @@ function BrandOnboarding({ state: w, isActive }: { state: WizardState; isActive:
             <div className="text-center">
               <Eyebrow>* YOU&rsquo;RE IN</Eyebrow>
               <h1 className="font-sans font-semibold text-display sm:text-display-lg leading-[1.0] tracking-tightest mt-5 text-ink">
-                Welcome down,<br /><em className="text-brand">{w.orgName.trim() || 'explorer'}.</em>
+                Welcome down,<br /><span className="text-brand">{w.orgName.trim() || 'explorer'}.</span>
               </h1>
               <p className="text-ink-muted text-body leading-relaxed mt-5 max-w-[400px] mx-auto">
                 Your workspace is ready. 10K free traces are waiting. The chaos is ours to handle.

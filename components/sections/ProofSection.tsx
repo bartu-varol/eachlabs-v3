@@ -95,7 +95,7 @@ function ComparisonRow({
         >
           {sideMeta.label}
         </div>
-        <div className="text-ink-faint italic text-eyebrow md:text-caption mt-0.5 truncate">
+        <div className="text-ink-faint text-eyebrow md:text-caption mt-0.5 truncate">
           {sideMeta.sub}
         </div>
       </div>
@@ -217,9 +217,8 @@ export function ProofSection() {
         }}
       />
 
-      <div className="container py-24 md:py-32 relative">
+      <div className="container py-20 md:py-28 relative">
       <SectionHeader
-        eyebrow="* SECTION / 02 · CHAOS → FIX · BENCHMARKED Q1 2026"
         headline="Tell us what’s breaking."
         headlineSub="We’ve already built the fix."
         description="Four scenarios. Real benchmarks against raw SDKs. Same numbers, different week."
@@ -281,7 +280,7 @@ export function ProofSection() {
                   <span className="text-brand">▸</span>
                   {s.metric.label}
                 </div>
-                <p className="text-ink-faint italic text-body-sm mt-2 max-w-[520px]">
+                <p className="text-ink-faint text-body-sm mt-2 max-w-[520px]">
                   {s.metric.caption}
                 </p>
               </div>
@@ -317,7 +316,7 @@ export function ProofSection() {
                 <div className="mt-3 flex items-center gap-3 flex-wrap">
                   <ProductMark name={s.fix.feature.name} size="lg" />
                   {s.fix.feature.tail && (
-                    <span className="text-ink-faint italic font-normal text-body-lg sm:text-h4">
+                    <span className="text-ink-faint font-normal text-body-lg sm:text-h4">
                       ({s.fix.feature.tail})
                     </span>
                   )}
@@ -335,13 +334,13 @@ export function ProofSection() {
                     ))}
                   {s.fix.feature.name}
                   {s.fix.feature.tail && (
-                    <span className="text-ink-faint italic font-normal text-h4 sm:text-h4 ml-2">
+                    <span className="text-ink-faint font-normal text-h4 sm:text-h4 ml-2">
                       ({s.fix.feature.tail})
                     </span>
                   )}
                 </h3>
               )}
-              <div className="text-ink-muted italic text-body mt-2">{s.fix.tagline}</div>
+              <div className="text-ink-muted text-body mt-2">{s.fix.tagline}</div>
               <p className="text-ink-muted text-body leading-relaxed mt-3 max-w-[480px]">
                 {s.fix.body}
               </p>

@@ -13,7 +13,7 @@ export type Scenario = {
     caption: string;     // sub-caption under the label
     hero: { multiplier: string; suffix: string };
     others: { label: 'OTHERS'; sub: string; value: number };
-    each:   { label: 'EACHLABS'; sub: string; value: number };
+    each:   { label: 'EACH::LABS'; sub: string; value: number };
     format: 'percent' | 'time' | 'usd' | 'days';
     /** Bar scale ceiling, both sides scale to this. */
     scaleMax: number;
@@ -39,7 +39,7 @@ export const SCENARIOS: Scenario[] = [
       caption: 'auto fallback fires in <120ms when the primary model dies',
       hero: { multiplier: '97×', suffix: 'FEWER ERRORS' },
       others: { label: 'OTHERS',   sub: 'raw SDKs, no router',         value: 3.42 },
-      each:   { label: 'EACHLABS', sub: 'quality aware + fallback',     value: 0.04 },
+      each:   { label: 'EACH::LABS', sub: 'quality aware + fallback',     value: 0.04 },
       format: 'percent',
       scaleMax: 4,
     },
@@ -62,7 +62,7 @@ export const SCENARIOS: Scenario[] = [
       caption: 'next best provider picked before your user notices',
       hero: { multiplier: '6,200×', suffix: 'FASTER RECOVERY' },
       others: { label: 'OTHERS',   sub: 'manual rollover · on call paged',  value: 744 },   // seconds
-      each:   { label: 'EACHLABS', sub: 'router failover · live',          value: 0.12 },  // seconds
+      each:   { label: 'EACH::LABS', sub: 'router failover · live',          value: 0.12 },  // seconds
       format: 'time',
       scaleMax: 800,
     },
@@ -85,7 +85,7 @@ export const SCENARIOS: Scenario[] = [
       caption: 'average $/successful output across 600+ models',
       hero: { multiplier: '3×', suffix: 'CHEAPER' },
       others: { label: 'OTHERS',   sub: 'pinned to one provider',        value: 0.18 },
-      each:   { label: 'EACHLABS', sub: 'quality aware routing + tags',  value: 0.06 },
+      each:   { label: 'EACH::LABS', sub: 'quality aware routing + tags',  value: 0.06 },
       format: 'usd',
       scaleMax: 0.2,
     },
@@ -108,7 +108,7 @@ export const SCENARIOS: Scenario[] = [
       caption: 'time to first prod call after signing up',
       hero: { multiplier: '2,520×', suffix: 'FASTER TO SHIP' },
       others: { label: 'OTHERS',   sub: 'new SDK · auth · QA',          value: 14 },     // days
-      each:   { label: 'EACHLABS', sub: 'one API · one signature',       value: 0.0056 }, // ~8 minutes
+      each:   { label: 'EACH::LABS', sub: 'one API · one signature',       value: 0.0056 }, // ~8 minutes
       format: 'days',
       scaleMax: 14,
     },

@@ -8,7 +8,6 @@ import { PageHero } from '@/components/ui/PageHero';
 import { StatTile, StatGrid } from '@/components/ui/StatTile';
 import { CustomerCard } from '@/components/sections/CustomerCard';
 import { customerStories } from '@/lib/content';
-import { Eyebrow } from '@/components/ui/Eyebrow';
 
 export default function CustomersPage() {
   const c = customerStories;
@@ -21,11 +20,10 @@ export default function CustomersPage() {
     <>
       {/* ─── Hero ───────────────────────────────────────────────────────── */}
       <PageHero
-        eyebrow={c.eyebrow}
         headline={
           <>
             <span className="block">{c.headline.line1}</span>
-            <span className="block text-ink-faint italic">{c.headline.line2}</span>
+            <span className="block text-ink-faint">{c.headline.line2}</span>
           </>
         }
         description={c.body}
@@ -81,13 +79,12 @@ export default function CustomersPage() {
               'radial-gradient(ellipse 60% 50% at 0% 0%, rgb(var(--brand) / 0.05), transparent 65%), radial-gradient(ellipse 60% 50% at 100% 100%, rgb(var(--cobrand) / 0.05), transparent 65%)',
           }}
         />
-        <div className="container py-20 md:py-24 relative">
+        <div className="container py-16 md:py-20 relative">
           <div className="flex items-baseline justify-between gap-6 flex-wrap mb-10">
             <div>
-              <Eyebrow className="mb-3">● IN THEIR WORDS</Eyebrow>
               <h2 className="font-sans font-semibold text-h2 md:text-h2 leading-[1.1] tracking-tightest text-ink">
                 Ten quotes.{' '}
-                <span className="text-ink-faint italic">Verbatim from the teams shipping on each::labs.</span>
+                <span className="text-ink-faint">Verbatim from the teams shipping on each::labs.</span>
               </h2>
             </div>
             <span className="font-mono text-eyebrow text-ink-faint uppercase tracking-eyebrow">
@@ -122,9 +119,8 @@ export default function CustomersPage() {
               'radial-gradient(ellipse 50% 80% at 50% 100%, rgb(var(--brand) / 0.08), transparent 60%)',
           }}
         />
-        <div className="container py-24 md:py-32 relative">
+        <div className="container py-20 md:py-28 relative">
           <div className="max-w-[680px] mx-auto text-center">
-            <Eyebrow className="mb-4">{c.ctaCard.eyebrow}</Eyebrow>
             <h2 className="font-sans font-semibold text-h2 md:text-display leading-[1.05] tracking-tightest text-ink">
               {c.ctaCard.headline}
             </h2>

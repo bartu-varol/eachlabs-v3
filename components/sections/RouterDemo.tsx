@@ -44,9 +44,9 @@ type Lane = {
 };
 
 const LANES: Lane[] = [
-  { id: 'kling', name: 'kling-v3-12v', p95: { steady: 640, degrade: 1420 }, score: 0.31 },
-  { id: 'wan',   name: 'wan-2.7',      p95: { steady: 580, degrade: 580  }, score: 0.94 },
-  { id: 'veo',   name: 'veo-3',        p95: { steady: 720, degrade: 720  }, score: 0.78 },
+  { id: 'kling', name: 'seedance-2.0-i2v', p95: { steady: 640, degrade: 1420 }, score: 0.31 },
+  { id: 'wan',   name: 'wan-2.7',          p95: { steady: 580, degrade: 580  }, score: 0.94 },
+  { id: 'veo',   name: 'veo-3',            p95: { steady: 720, degrade: 720  }, score: 0.78 },
 ];
 
 export function RouterDemo() {
@@ -149,7 +149,7 @@ function PhaseLabel({ phase }: { phase: Phase }) {
     phase === 'steady'
       ? 'all healthy'
       : phase === 'degrade'
-      ? 'kling-v3 ↑ p95'
+      ? 'seedance-2.0 ↑ p95'
       : phase === 'decide'
       ? 'scoring 3 candidates'
       : 'spilled → wan-2.7';
@@ -384,7 +384,7 @@ function DecisionStrip({ phase }: { phase: Phase }) {
             <div className="h-full flex items-center gap-3 font-mono text-eyebrow">
               <span className="text-ok">✓</span>
               <span className="text-ink-faint line-through decoration-danger/70">
-                kling-v3-12v
+                seedance-2.0-i2v
               </span>
               <span className="text-brand">→</span>
               <span className="text-ink">wan-2.7</span>

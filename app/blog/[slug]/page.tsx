@@ -106,7 +106,7 @@ export default async function BlogPostPage({
   return (
     <>
       <ReadingProgress />
-      <section className="container py-20 md:py-28">
+      <section className="container py-16 md:py-24">
       <Link
         href="/blog"
         className="inline-flex items-center gap-1.5 font-mono text-eyebrow uppercase tracking-eyebrow text-ink-faint hover:text-ink transition-colors"
@@ -137,7 +137,7 @@ export default async function BlogPostPage({
           </h1>
 
           {post.excerpt && (
-            <p className="text-ink-muted text-h4 leading-[1.55] mt-6 max-w-[680px] italic">
+            <p className="text-ink-muted text-h4 leading-[1.55] mt-6 max-w-[680px]">
               {post.excerpt}
             </p>
           )}
@@ -199,7 +199,7 @@ export default async function BlogPostPage({
               href="https://discord.gg/eachlabs"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-ink-faint hover:text-brand hover:italic transition-colors"
+              className="inline-flex items-center gap-1.5 text-ink-faint hover:text-brand transition-colors"
             >
               discuss in discord <ArrowRight size={12} />
             </a>

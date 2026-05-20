@@ -152,7 +152,6 @@ body {
 
 @layer utilities {
   .italic-spark {
-    font-style: italic;
     text-decoration: underline;
     text-decoration-color: rgb(var(--brand));
     text-decoration-thickness: 4px;
@@ -243,7 +242,7 @@ pre.snippet .tk-key   { color: rgb(var(--tk-key)); }
 pre.snippet .tk-str   { color: rgb(var(--tk-str)); }
 pre.snippet .tk-fn    { color: rgb(var(--ink)); }
 pre.snippet .tk-num   { color: rgb(var(--tk-str)); }
-pre.snippet .tk-cmt   { color: rgb(var(--ink-faint)); font-style: italic; }
+pre.snippet .tk-cmt   { color: rgb(var(--ink-faint)); }
 pre.snippet .tk-punct { color: rgb(var(--ink-faint)); }
 pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
 
@@ -472,7 +471,7 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
 }
 .blog-prose p { margin: 1.15rem 0; }
 .blog-prose strong { color: rgb(var(--ink)); font-weight: 600; }
-.blog-prose em { font-style: italic; }
+.blog-prose em { font-style: normal; }
 .blog-prose ul, .blog-prose ol {
   margin: 1.25rem 0;
   padding-left: 1.3rem;
@@ -516,7 +515,6 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
   padding: 0.5rem 0 0.5rem 2.25rem;
   margin: 2.25rem 0;
   color: rgb(var(--ink));
-  font-style: italic;
   font-size: 1.15rem;
   line-height: 1.6;
   letter-spacing: -0.005em;
@@ -586,7 +584,6 @@ pre.snippet .tk-prop  { color: rgb(var(--tk-prop)); }
   line-height: 1.55;
   text-align: center;
   margin-top: 0.85rem;
-  font-style: italic;
   max-width: 36rem;
   margin-left: auto;
   margin-right: auto;

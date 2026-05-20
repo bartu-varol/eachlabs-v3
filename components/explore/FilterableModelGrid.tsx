@@ -1,6 +1,7 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { Search } from 'lucide-react';
 import { Pill } from '@/components/ui/Pill';
 import { ModelTile } from './ModelTile';
@@ -42,8 +43,16 @@ function rankCategory(slug: string): number {
 }
 
 export function FilterableModelGrid({ models, eyebrow, searchPlaceholder = 'Search models...' }: Props) {
-  const [category, setCategory] = useState<string>('ALL');
+  const searchParams = useSearchParams();
+  const initialCategory = searchParams?.get('category') ?? 'ALL';
+  const [category, setCategory] = useState<string>(initialCategory);
   const [query, setQuery] = useState('');
+
+  // Sync state when the URL changes (e.g. footer link clicked from same page).
+  useEffect(() => {
+    const next = searchParams?.get('category') ?? 'ALL';
+    setCategory(next);
+  }, [searchParams]);
 
   /** Categories present in *this* model set, sorted by curated order then by count. */
   const availableCategories = useMemo(() => {

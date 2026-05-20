@@ -5,7 +5,6 @@ import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { CodeBlock } from '@/components/ui/CodeBlock';
-import { Eyebrow } from '@/components/ui/Eyebrow';
 
 const QUICKSTART_CODE = `# 1. Install the SDK
 npm install @eachlabs/sdk
@@ -72,15 +71,14 @@ export default function DocsPage() {
   return (
     <>
       {/* Hero */}
-      <section className="container py-20 md:py-28">
+      <section className="container py-16 md:py-24">
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
         >
-          <Eyebrow>* DOCS</Eyebrow>
-          <h1 className="font-sans font-semibold text-display sm:text-display-lg md:text-[76px] leading-[0.98] tracking-tightest mt-6 text-ink max-w-[860px]">
-            Read the docs. <span className="text-ink-faint italic">Ship the same day.</span>
+          <h1 className="font-sans font-semibold text-display sm:text-display-lg md:text-[76px] leading-[0.98] tracking-tightest text-ink max-w-[860px]">
+            Read the docs. <span className="text-ink-faint">Ship the same day.</span>
           </h1>
           <p className="text-ink-muted text-body-lg leading-[1.55] max-w-[640px] mt-7">
             Quickstart, API reference, SDKs, and 40+ end-to-end recipes.
@@ -95,8 +93,7 @@ export default function DocsPage() {
           className="absolute inset-0 pointer-events-none"
           style={{ background: 'radial-gradient(ellipse 50% 60% at 0% 0%, rgb(var(--brand) / 0.05), transparent 65%)' }}
         />
-        <div className="container py-20 md:py-24 relative">
-          <Eyebrow className="mb-3">● QUICKSTART</Eyebrow>
+        <div className="container py-16 md:py-20 relative">
           <h2 className="font-sans font-semibold text-h2 md:text-h2 leading-[1.1] tracking-tightest text-ink">
             From zero to first call in 3 minutes.
           </h2>
@@ -112,8 +109,7 @@ export default function DocsPage() {
 
       {/* Sections */}
       {SECTIONS.map((s, i) => (
-        <section key={s.eyebrow} className="container border-t border-divider py-20 md:py-24">
-          <Eyebrow className="mb-6">{s.eyebrow}</Eyebrow>
+        <section key={s.eyebrow} className="container border-t border-divider py-16 md:py-20">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
             {s.items.map((it, j) => (
               <motion.div
@@ -142,10 +138,10 @@ export default function DocsPage() {
       ))}
 
       {/* CTA */}
-      <section className="container border-t border-divider py-24 md:py-32">
+      <section className="container border-t border-divider py-20 md:py-28">
         <div className="max-w-[680px] mx-auto text-center">
           <h2 className="font-sans font-semibold text-h2 md:text-display leading-[1.05] tracking-tightest text-ink">
-            Stuck? <span className="text-ink-faint italic">4,200 devs are in our Discord.</span>
+            Stuck? <span className="text-ink-faint">4,200 devs are in our Discord.</span>
           </h2>
           <div className="flex flex-wrap gap-3 justify-center mt-8">
             <Button href="https://discord.gg/eachlabs" variant="primary">Open Discord →</Button>

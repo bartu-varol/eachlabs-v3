@@ -155,7 +155,7 @@ export function exploreFaqs(workflowCount: number): CatalogFaq[] {
       p('<strong>Models</strong> are single-purpose endpoints (image, video, audio, transcription). <strong>LLMs</strong> are the chat models served through the eachlabs-llm-router. <strong>Workflows</strong> chain multiple models together into a single API call you can ship straight to production.'),
       20),
     makeFaq('explore', null, 'Do I need a separate account for each provider?',
-      p('No. One each::labs key unlocks every provider in the catalog. No OpenAI key, no Replicate key, no Fal key, we own the upstream auth.'),
+      p('No. One each::labs key unlocks every provider in the catalog. No per-provider keys, no juggling marketplaces, we own the upstream auth.'),
       30),
     makeFaq('explore', null, 'How is pricing handled across providers?',
       p('Pay as you go, per call, in USD. Each model card shows its own price and there is no platform markup on top of the provider cost. You get one invoice, regardless of how many providers you mix.'),
@@ -219,7 +219,7 @@ ${model.name} is a large language model from **${model.providerName}**, availabl
 
 The cURL and TypeScript snippets above are ready to copy.
 
-## Why route through eachlabs
+## Why route through each::labs
 
 - **One API, many models.** Switch from ${model.name} to any other LLM by changing one string, no SDK rotation.
 - **Automatic failover.** Configure a backup model and the router fails over the moment ${model.providerName} returns an error or times out.

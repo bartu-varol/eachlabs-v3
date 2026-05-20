@@ -101,7 +101,7 @@ export function CustomerCard({ cs, variant = 'grid' }: Props) {
 
       <Headline tokens={cs.headline} />
 
-      <p className="text-ink-muted italic text-body leading-[1.65] mt-4 flex-1">
+      <p className="text-ink-muted text-body leading-[1.65] mt-4 flex-1">
         {`“${cs.quote}”`}
       </p>
 

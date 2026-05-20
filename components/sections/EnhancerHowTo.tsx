@@ -21,8 +21,7 @@ const POLICIES = [
 
 export function EnhancerHowTo() {
   return (
-    <section className="container border-t border-divider py-24 md:py-28">
-      <Eyebrow className="mb-3">● HOW TO USE IT · 30 SECONDS</Eyebrow>
+    <section className="container border-t border-divider py-20 md:py-24">
       <h2 className="font-sans font-semibold text-h2 md:text-display leading-[1.05] tracking-tightest text-ink max-w-[760px]">
         One flag. Five policies. Every refusal saved.
       </h2>
@@ -41,7 +40,7 @@ export function EnhancerHowTo() {
           <CodeMini
             lines={[
               { tokens: [k('await '), v('each('), o('{')] },
-              { indent: 2, tokens: [p('model: '), s('"kling-v3-12v"'), o(',')] },
+              { indent: 2, tokens: [p('model: '), s('"nano-banana-2"'), o(',')] },
               { indent: 2, tokens: [p('inputs: '), o('{ '), p('prompt: '), p('user.prompt'), o(' },')] },
               { indent: 2, tokens: [p('enhance: '), o('{')] },
               { indent: 4, tokens: [p('prompt: '), s('true'), o(',')], highlight: true },
@@ -203,5 +202,5 @@ const k = (text: string): Token => ({ text, cls: 'text-cobrand font-medium' });
 const p = (text: string): Token => ({ text, cls: 'text-ink-muted' });
 const s = (text: string): Token => ({ text, cls: 'text-brand' });
 const o = (text: string): Token => ({ text, cls: 'text-ink-muted' });
-const c = (text: string): Token => ({ text, cls: 'text-ink-faint italic' });
+const c = (text: string): Token => ({ text, cls: 'text-ink-faint' });
 const v = (text: string): Token => ({ text, cls: 'text-ink' });

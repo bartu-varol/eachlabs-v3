@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import { ArrowUpRight, MapPin, Briefcase, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { PageHero } from '@/components/ui/PageHero';
-import { Eyebrow } from '@/components/ui/Eyebrow';
 
 type Role = {
   title: string;
@@ -65,11 +64,10 @@ export default function CareerPage() {
   return (
     <>
       <PageHero
-        eyebrow="* CAREERS"
         headline={
           <>
             <span className="block">Build the rails</span>
-            <span className="block text-ink-faint italic">for production AI.</span>
+            <span className="block text-ink-faint">for production AI.</span>
           </>
         }
         description="each::labs is a small, distributed team building the orchestration and observability layer for teams shipping AI to real users. We hire people who care about the craft and move fast without breaking things that matter."
@@ -77,10 +75,9 @@ export default function CareerPage() {
 
       {/* ─── Open roles ─────────────────────────────────────────────────── */}
       <section className="border-t border-divider" id="open-roles">
-        <div className="container py-20 md:py-24">
+        <div className="container py-16 md:py-20">
           <div className="flex items-end justify-between gap-6 flex-wrap">
             <div>
-              <Eyebrow size="sm" tone="ink-faint" className="mb-3">OPEN ROLES</Eyebrow>
               <h2 className="font-sans font-semibold text-h2 md:text-display leading-[1.05] tracking-tightest text-ink">
                 We're hiring for {ROLES.length} roles.
               </h2>
@@ -140,10 +137,9 @@ export default function CareerPage() {
 
       {/* ─── Don't see your role ────────────────────────────────────────── */}
       <section className="border-t border-divider">
-        <div className="container py-20 md:py-24">
+        <div className="container py-16 md:py-20">
           <div className="bg-surface-raised border border-field rounded-md p-8 md:p-12 grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-8 md:gap-12 items-center">
             <div>
-              <Eyebrow size="sm" className="mb-3">* DIDN'T SEE YOUR ROLE</Eyebrow>
               <h2 className="font-sans font-semibold text-h2 md:text-h2 leading-[1.05] tracking-tightest text-ink">
                 Send us a note anyway.
               </h2>

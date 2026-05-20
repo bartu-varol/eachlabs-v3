@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { Search } from 'lucide-react';
 import { Pill } from '@/components/ui/Pill';
 import { MonoSelect } from '@/components/ui/MonoSelect';
@@ -96,11 +97,41 @@ export function ExploreShell({
     });
   }, []);
 
+  // Re-sync the active tab when the URL changes via browser back/forward.
+  // `history.replaceState` above bypasses Next's router, so on back-nav from a
+  // detail page Next may restore the wrong /explore variant. Reading
+  // location.pathname directly is authoritative.
+  useEffect(() => {
+    function syncTabFromUrl() {
+      if (typeof window === 'undefined') return;
+      const path = window.location.pathname;
+      const matched = (Object.entries(TAB_PATHS) as [Tab, string][])
+        .find(([, p]) => p === path)?.[0];
+      if (matched) setTabState(matched);
+    }
+    // Handle the case where the page mounts with a URL that doesn't match the
+    // SSR-supplied initialTab (can happen when soft-restored from cache).
+    syncTabFromUrl();
+    window.addEventListener('popstate', syncTabFromUrl);
+    return () => window.removeEventListener('popstate', syncTabFromUrl);
+  }, []);
+
   // Model filters
+  const searchParams = useSearchParams();
   const [query, setQuery] = useState('');
-  const [category, setCategory] = useState<string>('ALL');
-  const [provider, setProvider] = useState<string>('ALL');
+  const [category, setCategory] = useState<string>(
+    () => searchParams?.get('category') ?? 'ALL',
+  );
+  const [provider, setProvider] = useState<string>(
+    () => searchParams?.get('provider') ?? 'ALL',
+  );
   const [showAll, setShowAll] = useState(false);
+
+  // Sync filters when the URL changes (footer links, back/forward nav).
+  useEffect(() => {
+    const next = searchParams?.get('category') ?? 'ALL';
+    setCategory(next);
+  }, [searchParams]);
 
   // LLMs filters (independent search + provider so switching tabs doesn't
   // leak filter state between the Models grid and the LLMs grid).

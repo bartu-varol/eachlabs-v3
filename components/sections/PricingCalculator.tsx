@@ -4,7 +4,6 @@ import { useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Search, ArrowUp, ArrowDown } from 'lucide-react';
 import { MODEL_PRICES, type Modality } from '@/lib/modelPricing';
-import { Eyebrow } from '@/components/ui/Eyebrow';
 
 const PRESET_BUDGETS = [10, 50, 100, 500, 1000];
 const MODALITIES: Modality[] = ['VIDEO', 'IMAGE', 'AUDIO'];
@@ -20,9 +19,9 @@ type SortKey =
 type SortDir = 'asc' | 'desc';
 
 const TYPE_COLOR: Record<Modality, string> = {
-  VIDEO: 'rgb(var(--cobrand))',
-  IMAGE: 'rgb(var(--ok))',
-  AUDIO: 'rgb(var(--caution))',
+  VIDEO: 'rgb(var(--brand))',
+  IMAGE: 'rgb(var(--brand))',
+  AUDIO: 'rgb(var(--brand))',
 };
 
 // Keep the section's accent backdrop consistent with §01 above it. Switching
@@ -107,11 +106,9 @@ export function PricingCalculator() {
         }}
       />
 
-      <div className="container py-24 md:py-28 relative">
-        {/* Header */}
-        <Eyebrow className="mb-3">● MODEL PRICING DETAIL</Eyebrow>
+      <div className="container py-20 md:py-24 relative">
         <h2 className="font-sans font-semibold text-h2 md:text-display leading-[1.05] tracking-tightest text-ink max-w-[820px]">
-          Choose a budget. <span className="text-ink-faint italic">Check how many times you can run each model.</span>
+          Choose a budget. <span className="text-ink-faint">Check how many times you can run each model.</span>
         </h2>
         <p className="text-ink-muted text-body leading-[1.6] mt-5 max-w-[640px]">
           Prices are approximate per run; final cost depends on inputs (duration, resolution, mode).

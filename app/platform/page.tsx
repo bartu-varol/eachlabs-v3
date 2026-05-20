@@ -6,7 +6,6 @@ import { RabbitButton } from '@/components/ui/RabbitButton';
 import { StatTile, StatGrid } from '@/components/ui/StatTile';
 import { PageHero } from '@/components/ui/PageHero';
 import { PlatformBento } from '@/components/sections/PlatformBento';
-import { Eyebrow } from '@/components/ui/Eyebrow';
 
 const STATS = [
   { value: '600+',   label: 'models behind one API' },
@@ -42,7 +41,6 @@ export default function PlatformPage() {
   return (
     <>
       <PageHero
-        eyebrow="* PLATFORM"
         headline="One control plane for every AI call you ship."
         description={
           <>
@@ -65,8 +63,7 @@ export default function PlatformPage() {
       <PlatformBento />
 
       {/* Principles */}
-      <section className="container border-t border-divider py-24 md:py-28">
-        <Eyebrow className="mb-3">* PRINCIPLES</Eyebrow>
+      <section className="container border-t border-divider py-20 md:py-24">
         <h2 className="font-sans font-semibold text-h2 md:text-display leading-[1] tracking-tightest text-ink">
           How the platform thinks.
         </h2>
@@ -92,10 +89,10 @@ export default function PlatformPage() {
       </section>
 
       {/* CTA */}
-      <section className="container border-t border-divider py-24 md:py-32">
+      <section className="container border-t border-divider py-20 md:py-28">
         <div className="max-w-[680px] mx-auto text-center">
           <h2 className="font-sans font-semibold text-h2 md:text-display-lg leading-[1] tracking-tightest text-ink">
-            One platform. Modular products. <span className="text-ink-faint italic">Free to start.</span>
+            One platform. Modular products. <span className="text-ink-faint">Free to start.</span>
           </h2>
           <p className="text-ink-muted text-body-lg mt-6">
             API key in 60 seconds. Free plan covers your first 10K traces. Subscribe only when

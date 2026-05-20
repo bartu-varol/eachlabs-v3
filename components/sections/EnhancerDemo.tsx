@@ -116,7 +116,7 @@ export function EnhancerDemo() {
 
         {/* Original prompt */}
         <div className="px-4 md:px-5 pt-4 pb-2">
-          <Label tone="ink3">user prompt · kling-v3-12v</Label>
+          <Label tone="ink3">user prompt · nano-banana-2</Label>
           <PromptBox phase={phase} variant="original" />
         </div>
 

@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
 import { PageHero } from '@/components/ui/PageHero';
-import { Eyebrow } from '@/components/ui/Eyebrow';
 
 const BELIEFS = [
   {
@@ -55,12 +54,11 @@ export default function AboutPage() {
   return (
     <>
       <PageHero
-        eyebrow="* ABOUT EACH::LABS"
         headline={
           <>
             <span className="block">We make AI</span>
             <span className="block">behave like</span>
-            <span className="block text-ink-faint italic">software.</span>
+            <span className="block text-ink-faint">software.</span>
           </>
         }
         description="each::labs is the orchestration and observability layer for teams shipping AI to real users. One API for 600+ models, routing that fails over automatically, and traces that tell you exactly what happened, what it cost, and how long it took."
@@ -100,19 +98,18 @@ export default function AboutPage() {
 
       {/* ─── Why we exist ───────────────────────────────────────────────── */}
       <section className="border-t border-divider">
-        <div className="container py-20 md:py-24 grid grid-cols-1 md:grid-cols-[1fr_1.4fr] gap-10 md:gap-20 items-start">
+        <div className="container py-16 md:py-20 grid grid-cols-1 md:grid-cols-[1fr_1.4fr] gap-10 md:gap-20 items-start">
           <div className="md:sticky md:top-24">
-            <Eyebrow size="sm" tone="ink-faint" className="mb-3">WHY WE EXIST</Eyebrow>
             <h2 className="font-sans font-semibold text-h2 md:text-display leading-[1.05] tracking-tightest text-ink">
               The model layer changed.
-              <span className="block text-ink-faint italic">The plumbing didn't.</span>
+              <span className="block text-ink-faint">The plumbing didn't.</span>
             </h2>
           </div>
 
           <div className="flex flex-col gap-6 text-ink-muted text-body-lg leading-[1.7] max-w-[680px]">
             <p>
-              In 2023, the question was <em className="text-ink not-italic">which model</em>. By
-              2025, it was <em className="text-ink not-italic">all of them, at once, reliably</em>.
+              In 2023, the question was <span className="text-ink">which model</span>. By
+              2025, it was <span className="text-ink">all of them, at once, reliably</span>.
               Teams started running three or four providers in parallel, swapping models per task,
               and discovering that the hard part wasn't the prompt, it was everything around it.
             </p>
@@ -137,8 +134,7 @@ export default function AboutPage() {
 
       {/* ─── What we believe ────────────────────────────────────────────── */}
       <section className="border-t border-divider">
-        <div className="container py-20 md:py-24">
-          <Eyebrow size="sm" tone="ink-faint" className="mb-3">WHAT WE BELIEVE</Eyebrow>
+        <div className="container py-16 md:py-20">
           <h2 className="font-sans font-semibold text-h2 md:text-display leading-[1.05] tracking-tightest text-ink max-w-[760px]">
             Four ideas we won't compromise on.
           </h2>
@@ -149,8 +145,7 @@ export default function AboutPage() {
                 key={b.label}
                 className="bg-surface-raised border border-field rounded-md p-7 md:p-8"
               >
-                <Eyebrow size="sm">{b.label}</Eyebrow>
-                <h3 className="font-sans font-semibold text-h3 md:text-h3 text-ink mt-3 leading-tight">
+                <h3 className="font-sans font-semibold text-h3 md:text-h3 text-ink leading-tight">
                   {b.title}
                 </h3>
                 <p className="text-ink-muted text-body leading-[1.65] mt-3">{b.body}</p>
@@ -162,8 +157,7 @@ export default function AboutPage() {
 
       {/* ─── Timeline ───────────────────────────────────────────────────── */}
       <section className="border-t border-divider">
-        <div className="container py-20 md:py-24">
-          <Eyebrow size="sm" tone="ink-faint" className="mb-3">THE SHORT VERSION</Eyebrow>
+        <div className="container py-16 md:py-20">
           <h2 className="font-sans font-semibold text-h2 md:text-display leading-[1.05] tracking-tightest text-ink max-w-[760px]">
             Where we've been.
           </h2>
@@ -184,10 +178,9 @@ export default function AboutPage() {
 
       {/* ─── CTA ────────────────────────────────────────────────────────── */}
       <section className="border-t border-divider">
-        <div className="container py-20 md:py-24">
+        <div className="container py-16 md:py-20">
           <div className="bg-surface-raised border border-field rounded-md p-8 md:p-14 flex flex-col md:flex-row gap-8 md:gap-12 items-start md:items-center justify-between">
             <div className="max-w-[640px]">
-              <Eyebrow size="sm" className="mb-3">* COME WORK WITH US</Eyebrow>
               <h2 className="font-sans font-semibold text-h2 md:text-display leading-[1.05] tracking-tightest text-ink">
                 We're a small team and we're hiring.
               </h2>

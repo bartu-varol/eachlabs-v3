@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Eyebrow } from '@/components/ui/Eyebrow';
 
 const EASE_OUT_EXPO = [0.16, 1, 0.3, 1] as const;
 
@@ -193,8 +192,7 @@ export default function PrivacyPolicyPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, ease: EASE_OUT_EXPO }}
           >
-            <Eyebrow>* LEGAL</Eyebrow>
-            <h1 className="font-sans font-semibold text-display sm:text-display-lg lg:text-hero leading-[0.98] tracking-tightest text-ink mt-6">
+            <h1 className="font-sans font-semibold text-display sm:text-display-lg lg:text-hero leading-[0.98] tracking-tightest text-ink">
               Privacy policy.
             </h1>
             <p className="text-ink-faint text-body mt-5 font-mono uppercase tracking-eyebrow">
@@ -209,7 +207,6 @@ export default function PrivacyPolicyPage() {
         <div className="grid grid-cols-1 lg:grid-cols-[220px_minmax(0,1fr)] gap-10 lg:gap-16 items-start">
           {/* TOC */}
           <aside className="lg:sticky lg:top-24">
-            <Eyebrow size="sm" tone="ink-faint" className="mb-4">▸ Sections</Eyebrow>
             <ul className="flex flex-col gap-2.5">
               {SECTIONS.map((s) => (
                 <li key={s.id}>

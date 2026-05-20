@@ -61,7 +61,7 @@ function FallbackVisual() {
       <div className="mt-4 flex flex-col gap-3 font-mono text-caption">
         {/* Primary endpoint */}
         <Endpoint
-          name="kling-v3-12v"
+          name="seedance-2.0-i2v"
           role="primary"
           statuses={[
             { t: 0,    code: '200', tone: 'ok' },
@@ -113,16 +113,26 @@ function Endpoint({
   statuses: { t: number; code: string; tone: 'ok' | 'fail' | 'muted' }[];
   packetActive: boolean[];
 }) {
-  // For animation, take just the second-state (the "interesting" one) for the badge.
-  const badgeTone = statuses[1].tone;
-  const badgeCode = statuses[1].code;
-
+  const N = statuses.length;
   const codeKeyframes = statuses.map((s) => s.code);
-  const toneColors = statuses.map((s) =>
-    s.tone === 'ok' ? 'rgb(var(--ok))'
-    : s.tone === 'fail' ? 'rgb(var(--danger))'
-    : 'rgb(var(--ink-faint))'
-  );
+
+  // Step through tones in sync with CodeText (one slot per state across a 4s cycle).
+  // We drive color via React state + Tailwind classes instead of framer-motion's
+  // `animate.color`, because framer-motion's color interpolator can't resolve
+  // `rgb(var(--brand))`-style strings — the badge would silently stick on the
+  // first tone (the bug that made 503 render in green).
+  const [step, setStep] = useState(0);
+  useEffect(() => {
+    const slot = 4000 / N;
+    const id = setInterval(() => setStep((s) => (s + 1) % N), slot);
+    return () => clearInterval(id);
+  }, [N]);
+
+  const toneClass = {
+    ok:    'border-ok/60 text-ok',
+    fail:  'border-brand/60 text-brand',
+    muted: 'border-field text-ink-faint',
+  }[statuses[step].tone];
 
   return (
     <div className="flex items-center gap-3 px-3 py-2.5 bg-surface-raised border border-field rounded-md">
@@ -148,19 +158,12 @@ function Endpoint({
         ))}
       </div>
 
-      {/* Status badge */}
-      <motion.span
-        className="inline-flex items-center font-mono text-micro uppercase tracking-eyebrow px-2 py-0.5 border rounded-md whitespace-nowrap"
-        animate={{ color: toneColors, borderColor: toneColors }}
-        transition={{ duration: 4, times: [0, 0.4, 0.65, 1], repeat: Infinity }}
+      {/* Status badge — color driven by React state; CodeText handles the text swap. */}
+      <span
+        className={`inline-flex items-center font-mono text-micro uppercase tracking-eyebrow px-2 py-0.5 border rounded-md whitespace-nowrap transition-colors duration-150 ${toneClass}`}
       >
-        <motion.span
-          animate={{ opacity: [1, 1, 1, 1] }}
-          transition={{ duration: 4, repeat: Infinity }}
-        >
-          <CodeText keyframes={codeKeyframes} />
-        </motion.span>
-      </motion.span>
+        <CodeText keyframes={codeKeyframes} />
+      </span>
     </div>
   );
 }

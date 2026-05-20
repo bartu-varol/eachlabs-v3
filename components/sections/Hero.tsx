@@ -6,7 +6,7 @@ import { HeroWidget } from './HeroWidget';
 
 export function Hero() {
   return (
-    <section className="container py-20 md:py-24 lg:py-28">
+    <section className="container py-16 md:py-20 lg:py-28">
       <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_minmax(0,1fr)] gap-10 lg:gap-14 items-center">
         {/* Left, copy + CTAs + stats */}
         <div className="text-center lg:text-left">
@@ -29,14 +29,14 @@ export function Hero() {
           )}
 
           {/* H1, "AI apps" gets a thick spark underline,
-              "We handle" sits in muted ink3, "the chaos." in italic spark. */}
+              "We handle" sits in muted ink3, "the chaos." in brand spark. */}
           <h1 className="font-sans font-semibold text-display sm:text-display-lg md:text-hero lg:text-hero leading-[0.98] tracking-tightest mt-8 text-ink">
             <span className="block">
               Ship reliable <span className="hero-underline">AI apps</span>.
             </span>
             <span className="block">
               <span className="text-ink-faint">We handle</span>{' '}
-              <em className="text-brand">the chaos.</em>
+              <span className="text-brand">the chaos.</span>
             </span>
           </h1>
 

@@ -49,7 +49,7 @@ function FeaturedDispatch({ post }: { post: BlogPostSummary }) {
             )}
           </div>
 
-          <h2 className="font-sans font-semibold text-h2 md:text-display leading-[1.05] tracking-tightest mt-4 text-ink group-hover:italic group-hover:text-brand transition-colors">
+          <h2 className="font-sans font-semibold text-h2 md:text-display leading-[1.05] tracking-tightest mt-4 text-ink group-hover:text-brand transition-colors">
             {post.title}
           </h2>
 
@@ -104,7 +104,7 @@ function ArchiveRow({ post, idx }: { post: BlogPostSummary; idx: number }) {
         </div>
 
         <div className="md:order-2 min-w-0">
-          <h3 className="font-sans font-semibold text-h3 md:text-h3 leading-[1.2] tracking-tight text-ink group-hover:italic group-hover:text-brand transition-colors">
+          <h3 className="font-sans font-semibold text-h3 md:text-h3 leading-[1.2] tracking-tight text-ink group-hover:text-brand transition-colors">
             {post.title}
           </h3>
           {post.excerpt && (
@@ -188,7 +188,7 @@ export function BlogIndex({ posts }: Props) {
 
   return (
     <>
-      <section className="container py-20 md:py-28">
+      <section className="container py-16 md:py-24">
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
@@ -202,7 +202,7 @@ export function BlogIndex({ posts }: Props) {
           </div>
           <h1 className="font-sans font-semibold text-display sm:text-display-lg md:text-[80px] leading-[0.98] tracking-tightest mt-6 text-ink max-w-[860px]">
             Dispatches from{' '}
-            <span className="text-ink-faint italic">the rabbit hole.</span>
+            <span className="text-ink-faint">the rabbit hole.</span>
           </h1>
           <p className="text-ink-muted text-body-lg leading-[1.6] max-w-[620px] mt-7">
             Deep-dives, customer stories, and changelogs from the team building each::labs. No
@@ -269,7 +269,7 @@ export function BlogIndex({ posts }: Props) {
         </div>
       </section>
 
-      <section className="container py-24 md:py-28 mt-12">
+      <section className="container py-20 md:py-24 mt-12">
         <div className="max-w-[560px]">
           <Eyebrow size="sm" tone="ink-faint" className="mb-3">* Subscribe</Eyebrow>
           <h2 className="font-sans font-semibold text-h2 md:text-h2 leading-[1.1] tracking-tightest text-ink">

@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Eyebrow } from '@/components/ui/Eyebrow';
 
 const EASE_OUT_EXPO = [0.16, 1, 0.3, 1] as const;
 
@@ -19,7 +18,7 @@ const SECTIONS: Section[] = [
     body: [
       {
         kind: 'p',
-        text: 'These Terms of Service apply when accessing or purchasing services at eachlabs.ai. They constitute a binding agreement between Eachlabs, Inc. (a Delaware corporation) and users or customers. By accessing, using, or purchasing the Services, you consent to all terms and policies. If you disagree, do not use the Services.',
+        text: 'These Terms of Service apply when accessing or purchasing services at eachlabs.ai. They constitute a binding agreement between each::labs, Inc. (a Delaware corporation) and users or customers. By accessing, using, or purchasing the Services, you consent to all terms and policies. If you disagree, do not use the Services.',
       },
       {
         kind: 'p',
@@ -39,7 +38,7 @@ const SECTIONS: Section[] = [
           'Inference API, hosted services enabling inference runs on machine learning models.',
           'Content, any material posted or accessed on the website, including code, data, text, graphics, images, applications, or software.',
           'Dataset, structured data collections used to train machine learning models.',
-          'Eachlabs Inference, hosting platform for building, benchmarking, sharing, versioning, and deploying repositories containing Models, Datasets, and Applications.',
+          'each::labs Inference, hosting platform for building, benchmarking, sharing, versioning, and deploying repositories containing Models, Datasets, and Applications.',
           'Model, pre trained machine learning models including algorithms and weights for predictions.',
           'Repository, data structure containing project files and revision history; can be public (viewable by all, editable only by the owner / organization) or private (restricted access).',
           'Services, products and offerings including Open Source Libraries, Inference API, AutoTrain, Expert Acceleration Program, Infinity, and Inference Endpoints.',
@@ -137,7 +136,7 @@ const SECTIONS: Section[] = [
     body: [
       {
         kind: 'p',
-        text: 'AI Music Features are provided strictly for non commercial use unless expressly authorized in writing by Eachlabs.',
+        text: 'AI Music Features are provided strictly for non commercial use unless expressly authorized in writing by each::labs.',
       },
       { kind: 'h3', text: 'Prohibited commercial uses' },
       {
@@ -153,12 +152,12 @@ const SECTIONS: Section[] = [
       { kind: 'h3', text: 'No ownership rights' },
       {
         kind: 'p',
-        text: 'Eachlabs does not grant ownership rights, copyright interests, or commercial licenses in AI generated outputs. Generated outputs may resemble existing works and are not guaranteed to be original or copyright-free.',
+        text: 'each::labs does not grant ownership rights, copyright interests, or commercial licenses in AI generated outputs. Generated outputs may resemble existing works and are not guaranteed to be original or copyright-free.',
       },
       { kind: 'h3', text: 'User responsibility and liability' },
       {
         kind: 'p',
-        text: 'Users are solely responsible for how AI generated music or audio is used, shared, or distributed. Eachlabs assumes no liability for claims, disputes, damages, or losses arising from use, misuse, or distribution of AI generated music or audio, including copyright or intellectual property claims. Use of AI Music Features is entirely at the user\'s own risk.',
+        text: 'Users are solely responsible for how AI generated music or audio is used, shared, or distributed. each::labs assumes no liability for claims, disputes, damages, or losses arising from use, misuse, or distribution of AI generated music or audio, including copyright or intellectual property claims. Use of AI Music Features is entirely at the user\'s own risk.',
       },
     ],
   },
@@ -293,7 +292,7 @@ const SECTIONS: Section[] = [
     body: [
       {
         kind: 'p',
-        text: 'Users are solely and exclusively responsible for their Service use and agree to indemnify, defend, and hold harmless the company and Related Parties from all claims, liability, and expenses, including attorney\'s fees, arising out of or in connection with use of (or inability to use) the Services, including violations of Terms, law, or regulation, any user-posted Content or data, or any third party use with user credentials. This does not apply to claims arising directly from Eachlabs\'s fraud, gross negligence, recklessness, or willful or criminal misconduct.',
+        text: 'Users are solely and exclusively responsible for their Service use and agree to indemnify, defend, and hold harmless the company and Related Parties from all claims, liability, and expenses, including attorney\'s fees, arising out of or in connection with use of (or inability to use) the Services, including violations of Terms, law, or regulation, any user-posted Content or data, or any third party use with user credentials. This does not apply to claims arising directly from each::labs\'s fraud, gross negligence, recklessness, or willful or criminal misconduct.',
       },
     ],
   },
@@ -359,8 +358,7 @@ export default function TermsOfServicePage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, ease: EASE_OUT_EXPO }}
           >
-            <Eyebrow>* LEGAL</Eyebrow>
-            <h1 className="font-sans font-semibold text-display sm:text-display-lg lg:text-hero leading-[0.98] tracking-tightest text-ink mt-6">
+            <h1 className="font-sans font-semibold text-display sm:text-display-lg lg:text-hero leading-[0.98] tracking-tightest text-ink">
               Terms of service.
             </h1>
             <p className="text-ink-faint text-body mt-5 font-mono uppercase tracking-eyebrow">
@@ -375,7 +373,6 @@ export default function TermsOfServicePage() {
         <div className="grid grid-cols-1 lg:grid-cols-[220px_minmax(0,1fr)] gap-10 lg:gap-16 items-start">
           {/* TOC */}
           <aside className="lg:sticky lg:top-24">
-            <Eyebrow size="sm" tone="ink-faint" className="mb-4">▸ Sections</Eyebrow>
             <ul className="flex flex-col gap-2.5">
               {SECTIONS.map((s) => (
                 <li key={s.id}>

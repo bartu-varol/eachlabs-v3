@@ -20,7 +20,7 @@ export function SignupBrand() {
         </span>
         <span className="block">
           <span className="text-ink-faint">spoiler:</span>{' '}
-          <em className="text-brand">they all go down.</em>
+          <span className="text-brand">they all go down.</span>
         </span>
       </h1>
 

@@ -2,10 +2,8 @@
 
 import type { ReactNode } from 'react';
 import { motion } from 'framer-motion';
-import { Eyebrow } from './Eyebrow';
 
 type Props = {
-  eyebrow?: ReactNode;
   /** Headline content. Accepts ReactNode so inline italic/colored emphasis works. */
   headline: ReactNode;
   description?: ReactNode;
@@ -22,7 +20,6 @@ type Props = {
  * inline italic / colored emphasis where needed.
  */
 export function PageHero({
-  eyebrow,
   headline,
   description,
   ctas,
@@ -30,15 +27,13 @@ export function PageHero({
   className = '',
 }: Props) {
   return (
-    <section className={['container py-20 md:py-28', className].filter(Boolean).join(' ')}>
+    <section className={['container py-16 md:py-24', className].filter(Boolean).join(' ')}>
       <motion.div
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
       >
-        {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
-
-        <h1 className="font-sans font-semibold text-display sm:text-display-lg md:text-[80px] leading-[0.98] tracking-tightest mt-6 text-ink max-w-[920px]">
+        <h1 className="font-sans font-semibold text-display sm:text-display-lg md:text-[80px] leading-[0.98] tracking-tightest text-ink max-w-[920px]">
           {headline}
         </h1>
 

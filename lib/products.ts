@@ -75,7 +75,7 @@ export const PRODUCTS: Record<ProductDef['slug'], ProductDef> = {
       { n: '02', title: 'Multi-model parallelism', body: 'Branches run concurrently. Image and video generated in parallel and merged at the next node, total latency = the slowest branch, not the sum of branches.', detail: 'graph: { image, video → merge }', visual: 'flow' },
       { n: '03', title: 'Single endpoint', body: 'Your client calls each({ workflow: "X" }). The graph executes server-side; you don\'t orchestrate steps from the client. One trace_id covers the whole run.', detail: 'POST /v1/run', visual: 'rings' },
     ],
-    liveTitle: 'product-photo-v3 · executing now.',
+    liveTitle: 'Turning a one-line prompt into a shippable product photo.',
     liveBody: 'A real workflow with 8 nodes, input, enhance, two parallel branches (image + video), upscale, audio, merge, output.',
     whenTitle: 'Reach for workflows when…',
     whenPoints: [
@@ -136,19 +136,19 @@ const result = await each({
       { n: '02', title: 'Latency thresholds', body: 'Set a p95 threshold per provider. When one breaches, the router shifts traffic until it recovers, globally, per-tier, or per-experiment. Every failover lands in the trace with a reason.', detail: 'threshold_p95: 800 // ms', visual: 'graph' },
       { n: '03', title: 'Sticky cohorts', body: 'Variant assignment is sticky-by-user. The same user always lands on the same provider until the router has a reason to switch, keeping cohort data clean for A/B tests and tier-based pricing.', detail: 'cohort: user.id', visual: 'grid' },
     ],
-    liveTitle: 'kling-v3 just degraded. wan-2.7 took over.',
+    liveTitle: 'seedance-2.0 just degraded. wan-2.7 took over.',
     liveBody: 'A real failover at 03:14 AM. User latency unchanged, no on call paged, traced end to end.',
     whenTitle: 'Reach for router when…',
     whenPoints: [
-      { n: '01', title: 'It\'s 3:14 AM and kling-v3 just died', body: 'Your on call hasn\'t slept in two days. The dashboard is red. Users are seeing broken videos. Router catches this 124ms in, before your pager fires, before users notice, before the team reaches Slack.', detail: 'incident.caught = true', visual: 'pulse' },
-      { n: '02', title: 'Your bill jumped 40% this week', body: 'Cost shifts when fallbacks fire, wan-2.7 might be 2× the cost of kling-v3, and you have no idea which calls switched. Router writes the served-provider on every trace; finance gets the answer in two clicks.', detail: 'trace.served_by · per call', visual: 'graph' },
+      { n: '01', title: 'It\'s 3:14 AM and seedance-2.0 just died', body: 'Your on call hasn\'t slept in two days. The dashboard is red. Users are seeing broken videos. Router catches this 124ms in, before your pager fires, before users notice, before the team reaches Slack.', detail: 'incident.caught = true', visual: 'pulse' },
+      { n: '02', title: 'Your bill jumped 40% this week', body: 'Cost shifts when fallbacks fire, wan-2.7 might be 2× the cost of seedance-2.0, and you have no idea which calls switched. Router writes the served-provider on every trace; finance gets the answer in two clicks.', detail: 'trace.served_by · per call', visual: 'graph' },
       { n: '03', title: 'p95 tripled overnight, no one knows why', body: 'A provider degraded silently, same status codes, slower outputs. Without router you\'d be hunting in logs at 11 PM. With it, the failover already fired and the trace tells you which provider went bad and when.', detail: 'p95: 540ms → 1.42s → spilled', visual: 'flow' },
       { n: '04', title: 'You\'re shipping to 3 regions on day 30', body: 'Single-provider capacity has a ceiling, region throttles, daily limits, model deprecations land at the worst time. Router lets you shop across providers without rewriting a single call site.', detail: 'regions: us, eu, apac', visual: 'grid' },
     ],
     code: `import { each } from "eachlabs";
 
 const result = await each({
-  model: "kling-v3-12v",
+  model: "seedance-2.0-i2v",
   inputs: { prompt },
   router: {
     fallback:      ["wan-2.7", "veo-3"],
@@ -206,7 +206,7 @@ const result = await each({
     code: `import { each } from "eachlabs";
 
 const result = await each({
-  model: "kling-v3-12v",
+  model: "nano-banana-2",
   inputs: { prompt: user.prompt },
   enhance: {
     enabled: true,
@@ -255,7 +255,7 @@ const result = await each({
     ],
     liveTitle: '"a 6-second product video with a voiceover" · workflow built in 320ms.',
     liveBody:
-      'A real call: prompt arrives, sense picks kling-v3 for the visual and suno-v3 for the voice, composes the workflow, runs it. You called one endpoint. Behind the scenes: three models, two retries, one trace, $0.19.',
+      'A real call: prompt arrives, sense picks wan-2.5 for the video and suno-v3 for the voice, composes the workflow, runs it. You called one endpoint. Behind the scenes: three models, two retries, one trace, $0.19.',
     whenTitle: 'Reach for sense when…',
     whenPoints: [
       { n: '01', title: 'You don’t want to be the one picking models', body: 'Six hundred models, each with its own quirks. sense knows which ones land on your prompt and picks them by quality × latency × cost. You ship; the model panel is sense’s problem now.', detail: '600 → auto · top-1', visual: 'tags' },
@@ -281,7 +281,7 @@ const response = await client.chat.completions.create({
 });
 
 // behind the scenes:
-//   sense → kling-v3 (image)
+//   sense → wan-2.5 (video)
 //         → suno-v3 (voice)
 //         → compose → 1 trace · $0.19`,
     providers: ['OpenAI SDK', 'LangChain', 'CrewAI', 'AutoGen', 'Vercel AI SDK', 'Anthropic SDK'],

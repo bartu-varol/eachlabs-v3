@@ -40,16 +40,16 @@ export const megaMenus: Record<'platform' | 'developers', MegaMenu> = {
       {
         eyebrow: 'THE PLATFORM',
         items: [
-          { title: 'each::router',    body: 'Model aware fallbacks. Quality aware routing.', href: '/router' },
-          { title: 'each::workflows', body: 'Chain models. Version. Rollback.',              href: '/workflows' },
-          { title: 'each::enhancer',  body: '12× fewer errors. Same model. Same call.',     href: '/enhancer' },
-          { title: 'each::sense',     body: 'The agent that reads your stack and points to the fix.', href: '/each-sense' },
+          { title: 'Router',      body: 'Model aware fallbacks. Quality aware routing.', href: '/router' },
+          { title: 'Workflows',   body: 'Chain models. Version. Rollback.',              href: '/workflows' },
+          { title: 'Enhancer',    body: '12× fewer errors. Same model. Same call.',     href: '/enhancer' },
+          { title: 'each::Sense', body: 'The agent that reads your stack and points to the fix.', href: '/each-sense' },
         ],
       },
     ],
     featured: {
       eyebrow: '* THIS WEEK',
-      title: 'each::router 1.4, quality aware spill',
+      title: 'router 1.4, quality aware spill',
       body: 'We now route around quality degradations, not just failures.',
       link: 'Read more →',
     },
@@ -118,7 +118,7 @@ export const hero = {
     { value: '99.99%',  label: 'uptime',          sub: 'no asterisks' },
     { value: '<120ms',  label: 'router overhead', sub: 'faster than a tweet' },
   ],
-  subtext: 'NO CREDIT CARD · NO "JUMP ON A QUICK CALL" · CANCEL BY DELETING YOUR API KEY',
+  subtext: 'NO "JUMP ON A QUICK CALL" · 5 GB FREE STORAGE · 10K FREE TRACES',
 };
 
 // ---------- WIDGET ----------
@@ -169,7 +169,7 @@ export const receipts = {
       caption: 'auto fallback fires in <120ms when the primary model dies',
       hero: { multiplier: '97×', suffix: 'FEWER ERRORS' },
       others: { label: 'OTHERS', sub: 'raw SDKs, no router' },
-      each:   { label: 'EACH', sub: 'quality aware + fallback' },
+      each:   { label: 'EACH::LABS', sub: 'quality aware + fallback' },
       format: 'percent',
       othersValue: 3.42,
       eachValue: 0.035,
@@ -180,7 +180,7 @@ export const receipts = {
       caption: 'how long until the user sees a recovered response',
       hero: { multiplier: '6,200×', suffix: 'FASTER RECOVERY' },
       others: { label: 'OTHERS', sub: 'manual rollover, on call paged' },
-      each:   { label: 'EACH', sub: 'router failover · live' },
+      each:   { label: 'EACH::LABS', sub: 'router failover · live' },
       format: 'time',
       othersValue: 744, // seconds (12.4 min)
       eachValue: 0.12,  // seconds (120ms)
@@ -191,7 +191,7 @@ export const receipts = {
       caption: 'average $/successful output across 600+ models',
       hero: { multiplier: '3×', suffix: 'CHEAPER' },
       others: { label: 'OTHERS', sub: 'pinned to one provider' },
-      each:   { label: 'EACH', sub: 'quality aware routing' },
+      each:   { label: 'EACH::LABS', sub: 'quality aware routing' },
       format: 'usd',
       othersValue: 0.18,
       eachValue: 0.06,
@@ -202,7 +202,7 @@ export const receipts = {
       caption: 'time to first prod call after signing up',
       hero: { multiplier: '2,520×', suffix: 'FASTER TO SHIP' },
       others: { label: 'OTHERS', sub: 'new SDK · auth · QA' },
-      each:   { label: 'EACH', sub: 'one API · one signature' },
+      each:   { label: 'EACH::LABS', sub: 'one API · one signature' },
       format: 'days',
       othersValue: 14,    // days
       eachValue: 0.0056,  // days (8 minutes)
@@ -333,7 +333,7 @@ export const customerStories = {
         { kind: 'plain', text: ' hands-on technical support.' },
       ],
       quote:
-        'We work with Eachlabs on selected products where flexibility, speed, and stability matter most. Their 24/7 support during critical moments has been especially valuable, knowing that there is always a responsive and technically capable team available gives us operational confidence while scaling.',
+        'We work with each::labs on selected products where flexibility, speed, and stability matter most. Their 24/7 support during critical moments has been especially valuable, knowing that there is always a responsive and technically capable team available gives us operational confidence while scaling.',
       name: 'Aziz Gündoğdu',
       role: 'Scate',
       avatar: { initials: 'AG', bg: 'bg-brand', text: 'text-white', photo: '/customers/photos/aziz-gundogdu.jpg' },
@@ -347,7 +347,7 @@ export const customerStories = {
         { kind: 'plain', text: ' and responsive.' },
       ],
       quote:
-        'We work with Eachlabs because their team is highly solution oriented and responsive, and we always receive quick support. Their APIs are also reliable and stable in production.',
+        'We work with each::labs because their team is highly solution oriented and responsive, and we always receive quick support. Their APIs are also reliable and stable in production.',
       name: 'Osman Bahar',
       role: 'Byterise',
       avatar: { initials: 'OB', bg: 'bg-cobrand', text: 'text-white', photo: '/customers/photos/osman-bahar.png' },
@@ -493,7 +493,7 @@ export const rabbitHole = {
       eyebrow: '* TAKE THE LEAP',
       title: 'Sign up.',
       subline: 'API key in 60 seconds.',
-      body: '10K free traces. No credit card. Cancel by deleting your key.',
+      body: '10K free traces included. Ship your first call in 60 seconds.',
       cta: { label: 'Follow the white rabbit', href: '/sign-up', style: 'primary' as const },
     },
     {
@@ -511,7 +511,7 @@ export const rabbitHole = {
       cta: { label: 'Open the docs →', href: 'https://docs.eachlabs.ai/introduction', style: 'text' as const },
     },
   ],
-  subtext: 'NO CREDIT CARD · NO "JUMP ON A QUICK CALL" · CANCEL BY DELETING YOUR API KEY',
+  subtext: 'NO "JUMP ON A QUICK CALL" · 10K FREE TRACES · 5 GB FREE STORAGE',
 };
 
 // ---------- FOOTER ----------
@@ -544,11 +544,12 @@ export const footer = {
     {
       title: 'COMPANY',
       links: [
-        { label: 'About',     href: '/about' },
-        { label: 'Customers', href: '/customers' },
-        { label: 'Enterprise', href: '/enterprise' },
-        { label: 'Blog',      href: '/blog' },
-        { label: 'Careers',   href: '/career' },
+        { label: 'About',      href: '/about' },
+        { label: 'Customers',  href: '/customers' },
+        { label: 'Blog',       href: '/blog' },
+        { label: 'Careers',    href: '/career' },
+        { label: 'Contact Us', href: '/contact-us' },
+        { label: 'Brand Kit',  href: '/brand' },
       ],
     },
     {
@@ -561,14 +562,37 @@ export const footer = {
       ],
     },
     {
-      title: 'RESOURCES',
+      title: 'MODEL TYPES',
       links: [
-        { label: 'Contact Us',        href: '/contact-us' },
-        { label: 'Brand Kit',         href: '/brand' },
-        { label: 'Privacy Policy',    href: '/privacy-policy' },
-        { label: 'Terms of Service',  href: '/terms-of-service' },
+        { label: 'Text to Video',     href: '/explore?category=text-to-video' },
+        { label: 'Image to Video',    href: '/explore?category=image-to-video' },
+        { label: 'Text to Image',     href: '/explore?category=text-to-image' },
+        { label: 'Image to Image',    href: '/explore?category=image-to-image' },
+        { label: 'Music Generation',  href: '/explore?category=music-generation' },
+        { label: 'Text to Voice',     href: '/explore?category=text-to-voice' },
+        { label: 'Voice to Text',     href: '/explore?category=voice-to-text' },
+        { label: 'Image to 3D',       href: '/explore?category=image-to-3d' },
       ],
     },
+    {
+      title: 'TOP PROVIDERS',
+      links: [
+        { label: 'Kling',             href: '/kling' },
+        { label: 'Google',            href: '/google' },
+        { label: 'Black Forest Labs', href: '/black-forest-labs' },
+        { label: 'Alibaba',           href: '/alibaba' },
+        { label: 'ByteDance',         href: '/bytedance' },
+        { label: 'OpenAI',            href: '/openai' },
+        { label: 'Pixverse',          href: '/pixverse' },
+        { label: 'MiniMax',           href: '/minimax' },
+        { label: 'xAI',               href: '/xai' },
+        { label: 'Pika',              href: '/pika' },
+      ],
+    },
+  ],
+  legal: [
+    { label: 'Privacy Policy',   href: '/privacy-policy' },
+    { label: 'Terms of Service', href: '/terms-of-service' },
   ],
   copyright: '© 2026 each::labs. All rights reserved.',
   status: '* 99.99% · all systems operational',
@@ -633,7 +657,7 @@ export const enterprise = {
   socialProof: {
     eyebrow: '* TRUST · IN PRODUCTION',
     metric: 'Top 20%',
-    metricLabel: 'of app studios shipping AI use each::labs',
+    metricLabel: 'of app studios shipping AI use each::labs (per AppMagic)',
     body: 'Consumer apps with millions of users, ad tech platforms running billion+ monthly requests, and enterprise platforms with strict change control are all on the same router.',
     customers: ['NOVA', 'LUME', 'Helix', 'Forma', 'Ondra', 'Kairo', 'Aster', 'Prism', 'Maker', 'Orbit'],
   },

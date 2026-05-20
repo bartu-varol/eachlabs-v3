@@ -2,14 +2,10 @@ import { trustedBy } from '@/lib/content';
 import { Eyebrow } from '@/components/ui/Eyebrow';
 
 export function TrustedBy() {
-  const { eyebrow, stats } = trustedBy;
+  const { stats } = trustedBy;
 
   return (
     <section className="border-t border-b border-divider py-12">
-      <div className="container text-center">
-        <Eyebrow className="mb-8">{eyebrow}</Eyebrow>
-      </div>
-
       <div className="container">
         <div className="bg-surface-sunken rounded-3xl ring-1 ring-field py-10 md:py-14 overflow-hidden relative">
           <div className="absolute inset-y-0 left-0 w-16 md:w-32 bg-gradient-to-r from-surface-sunken to-transparent z-10 pointer-events-none" />

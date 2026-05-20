@@ -1,12 +1,9 @@
 import type { ReactNode } from 'react';
-import { Eyebrow } from './Eyebrow';
 
 type Size = 'lg' | 'md';
 type Align = 'left' | 'center';
 
 type Props = {
-  /** Mono eyebrow above the headline. Rendered in tracking-eyebrow + text-brand. */
-  eyebrow?: ReactNode;
   /** Primary headline. */
   headline: ReactNode;
   /** Optional muted continuation rendered on a new line under the headline. */
@@ -34,7 +31,6 @@ const ALIGN: Record<Align, { wrap: string; max: string }> = {
 };
 
 export function SectionHeader({
-  eyebrow,
   headline,
   headlineSub,
   description,
@@ -49,11 +45,9 @@ export function SectionHeader({
 
   return (
     <div className={[a.wrap, className].filter(Boolean).join(' ')}>
-      {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
-
       <HeadingTag
         className={[
-          'font-sans font-semibold tracking-tightest mt-4',
+          'font-sans font-semibold tracking-tightest',
           HEAD_SIZE[size],
         ].join(' ')}
       >

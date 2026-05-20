@@ -103,7 +103,7 @@ console.log(result.output);
           {model.name}
         </h1>
         <p className="max-w-2xl text-body-lg leading-[1.6] text-ink-muted">
-          {model.name} is available through the eachlabs LLM Router. The router
+          {model.name} is available through the each::labs LLM Router. The router
           handles authentication, retries, and provider fallback so you can
           target this model with a single API surface, no per-provider SDK
           required.
@@ -141,7 +141,7 @@ console.log(result.output);
                 Automatic retries and provider failover when {model.providerName}{' '}
                 hits rate limits.
               </li>
-              <li>Unified billing through eachlabs, pay-as-you-go.</li>
+              <li>Unified billing through each::labs, pay-as-you-go.</li>
               <li>Drop-in observability, every call is traced in the dashboard.</li>
             </ul>
           </section>
@@ -149,7 +149,6 @@ console.log(result.output);
 
         <aside className="flex flex-col gap-6 min-w-0">
           <div className="border border-field rounded-lg p-5">
-            <Eyebrow size="sm" tone="ink-faint" className="mb-3">More from {model.providerName}</Eyebrow>
             {related.length === 0 ? (
               <p className="text-body-sm text-ink-faint">No siblings.</p>
             ) : (

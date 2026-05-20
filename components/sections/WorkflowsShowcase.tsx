@@ -44,8 +44,7 @@ export function WorkflowsShowcase() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
           >
-            <Eyebrow>* {product.eyebrow}</Eyebrow>
-            <h1 className="font-sans font-semibold text-display sm:text-display-lg lg:text-hero xl:text-hero leading-[0.98] tracking-tightest mt-6 text-ink">
+            <h1 className="font-sans font-semibold text-display sm:text-display-lg lg:text-hero xl:text-hero leading-[0.98] tracking-tightest text-ink">
               {product.title}
             </h1>
             <p className="text-ink-muted text-body-lg leading-[1.55] max-w-[540px] mt-7">
@@ -119,8 +118,7 @@ export function WorkflowsShowcase() {
               'radial-gradient(ellipse 50% 60% at 0% 30%, rgb(var(--brand) / 0.05), transparent 60%)',
           }}
         />
-        <div className="container py-24 md:py-28 relative">
-          <Eyebrow className="mb-3">● WHAT IT DOES</Eyebrow>
+        <div className="container py-20 md:py-24 relative">
           <h2 className="font-sans font-semibold text-h2 md:text-display leading-[1.05] tracking-tightest text-ink max-w-[760px]">
             {product.whatTitle}
           </h2>
@@ -146,8 +144,7 @@ export function WorkflowsShowcase() {
               'radial-gradient(ellipse 60% 50% at 50% 0%, rgb(var(--brand) / 0.06), transparent 65%)',
           }}
         />
-        <div className="container py-24 md:py-28 relative">
-          <Eyebrow className="mb-3">● LIVE</Eyebrow>
+        <div className="container py-20 md:py-24 relative">
           <h2 className="font-sans font-semibold text-h2 md:text-h2 leading-[1.1] tracking-tightest text-ink max-w-[760px]">
             {product.liveTitle}
           </h2>
@@ -194,8 +191,7 @@ export function WorkflowsShowcase() {
       <WorkflowsAnatomy />
 
       {/* 6. WHEN TO REACH FOR IT */}
-      <section className="container border-t border-divider py-24 md:py-28">
-        <Eyebrow className="mb-3">● WHEN YOU’D REACH FOR IT</Eyebrow>
+      <section className="container border-t border-divider py-20 md:py-24">
         <h2 className="font-sans font-semibold text-h2 md:text-h2 leading-[1.1] tracking-tightest text-ink max-w-[680px]">
           {product.whenTitle}
         </h2>
@@ -206,11 +202,10 @@ export function WorkflowsShowcase() {
         </div>
       </section>
 
-      {/* 7. PAIRS WELL WITH */}
-      <section className="container border-t border-divider py-20 md:py-24">
-        <Eyebrow className="mb-3">● PAIRS WELL WITH</Eyebrow>
+      {/* 7. EXPLORE THE REST */}
+      <section className="container border-t border-divider py-16 md:py-20">
         <h2 className="font-sans font-semibold text-h3 md:text-h2 leading-[1.15] tracking-tight text-ink mb-8">
-          Other products you’ll use alongside this.
+          Explore the rest of each::labs.
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
           {product.pairsWith.map((pw) => (
@@ -233,7 +228,7 @@ export function WorkflowsShowcase() {
       </section>
 
       {/* 8. CTA */}
-      <section className="container border-t border-divider py-24 md:py-32">
+      <section className="container border-t border-divider py-20 md:py-28">
         <div className="max-w-[680px] mx-auto text-center">
           <h2 className="font-sans font-semibold text-h2 md:text-display leading-[1.05] tracking-tightest text-ink">
             {product.ctaTitle}

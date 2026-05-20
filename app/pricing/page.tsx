@@ -28,11 +28,10 @@ function StoragePrice() {
             'radial-gradient(ellipse 50% 45% at 85% 10%, rgb(var(--cobrand) / 0.06), transparent 65%)',
         }}
       />
-      <div className="container py-20 md:py-24 relative">
-        <Eyebrow className="mb-3">● STORAGE PRICE</Eyebrow>
+      <div className="container py-16 md:py-20 relative">
         <h2 className="font-sans font-semibold text-h2 md:text-display leading-[1.05] tracking-tightest text-ink max-w-[820px]">
           Generated assets live somewhere.{' '}
-          <span className="text-ink-faint italic">We pass through the cloud cost.</span>
+          <span className="text-ink-faint">We pass through the cloud cost.</span>
         </h2>
         <p className="text-ink-muted text-body leading-[1.6] mt-5 max-w-[640px]">
           Videos, images, audio, every output is stored so you can fetch it, share it,
@@ -81,14 +80,13 @@ export default function PricingPage() {
   return (
     <>
       <PageHero
-        eyebrow="* PRICING"
         headline={
           <>
             No additional price.{' '}
-            <span className="text-ink-faint italic">Pay the provider, not a penny more.</span>
+            <span className="text-ink-faint">No egress cost.</span>
           </>
         }
-        description="Eachlabs charges the same rate as the upstream provider, for every model, every run. Storage is pass-through. You only pay for what you would have paid anyway."
+        description="Same rate as the upstream provider, every model, every run. No bandwidth fees, no surprise bills."
       />
 
       {/* Main sections */}
@@ -109,10 +107,9 @@ export default function PricingPage() {
           <div className="bg-surface-raised border border-field rounded-md p-7 md:p-9 grid grid-cols-1 md:grid-cols-[auto_1fr_auto] items-center gap-6 md:gap-10">
             <span className="font-sans text-h2 md:text-display leading-none">💸</span>
             <div>
-              <Eyebrow size="sm" className="mb-1">ENTERPRISE</Eyebrow>
               <h3 className="font-sans font-semibold text-h4 md:text-h3 leading-[1.25] tracking-tight text-ink">
                 Running high-volume AI?{' '}
-                <span className="text-ink-faint italic">We&rsquo;ll go below provider price.</span>
+                <span className="text-ink-faint">We&rsquo;ll go below provider price.</span>
               </h3>
               <p className="text-ink-muted text-body mt-2 max-w-[640px]">
                 Committed-volume discounts, on-prem / VPC deploy, dedicated SLAs.
@@ -124,11 +121,11 @@ export default function PricingPage() {
       </section>
 
       {/* Bottom CTA */}
-      <section className="container border-t border-divider py-24 md:py-32">
+      <section className="container border-t border-divider py-20 md:py-28">
         <div className="max-w-[680px] mx-auto text-center">
           <h2 className="font-sans font-semibold text-h2 md:text-display leading-[1.05] tracking-tightest text-ink">
             Same price as the provider.{' '}
-            <span className="text-ink-faint italic">One API, one bill.</span>
+            <span className="text-ink-faint">One API, one bill.</span>
           </h2>
           <div className="flex flex-wrap gap-3 justify-center mt-8">
             <RabbitButton href="/sign-up" />

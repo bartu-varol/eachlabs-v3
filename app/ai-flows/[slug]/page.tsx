@@ -116,7 +116,7 @@ const MOCK_README: FlowReadmeData = {
   `,
   keyConsiderations: `
     <p>
-      This flow is opinionated by design. It's a <em>cinematic template</em>, not a freeform
+      This flow is opinionated by design. It's a cinematic template, not a freeform
       prompt, the storm, meteor, and tsunami beats are baked into the pipeline. If you need
       a different narrative arc, clone the flow and edit the step prompt rather than
       forcing it through inputs.
@@ -207,7 +207,7 @@ export default async function FlowDetailPage({
                 Fixed price for this template as-is. Clone the flow and the price moves with whatever
                 models you swap in,every step bills at its own model price, nothing on top.
               </p>
-              <p className="text-eyebrow text-ink-faint italic leading-[1.5] mt-3">
+              <p className="text-eyebrow text-ink-faint leading-[1.5] mt-3">
                 * Real cost can still shift with your inputs (duration, resolution, mode).
               </p>
               <dl className="grid grid-cols-2 gap-y-2 gap-x-4 text-caption mt-4 border-t border-field pt-4">

@@ -15,7 +15,6 @@ import { FilterableModelGrid } from '@/components/explore/FilterableModelGrid';
 import { ReadmeSection } from '@/components/explore/ReadmeSection';
 import { FaqSection } from '@/components/explore/FaqSection';
 import { AiAssistantMenu } from '@/components/model-detail/AiAssistantMenu';
-import { Eyebrow } from '@/components/ui/Eyebrow';
 
 type RouteParams = { provider: string; family: string };
 
@@ -135,7 +134,6 @@ export default async function FamilyPage({
         <section className="container border-t border-divider py-12 md:py-16">
           <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-10">
             <div>
-              <Eyebrow className="mb-3">* WHY {family.name.toUpperCase()}</Eyebrow>
               <h2 className="font-sans font-semibold text-h2 md:text-h2 leading-[1.05] tracking-tightest text-ink">
                 One family. Many shapes.
               </h2>
@@ -144,7 +142,7 @@ export default async function FamilyPage({
               <p>
                 Every variant in the <strong className="text-ink">{family.name}</strong> family
                 shares the same input contract and the same call signature. Switch from{' '}
-                <em>standard</em> to <em>pro</em> to <em>4K</em> by changing one string, no client
+                standard to pro to 4K by changing one string, no client
                 code changes, no re-auth.
               </p>
               <p>

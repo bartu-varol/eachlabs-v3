@@ -25,8 +25,7 @@ export function RouterAnatomy() {
             'radial-gradient(ellipse 60% 60% at 50% 0%, rgb(var(--brand) / 0.05), transparent 65%)',
         }}
       />
-      <div className="container py-24 md:py-28 relative">
-        <Eyebrow className="mb-3">● ANATOMY OF A FAILOVER</Eyebrow>
+      <div className="container py-20 md:py-24 relative">
         <h2 className="font-sans font-semibold text-h2 md:text-display leading-[1.05] tracking-tightest text-ink max-w-[760px]">
           Three signals. One decision. Zero pages.
         </h2>
@@ -223,7 +222,7 @@ function SignalMeter({
 
 function DecisionViz() {
   const candidates = [
-    { name: 'kling-v3', score: 0.31, isLoser: true,  isWinner: false },
+    { name: 'seedance-2.0', score: 0.31, isLoser: true,  isWinner: false },
     { name: 'wan-2.7',  score: 0.94, isLoser: false, isWinner: true  },
     { name: 'veo-3',    score: 0.78, isLoser: false, isWinner: false },
   ];
@@ -306,7 +305,7 @@ function OutcomeViz() {
       <div className="flex flex-col gap-1.5">
         <TraceLine
           step="primary"
-          model="kling-v3-12v"
+          model="seedance-2.0-i2v"
           status="fail"
           ms="1422"
         />
